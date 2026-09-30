@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Upscore Tech — Teaser</title>
+<link rel="stylesheet" href="fonts.css">
+<style>
+:root{--grad:linear-gradient(95deg,#1f7bff 0%,#5b8cff 45%,#9a6bff 100%)}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1920px;height:1080px;overflow:hidden;background:#000}
+body{font-family:Inter,system-ui,sans-serif;color:#f4f6ff;-webkit-font-smoothing:antialiased}
+#stage{position:absolute;inset:0;overflow:hidden;background:#03040a}
+.abs{position:absolute}
+.serif{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;letter-spacing:-.01em}
+.gtxt{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.w{display:inline-block;white-space:pre}
+#bg{position:absolute;inset:0}
+.blob{position:absolute;border-radius:50%}
+#ring{position:absolute;left:50%;top:50%;width:1500px;height:1500px;margin:-750px 0 0 -750px;border-radius:50%;
+  background:radial-gradient(circle,transparent 61%,rgba(120,150,255,.9) 62.2%,rgba(150,110,255,.5) 63.2%,transparent 66.5%)}
+/* full-frame source (main promo scene) */
+#full{position:absolute;inset:0;overflow:hidden}
+#full iframe,#win iframe{position:absolute;left:0;top:0;width:1920px;height:1080px;border:0;transform-origin:0 0;background:#04050c}
+/* montage window */
+#win{position:absolute;width:1060px;height:700px;border-radius:30px;overflow:hidden;background:#04050c;
+  box-shadow:0 50px 120px rgba(0,0,0,.7),0 0 0 1px rgba(150,160,255,.22),0 0 90px rgba(80,90,255,.25)}
+#winGlow{position:absolute;inset:0;border-radius:30px;pointer-events:none;box-shadow:inset 0 0 0 1.5px rgba(160,170,255,.25),inset 0 1px 0 rgba(255,255,255,.12)}
+#draw{position:absolute;inset:0;pointer-events:none;overflow:visible}
+.big{position:absolute;font-weight:800;letter-spacing:-.05em;line-height:.98}
+.big .serif{font-weight:400;letter-spacing:-.02em}
+#hook{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+#hook div{font-weight:800;font-size:112px;letter-spacing:-.05em;line-height:1.02}
+#hook .serif{font-size:130px}
+.bar{position:absolute;left:0;right:0;height:0;background:#000;z-index:20}
+#flash{position:absolute;inset:0;background:#fff;opacity:0;z-index:30;pointer-events:none}
+#grain{position:absolute;inset:0;opacity:.06;mix-blend-mode:overlay;pointer-events:none;z-index:25}
+#vign{position:absolute;inset:0;pointer-events:none;z-index:24;background:radial-gradient(ellipse 85% 75% at 50% 50%,transparent 55%,rgba(0,0,0,.7) 100%)}
+#logoWrap{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+#logo{width:900px;position:relative}
+#logo img{width:100%;display:block}
+#logo img.r,#logo img.c{position:absolute;left:0;top:0;mix-blend-mode:screen}
+#cta{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+#cta .l1{font-weight:800;font-size:96px;letter-spacing:-.05em}
+#cta .btn{margin-top:54px;height:96px;padding:0 44px 0 30px;border-radius:999px;display:flex;align-items:center;gap:22px;font-size:36px;font-weight:700;
+  background:linear-gradient(95deg,#1f7bff,#7c5cff);box-shadow:0 24px 80px rgba(70,90,255,.55);position:relative;overflow:hidden}
+#cta .play{width:60px;height:60px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center}
+#cta .url{margin-top:40px;font-family:'JetBrains Mono',monospace;font-size:22px;letter-spacing:.28em;text-transform:uppercase;color:#8e9bd6}
+#sheen{position:absolute;top:0;bottom:0;width:160px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.5),transparent)}
+</style>
+</head>
+<body>
+<div id="stage">
+  <svg width="0" height="0" style="position:absolute">
+    <filter id="mbx" x="-20%" y="-5%" width="140%" height="110%"><feGaussianBlur id="mbxb" stdDeviation="0 0"/></filter>
+  </svg>
+  <div id="bg"><div class="blob" id="b1"></div><div class="blob" id="b2"></div><div id="ring"></div></div>
+  <div id="full"><iframe id="srcFull"></iframe></div>
+  <div id="win"><iframe id="srcWin"></iframe><div id="winGlow"></div></div>
+  <svg id="draw" viewBox="0 0 1920 1080"><path id="circ" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  <div class="big" id="word"></div>
+  <div id="hook"><div id="h1"></div><div id="h2"></div></div>
+  <div class="big" id="gtext" style="left:150px;top:420px;font-size:118px"></div>
+  <div id="logoWrap"><div id="logo"><img src="assets/logo.png" alt=""><img class="r" src="assets/logo.png" alt=""><img class="c" src="assets/logo.png" alt=""></div><div class="big" id="tag" style="position:relative;margin-top:44px;font-size:70px;font-weight:700"></div></div>
+  <div id="cta"><div class="l1" id="c1"></div><div class="btn" id="cbtn"><span class="play"><svg width="26" height="26" viewBox="0 0 24 24"><path d="M7 4v16l13-8z" fill="#3d56ff"/></svg></span><span>Watch the full video</span><i id="sheen"></i></div><div class="url" id="curl">upscoretech.com</div></div>
+  <div class="bar" id="barT" style="top:0"></div><div class="bar" id="barB" style="bottom:0"></div>
+  <canvas id="grain" width="960" height="540"></canvas>
+  <div id="vign"></div>
+  <div id="flash"></div>
+</div>
+<script src="teaser.js"></script>
+</body>
+</html>

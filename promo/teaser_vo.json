@@ -1,0 +1,23 @@
+{
+ "voice": "af_heart",
+ "speed": 1.06,
+ "lines": [
+  {
+   "id": "t_hook",
+   "text": "What if one team could do all of this?"
+  },
+  {
+   "id": "t_search",
+   "text": "One search is all it takes.",
+   "speed": 1.1
+  },
+  {
+   "id": "t_logo",
+   "text": "Upscore Tech, build smarter, grow faster."
+  },
+  {
+   "id": "t_cta",
+   "text": "Four services, one team. Watch the full video now."
+  }
+ ]
+}

@@ -16,7 +16,9 @@ const [mode, ...args] = process.argv.slice(2);
 const browser = await chromium.launch({ args: ['--allow-file-access-from-files', '--disable-web-security', '--force-color-profile=srgb', '--hide-scrollbars'] });
 const page = await browser.newPage({ viewport: { width: 1920, height: 1080 }, deviceScaleFactor: 1 });
 page.on('pageerror', e => console.error('PAGE ERROR', e.message));
-await page.goto(pathToFileURL(path.join(here, 'index.html')).href + '?rec=' + encodeURIComponent(pathToFileURL(REC).href));
+// PAGE_URL (http) is used for pages that embed the main scene in iframes (teaser)
+if (process.env.PAGE_URL) await page.goto(process.env.PAGE_URL);
+else await page.goto(pathToFileURL(path.join(here, 'index.html')).href + '?rec=' + encodeURIComponent(pathToFileURL(REC).href));
 await page.evaluate(() => window.ready);
 const duration = await page.evaluate(() => window.DURATION);
 
