@@ -63,19 +63,20 @@ function staggerWords(ws, t, s, e, st = .075, o = {}) {
 }
 
 /* ---------------- timeline ---------------- */
-const PD = 10;                 // seconds each service is presented
+const CFG = window.PROMO_CFG || {};
+const PD = CFG.pd || [10, 10, 10, 10];   // seconds each service is presented (fitted to the voice-over)
 const T = {
-  hookIn: .35, hookOut: 3.25,
-  phoneIn: 3.95, phoneInEnd: 5.25,
-  type0: 5.45, dtc: .066,
-  enter: 8.45, res: 8.8, glow: 9.55, tap: 10.25, toRec: 10.55,
+  hookIn: .35, hookOut: 3.5,
+  phoneIn: 4.15, phoneInEnd: 5.65,
+  type0: 5.85, dtc: .066,
+  enter: 8.85, res: 9.2, glow: 9.95, tap: 10.65, toRec: 10.95,
 };
 // rec segments: global t -> recording time r
 const SEG = [];
 let tc = T.toRec;
 const seg = (dur, r0, r1, ease = 'lin', cut = false) => { SEG.push({ t0: tc, t1: tc + dur, r0, r1, ease, cut }); tc += dur; };
 const P = [];
-const present = (r, i) => { P.push({ t0: tc, t1: tc + PD, r, i }); SEG.push({ t0: tc, t1: tc + PD, r0: r, r1: r, ease: 'lin' }); tc += PD; };
+const present = (r, i) => { const d = PD[i]; P.push({ t0: tc, t1: tc + d, r, i }); SEG.push({ t0: tc, t1: tc + d, r0: r, r1: r, ease: 'lin' }); tc += d; };
 seg(5.8, 3.0, 8.8);                     // splash + hero
 seg(11 / 1.4, 14.0, 25.0, 'lin', true); // skip the accidental contact-page detour
 seg(1.0, 25.0, 25.8, 'out');
@@ -90,7 +91,7 @@ seg(5.0, 35.2, 41.5, 'trap');
 seg(3.2, 67.4, 70.6, 'out', true);      // CTA block
 const REC_END = tc;
 const OUT = { t0: REC_END - .55 };
-OUT.end = OUT.t0 + 7.2;
+OUT.end = OUT.t0 + (CFG.outroLen || 7.2);
 const DURATION = OUT.end;
 T.A0 = SEG[0].t0; T.B0 = SEG[1].t0;
 
@@ -191,7 +192,7 @@ function FLOATS_ai() {
     </div>
     <div class="fc fb" style="left:96px;top:600px;width:350px">
       <div class="h">AI Assistant</div>
-      <div class="bubble u m0">Hi! Can I book a free strategy call?</div>
+      <div class="bubble u m0">Hi! Can I book a strategy call?</div>
       <div class="bubble b m1" style="display:flex;gap:5px;width:64px;justify-content:center"><i class="td" style="width:7px;height:7px;border-radius:50%;background:#fff;display:block"></i><i class="td" style="width:7px;height:7px;border-radius:50%;background:#fff;display:block"></i><i class="td" style="width:7px;height:7px;border-radius:50%;background:#fff;display:block"></i></div>
       <div class="bubble b m2">Of course — you're booked for Tuesday, 10:00 ✓</div>
     </div>`;
@@ -397,7 +398,7 @@ async function renderAt(t) {
       const q = eOutBack(prog(t, st, st + .6)), qo = eInCubic(prog(t, e + .15 + j * .02, e + .6 + j * .02));
       const o = clamp(prog(t, st, st + .35)) * (1 - qo);
       fx(c, o, 8 * (1 - clamp(q)) + 8 * qo, 0, 22 * (1 - q) - 14 * qo, lerp(.92, 1, clamp(q)));
-      c.querySelector('.sheen').style.left = (lerp(-140, 480, prog(t, st + .35, st + 1.05))) + 'px';
+      c.querySelector('.sheen').style.left = (lerp(-140, 480, prog(Math.max(0, t - st) % 5.2, .35, 1.05))) + 'px';
     });
     // floating cards
     const fa = s.f.querySelector('.fa'), fb = s.f.querySelector('.fb');

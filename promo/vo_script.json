@@ -1,0 +1,16 @@
+{
+  "voice": "af_heart",
+  "speed": 1.0,
+  "lines": [
+    {"id": "hook",   "anchor": "hook",    "text": "Looking for the best digital marketing agency in Padova?"},
+    {"id": "search", "anchor": "search",  "text": "One search is all it takes."},
+    {"id": "meet",   "anchor": "meet",    "text": "Meet Upscore Tech. A full-service digital agency from Padova, Italy, helping brands grow worldwide."},
+    {"id": "roof",   "anchor": "roof",    "text": "Websites, marketing, automation and video. Everything your brand needs, under one roof."},
+    {"id": "s1",     "anchor": "p0",      "text": "Web and App Development. Fast, secure websites and web apps. Custom builds, SaaS, WordPress, Shopify, Webflow and e-commerce, designed to rank on Google and turn visitors into customers."},
+    {"id": "s2",     "anchor": "p1",      "text": "Result-driven Digital Marketing. SEO, Google and Meta ads, social media, email and content marketing, built around real buyer intent, for more qualified leads and measurable R.O.I."},
+    {"id": "s3",     "anchor": "p2",      "text": "AI Automation and Intelligent Systems. AI agents, chatbots and smart workflows that capture leads, update your CRM, and support your customers around the clock, so your team can focus on growth."},
+    {"id": "s4",     "anchor": "p3",      "text": "Video Production and Content. Scroll-stopping reels, YouTube videos, motion graphics, AI avatar videos and video ads. Content that captures attention and builds your brand."},
+    {"id": "cta",    "anchor": "cta",     "text": "Ready to leave the digital status quo behind?"},
+    {"id": "outro",  "anchor": "outro",   "text": "Upscore Tech. Build smarter. Grow faster. Book your strategy session today."}
+  ]
+}
