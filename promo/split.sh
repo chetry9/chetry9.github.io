@@ -4,7 +4,7 @@
 set -euo pipefail
 FF=${FFMPEG:-ffmpeg}; IN=$1; PRE=$2; shift 2
 CUTS=(0 "$@")
-DUR=$("$FF" -i "$IN" 2>&1 | sed -n 's/.*Duration: \([0-9:.]*\).*/\1/p' | awk -F: '{print $1*3600+$2*60+$3}')
+DUR=$( { "$FF" -i "$IN" 2>&1 || true; } | sed -n 's/.*Duration: \([0-9:.]*\).*/\1/p' | awk -F: '{print $1*3600+$2*60+$3}')
 CUTS+=("$DUR")
 LIMIT_MB=${LIMIT_MB:-28}
 for ((i=0;i<${#CUTS[@]}-1;i++)); do
