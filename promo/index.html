@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Upscore Tech — Service Promo</title>
+<link rel="stylesheet" href="fonts.css">
+<style>
+:root{
+  --bg:#04050c; --ink:#f4f6ff; --mute:#9aa3c7; --blue:#3d6dff; --violet:#8b5cff; --cyan:#46c8ff;
+  --grad:linear-gradient(95deg,#1f7bff 0%,#5b8cff 45%,#9a6bff 100%);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1920px;height:1080px;overflow:hidden;background:var(--bg)}
+body{font-family:Inter,system-ui,sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased}
+#stage{position:absolute;inset:0;overflow:hidden;background:var(--bg)}
+.abs{position:absolute}
+.serif{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;letter-spacing:-.01em}
+.gtxt{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+
+/* ---------- background ---------- */
+.blob{position:absolute;border-radius:50%;pointer-events:none}
+#ring,#ring2{position:absolute;left:50%;top:50%;border-radius:50%;pointer-events:none}
+#ring{width:1560px;height:1560px;margin:-780px 0 0 -780px;
+  background:radial-gradient(circle,transparent 61%,rgba(120,150,255,.95) 62.2%,rgba(150,110,255,.55) 63.2%,transparent 66.5%);
+  filter:blur(5px)}
+#ring2{width:1560px;height:1560px;margin:-780px 0 0 -780px;
+  background:radial-gradient(circle,transparent 55%,rgba(80,110,255,.35) 62%,transparent 72%);
+  filter:blur(40px)}
+#grid{position:absolute;inset:-2px;opacity:.07;
+  background-image:linear-gradient(rgba(255,255,255,.5) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.5) 1px,transparent 1px);
+  background-size:96px 96px;
+  -webkit-mask-image:radial-gradient(ellipse 70% 60% at 50% 50%,#000 20%,transparent 75%)}
+#grain{position:absolute;inset:0;opacity:.055;mix-blend-mode:overlay;pointer-events:none}
+#vign{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 85% 75% at 50% 50%,transparent 55%,rgba(0,0,0,.62) 100%)}
+#flash{position:absolute;inset:0;background:#fff;opacity:0;pointer-events:none;mix-blend-mode:overlay}
+
+/* ---------- kinetic text ---------- */
+.w{display:inline-block;white-space:pre;will-change:transform,filter,opacity}
+#hook{position:absolute;left:0;right:0;top:0;bottom:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+#hook .l{font-weight:700;font-size:104px;letter-spacing:-.045em;line-height:1.04}
+#hook .l .serif{font-size:128px;letter-spacing:-.01em}
+#hook .small{font-size:26px;font-weight:500;color:var(--mute);letter-spacing:.32em;text-transform:uppercase;margin-bottom:34px}
+
+.cap{position:absolute;font-weight:700;letter-spacing:-.04em;line-height:1.02}
+.cap .serif{letter-spacing:-.005em}
+.kicker{font-family:'JetBrains Mono',monospace;font-size:18px;letter-spacing:.22em;text-transform:uppercase;color:#8ea2ff}
+
+/* ---------- phone ---------- */
+#phoneWrap{position:absolute;left:0;top:0;width:1920px;height:1080px;perspective:2200px;pointer-events:none}
+#phone{position:absolute;left:50%;top:50%;width:454px;height:882px;margin:-441px 0 0 -227px;border-radius:66px;
+  background:linear-gradient(145deg,#3a3f52 0%,#14161f 30%,#0b0c12 60%,#2a2e3d 100%);
+  padding:14px;transform-style:preserve-3d}
+#phone::before{content:"";position:absolute;inset:2px;border-radius:64px;border:1.5px solid rgba(255,255,255,.14)}
+#phone .btn{position:absolute;width:5px;border-radius:3px;background:linear-gradient(90deg,#1b1e28,#4a4f63)}
+#glowUnder{position:absolute;left:50%;top:50%;width:760px;height:980px;margin:-490px 0 0 -380px;border-radius:50%;
+  background:radial-gradient(ellipse,rgba(80,100,255,.55),rgba(140,80,255,.18) 45%,transparent 70%);filter:blur(30px)}
+#screen{position:relative;width:426px;height:854px;border-radius:52px;overflow:hidden;background:#0b0d1a}
+#zoomer{position:absolute;inset:0;transform-origin:50% 50%}
+#zoomer img{position:absolute;left:0;top:0;width:426px;height:854px;display:block}
+#patch{position:absolute;left:0;top:0;width:426px;height:73px;display:none}
+#dim{position:absolute;inset:0;pointer-events:none}
+#hl{position:absolute;pointer-events:none}
+#hl svg{position:absolute;left:-8px;top:-8px;overflow:visible}
+#glare{position:absolute;inset:0;border-radius:52px;pointer-events:none;
+  background:linear-gradient(115deg,rgba(255,255,255,.10) 0%,rgba(255,255,255,0) 28%,rgba(255,255,255,0) 70%,rgba(255,255,255,.05) 100%)}
+
+/* ---------- google mock ---------- */
+#gm{position:absolute;inset:0;background:#1f1f1f;font-family:Inter,sans-serif;color:#e8eaed;overflow:hidden}
+.chromebar{position:absolute;left:0;right:0;top:0;height:74px;background:#1f1f1f;display:flex;align-items:center;padding:0 16px;gap:12px}
+.chromebar .url{flex:1;height:46px;border-radius:23px;background:#303134;display:flex;align-items:center;padding:0 18px;font-size:17px;color:#e8eaed;gap:10px}
+.chromebar .ic{width:26px;height:26px;border:2.4px solid #c4c7c5;border-radius:6px;font-size:13px;display:flex;align-items:center;justify-content:center;font-weight:700;color:#c4c7c5}
+.glogo{font-family:Montserrat,sans-serif;font-weight:600;letter-spacing:-.02em}
+.glogo b{font-weight:600}
+#gHome{position:absolute;inset:74px 0 0 0}
+#gHome .glogo{position:absolute;top:150px;left:0;right:0;text-align:center;font-size:66px}
+.sbox{position:absolute;left:22px;right:22px;height:56px;border-radius:28px;background:#303134;display:flex;align-items:center;padding:0 20px;gap:14px;font-size:19px}
+#gHome .sbox{top:270px}
+.caret{display:inline-block;width:2px;height:24px;background:#8ab4f8;vertical-align:middle;margin-left:1px}
+#sugg{position:absolute;left:22px;right:22px;top:326px;background:#303134;border-radius:0 0 26px 26px;padding:6px 0 12px;overflow:hidden}
+#sugg div{display:flex;gap:16px;align-items:center;padding:13px 20px;font-size:17px;color:#e8eaed}
+#sugg div b{font-weight:700}
+#gRes{position:absolute;inset:74px 0 0 0;opacity:0}
+#gRes .top{position:absolute;left:0;right:0;top:0;height:128px;border-bottom:1px solid #3c4043}
+#gRes .glogo{position:absolute;top:10px;left:0;right:0;text-align:center;font-size:30px}
+#gRes .sbox{top:52px;height:48px;font-size:16px}
+#tabs{position:absolute;top:128px;left:0;right:0;height:46px;display:flex;gap:22px;padding:0 22px;font-size:15px;color:#bdc1c6;align-items:center;border-bottom:1px solid #3c4043}
+#tabs .on{color:#fff;position:relative}
+#tabs .on::after{content:"";position:absolute;left:0;right:0;bottom:-14px;height:3px;border-radius:2px;background:#fff}
+#loadbar{position:absolute;top:174px;left:0;height:3px;background:#8ab4f8}
+.res{position:absolute;left:14px;right:14px;border-radius:22px;padding:18px 18px 16px;background:#1f1f1f}
+#r1{top:190px;background:#202124}
+#r1 .site{display:flex;gap:12px;align-items:center}
+#r1 .fav{width:34px;height:34px;flex:none;border-radius:50%;background:url(assets/fav.png) center/cover}
+
+#r1 .nm{font-size:15px;color:#dadce0}
+#r1 .ur{font-size:13px;color:#9aa0a6}
+#r1 h3{font-weight:400;font-size:22px;line-height:1.3;color:#99c3ff;margin:12px 0 8px}
+#r1 p{font-size:15px;line-height:1.5;color:#bdc1c6}
+#r1 .sl{margin-top:12px;border-top:1px solid #3c4043}
+#r1 .sl div{display:flex;justify-content:space-between;padding:12px 2px;border-bottom:1px solid #3c4043;font-size:16px;color:#e8eaed}
+#r1ring{position:absolute;left:10px;right:10px;top:186px;height:0;border-radius:26px;pointer-events:none}
+.sk{position:absolute;left:28px;right:28px}
+.sk i{display:block;height:12px;border-radius:6px;background:#303134;margin-bottom:10px}
+#tap{position:absolute;width:90px;height:90px;margin:-45px 0 0 -45px;border-radius:50%;background:rgba(255,255,255,.35);pointer-events:none;opacity:0}
+
+/* ---------- service panel ---------- */
+#panel{position:absolute;left:905px;top:0;width:980px;height:1080px}
+.pnum{position:absolute;left:0;top:132px;display:flex;align-items:center;gap:18px}
+.pnum .n{font-family:'JetBrains Mono',monospace;font-size:20px;color:#fff;padding:7px 14px;border-radius:999px;border:1px solid rgba(140,160,255,.45);background:rgba(90,110,255,.12)}
+.pnum .line{height:1px;width:120px;background:linear-gradient(90deg,rgba(140,160,255,.8),transparent)}
+.ptitle{position:absolute;left:0;top:188px;font-weight:800;font-size:86px;letter-spacing:-.045em;line-height:1.02}
+.ptitle .serif{font-size:100px;font-weight:400;letter-spacing:-.015em}
+.pdef{position:absolute;left:2px;top:392px;width:820px;font-size:25px;line-height:1.5;color:#aeb6d8;font-weight:400}
+.pdef b{color:#fff;font-weight:600}
+.chips{position:absolute;left:0;top:500px;width:975px;display:grid;grid-template-columns:1fr 1fr;gap:12px 14px}
+.chip{display:flex;align-items:center;gap:14px;height:52px;padding:0 18px;border-radius:14px;font-size:18.5px;font-weight:500;white-space:nowrap;color:#e6eaff;
+  background:linear-gradient(180deg,rgba(255,255,255,.055),rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.08);position:relative;overflow:hidden}
+.chip .dot{flex:none;width:22px;height:22px;border-radius:50%;background:var(--grad);display:flex;align-items:center;justify-content:center;box-shadow:0 0 16px rgba(120,120,255,.7)}
+.chip .dot::after{content:"";width:8px;height:5px;border-left:2px solid #fff;border-bottom:2px solid #fff;transform:translateY(-1px) rotate(-45deg)}
+.chip .sheen{position:absolute;top:0;bottom:0;width:120px;background:linear-gradient(90deg,transparent,rgba(160,170,255,.18),transparent)}
+
+/* ---------- floating cards ---------- */
+.fc{position:absolute;border-radius:22px;padding:20px 22px;background:linear-gradient(160deg,rgba(30,34,62,.92),rgba(14,16,32,.92));
+  border:1px solid rgba(150,160,255,.18);box-shadow:0 30px 80px rgba(0,0,0,.55),0 0 0 1px rgba(0,0,0,.2),inset 0 1px 0 rgba(255,255,255,.06)}
+.fc .h{font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:#8e9bd6;display:flex;align-items:center;gap:8px}
+.fc .h::before{content:"";width:8px;height:8px;border-radius:50%;background:#5dff9e;box-shadow:0 0 10px #5dff9e}
+.fc .big{font-size:44px;font-weight:800;letter-spacing:-.04em;margin-top:6px}
+.pill{display:inline-flex;align-items:center;height:32px;padding:0 13px;border-radius:999px;font-size:14px;font-weight:600;color:#dfe4ff;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);margin:0 6px 8px 0}
+.code{font-family:'JetBrains Mono',monospace;font-size:14.5px;line-height:1.75;color:#c9d1ff;white-space:pre}
+.code .k{color:#c792ff}.code .s{color:#7ee0a0}.code .t{color:#6ea8ff}.code .c{color:#5d6690}
+.node{position:absolute;height:46px;padding:0 14px;border-radius:12px;display:flex;align-items:center;gap:10px;font-size:15px;font-weight:600;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12)}
+.node i{width:24px;height:24px;border-radius:7px;display:block}
+.bubble{max-width:250px;padding:11px 14px;border-radius:16px;font-size:15px;line-height:1.4;margin-top:10px}
+.bubble.u{background:rgba(255,255,255,.08);border-bottom-left-radius:4px}
+.bubble.b{background:linear-gradient(135deg,#3d6dff,#7c5cff);margin-left:auto;border-bottom-right-radius:4px}
+.track{position:absolute;left:0;right:0;height:26px;border-radius:6px}
+.clip{position:absolute;top:0;bottom:0;border-radius:6px}
+
+/* ---------- progress ---------- */
+#prog{position:absolute;left:50%;top:44px;transform:translateX(-50%);display:flex;align-items:center;gap:0}
+#prog .it{display:flex;align-items:center;gap:10px;font-size:15px;font-weight:600;color:#6c75a0;letter-spacing:.01em;white-space:nowrap}
+#prog .it .d{width:10px;height:10px;border-radius:50%;background:#2c3150;border:1px solid #444c78}
+#prog .bar{width:70px;height:2px;margin:0 16px;background:#23284a;position:relative;overflow:hidden;border-radius:2px}
+#prog .bar i{position:absolute;left:0;top:0;bottom:0;background:var(--grad)}
+
+/* ---------- outro ---------- */
+#outro{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+#outro .logo{width:760px}
+#outro .tag{margin-top:46px;font-size:64px;font-weight:700;letter-spacing:-.04em}
+#outro .cta{margin-top:48px;display:flex;gap:18px;align-items:center}
+#outro .btn1{height:70px;padding:0 34px;border-radius:999px;display:flex;align-items:center;gap:14px;font-size:24px;font-weight:700;background:linear-gradient(95deg,#3d6dff,#7c5cff);box-shadow:0 20px 60px rgba(90,90,255,.45);position:relative;overflow:hidden}
+#outro .btn2{height:70px;padding:0 30px;border-radius:999px;display:flex;align-items:center;font-size:24px;font-weight:600;border:1.5px solid rgba(255,255,255,.22);color:#e6e9ff}
+#outro .loc{margin-top:34px;font-family:'JetBrains Mono',monospace;font-size:18px;letter-spacing:.24em;text-transform:uppercase;color:#8793c4}
+</style>
+</head>
+<body>
+<div id="stage">
+  <!-- background -->
+  <div id="bgwrap" class="abs" style="inset:0">
+    <div class="blob" id="b1"></div><div class="blob" id="b2"></div><div class="blob" id="b3"></div>
+    <div id="grid"></div>
+    <div id="ring2"></div><div id="ring"></div>
+  </div>
+
+  <!-- hook -->
+  <div id="hook">
+    <div class="small" id="hk0"></div>
+    <div class="l" id="hk1"></div>
+    <div class="l" id="hk2"></div>
+    <div class="l" id="hk3"></div>
+  </div>
+
+  <!-- side captions -->
+  <div class="cap" id="capA" style="left:150px;top:380px"></div>
+  <div class="cap" id="capA2" style="left:1270px;top:430px"></div>
+  <div class="cap" id="capB" style="left:110px;top:400px"></div>
+
+  <!-- floating cards (per service) -->
+  <div id="floats" class="abs" style="inset:0"></div>
+
+  <!-- phone -->
+  <div id="phoneWrap">
+    <div id="glowUnder"></div>
+    <div id="phone">
+      <div class="btn" style="left:-4px;top:170px;height:58px"></div>
+      <div class="btn" style="left:-4px;top:250px;height:90px"></div>
+      <div class="btn" style="right:-4px;top:230px;height:120px"></div>
+      <div id="screen">
+        <div id="zoomer">
+          <img id="recA" alt=""><img id="recB" alt="">
+          <img id="patch" src="assets/header_patch.jpg" alt="">
+          <!-- google mock -->
+          <div id="gm">
+            <div class="chromebar">
+              <svg width="26" height="26" viewBox="0 0 24 24"><path d="M4 11 12 4l8 7v9h-5v-6H9v6H4z" fill="none" stroke="#c4c7c5" stroke-width="2" stroke-linejoin="round"/></svg>
+              <div class="url"><svg width="18" height="18" viewBox="0 0 24 24"><circle cx="7" cy="8" r="2.5" fill="none" stroke="#c4c7c5" stroke-width="2"/><path d="M11 8h9M4 16h9" stroke="#c4c7c5" stroke-width="2"/><circle cx="17" cy="16" r="2.5" fill="none" stroke="#c4c7c5" stroke-width="2"/></svg><span id="urltxt">google.com</span></div>
+              <svg width="24" height="24" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" stroke="#c4c7c5" stroke-width="2.2"/></svg>
+              <div class="ic">2</div>
+              <svg width="8" height="24" viewBox="0 0 8 24"><circle cx="4" cy="5" r="2" fill="#c4c7c5"/><circle cx="4" cy="12" r="2" fill="#c4c7c5"/><circle cx="4" cy="19" r="2" fill="#c4c7c5"/></svg>
+            </div>
+            <div id="gHome">
+              <div class="glogo"><b style="color:#8ab4f8">G</b><b style="color:#f28b82">o</b><b style="color:#fdd663">o</b><b style="color:#8ab4f8">g</b><b style="color:#81c995">l</b><b style="color:#f28b82">e</b></div>
+              <div class="sbox"><svg width="22" height="22" viewBox="0 0 24 24"><circle cx="10" cy="10" r="6.5" fill="none" stroke="#9aa0a6" stroke-width="2.2"/><path d="m15 15 5 5" stroke="#9aa0a6" stroke-width="2.2"/></svg><span id="qtxt"></span><span class="caret" id="caret"></span></div>
+              <div id="sugg"></div>
+            </div>
+            <div id="gRes">
+              <div class="top">
+                <div class="glogo"><b style="color:#8ab4f8">G</b><b style="color:#f28b82">o</b><b style="color:#fdd663">o</b><b style="color:#8ab4f8">g</b><b style="color:#81c995">l</b><b style="color:#f28b82">e</b></div>
+                <div class="sbox"><span>best digital marketing agency in padova</span><svg style="margin-left:auto" width="20" height="20" viewBox="0 0 24 24"><circle cx="10" cy="10" r="6.5" fill="none" stroke="#8ab4f8" stroke-width="2.2"/><path d="m15 15 5 5" stroke="#8ab4f8" stroke-width="2.2"/></svg></div>
+              </div>
+              <div id="tabs"><span class="on">All</span><span>Images</span><span>Maps</span><span>News</span><span>Videos</span></div>
+              <div id="loadbar"></div>
+              <div id="r1ring"></div>
+              <div class="res" id="r1">
+                <div class="site"><div class="fav"></div><div><div class="nm">upscoretech.com</div><div class="ur">https://upscoretech.com</div></div></div>
+                <h3>Digital Marketing Agency in Padova, Italy | Upscoretech</h3>
+                <p>Looking for a premier Digital Marketing Agency in Padova, Italy? We deliver advanced SEO services, web design, video editing, and AI automation worldwide.</p>
+                <div class="sl"><div><span>Portfolio</span><span>›</span></div><div><span>About UpScore Tech</span><span>›</span></div><div><span>Services</span><span>›</span></div></div>
+              </div>
+              <div class="sk" id="sk1" style="top:660px"><i style="width:40%"></i><i style="width:85%;height:16px;background:#35373b"></i><i style="width:95%"></i><i style="width:70%"></i></div>
+              <div class="sk" id="sk2" style="top:780px"><i style="width:35%"></i><i style="width:80%;height:16px;background:#35373b"></i><i style="width:92%"></i></div>
+            </div>
+            <div id="tap"></div>
+          </div>
+          <div id="dim"></div>
+          <div id="hl"><svg id="hlsvg"><defs><linearGradient id="hg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#6ea8ff"/><stop offset=".55" stop-color="#8f6bff"/><stop offset="1" stop-color="#d27dff"/></linearGradient></defs><rect id="hlrect" fill="none" stroke="url(#hg)" stroke-width="4" rx="18"/></svg></div>
+        </div>
+        <div id="glare"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- service panel -->
+  <div id="panel"></div>
+
+  <!-- progress -->
+  <div id="prog"></div>
+
+  <!-- outro -->
+  <div id="outro">
+    <img class="logo" id="oLogo" src="assets/logo.png" alt="">
+    <div class="tag" id="oTag"></div>
+    <div class="cta" id="oCta"><div class="btn1" id="oBtn"><span>Schedule a Strategy Session</span><svg width="22" height="22" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><i class="sheen" id="oSheen" style="position:absolute;top:0;bottom:0;width:140px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.45),transparent)"></i></div><div class="btn2" id="oUrl">upscoretech.com</div></div>
+    <div class="loc" id="oLoc">Padova, Italy&nbsp;&nbsp;·&nbsp;&nbsp;Serving clients worldwide</div>
+  </div>
+
+  <canvas id="grain" width="960" height="540"></canvas>
+  <div id="vign"></div>
+  <div id="flash"></div>
+</div>
+
+<script src="scene.js"></script>
+</body>
+</html>
