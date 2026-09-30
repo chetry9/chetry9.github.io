@@ -65,8 +65,8 @@ function staggerWords(ws, t, s, e, st = .075, o = {}) {
 /* ---------------- timeline ---------------- */
 const PD = 10;                 // seconds each service is presented
 const T = {
-  hookIn: .35, hookOut: 3.55,
-  phoneIn: 3.75, phoneInEnd: 5.25,
+  hookIn: .35, hookOut: 3.25,
+  phoneIn: 3.95, phoneInEnd: 5.25,
   type0: 5.45, dtc: .066,
   enter: 8.45, res: 8.8, glow: 9.55, tap: 10.25, toRec: 10.55,
 };
@@ -304,7 +304,7 @@ async function renderAt(t) {
 
   /* screen content: google mock → recording */
   const gm = $('gm');
-  const gmo = 1 - prog(t, T.toRec, T.toRec + .3);
+  const gmo = 1 - eInOutCubic(prog(t, T.toRec, T.toRec + .16));
   gm.style.opacity = gmo; gm.style.visibility = gmo <= 0 ? 'hidden' : 'visible';
   if (gmo > 0) {
     const n = clamp(Math.floor((t - T.type0) / T.dtc), 0, QUERY.length);
@@ -349,6 +349,11 @@ async function renderAt(t) {
     waits.push(setImg(recB, frameOf(prev.r1)));
   }
   recB.style.opacity = xf; recB.style.visibility = xf > 0 ? 'visible' : 'hidden';
+  // blur-dip across cuts so two screens never read as a muddy double exposure
+  let dip = 0;
+  for (const s of SEG) if (s.cut) dip = Math.max(dip, Math.sin(Math.PI * clamp((t - s.t0 + .12) / .5)));
+  const fl = $('screen');
+  fl.style.filter = dip > .01 ? `blur(${(dip * 7).toFixed(2)}px) brightness(${(1 + .25 * dip).toFixed(3)})` : 'none';
   // hide the incoming notification banner by restoring the (static) sticky header
   $('patch').style.display = r >= 23.1 && r <= 25.6 ? 'block' : 'none';
 
