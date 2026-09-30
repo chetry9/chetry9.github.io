@@ -1,0 +1,5 @@
+node_modules/
+*.video.mp4
+*.wav
+*.cues.json
+snap_*.jpg
