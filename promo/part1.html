@@ -306,23 +306,23 @@ const flash=(t)=>{tl.fromTo('#flash',{opacity:0},{opacity:.85,duration:.08,ease:
 /* S1 0–3.3 */
 show('s1',0);
 tl.fromTo('#s1 .arc,#s1 .arc2',{rotate:-12,opacity:0},{rotate:4,opacity:1,duration:3.4,ease:'power2.out'},0);
-blurIn('#s1t .w',.25,.12,.9); cue(.2,'swell');
+blurIn('#s1t .w',.25,.12,.9); cue(.2,'swell'); cue(.35,'vo:0');
 tl.fromTo('#s1t',{scale:1},{scale:1.06,duration:3.3,ease:'none'},0);
 blurOut('#s1t .w',2.85); whoosh(2.95);
 hide('s1',3.35);
 
 /* S2 3.3–5.8 */
-show('s2',3.3);
+show('s2',3.3); cue(3.35,'vo:1');
 [['#p1',3.35],['#p2',4.15],['#p3',4.95]].forEach(([s,t],i)=>{
   tl.fromTo(s,{opacity:0,scale:1.35,filter:'blur(24px)'},{opacity:1,scale:1,filter:'blur(0px)',duration:.35,ease:'expo.out'},t);
-  cue(t,'hit');
+  cue(t,'hit'+i);
   if(i<2) tl.to(s,{opacity:0,scale:.9,filter:'blur(14px)',duration:.2,ease:'power2.in'},t+.62);
 });
 tl.to('#p3',{opacity:0,scale:.92,filter:'blur(16px)',duration:.3,ease:'power2.in'},5.55);
 whoosh(5.6); hide('s2',5.9);
 
 /* S3 google 5.85–12.2 */
-show('s3',5.85);
+show('s3',5.85); cue(6.3,'vo:2');
 tl.fromTo('#gwin',{y:220,rotateX:18,scale:.86,opacity:0,transformPerspective:2000},{y:0,rotateX:0,scale:1,opacity:1,duration:1,ease:'expo.out'},5.85);
 tl.set('#sugg',{opacity:0},0); tl.set('#gres',{opacity:0,visibility:'hidden'},0); tl.set('#rip',{opacity:0},0);
 tl.fromTo('#caret',{opacity:1},{opacity:0,duration:.3,repeat:5,yoyo:true,ease:'steps(1)'},6.5);
@@ -345,7 +345,7 @@ tl.to('#cur',{opacity:0,duration:.2},10.8);
 whoosh(11.35); flash(11.8); hide('s3',11.9);
 
 /* S4 Meet 11.9–13.2 */
-show('s4',11.9);
+show('s4',11.9); cue(11.95,'vo:3');
 tl.fromTo('#meet',{opacity:0,scale:1.25,filter:'blur(30px)'},{opacity:1,scale:1,filter:'blur(0px)',duration:.7,ease:'expo.out'},11.95);
 tl.to('#meet',{scale:1.08,duration:1.2,ease:'none'},12.4);
 cue(12.95,'riser');
@@ -353,7 +353,7 @@ tl.to('#meet',{opacity:0,scale:1.5,filter:'blur(30px)',duration:.3,ease:'power2.
 hide('s4',13.3);
 
 /* S5 logo 13.3–17.0 */
-show('s5',13.3); cue(13.3,'impact');
+show('s5',13.3); cue(13.3,'impact'); cue(13.4,'vo:4'); cue(14.45,'vo:5');
 tl.fromTo('#s5arc,#s5arc2',{y:300,opacity:0},{y:0,opacity:1,duration:1.6,ease:'expo.out'},13.3);
 tl.fromTo('#bicon',{scale:.4,opacity:0,filter:'blur(30px)'},{scale:1,opacity:1,filter:'blur(0px)',duration:.9,ease:'expo.out'},13.3);
 tl.fromTo('#bdiv',{scaleY:0},{scaleY:1,duration:.5},13.75);
@@ -364,7 +364,7 @@ tl.to('#brand',{opacity:0,scale:1.12,filter:'blur(20px)',duration:.4,ease:'power
 whoosh(16.6); hide('s5',17.0);
 
 /* S6 hero+stats 17.0–22.4 */
-show('s6',17.0);
+show('s6',17.0); cue(17.3,'vo:6');
 tl.fromTo('#ph6',{rotateY:-35,rotateX:8,x:260,opacity:0},{rotateY:-16,rotateX:4,x:0,opacity:1,duration:1.2,ease:'expo.out'},17.0);
 blurIn('#s6h .w',17.15,.07,.8);
 tl.fromTo('#stats>div',{opacity:0,y:60,filter:'blur(12px)'},{opacity:1,y:0,filter:'blur(0px)',duration:.7,stagger:.14},18.3);
@@ -378,7 +378,7 @@ blurOut('#s6h .w,#stats>div',21.9); tl.to('#ph6',{x:500,opacity:0,duration:.45,e
 whoosh(21.95); hide('s6',22.4);
 
 /* S7 categories 22.4–26.0 */
-show('s7',22.4);
+show('s7',22.4); cue(22.6,'vo:7');
 blurIn('#s7h .w',22.45,.06,.7);
 tl.fromTo('#cats>div',{opacity:0,y:80,scale:.9,filter:'blur(10px)'},{opacity:1,y:0,scale:1,filter:'blur(0px)',duration:.6,stagger:.08},23.1);
 for(let i=0;i<8;i++) cue(23.1+i*.08,'tick');
@@ -387,8 +387,9 @@ blurOut('#s7h .w,#cats>div',25.5); whoosh(25.55); hide('s7',26.0);
 
 /* category sections */
 function section(k,t0){
+  const HERO=5.5, RUN=4.2;
   const id='cat'+k;
-  show(id,t0);
+  show(id,t0); cue(t0-.7,'titleriser'); cue(t0,'sec'+k); cue(t0+.1,'vo:'+(8+k*3));
   tl.set(`#sh${k},#hc${k},#sp${k},#rh${k},#rn${k}>div`,{opacity:0},0);
   // big title
   blurIn(`#ct${k} .w`,t0+.05,.1,.7); cue(t0+.05,'hit');
@@ -397,7 +398,7 @@ function section(k,t0){
   const t1=t0+1.55;
   tl.fromTo(`#sh${k}`,{opacity:0,x:-40},{opacity:1,x:0,duration:.6},t1);
   tl.fromTo(`#hc${k}`,{opacity:0,y:160,rotateX:22,scale:.9,transformPerspective:2400},{opacity:1,y:0,rotateX:0,scale:1,duration:.9,ease:'expo.out'},t1);
-  cue(t1,'swoosh');
+  cue(t1,'swoosh'); cue(t1+.25,'vo:'+(9+k*3)); cue(t1+.5,'ring');
   tl.fromTo(`#sp${k}`,{opacity:0,rotateY:-40,x:200},{opacity:1,rotateY:-14,x:0,duration:1.1,ease:'expo.out'},t1+.2);
   tl.fromTo(`#hc${k} .logoarea`,{opacity:0,x:-30},{opacity:1,x:0,duration:.6},t1+.35);
   const sc={v:0}, target=SECTIONS[k].top.score;
@@ -410,19 +411,19 @@ function section(k,t0){
   tl.fromTo(`#hc${k} .tick`,{scale:0},{scale:1,duration:.4,ease:'back.out(3)',stagger:.22},t1+1.3);
   for(let i=0;i<5;i++) cue(t1+1.3+i*.22,'tick');
   tl.fromTo(`#hc${k} .pricebar`,{opacity:0,y:20},{opacity:1,y:0,duration:.5},t1+2.4);
-  tl.to(`#bt${k}`,{scale:1.07,duration:.35,yoyo:true,repeat:3,ease:'sine.inOut'},t1+2.8);
-  tl.fromTo(`#sp${k} img`,{scale:1,transformOrigin:'50% 40%'},{scale:1.12,duration:4,ease:'none'},t1+.2);
-  tl.to(`#hc${k}`,{y:-10,duration:4,ease:'none'},t1+1);
+  tl.to(`#bt${k}`,{scale:1.07,duration:.35,yoyo:true,repeat:5,ease:'sine.inOut'},t1+2.8);
+  tl.fromTo(`#sp${k} img`,{scale:1,transformOrigin:'50% 40%'},{scale:1.14,duration:HERO,ease:'none'},t1+.2);
+  tl.to(`#hc${k}`,{y:-10,duration:HERO-.8,ease:'none'},t1+1);
   // runners
-  const t2=t1+4.7;
+  const t2=t1+HERO; cue(t2+.15,'vo:'+(10+k*3)); cue(t1+2.4,'price'); cue(t1+2.8,'deal');
   tl.to(`#hc${k}`,{opacity:0,y:-80,scale:.94,filter:'blur(12px)',duration:.45,ease:'power2.in'},t2-.45);
   tl.to(`#sp${k}`,{opacity:0,x:300,duration:.45,ease:'power2.in'},t2-.45);
   whoosh(t2-.4);
   blurIn(`#rh${k} .w`,t2,.07,.7);
   tl.fromTo(`#rn${k}>div`,{opacity:0,y:120,rotateX:25,transformPerspective:2000},{opacity:1,y:0,rotateX:0,duration:.75,ease:'expo.out',stagger:.13},t2+.35);
   for(let i=0;i<4;i++) cue(t2+.35+i*.13,'pop');
-  tl.to(`#rn${k}`,{y:-15,duration:2.4,ease:'none'},t2+.5);
-  const tEnd=t2+2.9;
+  tl.to(`#rn${k}`,{y:-15,duration:RUN-.6,ease:'none'},t2+.5);
+  const tEnd=t2+RUN;
   blurOut(`#rh${k} .w,#rn${k}>div,#sh${k}`,tEnd-.45); whoosh(tEnd-.4);
   hide(id,tEnd);
   return tEnd;
@@ -432,11 +433,11 @@ t=section(0,t);
 t=section(1,t);
 
 /* S10 up next */
-show('s10',t);
+show('s10',t); cue(t+.15,'vo:14'); cue(t,'outro');
 blurIn('#s10 .w',t+.05,.08,.8); cue(t+.05,'swell');
-tl.fromTo('#s10 .center',{scale:1},{scale:1.05,duration:3,ease:'none'},t);
-tl.to('#s10 .w',{opacity:0,filter:'blur(18px)',duration:.6,stagger:.02},t+2.5);
-const END=t+3.2;
+tl.fromTo('#s10 .center',{scale:1},{scale:1.05,duration:3.6,ease:'none'},t);
+tl.to('#s10 .w',{opacity:0,filter:'blur(18px)',duration:.6,stagger:.02},t+2.9);
+const END=t+3.6;
 tl.set({}, {}, END);
 window.DURATION=END; window.CUES=CUES.sort((a,b)=>a[0]-b[0]);
 window.seek=s=>{tl.seek(s,false)};
