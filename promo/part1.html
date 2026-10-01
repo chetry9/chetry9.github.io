@@ -119,19 +119,19 @@ html,body{width:1920px;height:1080px;overflow:hidden;background:var(--bg);font-f
 
 /* ---- Apple-style liquid glass social bar ---- */
 #social{position:absolute;inset:0;z-index:80;pointer-events:none}
-.lg{position:absolute;display:flex;align-items:center;gap:14px;border-radius:24px;isolation:isolate;
+.lglass{position:absolute;display:flex;align-items:center;gap:14px;border-radius:24px;isolation:isolate;
  background:linear-gradient(140deg,rgba(255,255,255,.26),rgba(255,255,255,.07) 45%,rgba(255,255,255,.10)),rgba(18,18,24,.5);
  backdrop-filter:blur(20px) saturate(200%) brightness(1.08);-webkit-backdrop-filter:blur(20px) saturate(200%) brightness(1.08);
  box-shadow:inset 0 1.5px 0 rgba(255,255,255,.65),inset 0 -1px 0 rgba(255,255,255,.18),inset 1px 0 0 rgba(255,255,255,.2),inset 0 0 22px rgba(255,255,255,.10),0 14px 34px rgba(0,0,0,.35),0 2px 6px rgba(0,0,0,.2)}
-.lg::before{content:'';position:absolute;inset:0;border-radius:inherit;padding:1.2px;z-index:-1;
+.lglass::before{content:'';position:absolute;inset:0;border-radius:inherit;padding:1.2px;z-index:-1;
  background:linear-gradient(135deg,rgba(255,255,255,.95),rgba(255,255,255,.08) 35%,rgba(255,255,255,.04) 65%,rgba(255,255,255,.7));
  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude}
-.lg::after{content:'';position:absolute;left:8%;right:30%;top:3px;height:42%;border-radius:20px 20px 40px 40px;z-index:-1;
- background:linear-gradient(180deg,rgba(255,255,255,.35),rgba(255,255,255,0));filter:blur(1px)}
-.pill{bottom:30px;height:66px;padding:0 22px 0 12px}
-.chip{width:42px;height:42px;border-radius:13px;display:flex;align-items:center;justify-content:center;flex:none;box-shadow:0 4px 10px rgba(0,0,0,.25),inset 0 1px 0 rgba(255,255,255,.35)}
+.lglass::after{content:'';position:absolute;left:8%;right:30%;top:3px;height:42%;border-radius:20px 20px 40px 40px;z-index:-1;
+ background:linear-gradient(180deg,rgba(255,255,255,.35),rgba(255,255,255,0));filter:blur(1px);opacity:.5}
+.pill{bottom:30px;height:68px;width:442px;padding:0 16px;justify-content:center}
+.chip{width:46px;height:46px;border-radius:13px;display:flex;align-items:center;justify-content:center;flex:none;box-shadow:0 4px 10px rgba(0,0,0,.25),inset 0 1px 0 rgba(255,255,255,.35)}
 .chip i{display:block;width:24px;height:24px;background:#fff;-webkit-mask-size:contain;-webkit-mask-repeat:no-repeat;-webkit-mask-position:center}
-.pill span{font-family:'IT';font-weight:700;font-size:22px;letter-spacing:-.01em;color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.35);white-space:nowrap}
+.pill span{font-family:'IT';font-weight:700;font-size:26px;letter-spacing:-.01em;color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.35);white-space:nowrap}
 .pill span b{color:#FF6A26;font-weight:700}
 #follow::after{opacity:.35}
 #follow{left:50%;top:50%;height:120px;padding:0 26px 0 22px;border-radius:40px;gap:20px;transform:translate(-50%,-50%);opacity:0}
@@ -253,7 +253,7 @@ html,body{width:1920px;height:1080px;overflow:hidden;background:var(--bg);font-f
   </div>
 </section>
 
-<div id="social"><div class="lg pill" id="pl0" style="left:40px"><div class="chip" style="background:#1877F2"><i style="-webkit-mask-image:url(assets/si/facebook.svg)"></i></div><span>@best<b>digi</b>tools</span></div><div class="lg pill" id="pl1" style="left:330px"><div class="chip" style="background:#0A66C2"><i style="-webkit-mask-image:url(assets/si/linkedin.svg)"></i></div><span>@best<b>digi</b>tools</span></div><div class="lg pill" id="pl2" style="right:330px"><div class="chip" style="background:linear-gradient(45deg,#FEDA75,#FA7E1E 30%,#D62976 60%,#962FBF 85%,#4F5BD5)"><i style="-webkit-mask-image:url(assets/si/instagram.svg)"></i></div><span>@best<b>digi</b>tools</span></div><div class="lg pill" id="pl3" style="right:40px"><div class="chip" style="background:#FF0000"><i style="-webkit-mask-image:url(assets/si/youtube.svg)"></i></div><span>@best<b>digi</b>tools</span></div><div class="lg" id="follow"><div class="chip" style="background:#1877F2"><i style="-webkit-mask-image:url(assets/si/facebook.svg)"></i></div><div class="chip" style="background:#0A66C2"><i style="-webkit-mask-image:url(assets/si/linkedin.svg)"></i></div><div class="chip" style="background:linear-gradient(45deg,#FEDA75,#FA7E1E 30%,#D62976 60%,#962FBF 85%,#4F5BD5)"><i style="-webkit-mask-image:url(assets/si/instagram.svg)"></i></div><div class="chip" style="background:#FF0000"><i style="-webkit-mask-image:url(assets/si/youtube.svg)"></i></div><div class="fl">@best<span style="color:#FF6A26">digi</span>tools</div><div class="fb" id="fbtn"><span id="fbt">+ Follow</span></div></div><div id="fripple"></div><svg id="fcur" viewBox="0 0 24 24"><path d="M4 2l16 10-7 1.5L9.5 21z" fill="#111" stroke="#fff" stroke-width="1.5" stroke-linejoin="round"/></svg></div>
+<div id="social"><div class="lglass pill" id="pl0" style="left:40px"><div class="chip" style="background:#1877F2"><i style="-webkit-mask-image:url(assets/si/facebook.svg)"></i></div><span>@best<b>digi</b>tools</span></div><div class="lglass pill" id="pl1" style="left:506px"><div class="chip" style="background:#0A66C2"><i style="-webkit-mask-image:url(assets/si/linkedin.svg)"></i></div><span>@best<b>digi</b>tools</span></div><div class="lglass pill" id="pl2" style="left:972px"><div class="chip" style="background:linear-gradient(45deg,#FEDA75,#FA7E1E 30%,#D62976 60%,#962FBF 85%,#4F5BD5)"><i style="-webkit-mask-image:url(assets/si/instagram.svg)"></i></div><span>@best<b>digi</b>tools</span></div><div class="lglass pill" id="pl3" style="left:1438px"><div class="chip" style="background:#FF0000"><i style="-webkit-mask-image:url(assets/si/youtube.svg)"></i></div><span>@best<b>digi</b>tools</span></div><div class="lglass" id="follow"><div class="chip" style="background:#1877F2"><i style="-webkit-mask-image:url(assets/si/facebook.svg)"></i></div><div class="chip" style="background:#0A66C2"><i style="-webkit-mask-image:url(assets/si/linkedin.svg)"></i></div><div class="chip" style="background:linear-gradient(45deg,#FEDA75,#FA7E1E 30%,#D62976 60%,#962FBF 85%,#4F5BD5)"><i style="-webkit-mask-image:url(assets/si/instagram.svg)"></i></div><div class="chip" style="background:#FF0000"><i style="-webkit-mask-image:url(assets/si/youtube.svg)"></i></div><div class="fl">@best<span style="color:#FF6A26">digi</span>tools</div><div class="fb" id="fbtn"><span id="fbt">+ Follow</span></div></div><div id="fripple"></div><svg id="fcur" viewBox="0 0 24 24"><path d="M4 2l16 10-7 1.5L9.5 21z" fill="#111" stroke="#fff" stroke-width="1.5" stroke-linejoin="round"/></svg></div>
 <div class="flash" id="flash"></div>
 <div class="grain"></div>
 </div>
