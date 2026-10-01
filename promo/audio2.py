@@ -172,6 +172,7 @@ for tm,ty in cues:
     elif ty=='swell': add(FX,swell(),tm,1.)
     elif ty=='outro': add(FX,impact(),tm,.45)
     elif ty.startswith('glass'): gi=int(ty[5:]); add(FX,glass([84,88,91,96][gi]),tm,.35,(-.7,.7,-.4,.4)[gi]); add(FX,w_swipe(.3),tm-.1,.25,(-.7,.7,-.4,.4)[gi])
+    elif ty=='glow': add(FX,w_shimmer(.9),tm,.3)
     elif ty=='merge': add(FX,suck(),tm,.5)
     elif ty=='rise': add(FX,w_shimmer(),tm-.1,.5); add(FX,w_air(.6),tm-.2,.35)
     elif ty=='fclick': add(FX,click(),tm,.9); add(FX,success(),tm+.05,.6)

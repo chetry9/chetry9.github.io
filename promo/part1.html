@@ -470,6 +470,9 @@ PL.forEach((id,i)=>{const tt=5.0+i*.28;
   cue(tt+.05,'glass'+i);});
 const M=t+2.55;
 cue(M,'merge');
+// dim after ~3s on screen, brighten again ~2.5s before merging
+tl.to('#social .pill',{opacity:.16,duration:.8,ease:'power2.inOut'},8.6);
+tl.to('#social .pill',{opacity:1,duration:.6,ease:'power2.out'},M-2.5); cue(M-2.5,'glow');
 ['#pl0','#pl1','#pl2','#pl3'].forEach((id,i)=>{const el=document.querySelector(id);const cx=el.offsetLeft+el.offsetWidth/2;
   tl.to(id,{x:960-cx,y:-8,scale:.92,duration:.6,ease:'power3.inOut'},M);
   tl.to(id,{opacity:0,filter:'blur(6px)',duration:.2,ease:'none'},M+.5);});
