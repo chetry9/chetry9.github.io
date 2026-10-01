@@ -134,7 +134,7 @@ for tm,ty in J['cues']:
         add(VO,v,tm)
 VO=hp(VO,90); VO=VO+.25*bp(VO,2500,6000)
 env=lfilter([1-np.exp(-1/(.01*SR))],[1,-np.exp(-1/(.01*SR))],np.abs(VO)); VO*=np.minimum(1,.35/np.maximum(env,1e-4))**.5; VO*=.9/np.max(np.abs(VO))
-vg=np.ones(N); vg[int(12.38*SR):b]=.45; VO*=vg
+vg=np.ones(N); vg[int(12.3*SR):b]=.6; VO*=vg
 VO=VO+.18*verb(VO,1.2,1.0)[:N]   # a touch of cinematic space
 denv=lfilter([1-np.exp(-1/(.1*SR))],[1,-np.exp(-1/(.1*SR))],(np.abs(VO)>.02).astype(float))
 mix=M*(1-.6*np.clip(denv*1.5,0,1))[:,None]*.9+FX*(1-.35*np.clip(denv,0,1))[:,None]*.85+np.stack([VO,VO],1)*1.45
