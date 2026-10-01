@@ -1,4 +1,5 @@
 import numpy as np, json, sys, wave, soundfile as sf
+from scipy.signal import resample_poly
 from scipy.signal import butter, sosfilt, lfilter
 name,vo_prefix=sys.argv[1],sys.argv[2]
 J=json.load(open(name+'.cues.json')); DUR=J['dur']+0.4; SR=48000; N=int(DUR*SR)
@@ -130,14 +131,18 @@ add(FX,revswell(.55),REV[0],.6)
 # ---------- VO ----------
 for tm,ty in J['cues']:
     if ty.startswith('vo:'):
-        k=int(ty[3:]); v,sr=sf.read(f'{vo_prefix}_{k:02d}.wav'); v=np.interp(np.arange(len(v)*2)/2,np.arange(len(v)),v)
+        k=int(ty[3:]); v,sr=sf.read(f'{vo_prefix}_{k:02d}.wav'); v=resample_poly(v,2,1)
         add(VO,v,tm)
-VO=hp(VO,90); VO=VO+.25*bp(VO,2500,6000)
-env=lfilter([1-np.exp(-1/(.01*SR))],[1,-np.exp(-1/(.01*SR))],np.abs(VO)); VO*=np.minimum(1,.35/np.maximum(env,1e-4))**.5; VO*=.9/np.max(np.abs(VO))
+VO*=.9/np.max(np.abs(VO))
 vg=np.ones(N); vg[int(12.3*SR):b]=.6; VO*=vg
-VO=VO+.18*verb(VO,1.2,1.0)[:N]   # a touch of cinematic space
-denv=lfilter([1-np.exp(-1/(.1*SR))],[1,-np.exp(-1/(.1*SR))],(np.abs(VO)>.02).astype(float))
-mix=M*(1-.6*np.clip(denv*1.5,0,1))[:,None]*.9+FX*(1-.35*np.clip(denv,0,1))[:,None]*.85+np.stack([VO,VO],1)*1.45
+denv=lfilter([1-np.exp(-1/(.08*SR))],[1,-np.exp(-1/(.08*SR))],(np.abs(VO)>.02).astype(float)); dk=np.clip(denv*1.6,0,1)
+# carve a pocket for the voice: pull 700Hz-4kHz out of music & fx while the narrator speaks
+def carve(X,depth):
+    mid=np.stack([bp(X[:,0],700,4000),bp(X[:,1],700,4000)],1); return X-mid*(depth*dk)[:,None]
+Mc=carve(M,.8)*(1-.62*dk)[:,None]; FXc=carve(FX,.7)*(1-.45*dk)[:,None]
+mix=Mc*.9+FXc*.85+np.stack([VO,VO],1)*2.3
+r=lambda x:20*np.log10(np.sqrt((x**2).mean())+1e-9); m=dk>.6
+print('VO',round(r(VO[m]*2.3),1),'music+fx under VO',round(r((Mc*.9+FXc*.85).mean(1)[m]),1),'music+fx elsewhere',round(r((Mc*.9+FXc*.85).mean(1)[~m]),1))
 fo=int(.8*SR); mix[-fo:]*=np.linspace(1,0,fo)[:,None]
 mix=np.tanh(mix*1.25)/np.tanh(1.25); mix*=.92/np.max(np.abs(mix))
 with wave.open(name+'.wav','wb') as w:
