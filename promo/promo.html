@@ -92,7 +92,7 @@ html,body{width:1920px;height:1080px;overflow:hidden;background:var(--bg);font-f
 .ring .v{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:'IT';font-weight:800;font-size:46px}
 .stars{font-size:30px;color:#FFB400;letter-spacing:4px}
 .verdict{font-size:26px;color:#6b6b76;font-weight:500;margin-top:4px}
-.bestfor{display:inline-flex;align-items:center;gap:14px;background:#fff3ec;color:#c2410c;border-radius:14px;padding:14px 22px;font-family:'IT';font-weight:700;font-size:30px}
+.bestfor{max-width:450px;line-height:1.25;display:inline-flex;align-items:center;gap:14px;background:#fff3ec;color:#c2410c;border-radius:14px;padding:14px 22px;font-family:'IT';font-weight:700;font-size:30px}
 .feats{position:absolute;left:560px;top:250px;width:450px}
 .feat{display:flex;align-items:center;gap:16px;font-size:25px;font-weight:500;color:#2a2a33;margin-bottom:22px}
 .tick{width:34px;height:34px;border-radius:50%;background:#16a34a;flex:none;display:flex;align-items:center;justify-content:center}
@@ -117,6 +117,14 @@ html,body{width:1920px;height:1080px;overflow:hidden;background:var(--bg);font-f
 .sectionhdr .ttl{font-family:'IT';font-weight:700;font-size:40px}
 .sectionhdr .bar{width:60px;height:3px;background:var(--or)}
 
+
+/* how it works */
+.steps{position:absolute;left:150px;top:300px;width:1050px}
+.step{position:relative;display:flex;align-items:center;gap:30px;padding:30px 36px;margin-bottom:26px;border-radius:28px}
+.step .no{font-family:'IT';font-weight:800;font-size:64px;color:var(--or);width:90px;flex:none;letter-spacing:-.03em}
+.step .tt{font-family:'IT';font-weight:800;font-size:48px;letter-spacing:-.02em}
+.step .ds{font-size:24px;color:rgba(255,255,255,.72);margin-top:6px;line-height:1.35}
+.step.on{border-color:rgba(255,110,40,.75);box-shadow:0 0 0 1px rgba(255,110,40,.6),0 30px 70px rgba(255,90,20,.18)}
 /* ---- Apple-style liquid glass social bar ---- */
 #social{position:absolute;inset:0;z-index:80;pointer-events:none}
 .lglass{position:absolute;display:flex;align-items:center;gap:14px;border-radius:24px;isolation:isolate;
@@ -244,12 +252,25 @@ html,body{width:1920px;height:1080px;overflow:hidden;background:var(--bg);font-f
 <!-- S8/S9 category sections are generated -->
 <div id="sections"></div>
 
-<!-- S10 up next -->
+<!-- S11 how it works (part 3) -->
+<section class="scene darkbg" id="s11">
+  <div class="arc" style="left:900px;top:-1450px"></div>
+  <div style="position:absolute;left:150px;top:120px" class="head" id="s11h"><div style="font-size:104px;text-align:left"><span class="w">How</span> <span class="w">it</span> <span class="w grad">works</span></div></div>
+  <div class="steps">
+    <div class="glass step" id="st0"><div class="no">01</div><div><div class="tt">Discover</div><div class="ds">Browse 8 categories, or search &amp; filter every tool we've reviewed.</div></div></div>
+    <div class="glass step" id="st1"><div class="no">02</div><div><div class="tt">Compare</div><div class="ds">Honest scores, key features &amp; pricing — the top 5, side by side.</div></div></div>
+    <div class="glass step" id="st2"><div class="no">03</div><div><div class="tt">Choose the best</div><div class="ds">Read the full review, then visit the site for the best deal.</div></div></div>
+  </div>
+  <div class="persp full"><div class="phone" id="ph11" style="left:1340px;top:40px"><div class="notch"></div><div class="scr">
+    <img src="assets/shots/s_78.3.jpg" id="h1"><img src="assets/shots/s_80.3.jpg" id="h2" style="opacity:0"><img src="assets/shots/s_12.3.jpg" id="h3" style="opacity:0"><img src="assets/shots/s_82.0.jpg" id="h4" style="opacity:0"></div></div></div>
+</section>
+<!-- S10 outro (part 3) -->
 <section class="scene darkbg" id="s10">
-  <div class="arc" style="left:-1150px;top:250px"></div><div class="arc2" style="left:-1150px;top:250px"></div>
-  <div class="center head" style="font-size:112px">
-    <div><span class="w">And</span> <span class="w">that's</span> <span class="w">just</span> <span class="w">the</span> <span class="w grad">start.</span></div>
-    <div style="font-size:36px;font-family:'IT';font-weight:600;letter-spacing:.3em;color:rgba(255,255,255,.6);margin-top:40px"><span class="w">AI TOOLS</span> <span class="w or">·</span> <span class="w">SAAS</span> <span class="w or">·</span> <span class="w">EMAIL</span> <span class="w or">·</span> <span class="w">&amp; MORE</span></div>
+  <div class="arc" style="left:10px;top:560px"></div><div class="arc2" style="left:10px;top:560px"></div>
+  <div class="center head" id="s10c">
+    <div style="display:flex;align-items:center;justify-content:center;gap:34px"><img src="assets/logos/bdt_icon_clean.png" class="w" style="height:120px"><div class="wordmark w" style="font-size:96px">Best<span class="or">Digi</span>Tools</div></div>
+    <div style="font-size:96px;margin-top:40px"><span class="w">Stop</span> <span class="w">guessing.</span> <span class="w grad">Choose</span> <span class="w grad">the</span> <span class="w grad">best.</span></div>
+    <div style="font-family:'IT';font-weight:600;font-size:40px;letter-spacing:.12em;color:rgba(255,255,255,.75);margin-top:34px"><span class="w">www.bestdigitools.com</span></div>
   </div>
 </section>
 
@@ -273,8 +294,11 @@ const CATS=[['server','Web Hosting'],['shield','VPN & Security'],['spark','AI To
 document.getElementById('cats').innerHTML=CATS.map(([i,t])=>`<div class="glass cat"><div class="ic"><svg viewBox="0 0 24 24">${ICONS[i]}</svg></div><div class="t">${t}</div></div>`).join('');
 
 // logo renderer: si = simple-icons mark tinted with brand colour + wordmark; img = supplied logo file
+function wordmark(l){return `<div class="si"><div class="nm" style="color:${l.tc||l.c||'#16161c'}">${l.name}</div></div>`;}
 function logo(l,small){
-  if(l.img) return `<img class="imglogo" src="assets/logos/${l.img}" style="${l.h?('height:'+(small?l.h*0.8:l.h)+'px'):''}">`;
+  if(l.img){const fb=encodeURIComponent(wordmark(l));
+    return `<img class="imglogo" src="assets/logos/${l.img}" style="${l.h?('height:'+(small?l.h*0.8:l.h)+'px'):''}" onerror="this.outerHTML=decodeURIComponent('${fb}')">`;}
+  if(!l.si) return wordmark(l);
   return `<div class="si"><div class="mk" style="background:${l.c};-webkit-mask-image:url(assets/si/${l.si}.svg)"></div><div class="nm" style="color:${l.tc||'#16161c'}">${l.name}</div></div>`;
 }
 const TICK='<svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';
@@ -283,8 +307,8 @@ const SECTIONS=[
   top:{logo:{si:'hostinger',c:'#673DE6',name:'HOSTINGER',tc:'#673DE6'},score:9.8,verdict:'Outstanding',best:'Best overall value hosting',
    feats:['Free Domain for 1st Year','99.9% Uptime Guarantee','1-Click WordPress Install','LiteSpeed Cache Included','Free SSL Certificate'],price:'$2.99'},
   runners:[
-   {logo:{img:'bluehost.png',h:112},score:9.5,v:'Excellent',bf:'WordPress beginners'},
-   {logo:{img:'siteground.png',h:70},score:9.3,v:'Excellent',bf:'Speed & performance'},
+   {logo:{img:'bluehost.png',h:112,name:'bluehost',c:'#3E64CE'},score:9.5,v:'Excellent',bf:'WordPress beginners'},
+   {logo:{img:'siteground.png',h:70,name:'SiteGround',c:'#2b2b2b'},score:9.3,v:'Excellent',bf:'Speed & performance'},
    {logo:{si:'digitalocean',c:'#0080FF',name:'DigitalOcean',tc:'#0080FF'},score:9.1,v:'Very Good',bf:'Developers & DevOps'},
    {logo:{si:'cloudways',c:'#2C39BD',name:'Cloudways',tc:'#2C39BD'},score:8.9,v:'Very Good',bf:'Managed cloud hosting'}]},
  {n:'02',cat:'VPN & Security',ttl:'Best VPN & Security Tools',shot:'s_20.3.jpg',
@@ -294,11 +318,61 @@ const SECTIONS=[
    {logo:{si:'expressvpn',c:'#DA3940',name:'ExpressVPN',tc:'#DA3940'},score:9.6,v:'Excellent',bf:'Fastest for streaming'},
    {logo:{si:'surfshark',c:'#1EBFBF',name:'Surfshark',tc:'#16161c'},score:9.4,v:'Excellent',bf:'Best budget VPN pick'},
    {logo:{si:'protonvpn',c:'#6D4AFF',name:'Proton VPN',tc:'#16161c'},score:9.2,v:'Excellent',bf:'Privacy-first users'},
-   {logo:{img:'hma.png',h:130},score:9.2,v:'Good',bf:'Easy everyday privacy'}]}
+   {logo:{img:'hma.png',h:130,name:'HMA',c:'#333'},score:9.2,v:'Good',bf:'Easy everyday privacy'}]},
+ {n:'03',cat:'AI Tools',ttl:'Best AI Tools',shot:'s_28.2.jpg',
+  top:{logo:{img:'chatgpt.png',h:96,name:'ChatGPT',c:'#111'},score:9.9,verdict:'Exceptional',best:'Best overall AI assistant',
+   feats:['Content Writing & Copywriting','Coding & Debugging Support','Research & Summarization','Multilingual Conversations','Free & Premium Plans Available'],price:'$20'},
+  runners:[
+   {logo:{si:'claude',c:'#D97757',name:'Claude',tc:'#16161c'},score:9.9,v:'Outstanding',bf:'Long documents'},
+   {logo:{si:'googlegemini',c:'#8E75B2',name:'Gemini',tc:'#16161c'},score:9.7,v:'Excellent',bf:'Best Google AI tool'},
+   {logo:{img:'jasper.png',h:70,name:'Jasper',c:'#16161c'},score:9.5,v:'Highly Recommended',bf:'Marketing content'},
+   {logo:{img:'midjourney.png',h:90,name:'Midjourney',c:'#16161c'},score:9.5,v:'Great Choice',bf:'AI image generation'}]},
+ {n:'04',cat:'SaaS Software',ttl:'Best SaaS Software',shot:'s_36.2.jpg',
+  top:{logo:{si:'hubspot',c:'#FF7A59',name:'HubSpot',tc:'#33475B'},score:9.9,verdict:'Outstanding',best:'Best overall CRM software',
+   feats:['Customer Relationship Management','Marketing Automation Tools','Sales Pipeline Tracking','Email Marketing Features','Free Plan Available'],free:true},
+  runners:[
+   {logo:{img:'salesforce.png',h:110,name:'salesforce',c:'#00A1E0'},score:9.8,v:'Exceptional',bf:'Enterprise CRM'},
+   {logo:{si:'notion',c:'#000',name:'Notion',tc:'#000'},score:9.9,v:'Outstanding',bf:'All-in-one workspace'},
+   {logo:{si:'clickup',c:'#7B68EE',name:'ClickUp',tc:'#16161c'},score:9.8,v:'Excellent',bf:'Productivity platform'},
+   {logo:{img:'monday.png',h:64,name:'monday.com',c:'#333'},score:9.7,v:'Excellent',bf:'Team collaboration'}]},
+ {n:'05',cat:'Email Marketing',ttl:'Best Email Marketing Tools',shot:'s_44.2.jpg',
+  top:{logo:{si:'mailchimp',c:'#16161c',name:'mailchimp',tc:'#16161c'},score:9.9,verdict:'Outstanding',best:'Best all-in-one email platform',
+   feats:['Drag & Drop Email Builder','Marketing Automation','Audience Segmentation','Advanced Analytics & Reports','Free Plan Available'],free:true},
+  runners:[
+   {logo:{si:'brevo',c:'#0B996E',name:'Brevo',tc:'#0B996E'},score:9.8,v:'Excellent',bf:'Affordable campaigns'},
+   {logo:{name:'ConvertKit',c:'#FB6970'},score:9.7,v:'Excellent',bf:'Creators & bloggers'},
+   {logo:{img:'getresponse.png',h:56,name:'GetResponse',c:'#00BAFF'},score:9.6,v:'Excellent',bf:'Marketing automation'},
+   {logo:{img:'activecampaign.png',h:84,name:'ActiveCampaign',c:'#356AE6'},score:9.8,v:'Outstanding',bf:'Advanced automation'}]},
+ {n:'06',cat:'Landing Pages',ttl:'Best Landing Page Builders',shot:'s_51.2.jpg',
+  top:{logo:{img:'clickfunnels.png',h:100,name:'ClickFunnels',c:'#16161c'},score:9.9,verdict:'Outstanding',best:'Best sales funnel & page builder',
+   feats:['Complete Sales Funnel Builder','High-Converting Templates','One-Click Upsells','Email Marketing Integration','Conversion Tracking & Analytics']},
+  runners:[
+   {logo:{img:'unbounce.png',h:60,name:'unbounce',c:'#0E8DD8'},score:9.8,v:'Outstanding',bf:'Conversion optimization'},
+   {logo:{img:'leadpages.png',h:84,name:'Leadpages',c:'#5A3CF0'},score:9.7,v:'Excellent',bf:'Small businesses'},
+   {logo:{img:'instapage.png',h:52,name:'Instapage',c:'#111'},score:9.6,v:'Excellent',bf:'Enterprise teams'},
+   {logo:{img:'landingi.png',h:56,name:'Landingi',c:'#2B4DB0'},score:9.5,v:'Good',bf:'Beginners'}]},
+ {n:'07',cat:'Productivity',ttl:'Best Productivity Tools',shot:'s_58.2.jpg',
+  top:{logo:{si:'todoist',c:'#E44332',name:'todoist',tc:'#E44332'},score:9.9,verdict:'Outstanding',best:'Best overall task manager',
+   feats:['Task & Project Management','Natural-Language Quick Add','Recurring Due Dates','Cross-Platform Sync','Free Plan Available'],free:true},
+  runners:[
+   {logo:{si:'evernote',c:'#00A82D',name:'evernote',tc:'#16161c'},score:9.8,v:'Excellent',bf:'Note-taking app'},
+   {logo:{img:'onenote.png',h:80,name:'OneNote',c:'#7719AA'},score:9.7,v:'Very Good',bf:'Free note-taking'},
+   {logo:{name:'<span style="color:#4285F4">G</span><span style="color:#EA4335">o</span><span style="color:#FBBC05">o</span><span style="color:#4285F4">g</span><span style="color:#34A853">l</span><span style="color:#EA4335">e</span> <span style="color:#5f6368;font-weight:600">Workspace</span>',c:'#5f6368'},score:9.6,v:'Very Good',bf:'Cloud productivity suite'},
+   {logo:{si:'grammarly',c:'#15C39A',name:'grammarly',tc:'#16161c'},score:9.5,v:'Good',bf:'Writing productivity'}]},
+ {n:'08',cat:'E-Commerce',ttl:'Best E-Commerce Platforms',shot:'s_65.2.jpg',
+  top:{logo:{si:'shopify',c:'#7AB55C',name:'shopify',tc:'#16161c'},score:9.9,verdict:'Outstanding',best:'Best all-in-one eCommerce',
+   feats:['Easy Online Store Builder','Secure Payment Processing','Thousands of Apps & Themes','Inventory Management','Multi-Channel Selling'],price:'$5'},
+  runners:[
+   {logo:{name:'WooCommerce',c:'#96588A'},score:9.8,v:'Outstanding',bf:'Open-source stores'},
+   {logo:{si:'bigcommerce',c:'#121118',name:'BigCommerce',tc:'#121118'},score:9.7,v:'Excellent',bf:'Growing businesses'},
+   {logo:{name:'Wix.com',c:'#111'},score:9.6,v:'Very Good',bf:'Beginners'},
+   {logo:{si:'squarespace',c:'#000',name:'Squarespace',tc:'#000'},score:9.5,v:'Good',bf:'Beautiful online stores'}]}
 ];
-document.getElementById('sections').innerHTML=SECTIONS.map((s,k)=>`
+const PART=+(new URLSearchParams(location.search).get('p')||1);
+const PART_SECS={1:[0,1],2:[2,3,4],3:[5,6,7]}[PART];
+document.getElementById('sections').innerHTML=SECTIONS.map((s,k)=>!PART_SECS.includes(k)?'':`
 <section class="scene darkbg" id="cat${k}">
-  <div class="arc" style="left:${k?900:-1100}px;top:${k?-1450:420}px"></div>
+  <div class="arc" style="left:${k%2?900:-1100}px;top:${k%2?-1450:420}px"></div>
   <div class="center head" id="ct${k}"><div class="kicker"><span class="w">Category ${s.n}</span></div><div style="font-size:170px;margin-top:20px"><span class="w">${s.cat.split(' ').join('</span> <span class="w">')}</span></div></div>
   <div class="sectionhdr" id="sh${k}"><span class="num">${s.n}</span><span class="bar"></span><span class="ttl">${s.ttl}</span></div>
   <div class="card hero" id="hc${k}">
@@ -310,7 +384,7 @@ document.getElementById('sections').innerHTML=SECTIONS.map((s,k)=>`
     </div>
     <div class="bestfor" id="bf${k}">🏆 ${s.top.best}</div>
     <div class="feats">${s.top.feats.map(f=>`<div class="feat"><div class="tick">${TICK}</div>${f}</div>`).join('')}</div>
-    <div class="pricebar"><div class="price">From <b>${s.top.price}</b>/mo</div><div class="btn" id="bt${k}">Get Best Deal →</div></div>
+    <div class="pricebar"><div class="price">${s.top.price?`From <b>${s.top.price}</b>/mo`:s.top.free?`<b style="font-size:40px">Free plan</b> available`:`Rated <b>${s.top.score}</b>/10`}</div><div class="btn" id="bt${k}">Get Best Deal →</div></div>
   </div>
   <div class="persp full"><div class="phone sidephone" id="sp${k}"><div class="notch"></div><div class="scr"><img src="assets/shots/${s.shot}"></div></div></div>
   <div style="position:absolute;left:0;right:0;top:230px" class="head" id="rh${k}"><div style="font-size:88px"><span class="w">Plus</span> <span class="w">the</span> <span class="w grad">top</span> <span class="w grad">5,</span> <span class="w">compared.</span></div></div>
@@ -328,6 +402,7 @@ const blurOut=(sel,t,d=.45)=>tl.to(sel,{opacity:0,y:-30,filter:'blur(18px)',dura
 const whoosh=t=>cue(t,'whoosh');
 const flash=(t)=>{tl.fromTo('#flash',{opacity:0},{opacity:.85,duration:.08,ease:'none'},t).to('#flash',{opacity:0,duration:.35,ease:'power2.out'},t+.08)};
 
+if(PART===1){
 /* S1 0–3.3 */
 show('s1',0);
 tl.fromTo('#s1 .arc,#s1 .arc2',{rotate:-12,opacity:0},{rotate:4,opacity:1,duration:3.4,ease:'power2.out'},0);
@@ -410,11 +485,12 @@ for(let i=0;i<8;i++) cue(23.1+i*.08,'tick');
 tl.to('#cats',{y:-20,duration:2.5,ease:'none'},23.3);
 blurOut('#s7h .w,#cats>div',25.5); whoosh(25.55); hide('s7',26.0);
 
+}
 /* category sections */
-function section(k,t0){
+function section(k,t0,vb){
   const HERO=5.5, RUN=4.2;
   const id='cat'+k;
-  show(id,t0); cue(t0-.7,'titleriser'); cue(t0,'sec'+k); cue(t0+.1,'vo:'+(8+k*3));
+  show(id,t0); if(t0>.7) cue(t0-.7,'titleriser'); cue(t0,'sec'+k); cue(t0+.1,'vo:'+vb);
   tl.set(`#sh${k},#hc${k},#sp${k},#rh${k},#rn${k}>div`,{opacity:0},0);
   // big title
   blurIn(`#ct${k} .w`,t0+.05,.1,.7); cue(t0+.05,'hit');
@@ -423,7 +499,7 @@ function section(k,t0){
   const t1=t0+1.55;
   tl.fromTo(`#sh${k}`,{opacity:0,x:-40},{opacity:1,x:0,duration:.6},t1);
   tl.fromTo(`#hc${k}`,{opacity:0,y:160,rotateX:22,scale:.9,transformPerspective:2400},{opacity:1,y:0,rotateX:0,scale:1,duration:.9,ease:'expo.out'},t1);
-  cue(t1,'swoosh'); cue(t1+.25,'vo:'+(9+k*3)); cue(t1+.5,'ring');
+  cue(t1,'swoosh'); cue(t1+.25,'vo:'+(vb+1)); cue(t1+.5,'ring');
   tl.fromTo(`#sp${k}`,{opacity:0,rotateY:-40,x:200},{opacity:1,rotateY:-14,x:0,duration:1.1,ease:'expo.out'},t1+.2);
   tl.fromTo(`#hc${k} .logoarea`,{opacity:0,x:-30},{opacity:1,x:0,duration:.6},t1+.35);
   const sc={v:0}, target=SECTIONS[k].top.score;
@@ -440,7 +516,7 @@ function section(k,t0){
   tl.fromTo(`#sp${k} img`,{scale:1,transformOrigin:'50% 40%'},{scale:1.14,duration:HERO,ease:'none'},t1+.2);
   tl.to(`#hc${k}`,{y:-10,duration:HERO-.8,ease:'none'},t1+1);
   // runners
-  const t2=t1+HERO; cue(t2+.15,'vo:'+(10+k*3)); cue(t1+2.4,'price'); cue(t1+2.8,'deal');
+  const t2=t1+HERO; cue(t2+.15,'vo:'+(vb+2)); cue(t1+2.4,'price'); cue(t1+2.8,'deal');
   tl.to(`#hc${k}`,{opacity:0,y:-80,scale:.94,filter:'blur(12px)',duration:.45,ease:'power2.in'},t2-.45);
   tl.to(`#sp${k}`,{opacity:0,x:300,duration:.45,ease:'power2.in'},t2-.45);
   whoosh(t2-.4);
@@ -453,43 +529,72 @@ function section(k,t0){
   hide(id,tEnd);
   return tEnd;
 }
-let t=26.0;
-t=section(0,t);
-t=section(1,t);
-
-/* S10 up next */
-show('s10',t); cue(t+.15,'vo:14'); cue(t,'outro');
-blurIn('#s10 .w',t+.05,.08,.8); cue(t+.05,'swell');
-tl.fromTo('#s10 .center',{scale:1},{scale:1.05,duration:3.6,ease:'none'},t);
-tl.to('#s10 .w',{opacity:0,filter:'blur(18px)',duration:.5,stagger:.02},t+2.35);
-/* social pills: in at 5s, merge into Follow button at the end */
+/* social pills */
 const PL=['#pl0','#pl3','#pl1','#pl2'];   // left, right, left, right
-tl.set('#social .pill',{opacity:0,y:150},0);
-PL.forEach((id,i)=>{const tt=5.0+i*.28;
-  tl.fromTo(id,{opacity:0,y:150,scale:.85,filter:'blur(10px)'},{opacity:1,y:0,scale:1,filter:'blur(0px)',duration:.85,ease:'back.out(1.6)'},tt);
-  cue(tt+.05,'glass'+i);});
-const M=t+2.55;
-cue(M,'merge');
-// dim after ~3s on screen, brighten again ~2.5s before merging
-tl.to('#social .pill',{opacity:.16,duration:.8,ease:'power2.inOut'},8.6);
-tl.to('#social .pill',{opacity:1,duration:.6,ease:'power2.out'},M-2.5); cue(M-2.5,'glow');
-['#pl0','#pl1','#pl2','#pl3'].forEach((id,i)=>{const el=document.querySelector(id);const cx=el.offsetLeft+el.offsetWidth/2;
-  tl.to(id,{x:960-cx,y:-8,scale:.92,duration:.6,ease:'power3.inOut'},M);
-  tl.to(id,{opacity:0,filter:'blur(6px)',duration:.2,ease:'none'},M+.5);});
-tl.fromTo('#follow',{opacity:0,y:400,scale:.55},{opacity:1,y:380,scale:.6,duration:.2,ease:'none'},M+.5);
-tl.to('#follow',{y:0,scale:1,duration:.95,ease:'expo.out'},M+.7); cue(M+.7,'rise');
-tl.fromTo('#follow .chip',{scale:0,rotate:-25},{scale:1,rotate:0,duration:.5,ease:'back.out(2.2)',stagger:.08},M+.95);
-tl.fromTo('#follow .fl,#fbtn',{opacity:0,x:-20},{opacity:1,x:0,duration:.5,stagger:.12},M+1.1);
-cue(M+.85,'vo:15');
-tl.to('#fbtn',{scale:1.06,duration:.3,yoyo:true,repeat:1,ease:'sine.inOut'},M+1.7);
-tl.fromTo('#fcur',{opacity:0,x:1500,y:900},{opacity:1,x:1324,y:536,duration:.8,ease:'power2.inOut'},M+1.8);
-tl.to('#fcur',{scale:.8,duration:.08,yoyo:true,repeat:1},M+2.65); tl.to('#fbtn',{scale:.92,duration:.08,yoyo:true,repeat:1},M+2.65); cue(M+2.65,'fclick');
-tl.fromTo('#fripple',{x:1332,y:540,scale:.3,opacity:1},{scale:2.2,opacity:0,duration:.6,immediateRender:false},M+2.65);
-tl.set('#fbt',{textContent:'✓ Following'},M+2.72);
-tl.to('#fbtn',{background:'linear-gradient(180deg,#2bd46b,#16a34a)',boxShadow:'0 10px 26px rgba(22,163,74,.5),inset 0 1.5px 0 rgba(255,255,255,.5)',duration:.25},M+2.72);
-tl.to('#fcur',{opacity:0,duration:.3},M+3.0);
-tl.to('#follow',{scale:1.04,duration:1.4,ease:'none'},M+2.8);
-const END=M+4.3;
+if(PART===1){
+  tl.set('#social .pill',{opacity:0,y:150},0);
+  PL.forEach((id,i)=>{const tt=3.0+i*.28;
+    tl.fromTo(id,{opacity:0,y:150,scale:.85,filter:'blur(10px)'},{opacity:1,y:0,scale:1,filter:'blur(0px)',duration:.85,ease:'back.out(1.6)'},tt);
+    cue(tt+.05,'glass'+i);});
+  tl.to('#social .pill',{opacity:.16,duration:.8,ease:'power2.inOut'},6.0);
+} else tl.set('#social .pill',{opacity:.16,y:0},0);
+
+let t;
+if(PART===1){ t=26.0; }
+else t=0.35;
+const VOBASE=PART===1?8:0;
+PART_SECS.forEach((k,j)=>{t=section(k,t,VOBASE+j*3);});
+let END;
+if(PART<3){ END=t; }
+else{
+  /* how it works */
+  const H=t; show('s11',H); cue(H,'sec9'); cue(H+.15,'vo:9');
+  blurIn('#s11h .w',H+.05,.1,.8); cue(H+.05,'hit');
+  tl.fromTo('#ph11',{rotateY:-35,x:260,opacity:0},{rotateY:-14,x:0,opacity:1,duration:1.2,ease:'expo.out'},H+.3);
+  tl.set('.step',{opacity:0},0);
+  const SP=[H+1.9,H+7.4,H+12.1];
+  SP.forEach((st,i)=>{
+    tl.fromTo('#st'+i,{opacity:0,x:-80,filter:'blur(12px)'},{opacity:1,x:0,filter:'blur(0px)',duration:.7},st); cue(st,'step'+i); cue(st+.1,'vo:'+(10+i));
+    if(i>0) tl.to('#st'+(i-1),{opacity:.45,duration:.4},st);
+  });
+  tl.set('#st0,#st1,#st2',{className:'glass step'},0);
+  tl.set('#st0',{className:'glass step on'},SP[0]); tl.set('#st0',{className:'glass step'},SP[1]);
+  tl.set('#st1',{className:'glass step on'},SP[1]); tl.set('#st1',{className:'glass step'},SP[2]);
+  tl.set('#st2',{className:'glass step on'},SP[2]);
+  tl.fromTo('#h2',{opacity:0},{opacity:1,duration:.4},SP[0]+2.4);
+  tl.fromTo('#h3',{opacity:0},{opacity:1,duration:.4},SP[1]);
+  tl.fromTo('#h4',{opacity:0},{opacity:1,duration:.4},SP[2]);
+  tl.to('#ph11',{rotateY:-6,duration:15,ease:'none'},H+1.5);
+  const HE=SP[2]+4.6;
+  blurOut('#s11h .w,.step',HE-.5); tl.to('#ph11',{x:500,opacity:0,duration:.45,ease:'power2.in'},HE-.5); whoosh(HE-.45);
+  hide('s11',HE); t=HE;
+  /* outro + follow */
+  show('s10',t); cue(t,'outro'); cue(t+.25,'vo:13');
+  tl.fromTo('#s10 .arc,#s10 .arc2',{y:300,opacity:0},{y:0,opacity:1,duration:1.6,ease:'expo.out'},t);
+  blurIn('#s10c .w',t+.05,.08,.8); cue(t+.05,'swell');
+  tl.fromTo('#s10c',{scale:1},{scale:1.05,duration:6,ease:'none'},t);
+  const M=t+5.6;
+  tl.to('#s10c .w',{opacity:0,filter:'blur(18px)',duration:.5,stagger:.02},M-.2);
+  cue(M,'merge');
+  tl.to('#social .pill',{opacity:1,duration:.6,ease:'power2.out'},M-2.5); cue(M-2.5,'glow');
+  ['#pl0','#pl1','#pl2','#pl3'].forEach((id,i)=>{const el=document.querySelector(id);const cx=el.offsetLeft+el.offsetWidth/2;
+    tl.to(id,{x:960-cx,y:-8,scale:.92,duration:.6,ease:'power3.inOut'},M);
+    tl.to(id,{opacity:0,filter:'blur(6px)',duration:.2,ease:'none'},M+.5);});
+  tl.fromTo('#follow',{opacity:0,y:400,scale:.55},{opacity:1,y:380,scale:.6,duration:.2,ease:'none'},M+.5);
+  tl.to('#follow',{y:0,scale:1,duration:.95,ease:'expo.out'},M+.7); cue(M+.7,'rise');
+  tl.fromTo('#follow .chip',{scale:0,rotate:-25},{scale:1,rotate:0,duration:.5,ease:'back.out(2.2)',stagger:.08},M+.95);
+  tl.fromTo('#follow .fl,#fbtn',{opacity:0,x:-20},{opacity:1,x:0,duration:.5,stagger:.12},M+1.1);
+  cue(M+.85,'vo:14');
+  tl.to('#fbtn',{scale:1.06,duration:.3,yoyo:true,repeat:1,ease:'sine.inOut'},M+1.7);
+  tl.fromTo('#fcur',{opacity:0,x:1500,y:900},{opacity:1,x:1324,y:536,duration:.8,ease:'power2.inOut'},M+1.8);
+  tl.to('#fcur',{scale:.8,duration:.08,yoyo:true,repeat:1},M+2.65); tl.to('#fbtn',{scale:.92,duration:.08,yoyo:true,repeat:1},M+2.65); cue(M+2.65,'fclick');
+  tl.fromTo('#fripple',{x:1332,y:540,scale:.3,opacity:1},{scale:2.2,opacity:0,duration:.6,immediateRender:false},M+2.65);
+  tl.set('#fbt',{textContent:'✓ Following'},M+2.72);
+  tl.to('#fbtn',{background:'linear-gradient(180deg,#2bd46b,#16a34a)',boxShadow:'0 10px 26px rgba(22,163,74,.5),inset 0 1.5px 0 rgba(255,255,255,.5)',duration:.25},M+2.72);
+  tl.to('#fcur',{opacity:0,duration:.3},M+3.0);
+  tl.to('#follow',{scale:1.04,duration:1.4,ease:'none'},M+2.8);
+  END=M+4.3;
+}
 tl.set({}, {}, END);
 window.DURATION=END; window.CUES=CUES.sort((a,b)=>a[0]-b[0]);
 window.seek=s=>{tl.seek(s,false)};

@@ -86,12 +86,24 @@ def success():
 # ---------------- music with sections ----------------
 cues=J['cues']; ct={c[1]:c[0] for c in cues}
 BPM=118; beat=60/BPM; bar=beat*4
-DROP=ct.get('impact',13.3); S0=ct.get('sec0',1e9); S1=ct.get('sec1',1e9); OUT=ct.get('outro',1e9); G0=5.85
-progA=[[57,60,64],[53,57,60],[48,52,55],[55,59,62]]; bassA=[45,41,48,43]
-progB=[[50,53,57],[53,57,60],[48,52,55],[52,55,59]]; bassB=[38,41,36,40]   # VPN section: darker Dm-F-C-Em
+INTRO='impact' in ct
+DROP=ct.get('impact',0.0); OUT=ct.get('outro',1e9); G0=5.85 if INTRO else -1
+SECS=sorted(c[0] for c in cues if c[1].startswith('sec'))
+S0=SECS[0] if SECS else 1e9
+PROGS=[([[57,60,64],[53,57,60],[48,52,55],[55,59,62]],[45,41,48,43]),   # Am F C G
+       ([[50,53,57],[53,57,60],[48,52,55],[52,55,59]],[38,41,36,40]),   # Dm F C Em
+       ([[53,57,60],[55,59,62],[52,55,59],[57,60,64]],[41,43,40,45]),   # F G Em Am
+       ([[48,52,55],[55,59,62],[57,60,64],[53,57,60]],[36,43,45,41])]   # C G Am F
+def sec_index(t):
+    i=-1
+    for j,st in enumerate(SECS):
+        if t>=st-0.01: i=j
+    return i
 def prog(t):
-    P,B=(progB,bassB) if S1<=t<OUT else (progA,bassA)
+    i=sec_index(t); P,B=PROGS[(i+ (1 if not INTRO else 0))%4] if i>=0 else PROGS[0]
+    if t>=OUT: P,B=PROGS[0]
     return P[int(t//bar)%4],B
+def in_break(t): return any(st-bar<=t<st+bar*.5 for st in SECS)
 def saw(fr,n): return 2*((np.arange(n)*fr/SR)%1)-1
 kick=(lambda t:np.sin(2*np.pi*np.cumsum(np.geomspace(140,45,len(t)))/SR)*np.exp(-t*8))(T(.4))
 hat=hp(noise(.06),7000)*np.exp(-T(.06)*70); ohat=hp(noise(.25),6000)*np.exp(-T(.25)*14)
@@ -106,15 +118,15 @@ while t<DUR:
     for m in ch:
         for det in (-.12,.12): s+=saw(f(m+12)*2**(det/12/8),n)
     fc=900 if t<DROP else 2200
-    if S0<=t<S0+bar or S1<=t<S1+bar: fc=500
+    if any(st<=t<st+bar for st in SECS): fc=500
     s=lp(s,fc)*.045; e=np.minimum(1,np.minimum(np.arange(n)/(.3*SR),(n-np.arange(n))/(.3*SR)))
     add(M,s*e,t,1.,0); t+=bar
 # rhythm
 t=0.; i=0
 while t<DUR-.4:
     b=i%4; bb=i%16; ch,bs=prog(t); m=bs[int(t//bar)%4]
-    brk=(S0-bar<=t<S0+bar*.5) or (S1-bar<=t<S1+bar*.5)  # breakdown into each category
-    if t<3.3:   # intro heartbeat
+    brk=in_break(t)
+    if INTRO and t<3.3:   # intro heartbeat
         if b in (0,1) : add(M,lp(kick,300),t+(0 if b==0 else .18),.35)
     elif t<G0:  # tension: pulse on 8ths
         add(M,pluck(ch[0]+12,.2,.3),t,.12,-.2); add(M,pluck(ch[1]+12,.2,.3),t+beat/2,.1,.2)
@@ -128,7 +140,7 @@ while t<DUR-.4:
     elif brk:
         add(M,hat,t,.05); add(M,hat,t+beat/2,.05)
     else:
-        vpn=t>=S1
+        vpn=sec_index(t)%2==1
         add(M,kick,t,.62)
         if vpn and b==2: add(M,kick,t+beat*.75,.35)
         if b in (1,3): add(M,clap,t,.2,.1)
@@ -147,7 +159,7 @@ while t<DUR-.4:
     t+=beat; i+=1
 # ---------------- place sfx ----------------
 ti=0; last=None; order=[0,1,2,3,4,5,6,7,0,3,1,6,2,5,4,7]
-keyi=0; tick=0; popi=0; POPS=[660,740,830,880,990,1100]
+keyi=0; tick=0; popi=0; secn=0; hitn=0; POPS=[660,740,830,880,990,1100]
 for tm,ty in cues:
     if ty in('whoosh','swoosh'):
         fn,g=TRANS[order[ti%len(order)]]; ti+=1; s=fn()
@@ -159,7 +171,9 @@ for tm,ty in cues:
     elif ty=='impact': add(FX,impact(),tm,.75); add(FX,riser(1.2),tm-1.2,.3)
     elif ty=='riser': add(FX,w_reverse(.4),tm,.3)
     elif ty=='titleriser': add(FX,riser(.75),tm,.28)
-    elif ty.startswith('sec'): add(FX,hit_boom() if ty=='sec0' else hit_tom(),tm,.4)
+    elif ty.startswith('sec'): add(FX,(hit_boom,hit_tom,hit_snap)[secn%3](),tm,.4); secn+=1
+    elif ty=='hit': add(FX,(hit_snap,hit_tom,hit_boom)[hitn%3](),tm,.35,(-.2,.2,0)[hitn%3]); hitn+=1
+    elif ty.startswith('step'): si_=int(ty[4:]); [add(FX,pluck(m+12,.6,.8),tm+j*.05,.12,(-.3,0,.3)[j]) for j,m in enumerate([[60,64,67],[62,65,69],[64,67,72]][si_])]
     elif ty=='click': add(FX,click(),tm,.8)
     elif ty=='key': add(FX,key(keyi),tm,.4,rng.uniform(-.25,.25)); keyi+=1
     elif ty=='pop': add(FX,pop(POPS[popi%6]),tm,.2,rng.uniform(-.4,.4)); popi+=1
@@ -194,7 +208,7 @@ mix=M*duck[:,None]*0.9+FX*(1-0.5*np.clip(denv,0,1))[:,None]*0.8+np.stack([VO,VO]
 m_=denv>0.6; bg=(M*duck[:,None]*0.9+FX*(1-0.5*np.clip(denv,0,1))[:,None]*0.8).mean(1)
 r=lambda x:20*np.log10(np.sqrt((x**2).mean()))
 print('VO',r(VO[m_]*1.5),'bg under VO',r(bg[m_]),'bg elsewhere',r(bg[~m_]))
-fade=np.ones(N); fi=int(.2*SR); fo=int(1.8*SR); fade[:fi]=np.linspace(0,1,fi); fade[-fo:]=np.linspace(1,0,fo)
+fade=np.ones(N); fi=int((.2 if INTRO else .1)*SR); fo=int((1.8 if 'merge' in ct else 0.25)*SR); fade[:fi]=np.linspace(0,1,fi); fade[-fo:]=np.linspace(1,0,fo)
 mix*=fade[:,None]; mix=np.tanh(mix*1.3)/np.tanh(1.3); mix*=0.9/np.max(np.abs(mix))
 with wave.open(name+'.wav','wb') as w:
     w.setnchannels(2); w.setsampwidth(2); w.setframerate(SR); w.writeframes((mix*32767).astype('<i2').tobytes())
