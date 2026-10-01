@@ -86,6 +86,8 @@ html,body{width:1920px;height:1080px;overflow:hidden;background:var(--bg);font-f
 .si .mk{width:84px;height:84px;-webkit-mask-size:contain;-webkit-mask-repeat:no-repeat;-webkit-mask-position:center}
 .si .nm{font-family:'IT';font-weight:800;font-size:66px;letter-spacing:-.02em}
 .imglogo{height:100px;object-fit:contain}
+.cust{display:flex;align-items:center;gap:.35em;line-height:1;white-space:nowrap}
+.cust svg{flex:none}
 .scorerow{display:flex;align-items:center;gap:30px;margin:34px 0 26px}
 .ring{position:relative;width:132px;height:132px}
 .ring svg{position:absolute;inset:0;transform:rotate(-90deg)}
@@ -294,10 +296,12 @@ const CATS=[['server','Web Hosting'],['shield','VPN & Security'],['spark','AI To
 document.getElementById('cats').innerHTML=CATS.map(([i,t])=>`<div class="glass cat"><div class="ic"><svg viewBox="0 0 24 24">${ICONS[i]}</svg></div><div class="t">${t}</div></div>`).join('');
 
 // logo renderer: si = simple-icons mark tinted with brand colour + wordmark; img = supplied logo file
+function custom(l,small){return `<div class="cust" style="font-size:${small?(l.fs||40)*.8:(l.fs||40)}px">${l.html}</div>`;}
 function wordmark(l){return `<div class="si"><div class="nm" style="color:${l.tc||l.c||'#16161c'}">${l.name}</div></div>`;}
 function logo(l,small){
   if(l.img){const fb=encodeURIComponent(wordmark(l));
     return `<img class="imglogo" src="assets/logos/${l.img}" style="${l.h?('height:'+(small?l.h*0.8:l.h)+'px'):''}" onerror="this.outerHTML=decodeURIComponent('${fb}')">`;}
+  if(l.html) return custom(l,small);
   if(!l.si) return wordmark(l);
   return `<div class="si"><div class="mk" style="background:${l.c};-webkit-mask-image:url(assets/si/${l.si}.svg)"></div><div class="nm" style="color:${l.tc||'#16161c'}">${l.name}</div></div>`;
 }
@@ -323,50 +327,50 @@ const SECTIONS=[
   top:{logo:{img:'chatgpt.png',h:96,name:'ChatGPT',c:'#111'},score:9.9,verdict:'Exceptional',best:'Best overall AI assistant',
    feats:['Content Writing & Copywriting','Coding & Debugging Support','Research & Summarization','Multilingual Conversations','Free & Premium Plans Available'],price:'$20'},
   runners:[
-   {logo:{si:'claude',c:'#D97757',name:'Claude',tc:'#16161c'},score:9.9,v:'Outstanding',bf:'Long documents'},
-   {logo:{si:'googlegemini',c:'#8E75B2',name:'Gemini',tc:'#16161c'},score:9.7,v:'Excellent',bf:'Best Google AI tool'},
+   {logo:{img:'lib/claude.svg',h:62,name:'Claude'},score:9.9,v:'Outstanding',bf:'Long documents'},
+   {logo:{img:'lib/google-gemini.svg',h:74,name:'Gemini'},score:9.7,v:'Excellent',bf:'Best Google AI tool'},
    {logo:{img:'jasper.png',h:70,name:'Jasper',c:'#16161c'},score:9.5,v:'Highly Recommended',bf:'Marketing content'},
-   {logo:{img:'midjourney.png',h:90,name:'Midjourney',c:'#16161c'},score:9.5,v:'Great Choice',bf:'AI image generation'}]},
+   {logo:{fs:44,html:`<img src="assets/logos/lib/midjourney.svg" style="height:1.5em"><span style="font-family:IT;font-weight:700;color:#111">Midjourney</span>`},score:9.5,v:'Great Choice',bf:'AI image generation'}]},
  {n:'04',cat:'SaaS Software',ttl:'Best SaaS Software',shot:'s_36.2.jpg',
-  top:{logo:{si:'hubspot',c:'#FF7A59',name:'HubSpot',tc:'#33475B'},score:9.9,verdict:'Outstanding',best:'Best overall CRM software',
+  top:{logo:{img:'lib/hubspot.svg',h:100,name:'HubSpot'},score:9.9,verdict:'Outstanding',best:'Best overall CRM software',
    feats:['Customer Relationship Management','Marketing Automation Tools','Sales Pipeline Tracking','Email Marketing Features','Free Plan Available'],free:true},
   runners:[
-   {logo:{img:'salesforce.png',h:110,name:'salesforce',c:'#00A1E0'},score:9.8,v:'Exceptional',bf:'Enterprise CRM'},
-   {logo:{si:'notion',c:'#000',name:'Notion',tc:'#000'},score:9.9,v:'Outstanding',bf:'All-in-one workspace'},
-   {logo:{si:'clickup',c:'#7B68EE',name:'ClickUp',tc:'#16161c'},score:9.8,v:'Excellent',bf:'Productivity platform'},
-   {logo:{img:'monday.png',h:64,name:'monday.com',c:'#333'},score:9.7,v:'Excellent',bf:'Team collaboration'}]},
+   {logo:{img:'lib/salesforce.svg',h:120,name:'salesforce'},score:9.8,v:'Exceptional',bf:'Enterprise CRM'},
+   {logo:{img:'lib/notion.svg',h:76,name:'Notion'},score:9.9,v:'Outstanding',bf:'All-in-one workspace'},
+   {logo:{img:'lib/clickup.svg',h:60,name:'ClickUp'},score:9.8,v:'Excellent',bf:'Productivity platform'},
+   {logo:{img:'lib/monday.svg',h:50,name:'monday.com'},score:9.7,v:'Excellent',bf:'Team collaboration'}]},
  {n:'05',cat:'Email Marketing',ttl:'Best Email Marketing Tools',shot:'s_44.2.jpg',
-  top:{logo:{si:'mailchimp',c:'#16161c',name:'mailchimp',tc:'#16161c'},score:9.9,verdict:'Outstanding',best:'Best all-in-one email platform',
+  top:{logo:{img:'lib/mailchimp.svg',h:96,name:'mailchimp'},score:9.9,verdict:'Outstanding',best:'Best all-in-one email platform',
    feats:['Drag & Drop Email Builder','Marketing Automation','Audience Segmentation','Advanced Analytics & Reports','Free Plan Available'],free:true},
   runners:[
    {logo:{si:'brevo',c:'#0B996E',name:'Brevo',tc:'#0B996E'},score:9.8,v:'Excellent',bf:'Affordable campaigns'},
-   {logo:{name:'ConvertKit',c:'#FB6970'},score:9.7,v:'Excellent',bf:'Creators & bloggers'},
-   {logo:{img:'getresponse.png',h:56,name:'GetResponse',c:'#00BAFF'},score:9.6,v:'Excellent',bf:'Marketing automation'},
-   {logo:{img:'activecampaign.png',h:84,name:'ActiveCampaign',c:'#356AE6'},score:9.8,v:'Outstanding',bf:'Advanced automation'}]},
+   {logo:{fs:42,html:`<svg viewBox="0 0 40 40" style="height:1.15em;width:1.15em"><path d="M20 4a16 16 0 1 0 16 16h-7.5A8.5 8.5 0 1 1 20 11.5z" fill="#FB6970"/><circle cx="29" cy="11" r="5" fill="#FB6970"/></svg><span style="font-family:PP;font-weight:600;color:#373F45">ConvertKit</span>`},score:9.7,v:'Excellent',bf:'Creators & bloggers'},
+   {logo:{fs:42,html:`<svg viewBox="0 0 40 40" style="height:1.1em;width:1.1em"><defs><linearGradient id="grg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5BC6F5"/><stop offset="1" stop-color="#1A8FD6"/></linearGradient></defs><rect width="40" height="40" rx="3" fill="url(#grg)"/><path d="M3 9c8 12 26 12 34-1" stroke="#fff" stroke-width="4" fill="none" stroke-linecap="round"/></svg><span style="font-family:PP;font-weight:500;color:#3d3d3d">GetResponse</span>`},score:9.6,v:'Excellent',bf:'Marketing automation'},
+   {logo:{fs:40,html:`<span style="font-family:PP;font-weight:400;color:#356AE6;line-height:1.05;text-align:left">Active<br>Campaign</span><svg viewBox="0 0 20 28" style="height:.95em;width:.7em;align-self:flex-end;margin-bottom:.1em"><path d="M3 3l13 11-13 11" stroke="#356AE6" stroke-width="3.4" fill="none" stroke-linejoin="round"/><path d="M3 10l6 4-6 4" fill="#356AE6"/></svg>`},score:9.8,v:'Outstanding',bf:'Advanced automation'}]},
  {n:'06',cat:'Landing Pages',ttl:'Best Landing Page Builders',shot:'s_51.2.jpg',
-  top:{logo:{img:'clickfunnels.png',h:100,name:'ClickFunnels',c:'#16161c'},score:9.9,verdict:'Outstanding',best:'Best sales funnel & page builder',
+  top:{logo:{fs:58,html:`<svg viewBox="0 0 64 48" style="height:1.25em;width:1.67em"><rect x="2" y="2" width="60" height="44" rx="5" fill="#fff" stroke="#243B53" stroke-width="4"/><rect x="2" y="2" width="60" height="10" rx="4" fill="#243B53"/><circle cx="44" cy="7" r="2" fill="#fff"/><circle cx="50" cy="7" r="2" fill="#fff"/><circle cx="56" cy="7" r="2" fill="#fff"/><path d="M8 14h18l-3 4 3 4-3 4 3 4-3 4 3 4-3 4H8z" fill="#3B8BD9"/><path d="M56 14H38l3 4-3 4 3 4-3 4 3 4-3 4 3 4H56z" fill="#E2402E"/></svg><span style="font-family:PP;font-weight:500;color:#243B53">click funnels</span>`},score:9.9,verdict:'Outstanding',best:'Best sales funnel & page builder',
    feats:['Complete Sales Funnel Builder','High-Converting Templates','One-Click Upsells','Email Marketing Integration','Conversion Tracking & Analytics']},
   runners:[
-   {logo:{img:'unbounce.png',h:60,name:'unbounce',c:'#0E8DD8'},score:9.8,v:'Outstanding',bf:'Conversion optimization'},
-   {logo:{img:'leadpages.png',h:84,name:'Leadpages',c:'#5A3CF0'},score:9.7,v:'Excellent',bf:'Small businesses'},
-   {logo:{img:'instapage.png',h:52,name:'Instapage',c:'#111'},score:9.6,v:'Excellent',bf:'Enterprise teams'},
-   {logo:{img:'landingi.png',h:56,name:'Landingi',c:'#2B4DB0'},score:9.5,v:'Good',bf:'Beginners'}]},
+   {logo:{img:'lib/unbounce.svg',h:54,name:'unbounce'},score:9.8,v:'Outstanding',bf:'Conversion optimization'},
+   {logo:{fs:42,html:`<svg viewBox="0 0 48 40" style="height:1.1em;width:1.32em"><path d="M24 2l18 9-18 9-18-9z" fill="#5A3CF0"/><path d="M8 18l16 8 16-8 4 2-20 10L4 20z" fill="#5A3CF0"/><path d="M6 26l18 9 18-9 4 2-22 11L2 28z" fill="#5A3CF0"/></svg><span style="font-family:PP;font-weight:600;color:#16161c">Leadpages</span>`},score:9.7,v:'Excellent',bf:'Small businesses'},
+   {logo:{fs:42,html:`<svg viewBox="0 0 30 40" style="height:1.05em;width:.8em"><rect x="2" y="3" width="4" height="34" fill="#111"/><path d="M11 3h17v34H11" fill="none" stroke="#111" stroke-width="3.6"/></svg><span style="font-family:IN;font-weight:500;color:#111;letter-spacing:-.01em">Instapage</span>`},score:9.6,v:'Excellent',bf:'Enterprise teams'},
+   {logo:{fs:42,html:`<svg viewBox="0 0 48 40" style="height:1em;width:1.2em"><path d="M2 16l12-12 18 18-12 12z" fill="#2B4DB0"/><path d="M30 6l8-4 8 8-12 12-8-8z" fill="#2B4DB0"/></svg><span style="font-family:PP;font-weight:600;color:#2B4DB0;letter-spacing:.04em">Landingi</span>`},score:9.5,v:'Good',bf:'Beginners'}]},
  {n:'07',cat:'Productivity',ttl:'Best Productivity Tools',shot:'s_58.2.jpg',
-  top:{logo:{si:'todoist',c:'#E44332',name:'todoist',tc:'#E44332'},score:9.9,verdict:'Outstanding',best:'Best overall task manager',
+  top:{logo:{img:'lib/todoist.svg',h:84,name:'todoist'},score:9.9,verdict:'Outstanding',best:'Best overall task manager',
    feats:['Task & Project Management','Natural-Language Quick Add','Recurring Due Dates','Cross-Platform Sync','Free Plan Available'],free:true},
   runners:[
    {logo:{si:'evernote',c:'#00A82D',name:'evernote',tc:'#16161c'},score:9.8,v:'Excellent',bf:'Note-taking app'},
-   {logo:{img:'onenote.png',h:80,name:'OneNote',c:'#7719AA'},score:9.7,v:'Very Good',bf:'Free note-taking'},
+   {logo:{si:'microsoftonenote',c:'#7719AA',name:'OneNote',tc:'#7719AA'},score:9.7,v:'Very Good',bf:'Free note-taking'},
    {logo:{name:'<span style="color:#4285F4">G</span><span style="color:#EA4335">o</span><span style="color:#FBBC05">o</span><span style="color:#4285F4">g</span><span style="color:#34A853">l</span><span style="color:#EA4335">e</span> <span style="color:#5f6368;font-weight:600">Workspace</span>',c:'#5f6368'},score:9.6,v:'Very Good',bf:'Cloud productivity suite'},
-   {logo:{si:'grammarly',c:'#15C39A',name:'grammarly',tc:'#16161c'},score:9.5,v:'Good',bf:'Writing productivity'}]},
+   {logo:{img:'lib/grammarly.svg',h:56,name:'grammarly'},score:9.5,v:'Good',bf:'Writing productivity'}]},
  {n:'08',cat:'E-Commerce',ttl:'Best E-Commerce Platforms',shot:'s_65.2.jpg',
-  top:{logo:{si:'shopify',c:'#7AB55C',name:'shopify',tc:'#16161c'},score:9.9,verdict:'Outstanding',best:'Best all-in-one eCommerce',
+  top:{logo:{fs:64,html:`<img src="assets/logos/lib/shopify.svg" style="height:1.25em"><span style="font-family:PP;font-weight:700;font-style:italic;color:#111;letter-spacing:-.02em">shopify</span>`},score:9.9,verdict:'Outstanding',best:'Best all-in-one eCommerce',
    feats:['Easy Online Store Builder','Secure Payment Processing','Thousands of Apps & Themes','Inventory Management','Multi-Channel Selling'],price:'$5'},
   runners:[
-   {logo:{name:'WooCommerce',c:'#96588A'},score:9.8,v:'Outstanding',bf:'Open-source stores'},
+   {logo:{img:'lib/woocommerce.svg',h:56,name:'WooCommerce'},score:9.8,v:'Outstanding',bf:'Open-source stores'},
    {logo:{si:'bigcommerce',c:'#121118',name:'BigCommerce',tc:'#121118'},score:9.7,v:'Excellent',bf:'Growing businesses'},
-   {logo:{name:'Wix.com',c:'#111'},score:9.6,v:'Very Good',bf:'Beginners'},
-   {logo:{si:'squarespace',c:'#000',name:'Squarespace',tc:'#000'},score:9.5,v:'Good',bf:'Beautiful online stores'}]}
+   {logo:{img:'lib/wix.svg',h:64,name:'Wix'},score:9.6,v:'Very Good',bf:'Beginners'},
+   {logo:{fs:38,html:`<img src="assets/logos/lib/squarespace.svg" style="height:1.1em"><span style="font-family:IN;font-weight:500;color:#111;letter-spacing:.14em">SQUARESPACE</span>`},score:9.5,v:'Good',bf:'Beautiful online stores'}]}
 ];
 const PART=+(new URLSearchParams(location.search).get('p')||1);
 const PART_SECS={1:[0,1],2:[2,3,4],3:[5,6,7]}[PART];
