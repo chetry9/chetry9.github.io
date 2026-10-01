@@ -101,7 +101,7 @@ html,body{width:1920px;height:1080px;overflow:hidden;background:var(--bg);font-f
 .price{font-size:26px;color:#6b6b76}
 .price b{font-family:'IT';font-weight:800;font-size:52px;color:#16161c;letter-spacing:-.02em}
 .btn{background:linear-gradient(90deg,#ff6a1f,#ff4a0a);color:#fff;font-family:'IT';font-weight:700;font-size:28px;padding:22px 40px;border-radius:18px;box-shadow:0 14px 34px rgba(255,90,20,.45)}
-.sidephone{left:1330px;top:90px}
+.sidephone{left:1330px;top:40px}
 .runners{position:absolute;left:50%;top:470px;width:1640px;margin-left:-820px;display:grid;grid-template-columns:repeat(4,1fr);gap:26px}
 .rcard{position:relative;background:#fff;color:#16161c;border-radius:26px;height:360px;padding:34px 30px 26px;box-shadow:0 40px 80px rgba(0,0,0,.5)}
 .rcard .rk{position:absolute;left:0;top:0;width:58px;height:58px;border-radius:26px 0 22px 0;background:#18181d;color:#fff;font-family:'IT';font-weight:800;font-size:28px;display:flex;align-items:center;justify-content:center}
@@ -116,6 +116,30 @@ html,body{width:1920px;height:1080px;overflow:hidden;background:var(--bg);font-f
 .sectionhdr .num{font-family:'IT';font-weight:800;font-size:34px;color:var(--or)}
 .sectionhdr .ttl{font-family:'IT';font-weight:700;font-size:40px}
 .sectionhdr .bar{width:60px;height:3px;background:var(--or)}
+
+/* ---- Apple-style liquid glass social bar ---- */
+#social{position:absolute;inset:0;z-index:80;pointer-events:none}
+.lg{position:absolute;display:flex;align-items:center;gap:14px;border-radius:24px;isolation:isolate;
+ background:linear-gradient(140deg,rgba(255,255,255,.26),rgba(255,255,255,.07) 45%,rgba(255,255,255,.10)),rgba(18,18,24,.5);
+ backdrop-filter:blur(20px) saturate(200%) brightness(1.08);-webkit-backdrop-filter:blur(20px) saturate(200%) brightness(1.08);
+ box-shadow:inset 0 1.5px 0 rgba(255,255,255,.65),inset 0 -1px 0 rgba(255,255,255,.18),inset 1px 0 0 rgba(255,255,255,.2),inset 0 0 22px rgba(255,255,255,.10),0 14px 34px rgba(0,0,0,.35),0 2px 6px rgba(0,0,0,.2)}
+.lg::before{content:'';position:absolute;inset:0;border-radius:inherit;padding:1.2px;z-index:-1;
+ background:linear-gradient(135deg,rgba(255,255,255,.95),rgba(255,255,255,.08) 35%,rgba(255,255,255,.04) 65%,rgba(255,255,255,.7));
+ -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude}
+.lg::after{content:'';position:absolute;left:8%;right:30%;top:3px;height:42%;border-radius:20px 20px 40px 40px;z-index:-1;
+ background:linear-gradient(180deg,rgba(255,255,255,.35),rgba(255,255,255,0));filter:blur(1px)}
+.pill{bottom:30px;height:66px;padding:0 22px 0 12px}
+.chip{width:42px;height:42px;border-radius:13px;display:flex;align-items:center;justify-content:center;flex:none;box-shadow:0 4px 10px rgba(0,0,0,.25),inset 0 1px 0 rgba(255,255,255,.35)}
+.chip i{display:block;width:24px;height:24px;background:#fff;-webkit-mask-size:contain;-webkit-mask-repeat:no-repeat;-webkit-mask-position:center}
+.pill span{font-family:'IT';font-weight:700;font-size:22px;letter-spacing:-.01em;color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.35);white-space:nowrap}
+.pill span b{color:#FF6A26;font-weight:700}
+#follow::after{opacity:.35}
+#follow{left:50%;top:50%;height:120px;padding:0 26px 0 22px;border-radius:40px;gap:20px;transform:translate(-50%,-50%);opacity:0}
+#follow .chip{width:64px;height:64px;border-radius:19px}#follow .chip i{width:34px;height:34px}
+#follow .fl{font-family:'IT';font-weight:800;font-size:46px;letter-spacing:-.02em;color:#fff;margin:0 10px 0 14px;white-space:nowrap;text-shadow:0 2px 6px rgba(0,0,0,.3)}
+#follow .fb{white-space:nowrap;height:80px;padding:0 38px;border-radius:26px;background:linear-gradient(180deg,#ff7a33,#ff4d0d);display:flex;align-items:center;gap:12px;font-family:'IT';font-weight:800;font-size:36px;color:#fff;box-shadow:0 10px 26px rgba(255,90,20,.55),inset 0 1.5px 0 rgba(255,255,255,.5)}
+#fripple{position:absolute;left:0;top:0;width:120px;height:120px;margin:-60px 0 0 -60px;border-radius:50%;border:4px solid rgba(255,255,255,.9);opacity:0;z-index:85}
+#fcur{position:absolute;left:0;top:0;width:44px;height:44px;z-index:86;opacity:0}
 .flash{position:absolute;inset:0;background:#fff;opacity:0;z-index:90;pointer-events:none}
 .grain{position:absolute;inset:0;z-index:95;pointer-events:none;opacity:.05;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/></filter><rect width='200' height='200' filter='url(%23n)'/></svg>")}
 </style>
@@ -204,7 +228,7 @@ html,body{width:1920px;height:1080px;overflow:hidden;background:var(--bg);font-f
     <div class="glass stat"><div class="n" id="c2">0</div><div class="l">Categories</div></div>
     <div class="glass stat"><div class="n"><span id="c3">0</span><span class="or">K</span></div><div class="l">Monthly Readers</div></div>
   </div>
-  <div class="persp full"><div class="phone" id="ph6" style="left:1340px;top:90px"><div class="notch"></div><div class="scr"><img src="assets/shots/s_0.3.jpg" id="ph6img"><img src="assets/shots/s_4.5.jpg" id="ph6img2" style="opacity:0"></div></div></div>
+  <div class="persp full"><div class="phone" id="ph6" style="left:1340px;top:40px"><div class="notch"></div><div class="scr"><img src="assets/shots/s_0.3.jpg" id="ph6img"><img src="assets/shots/s_4.5.jpg" id="ph6img2" style="opacity:0"></div></div></div>
 </section>
 
 <!-- S7 categories -->
@@ -229,6 +253,7 @@ html,body{width:1920px;height:1080px;overflow:hidden;background:var(--bg);font-f
   </div>
 </section>
 
+<div id="social"><div class="lg pill" id="pl0" style="left:40px"><div class="chip" style="background:#1877F2"><i style="-webkit-mask-image:url(assets/si/facebook.svg)"></i></div><span>@best<b>digi</b>tools</span></div><div class="lg pill" id="pl1" style="left:330px"><div class="chip" style="background:#0A66C2"><i style="-webkit-mask-image:url(assets/si/linkedin.svg)"></i></div><span>@best<b>digi</b>tools</span></div><div class="lg pill" id="pl2" style="right:330px"><div class="chip" style="background:linear-gradient(45deg,#FEDA75,#FA7E1E 30%,#D62976 60%,#962FBF 85%,#4F5BD5)"><i style="-webkit-mask-image:url(assets/si/instagram.svg)"></i></div><span>@best<b>digi</b>tools</span></div><div class="lg pill" id="pl3" style="right:40px"><div class="chip" style="background:#FF0000"><i style="-webkit-mask-image:url(assets/si/youtube.svg)"></i></div><span>@best<b>digi</b>tools</span></div><div class="lg" id="follow"><div class="chip" style="background:#1877F2"><i style="-webkit-mask-image:url(assets/si/facebook.svg)"></i></div><div class="chip" style="background:#0A66C2"><i style="-webkit-mask-image:url(assets/si/linkedin.svg)"></i></div><div class="chip" style="background:linear-gradient(45deg,#FEDA75,#FA7E1E 30%,#D62976 60%,#962FBF 85%,#4F5BD5)"><i style="-webkit-mask-image:url(assets/si/instagram.svg)"></i></div><div class="chip" style="background:#FF0000"><i style="-webkit-mask-image:url(assets/si/youtube.svg)"></i></div><div class="fl">@best<span style="color:#FF6A26">digi</span>tools</div><div class="fb" id="fbtn"><span id="fbt">+ Follow</span></div></div><div id="fripple"></div><svg id="fcur" viewBox="0 0 24 24"><path d="M4 2l16 10-7 1.5L9.5 21z" fill="#111" stroke="#fff" stroke-width="1.5" stroke-linejoin="round"/></svg></div>
 <div class="flash" id="flash"></div>
 <div class="grain"></div>
 </div>
@@ -332,14 +357,14 @@ for(let i=0;i<word.length;i++) cue(6.9+i*1.35/word.length,'key');
 tl.fromTo('#sugg',{opacity:0,y:-10},{opacity:1,y:0,duration:.3},7.7);
 tl.fromTo('#cur',{x:1500,y:900},{x:760,y:548,duration:.9,ease:'power2.inOut'},8.2);
 tl.to('#cur',{scale:.85,duration:.08,yoyo:true,repeat:1},9.1); cue(9.1,'click');
-tl.fromTo('#rip',{x:772,y:560,scale:.3,opacity:1},{scale:1.6,opacity:0,duration:.5},9.1);
+tl.fromTo('#rip',{x:772,y:560,scale:.3,opacity:1},{scale:1.6,opacity:0,duration:.5,immediateRender:false},9.1);
 tl.set('#ghome',{opacity:0},9.3); tl.set('#gres',{opacity:1,visibility:'visible'},9.3);
 tl.set('#gurl',{textContent:'google.com/search?q=bestdigitools'},9.3);
 tl.fromTo('#r1',{opacity:0,y:20},{opacity:1,y:0,duration:.5},9.35);
 tl.to('#cur',{x:560,y:380,duration:.8,ease:'power2.inOut'},9.6);
 tl.to('#rt',{textDecoration:'underline',duration:0},10.35);
 tl.to('#cur',{scale:.85,duration:.08,yoyo:true,repeat:1},10.6); cue(10.6,'click');
-tl.fromTo('#rip',{x:572,y:392,scale:.3,opacity:1},{scale:1.6,opacity:0,duration:.5},10.6);
+tl.fromTo('#rip',{x:572,y:392,scale:.3,opacity:1},{scale:1.6,opacity:0,duration:.5,immediateRender:false},10.6);
 tl.to('#gwin',{scale:1.9,x:420,y:260,duration:1.1,ease:'power3.in'},10.8);
 tl.to('#cur',{opacity:0,duration:.2},10.8);
 whoosh(11.35); flash(11.8); hide('s3',11.9);
@@ -436,8 +461,32 @@ t=section(1,t);
 show('s10',t); cue(t+.15,'vo:14'); cue(t,'outro');
 blurIn('#s10 .w',t+.05,.08,.8); cue(t+.05,'swell');
 tl.fromTo('#s10 .center',{scale:1},{scale:1.05,duration:3.6,ease:'none'},t);
-tl.to('#s10 .w',{opacity:0,filter:'blur(18px)',duration:.6,stagger:.02},t+2.9);
-const END=t+3.6;
+tl.to('#s10 .w',{opacity:0,filter:'blur(18px)',duration:.5,stagger:.02},t+2.35);
+/* social pills: in at 5s, merge into Follow button at the end */
+const PL=['#pl0','#pl3','#pl1','#pl2'];   // left, right, left, right
+tl.set('#social .pill',{opacity:0,y:150},0);
+PL.forEach((id,i)=>{const tt=5.0+i*.28;
+  tl.fromTo(id,{opacity:0,y:150,scale:.85,filter:'blur(10px)'},{opacity:1,y:0,scale:1,filter:'blur(0px)',duration:.85,ease:'back.out(1.6)'},tt);
+  cue(tt+.05,'glass'+i);});
+const M=t+2.55;
+cue(M,'merge');
+['#pl0','#pl1','#pl2','#pl3'].forEach((id,i)=>{const el=document.querySelector(id);const cx=el.offsetLeft+el.offsetWidth/2;
+  tl.to(id,{x:960-cx,y:-8,scale:.92,duration:.6,ease:'power3.inOut'},M);
+  tl.to(id,{opacity:0,filter:'blur(6px)',duration:.2,ease:'none'},M+.5);});
+tl.fromTo('#follow',{opacity:0,y:400,scale:.55},{opacity:1,y:380,scale:.6,duration:.2,ease:'none'},M+.5);
+tl.to('#follow',{y:0,scale:1,duration:.95,ease:'expo.out'},M+.7); cue(M+.7,'rise');
+tl.fromTo('#follow .chip',{scale:0,rotate:-25},{scale:1,rotate:0,duration:.5,ease:'back.out(2.2)',stagger:.08},M+.95);
+tl.fromTo('#follow .fl,#fbtn',{opacity:0,x:-20},{opacity:1,x:0,duration:.5,stagger:.12},M+1.1);
+cue(M+.85,'vo:15');
+tl.to('#fbtn',{scale:1.06,duration:.3,yoyo:true,repeat:1,ease:'sine.inOut'},M+1.7);
+tl.fromTo('#fcur',{opacity:0,x:1500,y:900},{opacity:1,x:1324,y:536,duration:.8,ease:'power2.inOut'},M+1.8);
+tl.to('#fcur',{scale:.8,duration:.08,yoyo:true,repeat:1},M+2.65); tl.to('#fbtn',{scale:.92,duration:.08,yoyo:true,repeat:1},M+2.65); cue(M+2.65,'fclick');
+tl.fromTo('#fripple',{x:1332,y:540,scale:.3,opacity:1},{scale:2.2,opacity:0,duration:.6,immediateRender:false},M+2.65);
+tl.set('#fbt',{textContent:'✓ Following'},M+2.72);
+tl.to('#fbtn',{background:'linear-gradient(180deg,#2bd46b,#16a34a)',boxShadow:'0 10px 26px rgba(22,163,74,.5),inset 0 1.5px 0 rgba(255,255,255,.5)',duration:.25},M+2.72);
+tl.to('#fcur',{opacity:0,duration:.3},M+3.0);
+tl.to('#follow',{scale:1.04,duration:1.4,ease:'none'},M+2.8);
+const END=M+4.3;
 tl.set({}, {}, END);
 window.DURATION=END; window.CUES=CUES.sort((a,b)=>a[0]-b[0]);
 window.seek=s=>{tl.seek(s,false)};

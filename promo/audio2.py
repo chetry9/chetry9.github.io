@@ -73,6 +73,16 @@ def coin():
     for i,m in enumerate([88,95]): s=np.sign(np.sin(2*np.pi*f(m)*T(.3)))*np.exp(-T(.3)*9)*.25; st=int(i*.08*SR); y[st:st+len(s)]+=s
     return lp(y,6000)
 def swell(): t=T(2.6); return sum(np.sin(2*np.pi*f(m)*t) for m in (57,64,69,72,76))*np.minimum(1,t/1.1)*np.exp(-np.maximum(0,t-1.2)*1.8)*.06
+
+def glass(m):   # glassy tink: inharmonic partials + soft air
+    t=T(1.2); y=sum(a*np.sin(2*np.pi*f(m)*r*t)*np.exp(-t*k) for r,a,k in ((1,.5,5),(2.76,.25,9),(5.4,.12,14),(8.9,.06,20)))
+    return y*.6+hp(noise(1.2),4000)*np.exp(-t*25)*.25
+def suck(d=.6): t=T(d); u=t/d; return sweep_lp(noise(d),500,7000)*u**2.5*.9+np.sin(2*np.pi*np.cumsum(np.geomspace(200,700,len(t)))/SR)*u**2*.2
+def success():
+    y=np.zeros(int(1.4*SR))
+    for i,m in enumerate([76,83,88]):
+        tt=T(1.0); s=(np.sin(2*np.pi*f(m)*tt)+.3*np.sin(4*np.pi*f(m)*tt))*np.exp(-tt*4)*.35; st=int(i*.09*SR); y[st:st+len(s)]+=s
+    return y
 # ---------------- music with sections ----------------
 cues=J['cues']; ct={c[1]:c[0] for c in cues}
 BPM=118; beat=60/BPM; bar=beat*4
@@ -161,6 +171,10 @@ for tm,ty in cues:
     elif ty=='deal': add(FX,ding(),tm,.12)
     elif ty=='swell': add(FX,swell(),tm,1.)
     elif ty=='outro': add(FX,impact(),tm,.45)
+    elif ty.startswith('glass'): gi=int(ty[5:]); add(FX,glass([84,88,91,96][gi]),tm,.35,(-.7,.7,-.4,.4)[gi]); add(FX,w_swipe(.3),tm-.1,.25,(-.7,.7,-.4,.4)[gi])
+    elif ty=='merge': add(FX,suck(),tm,.5)
+    elif ty=='rise': add(FX,w_shimmer(),tm-.1,.5); add(FX,w_air(.6),tm-.2,.35)
+    elif ty=='fclick': add(FX,click(),tm,.9); add(FX,success(),tm+.05,.6)
 # ---------------- voice-over ----------------
 vo_i=0
 for tm,ty in cues:
