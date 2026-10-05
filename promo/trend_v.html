@@ -1,0 +1,356 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Trending ChatGPT</title><style>
+@font-face{font-family:'IT';font-weight:600;src:url(node_modules/@fontsource/inter-tight/files/inter-tight-latin-600-normal.woff2)}
+@font-face{font-family:'IT';font-weight:700;src:url(node_modules/@fontsource/inter-tight/files/inter-tight-latin-700-normal.woff2)}
+@font-face{font-family:'IT';font-weight:800;src:url(node_modules/@fontsource/inter-tight/files/inter-tight-latin-800-normal.woff2)}
+@font-face{font-family:'IN';font-weight:400;src:url(node_modules/@fontsource/inter/files/inter-latin-400-normal.woff2)}
+@font-face{font-family:'IN';font-weight:500;src:url(node_modules/@fontsource/inter/files/inter-latin-500-normal.woff2)}
+@font-face{font-family:'IN';font-weight:600;src:url(node_modules/@fontsource/inter/files/inter-latin-600-normal.woff2)}
+@font-face{font-family:'PP';font-weight:600;src:url(node_modules/@fontsource/poppins/files/poppins-latin-600-normal.woff2)}
+@font-face{font-family:'PP';font-weight:700;src:url(node_modules/@fontsource/poppins/files/poppins-latin-700-normal.woff2)}
+:root{--or:#FF5A14;--or2:#FF8A3D;--bg:#070708;--ink:#0d0d12}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1920px;height:1080px;overflow:hidden;background:var(--bg);font-family:'IN',sans-serif;color:#fff}
+#stage{position:absolute;inset:0;overflow:hidden;background:var(--bg)}
+.scene{position:absolute;inset:0;opacity:0;visibility:hidden}
+.full{position:absolute;inset:0}
+/* dark backdrop with orange glow + light arc, like reference */
+.darkbg{background:radial-gradient(1200px 800px at 0% 100%,rgba(255,90,20,.28),transparent 60%),radial-gradient(900px 700px at 100% 0%,rgba(255,120,40,.14),transparent 60%),#070708}
+.arc{position:absolute;width:1900px;height:1900px;border-radius:50%;border:3px solid rgba(255,160,90,.9);filter:blur(6px);box-shadow:0 0 80px 20px rgba(255,90,20,.45),inset 0 0 120px rgba(255,90,20,.35)}
+.arc2{position:absolute;width:1900px;height:1900px;border-radius:50%;border:1.5px solid rgba(255,255,255,.55);filter:blur(1.5px)}
+.lightbg{background:radial-gradient(1200px 700px at 50% 120%,#ffd9c2,transparent 70%),radial-gradient(900px 600px at 50% -20%,#fff,transparent),linear-gradient(180deg,#f6f3f8,#ece7f0)}
+.head{font-family:'IT';font-weight:700;letter-spacing:-.02em;line-height:1.02;text-align:center}
+.w{display:inline-block;will-change:transform,filter,opacity}
+.or{color:var(--or)}
+.grad{background:linear-gradient(90deg,#ff7a2e,#ff4a0a);-webkit-background-clip:text;background-clip:text;color:transparent}
+.center{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%)}
+/* google mock */
+.gwrap{position:absolute;left:50%;top:50%;width:1400px;height:820px;margin:-410px 0 0 -700px;border-radius:26px;background:#fff;box-shadow:0 60px 140px rgba(60,20,0,.25),0 0 0 1px rgba(0,0,0,.05);overflow:hidden;color:#202124}
+.gbar{height:56px;background:#f1f3f4;display:flex;align-items:center;padding:0 22px;gap:10px}
+.dot{width:14px;height:14px;border-radius:50%}
+.gurl{margin-left:24px;flex:1;height:34px;border-radius:17px;background:#fff;display:flex;align-items:center;padding:0 18px;font-size:16px;color:#5f6368}
+.glogo{font-family:'PP';font-weight:600;font-size:118px;letter-spacing:-4px;text-align:center}
+.gsearch{width:820px;height:66px;border-radius:33px;border:1px solid #dfe1e5;box-shadow:0 2px 8px rgba(32,33,36,.18);display:flex;align-items:center;padding:0 26px;font-size:24px;gap:18px;background:#fff;position:relative}
+.caret{width:2px;height:30px;background:#1a73e8}
+.sugg{position:absolute;left:-1px;right:-1px;top:62px;background:#fff;border:1px solid #dfe1e5;border-top:none;border-radius:0 0 33px 33px;box-shadow:0 8px 12px rgba(32,33,36,.18);padding:8px 0 16px;overflow:hidden}
+.sugg div{padding:12px 26px 12px 70px;font-size:21px;color:#202124;position:relative}
+.sugg div::before{content:'';position:absolute;left:28px;top:18px;width:16px;height:16px;border:2px solid #9aa0a6;border-radius:50%}
+.sugg b{font-weight:600}
+.results{position:absolute;inset:56px 0 0 0;background:#fff;padding:30px 0 0 170px}
+.rhead{display:flex;align-items:center;gap:40px;margin:0 0 26px -140px;padding-left:0}
+.rres{width:760px;margin-bottom:34px}
+.rsite{display:flex;align-items:center;gap:12px;font-size:15px;color:#202124}
+.fav{width:32px;height:32px;border-radius:50%;background:#1b1b1f;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.rtitle{font-size:25px;color:#1a0dab;margin:8px 0 6px;font-weight:400}
+.rdesc{font-size:16px;color:#4d5156;line-height:1.55}
+.sitelinks{display:grid;grid-template-columns:1fr 1fr;gap:10px 40px;margin-top:14px;font-size:18px;color:#1a0dab}
+.cursor{position:absolute;width:34px;height:34px;z-index:50;pointer-events:none}
+.ripple{position:absolute;width:80px;height:80px;margin:-40px 0 0 -40px;border-radius:50%;border:3px solid rgba(255,90,20,.9);opacity:0;z-index:49}
+/* logo */
+.brand{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);display:flex;align-items:center;gap:46px}
+.brand .icon{position:relative;width:420px;height:224px}
+.brand .icon img{position:absolute;inset:0;width:100%;height:100%}
+.divider{width:3px;height:190px;background:linear-gradient(transparent,rgba(255,255,255,.6),transparent)}
+.wordmark{white-space:nowrap;font-family:'PP';font-weight:700;font-size:120px;letter-spacing:-3px;line-height:1}
+.tagline{font-family:'IT';font-weight:600;font-size:25px;letter-spacing:.42em;color:rgba(255,255,255,.75);margin-top:18px;white-space:nowrap}
+.tagline i{font-style:normal;color:var(--or);letter-spacing:0;margin:0 .5em}
+/* phone */
+.phone{position:absolute;width:430px;height:900px;border-radius:62px;background:#111;padding:14px;box-shadow:0 0 0 2px #2b2b30,0 0 0 9px #0b0b0d,0 0 0 11px #3a3a40,0 70px 140px rgba(0,0,0,.7),0 0 120px rgba(255,90,20,.25)}
+.phone .scr{width:100%;height:100%;border-radius:48px;overflow:hidden;position:relative;background:#000}
+.phone .scr img{position:absolute;left:0;top:0;width:100%}
+.notch{position:absolute;left:50%;top:22px;width:120px;height:32px;margin-left:-60px;border-radius:20px;background:#000;z-index:3}
+.persp{perspective:2200px}
+/* stat cards */
+.glass{background:linear-gradient(160deg,rgba(255,255,255,.10),rgba(255,255,255,.03));border:1px solid rgba(255,255,255,.14);backdrop-filter:blur(16px);border-radius:26px;box-shadow:0 30px 60px rgba(0,0,0,.35)}
+.stat{padding:28px 36px;width:330px}
+.stat .n{font-family:'IT';font-weight:800;font-size:84px;letter-spacing:-.03em;line-height:1}
+.stat .l{font-size:22px;color:rgba(255,255,255,.65);margin-top:10px;font-weight:500}
+/* categories */
+.cats{position:absolute;left:50%;top:560px;width:1500px;margin-left:-750px;display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+.cat{height:150px;padding:26px 28px;display:flex;flex-direction:column;justify-content:space-between}
+.cat .ic{width:54px;height:54px;border-radius:16px;background:rgba(255,90,20,.14);border:1px solid rgba(255,90,20,.4);display:flex;align-items:center;justify-content:center}
+.cat .ic svg{width:28px;height:28px;stroke:var(--or2);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.cat .t{font-family:'IT';font-weight:700;font-size:28px}
+/* category title */
+.kicker{font-family:'IT';font-weight:600;font-size:26px;letter-spacing:.35em;color:var(--or2);text-transform:uppercase}
+/* tool card */
+.card{position:absolute;background:#fff;color:#16161c;border-radius:34px;box-shadow:0 50px 120px rgba(0,0,0,.55),0 0 0 1px rgba(255,255,255,.08)}
+.hero{left:150px;top:190px;width:1060px;height:700px;padding:56px 60px}
+.rank{position:absolute;left:-2px;top:-2px;width:92px;height:92px;border-radius:34px 0 34px 0;background:var(--or);color:#fff;font-family:'IT';font-weight:800;font-size:44px;display:flex;align-items:center;justify-content:center}
+.logoarea{height:110px;display:flex;align-items:center;margin-left:70px}
+.si{display:flex;align-items:center;gap:22px}
+.si .mk{width:84px;height:84px;-webkit-mask-size:contain;-webkit-mask-repeat:no-repeat;-webkit-mask-position:center}
+.si .nm{font-family:'IT';font-weight:800;font-size:66px;letter-spacing:-.02em}
+.imglogo{height:100px;object-fit:contain}
+.cust{display:flex;align-items:center;gap:.35em;line-height:1;white-space:nowrap}
+.cust svg{flex:none}
+.scorerow{display:flex;align-items:center;gap:30px;margin:34px 0 26px}
+.ring{position:relative;width:132px;height:132px}
+.ring svg{position:absolute;inset:0;transform:rotate(-90deg)}
+.ring .v{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:'IT';font-weight:800;font-size:46px}
+.stars{font-size:30px;color:#FFB400;letter-spacing:4px}
+.verdict{font-size:26px;color:#6b6b76;font-weight:500;margin-top:4px}
+.bestfor{max-width:450px;line-height:1.25;display:inline-flex;align-items:center;gap:14px;background:#fff3ec;color:#c2410c;border-radius:14px;padding:14px 22px;font-family:'IT';font-weight:700;font-size:30px}
+.feats{position:absolute;left:560px;top:250px;width:450px}
+.feat{display:flex;align-items:center;gap:16px;font-size:25px;font-weight:500;color:#2a2a33;margin-bottom:22px}
+.tick{width:34px;height:34px;border-radius:50%;background:#16a34a;flex:none;display:flex;align-items:center;justify-content:center}
+.tick svg{width:18px;height:18px;stroke:#fff;stroke-width:3.4;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.pricebar{position:absolute;left:60px;right:60px;bottom:50px;display:flex;align-items:center;justify-content:space-between;border-top:2px dashed #eee;padding-top:34px}
+.price{font-size:26px;color:#6b6b76}
+.price b{font-family:'IT';font-weight:800;font-size:52px;color:#16161c;letter-spacing:-.02em}
+.btn{background:linear-gradient(90deg,#ff6a1f,#ff4a0a);color:#fff;font-family:'IT';font-weight:700;font-size:28px;padding:22px 40px;border-radius:18px;box-shadow:0 14px 34px rgba(255,90,20,.45)}
+.sidephone{left:1330px;top:40px}
+.runners{position:absolute;left:50%;top:470px;width:1640px;margin-left:-820px;display:grid;grid-template-columns:repeat(4,1fr);gap:26px}
+.rcard{position:relative;background:#fff;color:#16161c;border-radius:26px;height:360px;padding:34px 30px 26px;box-shadow:0 40px 80px rgba(0,0,0,.5)}
+.rcard .rk{position:absolute;left:0;top:0;width:58px;height:58px;border-radius:26px 0 22px 0;background:#18181d;color:#fff;font-family:'IT';font-weight:800;font-size:28px;display:flex;align-items:center;justify-content:center}
+.rcard .lg{height:120px;display:flex;align-items:center;justify-content:center;margin-top:6px}
+.rcard .si .mk{width:54px;height:54px}.rcard .si .nm{font-size:38px}
+.rcard .imglogo{max-height:110px;max-width:300px}
+.rcard .sc{display:flex;align-items:center;justify-content:center;gap:14px;margin:22px 0 16px}
+.rcard .sc b{font-family:'IT';font-weight:800;font-size:40px;color:#fff;background:#16161c;border-radius:12px;padding:4px 14px}
+.rcard .sc span{font-size:22px;color:#6b6b76}
+.rcard .bf{text-align:center;font-family:'IT';font-weight:700;font-size:24px;color:#c2410c}
+.sectionhdr{position:absolute;left:150px;top:78px;display:flex;align-items:center;gap:22px}
+.sectionhdr .num{font-family:'IT';font-weight:800;font-size:34px;color:var(--or)}
+.sectionhdr .ttl{font-family:'IT';font-weight:700;font-size:40px}
+.sectionhdr .bar{width:60px;height:3px;background:var(--or)}
+
+
+/* how it works */
+.steps{position:absolute;left:150px;top:300px;width:1050px}
+.step{position:relative;display:flex;align-items:center;gap:30px;padding:30px 36px;margin-bottom:26px;border-radius:28px}
+.step .no{font-family:'IT';font-weight:800;font-size:64px;color:var(--or);width:90px;flex:none;letter-spacing:-.03em}
+.step .tt{font-family:'IT';font-weight:800;font-size:48px;letter-spacing:-.02em}
+.step .ds{font-size:24px;color:rgba(255,255,255,.72);margin-top:6px;line-height:1.35}
+.step.on{border-color:rgba(255,110,40,.75);box-shadow:0 0 0 1px rgba(255,110,40,.6),0 30px 70px rgba(255,90,20,.18)}
+/* ---- Apple-style liquid glass social bar ---- */
+#social{position:absolute;inset:0;z-index:80;pointer-events:none}
+.lglass{position:absolute;display:flex;align-items:center;gap:14px;border-radius:24px;isolation:isolate;
+ background:linear-gradient(140deg,rgba(255,255,255,.26),rgba(255,255,255,.07) 45%,rgba(255,255,255,.10)),rgba(18,18,24,.5);
+ backdrop-filter:blur(20px) saturate(200%) brightness(1.08);-webkit-backdrop-filter:blur(20px) saturate(200%) brightness(1.08);
+ box-shadow:inset 0 1.5px 0 rgba(255,255,255,.65),inset 0 -1px 0 rgba(255,255,255,.18),inset 1px 0 0 rgba(255,255,255,.2),inset 0 0 22px rgba(255,255,255,.10),0 14px 34px rgba(0,0,0,.35),0 2px 6px rgba(0,0,0,.2)}
+.lglass::before{content:'';position:absolute;inset:0;border-radius:inherit;padding:1.2px;z-index:-1;
+ background:linear-gradient(135deg,rgba(255,255,255,.95),rgba(255,255,255,.08) 35%,rgba(255,255,255,.04) 65%,rgba(255,255,255,.7));
+ -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude}
+.lglass::after{content:'';position:absolute;left:8%;right:30%;top:3px;height:42%;border-radius:20px 20px 40px 40px;z-index:-1;
+ background:linear-gradient(180deg,rgba(255,255,255,.35),rgba(255,255,255,0));filter:blur(1px);opacity:.5}
+.pill{bottom:30px;height:68px;width:442px;padding:0 16px;justify-content:center}
+.chip{width:46px;height:46px;border-radius:13px;display:flex;align-items:center;justify-content:center;flex:none;box-shadow:0 4px 10px rgba(0,0,0,.25),inset 0 1px 0 rgba(255,255,255,.35)}
+.chip i{display:block;width:24px;height:24px;background:#fff;-webkit-mask-size:contain;-webkit-mask-repeat:no-repeat;-webkit-mask-position:center}
+.pill span{font-family:'IT';font-weight:700;font-size:26px;letter-spacing:-.01em;color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.35);white-space:nowrap}
+.pill span b{color:#FF6A26;font-weight:700}
+#follow::after{opacity:.35}
+#follow{left:50%;top:50%;height:120px;padding:0 26px 0 22px;border-radius:40px;gap:20px;transform:translate(-50%,-50%);opacity:0}
+#follow .chip{width:64px;height:64px;border-radius:19px}#follow .chip i{width:34px;height:34px}
+#follow .fl{font-family:'IT';font-weight:800;font-size:46px;letter-spacing:-.02em;color:#fff;margin:0 10px 0 14px;white-space:nowrap;text-shadow:0 2px 6px rgba(0,0,0,.3)}
+#follow .fb{white-space:nowrap;height:80px;padding:0 38px;border-radius:26px;background:linear-gradient(180deg,#ff7a33,#ff4d0d);display:flex;align-items:center;gap:12px;font-family:'IT';font-weight:800;font-size:36px;color:#fff;box-shadow:0 10px 26px rgba(255,90,20,.55),inset 0 1.5px 0 rgba(255,255,255,.5)}
+#fripple{position:absolute;left:0;top:0;width:120px;height:120px;margin:-60px 0 0 -60px;border-radius:50%;border:4px solid rgba(255,255,255,.9);opacity:0;z-index:85}
+#fcur{position:absolute;left:0;top:0;width:44px;height:44px;z-index:86;opacity:0}
+.flash{position:absolute;inset:0;background:#fff;opacity:0;z-index:90;pointer-events:none}
+.grain{position:absolute;inset:0;z-index:95;pointer-events:none;opacity:.05;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/></filter><rect width='200' height='200' filter='url(%23n)'/></svg>")}
+</style><style>
+.tag{position:absolute;left:150px;top:110px;display:flex;align-items:center;gap:14px;padding:12px 24px;border-radius:40px;font-family:'IT';font-weight:700;font-size:26px;letter-spacing:.18em}
+.live{width:16px;height:16px;border-radius:50%;background:#ff3b30;box-shadow:0 0 0 0 rgba(255,59,48,.7)}
+.wm2{position:absolute;left:50%;transform:translateX(-50%);top:70px;display:flex;align-items:center;gap:12px;opacity:.9;z-index:70}
+.wm2 img{height:44px}.wm2 span{font-family:'PP';font-weight:700;font-size:30px;letter-spacing:-1px}
+.gptTile{width:150px;height:150px;border-radius:38px;background:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 30px 80px rgba(0,0,0,.5),0 0 90px rgba(255,255,255,.12)}
+.big{font-family:'IT';font-weight:800;letter-spacing:-.05em;line-height:.85}
+.bars{position:absolute;left:0;right:0;bottom:0;height:640px;display:flex;align-items:flex-end;gap:10px;padding:0 40px;opacity:.55}
+.bars div{flex:1;border-radius:10px 10px 0 0;background:linear-gradient(180deg,rgba(255,110,40,.85),rgba(255,90,20,0))}
+.src{position:absolute;left:0;right:0;text-align:center;bottom:120px;font-size:20px;color:rgba(255,255,255,.45);letter-spacing:.06em}
+.dot3{position:absolute;width:64px;height:64px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff,#ffb27a 30%,#ff5a14 70%);box-shadow:0 0 60px rgba(255,90,20,.9),0 0 140px rgba(255,90,20,.5)}
+.win{position:absolute;border-radius:30px;overflow:hidden}
+.winbar{height:80px;font-size:30px!important;display:flex;align-items:center;gap:14px;padding:0 26px;border-bottom:1px solid rgba(255,255,255,.1);font-family:'IT';font-weight:700;font-size:24px}
+.msg{margin:26px 30px;padding:22px 28px;border-radius:22px;font-size:32px;line-height:1.35;max-width:720px}
+.task{display:flex;align-items:center;gap:20px;padding:30px 30px;margin:20px 26px;border-radius:22px;background:rgba(255,255,255,.06);font-size:34px;font-weight:500}
+.task .bx{width:38px;height:38px;border-radius:12px;border:2px solid rgba(255,255,255,.35);flex:none;display:flex;align-items:center;justify-content:center}
+.task .bx svg{width:22px;height:22px;stroke:#fff;stroke-width:3.4;fill:none;stroke-linecap:round;stroke-linejoin:round;opacity:0}
+.status{position:absolute;display:flex;align-items:center;gap:12px;padding:14px 24px;border-radius:30px;font-family:'IT';font-weight:700;font-size:24px}
+.clock{position:absolute;font-family:'IT';font-weight:800;font-size:64px;letter-spacing:-.02em}
+.app{position:absolute;width:104px;height:104px;margin:-52px 0 0 -52px;border-radius:28px;display:flex;align-items:center;justify-content:center;box-shadow:0 18px 40px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.35)}
+.app svg{width:52px;height:52px;stroke:#fff;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.core{position:absolute;left:50%;top:1000px;width:260px;height:260px;margin:-130px 0 0 -130px;border-radius:64px;display:flex;align-items:center;justify-content:center}
+.core svg{width:130px;height:130px;stroke:#ffb27a;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.code{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:31px;line-height:1.6;padding:26px 34px;white-space:pre;color:#e6e6ea}
+.k{color:#ff8a3d}.s{color:#7ee787}.c{color:#7d7d8a}.f{color:#79c0ff}
+.badge{display:inline-flex;align-items:center;gap:12px;padding:12px 24px;border-radius:16px;background:linear-gradient(90deg,#ff6a1f,#ff4a0a);font-family:'IT';font-weight:800;font-size:32px;box-shadow:0 14px 34px rgba(255,90,20,.45)}
+</style><style>html,body{width:1080px!important;height:1920px!important}#stage{width:1080px;height:1920px}.arc,.arc2{transform:scale(.8)}</style></head><body><div id="stage">
+<div class="wm2" id="wm2"><img src="assets/logos/bdt_icon_clean.png"><span>Best<span class="or">Digi</span>Tools</span></div>
+
+<section class="scene darkbg" id="S1">
+  <div class="arc" style="left:-1150px;top:250px"></div><div class="arc2" style="left:-1150px;top:250px"></div>
+  <div class="glass tag" id="tag1" style="left:50%;top:300px;margin-left:-160px"><div class="live" id="live"></div>TRENDING NOW</div>
+  <div style="position:absolute;left:0;right:0;top:520px;display:flex;justify-content:center"><div class="gptTile" id="gtile" style="width:200px;height:200px;border-radius:50px"><img src="assets/logos/lib/openai.svg" style="height:96px;width:96px;object-fit:cover;object-position:left"></div></div>
+  <div style="position:absolute;left:0;right:0;top:820px" class="head"><div style="font-size:140px;line-height:1.05" id="h1"><span class="w">ChatGPT</span><br><span class="w">just</span> <span class="w">changed.</span></div>
+  <div style="font-size:170px;margin-top:30px"><span class="w grad" id="again">Again.</span></div></div>
+</section>
+
+<section class="scene darkbg" id="S2">
+  <div class="bars" id="bars"></div>
+  <div style="position:absolute;left:0;right:0;top:560px;text-align:center">
+    <div class="big" style="font-size:300px"><span id="cnt">0.0</span><span class="grad">B</span></div>
+    <div class="head" style="font-size:72px;margin-top:40px;color:rgba(255,255,255,.88);line-height:1.15"><span class="w">people</span> <span class="w">use</span> <span class="w">ChatGPT</span><br><span class="w grad">every</span> <span class="w grad">week</span></div>
+  </div>
+  <div class="src" id="src2">Reported at OpenAI DevDay 2026</div>
+</section>
+
+<section class="scene" id="S3" style="background:#030304">
+  <div style="position:absolute;left:0;right:0;top:640px;text-align:center" class="head"><div style="font-size:40px;letter-spacing:.3em;color:rgba(255,255,255,.6);font-weight:600" id="intro">OPENAI INTRODUCES</div></div>
+  <div class="dot3" id="d1" style="left:408px;top:900px"></div><div class="dot3" id="d2" style="left:508px;top:900px"></div><div class="dot3" id="d3" style="left:608px;top:900px"></div>
+  <div style="position:absolute;left:0;right:0;top:810px;text-align:center"><div class="big grad" style="font-size:280px" id="dots">Dots</div></div>
+  <div style="position:absolute;left:0;right:0;top:1150px;text-align:center" class="head"><div style="font-size:52px;color:rgba(255,255,255,.85);font-weight:600;line-height:1.2" id="dsub"><span class="w">Always-on</span> <span class="w">AI</span> <span class="w">agents</span><br><span class="w">in</span> <span class="w">ChatGPT</span></div></div>
+</section>
+
+<section class="scene darkbg" id="S4">
+  <div class="arc" style="left:900px;top:-1450px"></div>
+  <div class="glass win" id="chat" style="left:70px;top:600px;width:940px;height:600px">
+    <div class="winbar"><img src="assets/logos/lib/openai.svg" style="height:30px;width:30px;object-fit:cover;object-position:left;filter:invert(1)">ChatGPT</div>
+    <div class="msg" style="margin-left:auto;background:rgba(255,255,255,.12);margin-right:28px;width:fit-content">Keep my inbox clean, research our competitors, and send the team updates.</div>
+    <div class="msg" style="background:rgba(255,90,20,.16);border:1px solid rgba(255,90,20,.4)">On it. I'll keep working on this — even after you close ChatGPT. ●</div>
+  </div>
+  <div class="glass status" id="off" style="left:70px;top:1300px"><span style="width:14px;height:14px;border-radius:50%;background:#8e8e99"></span>You: offline</div>
+  <div class="clock" id="clk" style="left:70px;top:1400px;font-size:120px">11:02 PM</div>
+  <div class="glass win" id="work" style="left:70px;top:600px;width:940px;height:520px">
+    <div class="winbar"><div class="dot3" style="position:relative;width:26px;height:26px;box-shadow:0 0 20px rgba(255,90,20,.9)"></div>Your Dot is working…</div>
+    <div class="task" id="tk0"><div class="bx"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>Inbox triaged &amp; replies drafted</div>
+    <div class="task" id="tk1"><div class="bx"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>Competitor research report ready</div>
+    <div class="task" id="tk2"><div class="bx"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>Project updates sent to the team</div>
+  </div>
+  <div style="position:absolute;left:0;right:0;top:250px;text-align:center" class="head"><div style="font-size:92px;line-height:1.1" id="s4t"><span class="w">Handled</span><br><span class="w grad">while</span> <span class="w grad">you</span> <span class="w grad">sleep.</span></div></div>
+</section>
+
+<section class="scene darkbg" id="S5">
+  <div class="arc" style="left:10px;top:600px"></div>
+  <div class="glass core" id="core"><svg viewBox="0 0 24 24"><path d="M7 18a4.5 4.5 0 0 1-.5-9 6 6 0 0 1 11.6 1.5A3.8 3.8 0 0 1 17.5 18z"/><rect x="9" y="11.5" width="6" height="4" rx=".6"/><path d="M12 15.5v1.3"/></svg></div>
+  <div id="apps"></div>
+  <div style="position:absolute;left:0;right:0;top:260px;text-align:center" class="head"><div style="font-size:96px;line-height:1.08" id="s5a"><span class="w">Its</span> <span class="w">own</span><br><span class="w grad">cloud</span> <span class="w grad">computer</span></div></div>
+  <div style="position:absolute;left:0;right:0;top:1480px;text-align:center" class="head"><div style="font-size:92px;line-height:1.1" id="s5b"><span class="w grad" id="appn">0</span><span class="w grad">+</span><br><span class="w">connected</span> <span class="w">apps</span></div></div>
+</section>
+
+<section class="scene darkbg" id="S6">
+  <div class="arc" style="left:-1150px;top:250px"></div>
+  <div style="position:absolute;left:80px;top:300px" id="s6l">
+    <div class="badge" id="badge">GPT-6.1 Sol</div>
+    <div class="head" style="font-size:110px;text-align:left;margin-top:40px"><div><span class="w">Built</span> <span class="w">for</span></div><div><span class="w grad">agentic</span> <span class="w grad">coding</span></div></div>
+    <div style="font-size:34px;color:rgba(255,255,255,.7);margin-top:26px" id="s6s">&amp; long-running work</div>
+  </div>
+  <div class="glass win" id="ide" style="left:60px;top:960px;width:960px;height:680px">
+    <div class="winbar"><span class="dot" style="background:#ff5f57"></span><span class="dot" style="background:#febc2e"></span><span class="dot" style="background:#28c840"></span><span style="margin-left:14px;font-weight:600;color:rgba(255,255,255,.7)">agent.py</span></div>
+    <div class="code" id="code"></div>
+  </div>
+</section>
+
+<section class="scene darkbg" id="S7">
+  <div class="arc" style="left:10px;top:560px"></div><div class="arc2" style="left:10px;top:560px"></div>
+  <div style="position:absolute;left:80px;top:260px" id="s7l" class="head">
+    <div style="font-size:40px;letter-spacing:.3em;color:var(--or2);font-weight:600;text-align:left">OUR VERDICT</div>
+    <div style="font-size:110px;text-align:left;margin-top:20px"><div><span class="w">ChatGPT</span></div><div><span class="w">stays</span> <span class="w grad">#1.</span></div></div>
+    <div style="font-size:36px;font-family:'IN';font-weight:500;color:rgba(255,255,255,.75);margin-top:34px;text-align:left"><span class="w">Full</span> <span class="w">review</span> <span class="w">→</span> <span class="w or" style="font-weight:700">bestdigitools.com</span></div>
+  </div>
+  <div class="card" id="vc" style="left:160px;top:960px;width:760px;height:540px;padding:50px 56px"><div class="rank">#1</div>
+    <div class="logoarea" style="height:100px"><img class="imglogo" src="assets/logos/chatgpt.png" style="height:92px"></div>
+    <div class="scorerow"><div class="ring"><svg viewBox="0 0 132 132"><circle cx="66" cy="66" r="58" stroke="#f1f1f4" stroke-width="12" fill="none"/><circle id="vr" cx="66" cy="66" r="58" stroke="#FF5A14" stroke-width="12" fill="none" stroke-linecap="round" stroke-dasharray="364.4" stroke-dashoffset="364.4"/></svg><div class="v" id="vv">0.0</div></div>
+    <div><div class="stars">★★★★★</div><div class="verdict">Exceptional</div></div></div>
+    <div class="bestfor">🏆 Best overall AI assistant</div></div>
+</section>
+<div id="social"></div>
+<div class="flash" id="flash"></div><div class="grain"></div>
+</div>
+<script src="node_modules/gsap/dist/gsap.min.js"></script>
+<script>
+const SOC=[['facebook','#1877F2'],['linkedin','#0A66C2'],['instagram','linear-gradient(45deg,#FEDA75,#FA7E1E 30%,#D62976 60%,#962FBF 85%,#4F5BD5)'],['youtube','#FF0000']];
+document.getElementById('social').innerHTML=SOC.map(([n,c],i)=>`<div class="lglass pill" id="pl${i}" style="left:${40+(i%2)*520}px;bottom:${i<2?140:40}px;width:480px"><div class="chip" style="background:${c}"><i style="-webkit-mask-image:url(assets/si/${n}.svg)"></i></div><span>@best<b>digi</b>tools</span></div>`).join('');
+document.getElementById('bars').innerHTML=Array.from({length:24},()=>'<div></div>').join('');
+const G={mail:'<rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/>',cal:'<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/>',doc:'<path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4M9 13h6M9 17h6"/>',chat:'<path d="M4 5h16v11H9l-5 4z"/>',chart:'<path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/>',cart:'<circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/><path d="M2 3h3l2.5 12h12L22 7H6.2"/>',folder:'<path d="M3 6h6l2 2h10v11H3z"/>',code:'<path d="M8 8l-5 4 5 4M16 8l5 4-5 4"/>',video:'<rect x="3" y="6" width="13" height="12" rx="2"/><path d="M16 10l5-3v10l-5-3"/>',users:'<circle cx="9" cy="8" r="3.5"/><path d="M2 20c1-4 4-5 7-5s6 1 7 5M16 4.5a3.5 3.5 0 0 1 0 7M18 15c2 .5 3.5 2 4 5"/>',card:'<rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/>',bell:'<path d="M6 16V11a6 6 0 0 1 12 0v5l2 2H4zM10 20a2 2 0 0 0 4 0"/>'};
+const COLS=['#4285F4','#EA4335','#34A853','#7B68EE','#FF7A59','#00A1E0','#E44332','#0B996E','#FFB400','#5A3CF0','#0A66C2','#D62976'];
+document.getElementById('apps').innerHTML=Object.values(G).map((g,i)=>`<div class="app" id="ap${i}" style="background:${COLS[i]}"><svg viewBox="0 0 24 24">${g}</svg></div>`).join('');
+const CODE=[['<span class="c"># long-running agent task</span>'],['<span class="k">from</span> openai <span class="k">import</span> OpenAI'],[''],['client = <span class="f">OpenAI</span>()'],['run = client.agents.<span class="f">start</span>('],['    model=<span class="s">"gpt-6.1-sol"</span>,'],['    task=<span class="s">"refactor + test the repo"</span>,'],[')'],['<span class="c"># ✓ 214 files updated · tests passing</span>']];
+
+gsap.defaults({ease:'power3.out'});
+const tl=gsap.timeline({paused:true});const CUES=[];const cue=(t,y)=>CUES.push([+t.toFixed(3),y]);
+const show=(id,t)=>tl.set('#'+id,{opacity:1,visibility:'visible'},t);const hide=(id,t)=>tl.set('#'+id,{opacity:0,visibility:'hidden'},t);
+const blurIn=(sel,t,st=.08,d=.7)=>tl.fromTo(sel,{opacity:0,y:50,filter:'blur(22px)'},{opacity:1,y:0,filter:'blur(0px)',duration:d,stagger:st},t);
+const blurOut=(sel,t,d=.4)=>tl.to(sel,{opacity:0,y:-30,filter:'blur(18px)',duration:d,ease:'power2.in',stagger:.02},t);
+const flash=(t,o=.8)=>{tl.fromTo('#flash',{opacity:0},{opacity:o,duration:.05,ease:'none',immediateRender:false},t).to('#flash',{opacity:0,duration:.3},t+.05)};
+tl.set('#social .pill',{opacity:0,y:150},0);
+tl.fromTo('#wm2',{opacity:0,y:-20},{opacity:.9,y:0,duration:.6},.2);
+
+/* S1 hook 0–3.2 */
+show('S1',0); cue(0,'boom'); cue(.3,'vo:0');
+tl.fromTo('#tag1',{opacity:0,x:-40},{opacity:1,x:0,duration:.5},.1);
+tl.fromTo('#live',{boxShadow:'0 0 0 0 rgba(255,59,48,.7)'},{boxShadow:'0 0 0 16px rgba(255,59,48,0)',duration:.8,repeat:3,ease:'power1.out'},.2);
+tl.fromTo('#gtile',{scale:.3,opacity:0,rotate:-20},{scale:1,opacity:1,rotate:0,duration:.7,ease:'back.out(1.8)'},.15); cue(.15,'pop');
+tl.fromTo('#h1 .w',{opacity:0,y:60,filter:'blur(20px)'},{opacity:1,y:0,filter:'blur(0px)',duration:.45,stagger:.14},.45);
+tl.fromTo('#again',{opacity:0,scale:1.8,filter:'blur(30px)'},{opacity:1,scale:1,filter:'blur(0px)',duration:.35,ease:'expo.out'},1.75); cue(1.75,'hit'); flash(1.75,.35);
+blurOut('#S1 .head .w,#gtile,#tag1',2.8); cue(2.85,'whoosh'); hide('S1',3.25);
+
+/* S2 stat 3.2–7.0 */
+show('S2',3.2);
+tl.fromTo('#bars div',{height:0},{height:(i)=>60+i*18+Math.sin(i*1.7)*40,duration:1.6,stagger:.03,ease:'expo.out'},3.25);
+const c={v:0}; tl.to(c,{v:1.2,duration:1.6,ease:'power3.out',onUpdate:()=>{cnt.textContent=c.v.toFixed(1)}},3.3); cue(3.3,'count'); cue(3.35,'vo:1');
+tl.fromTo('#cnt',{scale:.7,opacity:0},{scale:1,opacity:1,duration:.6},3.3);
+blurIn('#S2 .head .w',3.9,.07,.6);
+tl.fromTo('#src2',{opacity:0},{opacity:1,duration:.5},4.4);
+tl.to('#S2 .big',{scale:1.05,duration:2,ease:'none'},4.9);
+blurOut('#S2 .big,#S2 .head .w,#src2',6.6); tl.to('#bars',{opacity:0,duration:.4},6.6); cue(6.65,'whoosh'); hide('S2',7.05);
+
+/* S3 Dots reveal 7.0–9.6 */
+show('S3',7.0); cue(7.05,'vo:2'); cue(7.0,'riser');
+tl.fromTo('#intro',{opacity:0,letterSpacing:'.8em'},{opacity:1,letterSpacing:'.4em',duration:.9},7.05);
+['#d1','#d2','#d3'].forEach((d,i)=>{tl.fromTo(d,{scale:0,opacity:0},{scale:1,opacity:1,duration:.35,ease:'back.out(3)'},7.6+i*.22);cue(7.6+i*.22,'dot'+i);});
+tl.to('#d1,#d2,#d3',{scale:.2,opacity:0,y:-10,duration:.25,ease:'power2.in'},8.45);
+tl.fromTo('#dots',{opacity:0,scale:.6,filter:'blur(30px)'},{opacity:1,scale:1,filter:'blur(0px)',duration:.5,ease:'expo.out'},8.55); cue(8.55,'impact'); flash(8.55,.6);
+blurIn('#dsub .w',8.85,.06,.5);
+tl.to('#dots',{scale:1.06,duration:.9,ease:'none'},9.05);
+blurOut('#intro,#dots,#dsub .w',9.55,.3); cue(9.6,'whoosh'); hide('S3',9.9);
+
+/* S4 demo 9.9–16.6 */
+show('S4',9.9); cue(10.0,'vo:3');
+tl.fromTo('#chat',{opacity:0,x:-120,rotateY:12,transformPerspective:2000},{opacity:1,x:0,rotateY:0,duration:.8,ease:'expo.out'},9.95); cue(9.95,'swoosh');
+tl.fromTo('#chat .msg',{opacity:0,y:20},{opacity:1,y:0,duration:.4,stagger:.45},10.3); cue(10.3,'pop'); cue(10.75,'pop');
+tl.to('#chat',{scale:.6,opacity:0,y:120,filter:'blur(10px)',duration:.5,ease:'power2.in'},11.9); cue(11.9,'close');
+tl.fromTo('#off',{opacity:0,y:20},{opacity:1,y:0,duration:.4},12.2);
+tl.fromTo('#clk',{opacity:0},{opacity:1,duration:.4},12.2);
+const tm={m:0}; tl.to(tm,{m:508,duration:3.2,ease:'power1.inOut',onUpdate:()=>{let x=(23*60+2+Math.round(tm.m))%(24*60),h=Math.floor(x/60),mi=x%60,ap=h>=12?'PM':'AM',hh=h%12||12;clk.textContent=hh+':'+String(mi).padStart(2,'0')+' '+ap}},12.4);
+tl.fromTo('#work',{opacity:0,x:120,rotateY:-12,transformPerspective:2000},{opacity:1,x:0,rotateY:0,duration:.8,ease:'expo.out'},11.95); cue(11.95,'swoosh2');
+
+cue(13.4,'vo:4');
+[13.1,13.9,14.7].forEach((t,i)=>{tl.fromTo('#tk'+i,{opacity:.35},{opacity:1,duration:.2},t-.3);
+  tl.to(`#tk${i} .bx`,{background:'#16a34a',borderColor:'#16a34a',duration:.15},t); tl.to(`#tk${i} .bx svg`,{opacity:1,duration:.1},t); tl.fromTo(`#tk${i} .bx`,{scale:.6},{scale:1,duration:.35,ease:'back.out(3)'},t); cue(t,'tick'+i);});
+blurIn('#s4t .w',15.0,.08,.5);
+blurOut('#work,#off,#clk,#s4t .w',16.2,.35); cue(16.25,'whoosh'); hide('S4',16.6);
+
+/* S5 cloud + apps 16.6–21.0 */
+show('S5',16.6); cue(16.65,'vo:5');
+tl.fromTo('#core',{scale:.3,opacity:0},{scale:1,opacity:1,duration:.7,ease:'back.out(1.8)'},16.65); cue(16.65,'impact2');
+tl.fromTo('#core',{boxShadow:'0 0 0 0 rgba(255,90,20,.6)'},{boxShadow:'0 0 0 60px rgba(255,90,20,0)',duration:1,repeat:3},16.9);
+blurIn('#s5a .w',16.8,.08,.6);
+const N=12; for(let i=0;i<N;i++){const a0=i/N*Math.PI*2, R=i%2?330:250;
+  const pos=(a)=>({x:540+Math.cos(a)*R*1.25,y:1000+Math.sin(a)*R*1.05});
+  const p=pos(a0); tl.set('#ap'+i,{left:p.x,top:p.y},0);
+  tl.fromTo('#ap'+i,{scale:0,opacity:0},{scale:1,opacity:1,duration:.4,ease:'back.out(2.5)'},17.6+i*.07); cue(17.6+i*.07,'app'+(i%4));
+  const o={a:a0}; tl.to(o,{a:a0+(i%2?-.7:.7),duration:3.4,ease:'none',onUpdate:()=>{const q=pos(o.a);const el=document.getElementById('ap'+i);el.style.left=q.x+'px';el.style.top=q.y+'px'}},17.6);}
+const an={v:0}; tl.to(an,{v:4000,duration:1.2,ease:'power2.out',onUpdate:()=>{appn.textContent=Math.round(an.v).toLocaleString('en-US')}},18.6); cue(18.6,'count');
+blurIn('#s5b .w',18.5,.06,.5);
+blurOut('#S5 .w,#core,#apps .app',20.6,.35); cue(20.65,'whoosh'); hide('S5',21.0);
+
+/* S6 GPT-6.1 Sol 21.0–25.0 */
+show('S6',21.0); cue(21.05,'vo:6');
+tl.fromTo('#badge',{opacity:0,scale:.6},{opacity:1,scale:1,duration:.45,ease:'back.out(2.2)'},21.05); cue(21.05,'hit2');
+blurIn('#s6l .head .w',21.3,.08,.6); tl.fromTo('#s6s',{opacity:0},{opacity:1,duration:.4},21.9);
+tl.fromTo('#ide',{opacity:0,x:120,rotateY:-14,transformPerspective:2000},{opacity:1,x:0,rotateY:0,duration:.8,ease:'expo.out'},21.2); cue(21.2,'swoosh');
+const cobj={n:0}; const total=CODE.length;
+tl.to(cobj,{n:total,duration:2.6,ease:'none',onUpdate:()=>{const k=Math.floor(cobj.n);document.getElementById('code').innerHTML=CODE.slice(0,k).map(l=>l[0]).join('\n')+(k<total?'\n<span style="background:#ff8a3d">&nbsp;</span>':'')}},21.6);
+for(let i=0;i<total;i++) cue(21.6+i*2.6/total,'key');
+blurOut('#s6l .w,#badge,#s6s,#ide',24.6,.35); cue(24.65,'whoosh'); hide('S6',25.0);
+
+/* S7 verdict 25.0–30.0 */
+show('S7',25.0); cue(25.05,'vo:7'); cue(25.0,'outro');
+blurIn('#s7l .w',25.1,.07,.6); tl.fromTo('#s7l > div:first-child',{opacity:0,x:-30},{opacity:1,x:0,duration:.5},25.05);
+tl.fromTo('#vc',{opacity:0,y:140,rotateX:20,transformPerspective:2200},{opacity:1,y:0,rotateX:0,duration:.8,ease:'expo.out'},25.3); cue(25.3,'swoosh2');
+const vv={v:0}; tl.to('#vr',{strokeDashoffset:364.4*(1-.99),duration:1,ease:'power2.out'},25.7); tl.to(vv,{v:9.9,duration:1,ease:'power2.out',onUpdate:()=>{document.getElementById('vv').textContent=vv.v.toFixed(1)}},25.7); cue(25.7,'ring');
+[0,3,1,2].forEach((i,j)=>{const t=26.6+j*.14;tl.fromTo('#pl'+i,{opacity:0,y:150,scale:.85},{opacity:1,y:0,scale:1,duration:.6,ease:'back.out(1.6)'},t);cue(t,'glass'+j);});
+tl.to('#vc',{y:-10,duration:3,ease:'none'},26.1);
+const END=30.6; tl.set({}, {}, END);
+window.DURATION=END; window.CUES=CUES.sort((a,b)=>a[0]-b[0]); window.seek=s=>{tl.seek(s,false)};
+window.ready=document.fonts.ready.then(()=>Promise.all([...document.images].map(i=>i.complete?1:new Promise(r=>{i.onload=i.onerror=r}))));
+</script></body></html>
