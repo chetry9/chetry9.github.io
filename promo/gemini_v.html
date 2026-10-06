@@ -1,0 +1,219 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Gemini Changes</title><style>@font-face{font-family:'IT';font-weight:600;src:url(node_modules/@fontsource/inter-tight/files/inter-tight-latin-600-normal.woff2)}
+@font-face{font-family:'IT';font-weight:700;src:url(node_modules/@fontsource/inter-tight/files/inter-tight-latin-700-normal.woff2)}
+@font-face{font-family:'IT';font-weight:800;src:url(node_modules/@fontsource/inter-tight/files/inter-tight-latin-800-normal.woff2)}
+@font-face{font-family:'IN';font-weight:400;src:url(node_modules/@fontsource/inter/files/inter-latin-400-normal.woff2)}
+@font-face{font-family:'IN';font-weight:500;src:url(node_modules/@fontsource/inter/files/inter-latin-500-normal.woff2)}
+@font-face{font-family:'IN';font-weight:600;src:url(node_modules/@fontsource/inter/files/inter-latin-600-normal.woff2)}
+@font-face{font-family:'PP';font-weight:600;src:url(node_modules/@fontsource/poppins/files/poppins-latin-600-normal.woff2)}
+@font-face{font-family:'PP';font-weight:700;src:url(node_modules/@fontsource/poppins/files/poppins-latin-700-normal.woff2)}
+
+:root{--bg:#060A1C;--b1:#4F8CFF;--b2:#9B6BFF;--b3:#FF6FB5;--cy:#3DE0FF}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1080px;height:1920px;overflow:hidden;background:var(--bg);font-family:'IN',sans-serif;color:#fff}
+#stage{position:absolute;inset:0;overflow:hidden;background:var(--bg)}
+.bgfx{position:absolute;inset:-200px;background:radial-gradient(700px 700px at 15% 20%,rgba(79,140,255,.35),transparent 60%),radial-gradient(800px 800px at 90% 70%,rgba(155,107,255,.30),transparent 60%),radial-gradient(600px 600px at 40% 105%,rgba(255,111,181,.22),transparent 60%)}
+.gridbg{position:absolute;inset:0;background-image:linear-gradient(rgba(120,150,255,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(120,150,255,.07) 1px,transparent 1px);background-size:72px 72px;mask-image:radial-gradient(closest-side,#000,transparent)}
+.scene{position:absolute;inset:0;opacity:0;visibility:hidden}
+.w{display:inline-block;will-change:transform,filter,opacity}
+.head{font-family:'IT';font-weight:800;letter-spacing:-.03em;line-height:1.02;text-align:center}
+.gg{background:linear-gradient(90deg,#6FA2FF,#A77BFF 50%,#FF7FBF);-webkit-background-clip:text;background-clip:text;color:transparent}
+.cy{color:var(--cy)}
+.glass{background:linear-gradient(160deg,rgba(255,255,255,.12),rgba(255,255,255,.03));border:1px solid rgba(160,180,255,.22);backdrop-filter:blur(18px);border-radius:32px;box-shadow:0 30px 70px rgba(0,0,0,.45)}
+.tag{position:absolute;left:50%;top:300px;transform:translateX(-50%);display:flex;align-items:center;gap:14px;padding:14px 30px;border-radius:40px;font-family:'IT';font-weight:700;font-size:30px;letter-spacing:.18em;white-space:nowrap}
+.live{width:18px;height:18px;border-radius:50%;background:var(--b3)}
+.wm2{position:absolute;left:50%;transform:translateX(-50%);top:70px;display:flex;align-items:center;gap:12px;z-index:70}
+.wm2 img{height:48px}.wm2 span{font-family:'PP';font-weight:700;font-size:32px;letter-spacing:-1px}.wm2 b{color:#FF6A26;font-weight:700}
+.cal{position:absolute;left:50%;top:560px;width:420px;height:460px;margin-left:-210px;border-radius:44px;overflow:hidden;background:#fff;color:#0b1020;box-shadow:0 40px 100px rgba(0,0,0,.55),0 0 120px rgba(155,107,255,.35);perspective:1200px}
+.cal .top{height:130px;background:linear-gradient(90deg,var(--b1),var(--b2),var(--b3));display:flex;align-items:center;justify-content:center;font-family:'IT';font-weight:800;font-size:70px;letter-spacing:.08em;color:#fff}
+.cal .day{font-family:'IT';font-weight:800;font-size:250px;letter-spacing:-.04em;text-align:center;line-height:330px}
+.tier{position:absolute;left:70px;width:940px;height:300px;padding:34px 40px}
+.tier .nm{font-family:'IT';font-weight:800;font-size:54px}
+.tier .pr{font-family:'IT';font-weight:600;font-size:32px;color:rgba(255,255,255,.65);margin-left:16px}
+.chips{display:flex;gap:16px;margin-top:30px}
+.mc{display:flex;align-items:center;gap:12px;padding:16px 22px;border-radius:20px;font-family:'IT';font-weight:700;font-size:30px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12)}
+.mc.on{background:rgba(61,224,255,.14);border-color:rgba(61,224,255,.6)}
+.mc.off{opacity:.38;text-decoration:line-through}
+.ic{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:800}
+.on .ic{background:#22c55e}.off .ic{background:#ef4444}
+.gauge{position:absolute;left:50%;top:640px;width:560px;height:560px;margin-left:-280px}
+.gauge svg{position:absolute;inset:0;transform:rotate(-90deg)}
+.gauge .v{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.slider{position:absolute;left:110px;width:860px;top:1380px}
+.track{height:16px;border-radius:8px;background:rgba(255,255,255,.12);position:relative}
+.fill{position:absolute;left:0;top:0;bottom:0;border-radius:8px;background:linear-gradient(90deg,var(--b1),var(--b2),var(--b3))}
+.knob{position:absolute;top:-17px;width:50px;height:50px;margin-left:-25px;border-radius:50%;background:#fff;box-shadow:0 0 30px rgba(155,107,255,.8)}
+.lbls{display:flex;justify-content:space-between;margin-top:34px;font-family:'IT';font-weight:700;font-size:34px;color:rgba(255,255,255,.6)}
+.orb{position:absolute;left:50%;top:620px;width:480px;height:480px;margin-left:-240px;border-radius:50%;background:radial-gradient(circle at 40% 35%,#fff 0,#b9a6ff 12%,#7a5cff 35%,#2b1d7a 70%,transparent 72%);box-shadow:0 0 160px rgba(155,107,255,.8),0 0 320px rgba(79,140,255,.4)}
+.ringo{position:absolute;left:50%;top:860px;width:600px;height:600px;margin:-300px 0 0 -300px;border-radius:50%;border:3px solid rgba(61,224,255,.7)}
+.pt{display:flex;align-items:center;gap:22px;padding:26px 34px;margin:0 70px 22px;border-radius:26px;font-size:36px;font-weight:600}
+.pt .bul{width:20px;height:20px;border-radius:50%;background:linear-gradient(135deg,var(--b1),var(--b3));flex:none}
+.card{position:absolute;background:#fff;color:#0b1020;border-radius:40px;box-shadow:0 50px 120px rgba(0,0,0,.55)}
+.ring{position:relative;width:150px;height:150px}.ring svg{position:absolute;inset:0;transform:rotate(-90deg)}
+.ring .v{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:'IT';font-weight:800;font-size:52px}
+.alt{display:flex;align-items:center;gap:16px;padding:20px 26px;border-radius:24px;background:#f3f4fb;font-family:'IT';font-weight:800;font-size:34px;color:#0b1020}
+.alt b{background:#0b1020;color:#fff;border-radius:12px;padding:4px 14px;font-size:30px}
+.flash{position:absolute;inset:0;background:#fff;opacity:0;z-index:90;pointer-events:none}
+.grain{position:absolute;inset:0;z-index:95;pointer-events:none;opacity:.05;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/></filter><rect width='200' height='200' filter='url(%23n)'/></svg>")}
+/* ---- Apple-style liquid glass social bar ---- */
+#social{position:absolute;inset:0;z-index:80;pointer-events:none}
+.lglass{position:absolute;display:flex;align-items:center;gap:14px;border-radius:24px;isolation:isolate;
+ background:linear-gradient(140deg,rgba(255,255,255,.26),rgba(255,255,255,.07) 45%,rgba(255,255,255,.10)),rgba(18,18,24,.5);
+ backdrop-filter:blur(20px) saturate(200%) brightness(1.08);-webkit-backdrop-filter:blur(20px) saturate(200%) brightness(1.08);
+ box-shadow:inset 0 1.5px 0 rgba(255,255,255,.65),inset 0 -1px 0 rgba(255,255,255,.18),inset 1px 0 0 rgba(255,255,255,.2),inset 0 0 22px rgba(255,255,255,.10),0 14px 34px rgba(0,0,0,.35),0 2px 6px rgba(0,0,0,.2)}
+.lglass::before{content:'';position:absolute;inset:0;border-radius:inherit;padding:1.2px;z-index:-1;
+ background:linear-gradient(135deg,rgba(255,255,255,.95),rgba(255,255,255,.08) 35%,rgba(255,255,255,.04) 65%,rgba(255,255,255,.7));
+ -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude}
+.lglass::after{content:'';position:absolute;left:8%;right:30%;top:3px;height:42%;border-radius:20px 20px 40px 40px;z-index:-1;
+ background:linear-gradient(180deg,rgba(255,255,255,.35),rgba(255,255,255,0));filter:blur(1px);opacity:.5}
+.pill{bottom:30px;height:68px;width:442px;padding:0 16px;justify-content:center}
+.chip{width:46px;height:46px;border-radius:13px;display:flex;align-items:center;justify-content:center;flex:none;box-shadow:0 4px 10px rgba(0,0,0,.25),inset 0 1px 0 rgba(255,255,255,.35)}
+.chip i{display:block;width:24px;height:24px;background:#fff;-webkit-mask-size:contain;-webkit-mask-repeat:no-repeat;-webkit-mask-position:center}
+.pill span{font-family:'IT';font-weight:700;font-size:26px;letter-spacing:-.01em;color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.35);white-space:nowrap}
+.pill span b{color:#FF6A26;font-weight:700}
+
+.pill span b{color:#B79BFF!important}
+</style></head><body><div id="stage"><div class="bgfx" id="bgfx"></div><div class="gridbg"></div>
+<div class="wm2" id="wm2"><img src="assets/logos/bdt_icon_clean.png"><span>Best<b>Digi</b>Tools</span></div>
+
+<section class="scene" id="S1">
+  <div class="glass tag" id="tag1"><div class="live" id="live"></div>TRENDING NOW</div>
+  <div style="position:absolute;left:0;right:0;top:520px;display:flex;justify-content:center"><div class="glass" id="glogo" style="padding:40px 60px;border-radius:44px;background:rgba(255,255,255,.95)"><img src="assets/logos/lib/google-gemini.svg" style="height:140px"></div></div>
+  <div style="position:absolute;left:0;right:0;top:860px" class="head"><div style="font-size:120px" id="h1"><span class="w">Using</span> <span class="w">Gemini</span><br><span class="w">for</span> <span class="w gg">free?</span></div>
+  <div style="font-size:72px;margin-top:50px;color:rgba(255,255,255,.85)" id="h2"><span class="w">Big</span> <span class="w">changes</span> <span class="w">are</span> <span class="w cy">coming.</span></div></div>
+</section>
+
+<section class="scene" id="S2">
+  <div style="position:absolute;left:0;right:0;top:300px" class="head"><div style="font-size:64px;color:rgba(255,255,255,.8)" id="s2a"><span class="w">Starting</span></div></div>
+  <div class="cal" id="cal"><div class="top">OCT</div><div class="day" id="calday">8</div></div>
+  <div style="position:absolute;left:0;right:0;top:1130px" class="head"><div style="font-size:84px;line-height:1.1" id="s2b"><span class="w">Google</span> <span class="w">changes</span><br><span class="w">who</span> <span class="w">gets</span> <span class="w gg">which</span> <span class="w gg">model</span></div></div>
+</section>
+
+<section class="scene" id="S3">
+  <div style="position:absolute;left:0;right:0;top:230px" class="head"><div style="font-size:84px" id="s3h"><span class="w">What</span> <span class="w">you</span> <span class="w gg">get</span></div></div>
+  <div class="glass tier" id="t0" style="top:420px"><div><span class="nm">Free</span></div>
+    <div class="chips"><div class="mc on"><span class="ic">✓</span>Flash-Lite</div><div class="mc off"><span class="ic">✕</span>Flash</div><div class="mc off"><span class="ic">✕</span>Pro</div></div></div>
+  <div class="glass tier" id="t1" style="top:760px"><div><span class="nm">AI Plus</span><span class="pr">$4.99/mo</span></div>
+    <div class="chips"><div class="mc on"><span class="ic">✓</span>Flash-Lite</div><div class="mc on"><span class="ic">✓</span>Flash</div><div class="mc off"><span class="ic">✕</span>Pro</div></div></div>
+  <div class="glass tier" id="t2" style="top:1100px;border-color:rgba(155,107,255,.7);box-shadow:0 0 0 1px rgba(155,107,255,.5),0 30px 80px rgba(155,107,255,.25)"><div><span class="nm gg">AI Pro &amp; Ultra</span></div>
+    <div class="chips"><div class="mc on"><span class="ic">✓</span>Flash-Lite</div><div class="mc on"><span class="ic">✓</span>Flash</div><div class="mc on"><span class="ic">✓</span>Pro</div></div></div>
+  <div style="position:absolute;left:0;right:0;top:1470px" class="head"><div style="font-size:52px;color:rgba(255,255,255,.75)" id="s3f"><span class="w">Pro</span> <span class="w">&amp;</span> <span class="w">Ultra:</span> <span class="w cy">unchanged</span></div></div>
+</section>
+
+<section class="scene" id="S4">
+  <div style="position:absolute;left:0;right:0;top:280px" class="head"><div style="font-size:88px;line-height:1.08" id="s4h"><span class="w">New</span> <span class="w">usage</span> <span class="w">limits</span><br><span class="w gg">refresh</span> <span class="w gg">every</span></div></div>
+  <div class="gauge" id="gauge"><svg viewBox="0 0 200 200"><defs><linearGradient id="gq" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#4F8CFF"/><stop offset=".5" stop-color="#9B6BFF"/><stop offset="1" stop-color="#FF6FB5"/></linearGradient></defs><circle cx="100" cy="100" r="86" stroke="rgba(255,255,255,.1)" stroke-width="14" fill="none"/><circle id="garc" cx="100" cy="100" r="86" stroke="url(#gq)" stroke-width="14" fill="none" stroke-linecap="round" stroke-dasharray="540.4" stroke-dashoffset="540.4"/></svg>
+    <div class="v"><div style="font-family:'IT';font-weight:800;font-size:220px;letter-spacing:-.05em;line-height:.9" id="hrs">0</div><div style="font-family:'IT';font-weight:700;font-size:56px;color:rgba(255,255,255,.75)">HOURS</div></div></div>
+  <div class="slider" id="slider"><div style="font-family:'IT';font-weight:700;font-size:36px;margin-bottom:30px;color:rgba(255,255,255,.8)">Effort level</div><div class="track"><div class="fill" id="sfill" style="width:0"></div><div class="knob" id="knob" style="left:0"></div></div><div class="lbls"><span>Low</span><span>Medium</span><span>High</span></div></div>
+</section>
+
+<section class="scene" id="S5">
+  <div style="position:absolute;left:0;right:0;top:250px" class="head"><div style="font-size:52px;letter-spacing:.2em;font-weight:700;color:rgba(255,255,255,.65)" id="s5k">MEANWHILE…</div></div>
+  <div class="ringo" id="r1"></div><div class="ringo" id="r2"></div>
+  <div class="orb" id="orb"></div>
+  <div style="position:absolute;left:0;right:0;top:330px" class="head"><div style="font-size:120px;line-height:1.02" id="s5h"><span class="w">Gemini</span> <span class="w gg">4</span><br><span class="w gg">Argon</span></div></div>
+  <div style="position:absolute;left:0;right:0;top:1180px" id="pts">
+    <div class="glass pt"><div class="bul"></div>Google's most powerful model yet</div>
+    <div class="glass pt"><div class="bul"></div>Finds &amp; patches software flaws</div>
+    <div class="glass pt"><div class="bul"></div>Trusted partners only — for now</div>
+  </div>
+</section>
+
+<section class="scene" id="S6">
+  <div style="position:absolute;left:80px;top:260px" class="head" id="s6l">
+    <div style="font-size:40px;letter-spacing:.3em;color:var(--cy);font-weight:700;text-align:left">OUR TAKE</div>
+    <div style="font-size:100px;text-align:left;margin-top:22px;line-height:1.05"><span class="w">Check</span> <span class="w">your</span> <span class="w">plan.</span><br><span class="w gg">Compare</span> <span class="w gg">first.</span></div>
+  </div>
+  <div class="card" id="vc" style="left:90px;top:760px;width:900px;height:640px;padding:54px 60px">
+    <div style="display:flex;align-items:center;justify-content:space-between"><img src="assets/logos/lib/google-gemini.svg" style="height:96px"><div class="ring"><svg viewBox="0 0 132 132"><circle cx="66" cy="66" r="58" stroke="#eceef8" stroke-width="12" fill="none"/><circle id="vr" cx="66" cy="66" r="58" stroke="#9B6BFF" stroke-width="12" fill="none" stroke-linecap="round" stroke-dasharray="364.4" stroke-dashoffset="364.4"/></svg><div class="v" id="vv">0.0</div></div></div>
+    <div style="font-family:'IT';font-weight:700;font-size:34px;color:#6b7090;margin:26px 0 30px">Best Google AI tool · Excellent</div>
+    <div style="font-family:'IT';font-weight:800;font-size:30px;letter-spacing:.14em;color:#9aa0bd;margin-bottom:18px">ALSO RANKED</div>
+    <div style="display:flex;gap:18px" id="alts"><div class="alt"><img src="assets/logos/chatgpt.png" style="height:44px"> <b>9.9</b></div><div class="alt"><img src="assets/logos/lib/claude.svg" style="height:40px"> <b>9.9</b></div></div>
+  </div>
+  <div style="position:absolute;left:0;right:0;top:1480px" class="head"><div style="font-size:54px" id="s6u"><span class="w">bestdigitools</span><span class="w gg">.com</span></div></div>
+</section>
+<div id="social"></div>
+<div class="flash" id="flash"></div><div class="grain"></div>
+</div>
+<script src="node_modules/gsap/dist/gsap.min.js"></script>
+<script>
+const SOC=[['facebook','#1877F2'],['linkedin','#0A66C2'],['instagram','linear-gradient(45deg,#FEDA75,#FA7E1E 30%,#D62976 60%,#962FBF 85%,#4F5BD5)'],['youtube','#FF0000']];
+document.getElementById('social').innerHTML=SOC.map(([n,c],i)=>`<div class="lglass pill" id="pl${i}" style="left:${40+(i%2)*520}px;bottom:${i<2?140:40}px;width:480px"><div class="chip" style="background:${c}"><i style="-webkit-mask-image:url(assets/si/${n}.svg)"></i></div><span>@best<b>digi</b>tools</span></div>`).join('');
+gsap.defaults({ease:'power3.out'});
+const tl=gsap.timeline({paused:true});const CUES=[];const cue=(t,y)=>CUES.push([+t.toFixed(3),y]);
+const show=(id,t)=>tl.set('#'+id,{opacity:1,visibility:'visible'},t);const hide=(id,t)=>tl.set('#'+id,{opacity:0,visibility:'hidden'},t);
+const blurIn=(sel,t,st=.08,d=.6)=>tl.fromTo(sel,{opacity:0,y:50,filter:'blur(20px)'},{opacity:1,y:0,filter:'blur(0px)',duration:d,stagger:st},t);
+const blurOut=(sel,t,d=.35)=>tl.to(sel,{opacity:0,y:-30,filter:'blur(18px)',duration:d,ease:'power2.in',stagger:.02},t);
+const flash=(t,o=.6)=>{tl.fromTo('#flash',{opacity:0},{opacity:o,duration:.05,ease:'none',immediateRender:false},t).to('#flash',{opacity:0,duration:.3},t+.05)};
+tl.set('#social .pill',{opacity:0,y:150},0);
+tl.fromTo('#wm2',{opacity:0,y:-20},{opacity:.95,y:0,duration:.6},.2);
+tl.to('#bgfx',{x:80,y:-60,rotate:6,duration:31,ease:'none'},0);
+
+/* S1 hook 0-3.3 */
+show('S1',0); cue(0,'boom'); cue(.3,'vo:0');
+tl.fromTo('#tag1',{opacity:0,y:-30},{opacity:1,y:0,duration:.5},.1);
+tl.fromTo('#live',{boxShadow:'0 0 0 0 rgba(255,111,181,.8)'},{boxShadow:'0 0 0 18px rgba(255,111,181,0)',duration:.8,repeat:3,ease:'power1.out'},.2);
+tl.fromTo('#glogo',{scale:.4,opacity:0,rotate:-8},{scale:1,opacity:1,rotate:0,duration:.7,ease:'back.out(1.8)'},.2); cue(.2,'pop');
+blurIn('#h1 .w',.5,.12,.5);
+blurIn('#h2 .w',1.6,.09,.45); cue(1.6,'hit');
+blurOut('#S1 .w,#glogo,#tag1',2.95); cue(3.0,'whoosh'); hide('S1',3.35);
+
+/* S2 date 3.3-7.2 */
+show('S2',3.3); cue(3.35,'vo:1');
+blurIn('#s2a .w',3.35);
+tl.fromTo('#cal',{opacity:0,y:200,rotateX:40,transformPerspective:1800},{opacity:1,y:0,rotateX:0,duration:.8,ease:'expo.out'},3.45); cue(3.45,'swoosh');
+tl.to('#calday',{rotateX:-90,duration:.18,ease:'power2.in'},4.4);
+tl.set('#calday',{textContent:'9'},4.58);
+tl.fromTo('#calday',{rotateX:90},{rotateX:0,duration:.3,ease:'back.out(2)',immediateRender:false},4.58); cue(4.5,'flip'); flash(4.6,.25);
+tl.to('#cal',{scale:1.06,duration:.2,yoyo:true,repeat:1},4.6);
+blurIn('#s2b .w',5.0,.07,.5);
+blurOut('#S2 .w,#cal',6.85); cue(6.9,'whoosh'); hide('S2',7.25);
+
+/* S3 tiers 7.2-13.0 */
+show('S3',7.2); cue(7.35,'vo:2');
+blurIn('#s3h .w',7.25);
+[['#t0',7.5],['#t1',9.3],['#t2',11.4]].forEach(([id,t],k)=>{
+  tl.fromTo(id,{opacity:0,x:k%2?300:-300,filter:'blur(10px)'},{opacity:1,x:0,filter:'blur(0px)',duration:.6,ease:'expo.out'},t); cue(t,'card'+k);
+  tl.fromTo(id+' .mc',{opacity:0,scale:.6},{opacity:(i,el)=>el.classList.contains('off')?.38:1,scale:1,duration:.35,ease:'back.out(2.5)',stagger:.14},t+.25);
+  for(let j=0;j<3;j++) cue(t+.25+j*.14,(k==0&&j>0)||(k==1&&j==2)?'nope':'yes');
+});
+cue(11.75,'vo:3');
+blurIn('#s3f .w',12.0,.06,.4);
+blurOut('#S3 .w,.tier',12.75); cue(12.8,'whoosh'); hide('S3',13.15);
+
+/* S4 limits 13.1-17.6 */
+show('S4',13.1); cue(13.25,'vo:4');
+blurIn('#s4h .w',13.15,.07,.5);
+tl.fromTo('#gauge',{opacity:0,scale:.7},{opacity:1,scale:1,duration:.6,ease:'back.out(1.6)'},13.4); cue(13.4,'pop');
+const hh={v:0}; tl.to(hh,{v:5,duration:1.2,ease:'power2.out',onUpdate:()=>{hrs.textContent=Math.round(hh.v)}},13.6);
+tl.to('#garc',{strokeDashoffset:0,duration:1.4,ease:'power2.out'},13.6); cue(13.6,'count');
+tl.fromTo('#slider',{opacity:0,y:40},{opacity:1,y:0,duration:.5},15.0);
+const sl={v:0}; tl.to(sl,{v:1,duration:1.6,ease:'power1.inOut',onUpdate:()=>{const p=sl.v*100;sfill.style.width=p+'%';knob.style.left=p+'%'}},15.3);
+cue(15.3,'tick0'); cue(16.1,'tick1'); cue(16.9,'tick2');
+blurOut('#S4 .w,#gauge,#slider',17.25); cue(17.3,'whoosh'); hide('S4',17.65);
+
+/* S5 Argon 17.6-23.2 */
+show('S5',17.6); cue(17.7,'vo:5'); cue(17.6,'riser');
+tl.fromTo('#s5k',{opacity:0,letterSpacing:'.5em'},{opacity:1,letterSpacing:'.2em',duration:.6},17.65);
+tl.fromTo('#orb',{scale:0,opacity:0},{scale:1,opacity:1,duration:.9,ease:'expo.out'},18.4); cue(18.4,'impact'); flash(18.4,.5);
+tl.fromTo('#r1',{scale:.6,opacity:1},{scale:1.8,opacity:0,duration:1.4,ease:'power2.out',repeat:2},18.4);
+tl.fromTo('#r2',{scale:.6,opacity:1},{scale:1.8,opacity:0,duration:1.4,ease:'power2.out',repeat:2},19.1);
+tl.to('#orb',{scale:1.08,duration:4,ease:'none'},19.3);
+tl.fromTo('#s5h .w',{opacity:0,scale:1.4,filter:'blur(25px)'},{opacity:1,scale:1,filter:'blur(0px)',duration:.5,stagger:.12},18.5);
+tl.to('#s5k',{opacity:0,duration:.3},18.4);
+tl.fromTo('#pts .pt',{opacity:0,x:-120},{opacity:1,x:0,duration:.5,stagger:.6},20.0); cue(20.0,'yes'); cue(20.6,'yes'); cue(21.2,'yes');
+blurOut('#S5 .w,#orb,#pts .pt',22.85); cue(22.9,'whoosh'); hide('S5',23.25);
+
+/* S6 verdict 23.2-30.6 */
+show('S6',23.2); cue(23.3,'vo:6'); cue(23.2,'outro');
+tl.fromTo('#s6l > div:first-child',{opacity:0,x:-30},{opacity:1,x:0,duration:.5},23.25);
+blurIn('#s6l .w',23.35,.08,.5);
+tl.fromTo('#vc',{opacity:0,y:160,rotateX:22,transformPerspective:2200},{opacity:1,y:0,rotateX:0,duration:.8,ease:'expo.out'},23.7); cue(23.7,'swoosh');
+const vv={v:0}; tl.to('#vr',{strokeDashoffset:364.4*(1-.97),duration:1,ease:'power2.out'},24.2); tl.to(vv,{v:9.7,duration:1,ease:'power2.out',onUpdate:()=>{document.getElementById('vv').textContent=vv.v.toFixed(1)}},24.2); cue(24.2,'ring');
+tl.fromTo('#alts .alt',{opacity:0,y:30},{opacity:1,y:0,duration:.4,stagger:.15},25.0); cue(25.0,'pop'); cue(25.15,'pop');
+blurIn('#s6u .w',25.6,.1,.5);
+[0,3,1,2].forEach((i,j)=>{const t=26.3+j*.14;tl.fromTo('#pl'+i,{opacity:0,y:150,scale:.85},{opacity:1,y:0,scale:1,duration:.6,ease:'back.out(1.6)'},t);cue(t,'glass'+j);});
+tl.to('#vc',{y:-12,duration:4,ease:'none'},24.5);
+const END=30.6; tl.set({}, {}, END);
+window.DURATION=END; window.CUES=CUES.sort((a,b)=>a[0]-b[0]); window.seek=s=>{tl.seek(s,false)};
+window.ready=document.fonts.ready.then(()=>Promise.all([...document.images].map(i=>i.complete?1:new Promise(r=>{i.onload=i.onerror=r}))));
+</script></body></html>

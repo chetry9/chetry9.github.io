@@ -37,3 +37,22 @@ Sources:
 - https://aiweekly.co/alerts/openai-unveils-dots-always-on-chatgpt-agents-at-devday
 - https://technologychecker.io/blog/chatgpt-statistics
 - https://www.microcenter.com/site/mc-news/article/this-week-in-ai-oct-2-2026.aspx
+
+---
+
+# Trending Now: Gemini plan changes on Oct 9 (9:16, 30s, male VO)
+
+**File:** `Trending_Gemini_Oct9_9x16_MaleVO.mp4`, 1080×1920, 30.6 s
+**Colour palette:** midnight navy `#060A1C` · blue `#4F8CFF` → violet `#9B6BFF` → pink `#FF6FB5` gradient · cyan accent `#3DE0FF`
+
+| # | Start | Line | On-screen |
+|---|---|---|---|
+| 1 | 0:00.3 | Using Gemini for free? Big changes are coming. | TRENDING NOW · Gemini logo |
+| 2 | 0:03.4 | Starting October ninth, Google changes who gets which model. | Calendar flips 8 → **9** |
+| 3 | 0:07.4 | Free users get Flash-Lite only. AI Plus keeps Flash, but loses Pro. | Tier cards: Free / AI Plus $4.99 / AI Pro & Ultra |
+| 4 | 0:11.8 | Pro and Ultra? Unchanged. | "Pro & Ultra: unchanged" |
+| 5 | 0:13.3 | And usage limits now refresh every five hours. | 5-HOURS gauge · effort slider |
+| 6 | 0:17.7 | Meanwhile, Google's most powerful model yet, Gemini 4 Argon, is here, for trusted partners. | Glowing orb · 3 facts |
+| 7 | 0:23.3 | Our take? Check your plan, and compare the best AI tools at bestdigitools dot com. | Gemini 9.7 card · ChatGPT & Claude 9.9 · social pills |
+
+Sources: BusinessToday, AndroidHeadlines, Basic-Tutorials (Gemini plan changes from Oct 9, 2026); TechCrunch, Yahoo Finance (Gemini 4 Argon, Sept 30, 2026).
