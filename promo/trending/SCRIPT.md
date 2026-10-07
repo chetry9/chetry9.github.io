@@ -74,3 +74,25 @@ Sources: BusinessToday, AndroidHeadlines, Basic-Tutorials (Gemini plan changes f
 | 7 | 0:25.0 | Next up: API and Ultra users. Follow BestDigiTools for the release date. | Queue: Now / TBA / TBA · follow CTA |
 
 Sources: TechCrunch, The Rundown AI, TechWire Asia, Latent Space, NeuralTrust (Gemini 4 Argon, Sept 30, 2026).
+
+---
+
+# Gemini 4 Argon, reference editing style (9:16, 30s, male VO)
+
+**File:** `Gemini4_Argon_RefStyle_9x16_MaleVO.mp4`. Editing style follows the reference teaser: dark navy, large glowing arc, bold sans mixed with *italic serif* accents, and "word + UI card → phrase + animated UI" pairs, ending with One search → logo → CTA pill.
+
+| # | Start | Line | On-screen |
+|---|---|---|---|
+| 1 | 0:00.3 | Google just built its most powerful AI. | Hook text |
+| 2 | 0:02.9 | Gemini 4 Argon. | Model card (orb + Gemini logo) |
+| 3 | 0:04.3 | The first in seven months. | Timeline MAR→SEP · 7+ months |
+| 4 | 0:05.9 | Thirteen of nineteen. | Benchmark bars (Google's tests) |
+| 5 | 0:07.3 | Benchmarks won. | 77.9% DeepSWE · 1M output |
+| 6 | 0:08.9 | Cyber defense. | Threat scan: bug found |
+| 7 | 0:10.3 | It patches flaws on its own. | Shield ✓ "vulnerability patched" |
+| 8 | 0:11.9 | But it's locked. | Lock slams · "Public access: not yet" |
+| 9 | 0:13.3 | For trusted defenders only. | Fairwind: Governments / Critical infrastructure / Core tech |
+| 10 | 0:14.9 | Next up: API and Ultra users. No date yet. | Queue: NOW / TBA / TBA |
+| 11 | 0:17.9 | One search. | Phone: "gemini 4 argon" → BestDigiTools result |
+| 12 | 0:21.0 | BestDigiTools. Discover. Compare. Choose the best. | Logo reveal |
+| 13 | 0:24.1 | Curious? Follow us for the release date. | "Curious? Stay tuned." · CTA pill · social pills |
