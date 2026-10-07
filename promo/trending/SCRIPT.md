@@ -56,3 +56,21 @@ Sources:
 | 7 | 0:23.3 | Our take? Check your plan, and compare the best AI tools at bestdigitools dot com. | Gemini 9.7 card · ChatGPT & Claude 9.9 · social pills |
 
 Sources: BusinessToday, AndroidHeadlines, Basic-Tutorials (Gemini plan changes from Oct 9, 2026); TechCrunch, Yahoo Finance (Gemini 4 Argon, Sept 30, 2026).
+
+---
+
+# Gemini 4 Argon launch (9:16, 30s, male VO)
+
+**File:** `Gemini4_Argon_9x16_MaleVO.mp4`, 1080×1920, 30.6 s. Palette: midnight navy + blue→violet→pink gradient, cyan accent.
+
+| # | Start | Line | On-screen |
+|---|---|---|---|
+| 1 | 0:00.3 | Google's most powerful AI is here. But you can't use it. | JUST LAUNCHED · lock slams shut |
+| 2 | 0:04.3 | Meet Gemini 4 Argon. Google's first frontier model in seven months. | Orb reveal · "7+ months" |
+| 3 | 0:08.5 | It beats GPT-6 Astra and Claude Opus on thirteen of nineteen benchmarks. | 13/19 gauge · rivals |
+| 4 | 0:13.1 | With a one million token output. | 77.9% DeepSWE · 1M output |
+| 5 | 0:14.8 | So who gets it? Right now, only trusted cyber defenders, in Google's Fairwind program. | Fairwind Program · Governments / Critical infrastructure / Core tech |
+| 6 | 0:20.5 | Why? It can find and patch software flaws on its own. | Code scan: bug → patched · "Phased release" |
+| 7 | 0:25.0 | Next up: API and Ultra users. Follow BestDigiTools for the release date. | Queue: Now / TBA / TBA · follow CTA |
+
+Sources: TechCrunch, The Rundown AI, TechWire Asia, Latent Space, NeuralTrust (Gemini 4 Argon, Sept 30, 2026).
