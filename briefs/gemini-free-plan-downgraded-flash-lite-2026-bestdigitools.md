@@ -34,3 +34,20 @@ Reading taken: no category or seed given → AI tools, the most important free-p
    - AI Ultra price: not shown. Check current pricing.
    - AI Pro "+ Deep Think": from secondary coverage. Confirm on Google's page.
    - The rule cards ("Daily drafting → Try AI Plus" etc.) are BestDigiTools' editorial opinion, not Google's.
+
+## Voice-over (v2, 38.5s)
+Male American narrator (Kokoro TTS, voice `am_michael`, 1.08× speed). EQ'd and compressed; music ducks under the voice; loudness normalised to −14 LUFS.
+
+| Time | Line |
+|---|---|
+| 0.2s | Your free Gemini just got downgraded. |
+| 2.7s | Starting October ninth, free accounts get Flash-Lite only. Flash and Pro are gone. |
+| 8.5s | Here's what each plan keeps now. |
+| 10.5s | If you used Pro on the free plan, that's the line that changed. |
+| 15.6s | So, should you pay? |
+| 18.9s | Quick answers? Stay free. |
+| 21.6s | Daily drafting? Try AI Plus. |
+| 24.3s | Hard reasoning? That's AI Pro. |
+| 27.0s | Not sure? Use free for a week first. |
+| 30.3s | My verdict: don't upgrade on reflex. Pay only if you actually used Pro. |
+| 35.6s | Staying free, or upgrading? |
