@@ -35,7 +35,7 @@ Reading taken: no category or seed given → AI tools, the most important free-p
    - AI Pro "+ Deep Think": from secondary coverage. Confirm on Google's page.
    - The rule cards ("Daily drafting → Try AI Plus" etc.) are BestDigiTools' editorial opinion, not Google's.
 
-## Voice-over (v2, 38.5s)
+## Voice-over (v3, 47.5s, with strong CTA)
 Male American narrator (Kokoro TTS, voice `am_michael`, 1.08× speed). EQ'd and compressed; music ducks under the voice; loudness normalised to −14 LUFS.
 
 | Time | Line |
@@ -50,4 +50,13 @@ Male American narrator (Kokoro TTS, voice `am_michael`, 1.08× speed). EQ'd and 
 | 24.3s | Hard reasoning? That's AI Pro. |
 | 27.0s | Not sure? Use free for a week first. |
 | 30.3s | My verdict: don't upgrade on reflex. Pay only if you actually used Pro. |
-| 35.6s | Staying free, or upgrading? |
+| 36.0s | Save this before you pay for anything. |
+| 38.3s | Send it to a friend who's still on free Gemini. |
+| 41.0s | And follow BestDigiTools. We test the tools, so you never pay for the wrong plan. |
+
+## Strong CTA end screen (35.5–47.5s)
+- Kicker "BEFORE YOU PAY" + headline "Don't pay for the wrong plan."
+- Three action cards appear in sync with the voice: **SAVE** (this plan grid before you pay) · **SEND** (to a friend still on free Gemini) · **FOLLOW** (honest tool reviews, every week).
+- Big orange "+ Follow BestDigiTools" button pulses; the cursor clicks it and it turns green "✓ Following". Then the BDT logo and bestdigitools.com.
+- "Free or paid — which are you?" moves to the caption / pinned comment as the comment prompt.
+- HEADS-UP: "every week" is a promise. Keep it only if you'll post weekly.
