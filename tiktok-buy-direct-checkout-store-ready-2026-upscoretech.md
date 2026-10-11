@@ -1,6 +1,7 @@
 # UpscoreTech: "TikTok Wants to Be Your Checkout. Is Your Store Ready?"
 
 Format: MOTION (kinetic text, UI cards, male voice-over) · 30 s · 9:16 · 1080×1920 · 30 fps · Instagram Reels
+Look: copies the reference edit. Light-blue gradient + grid background, white rounded phone card with soft shadow, black "After" pill, dark "before" tile, Poppins black text, royal-blue #1950F7 accents and full-blue panels. Dark-wordmark logo.
 Video: `tiktok-buy-direct-checkout-store-ready-2026-upscoretech.mp4`
 
 ---
