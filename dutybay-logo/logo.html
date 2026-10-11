@@ -106,8 +106,10 @@
 const params = new URLSearchParams(location.search);
 const W = +(params.get('w') || 1920), H = +(params.get('h') || 1080);
 const VERTICAL = H > W;
+if (params.has('transparent')) document.documentElement.style.background = document.body.style.background = 'transparent';
 const DURATION = 6.5;
 const $ = id => document.getElementById(id);
+if (params.has('light')) { $('tDuty').setAttribute('fill', '#fff'); ['tag1','tag2','tag3'].forEach(id => $(id).setAttribute('fill', '#fff')); }
 const svg = $('stage');
 svg.setAttribute('width', W); svg.setAttribute('height', H);
 svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
