@@ -1,0 +1,256 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>DutyBay Animated Logo</title>
+<style>
+  html,body{margin:0;padding:0;background:#fff;overflow:hidden}
+  svg{display:block}
+  .word{font-family:"Inter","Inter Black",sans-serif;font-weight:900;letter-spacing:-6px}
+  .tag{font-family:"DejaVu Sans",sans-serif;font-weight:400}
+</style>
+</head>
+<body>
+<svg id="stage" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#9a62fc"/>
+      <stop offset="1" stop-color="#5432da"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.3" cy="0.2" r="0.8">
+      <stop offset="0" stop-color="#fff" stop-opacity=".18"/>
+      <stop offset="1" stop-color="#fff" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="shine" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#fff" stop-opacity="0"/>
+      <stop offset=".5" stop-color="#fff" stop-opacity=".45"/>
+      <stop offset="1" stop-color="#fff" stop-opacity="0"/>
+    </linearGradient>
+    <clipPath id="iconClip"><rect x="-153" y="-156" width="306" height="312" rx="58"/></clipPath>
+    <clipPath id="textClip"><rect id="textClipRect" x="0" y="-200" width="0" height="400"/></clipPath>
+    <filter id="soft" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="10" stdDeviation="14" flood-color="#4b2bc9" flood-opacity=".28"/>
+    </filter>
+    <filter id="lineShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="2" stdDeviation="2.5" flood-color="#2a1180" flood-opacity=".35"/>
+    </filter>
+  </defs>
+
+  <!-- whole logo -->
+  <g id="logo">
+    <!-- WORDMARK -->
+    <g id="wordWrap" clip-path="url(#textClip)">
+      <g id="words">
+        <text id="tDuty" class="word" x="0" y="0" font-size="214" fill="#000">Duty</text>
+        <text id="tBay" class="word" x="0" y="0" font-size="214" fill="#5d3cd6">Bay</text>
+      </g>
+    </g>
+    <g id="tagWrap">
+      <text id="tag1" class="tag" font-size="41" fill="#111">Track Better.</text>
+      <text id="tag2" class="tag" font-size="41" fill="#111">Manage Smarter.</text>
+      <text id="tag3" class="tag" font-size="41" fill="#111">Scale Faster</text>
+    </g>
+    <!-- ICON (coordinates centred on the icon square) -->
+    <g id="iconWrap">
+      <g id="icon" filter="url(#soft)">
+        <rect x="-153" y="-156" width="306" height="312" rx="58" fill="url(#bg)"/>
+        <rect x="-153" y="-156" width="306" height="312" rx="58" fill="url(#glow)"/>
+        <!-- scanning ripples from the eye -->
+        <g clip-path="url(#iconClip)">
+          <circle id="ripple1" cx="0" cy="0" r="0" fill="none" stroke="#fff" stroke-width="3" opacity="0"/>
+          <circle id="ripple2" cx="0" cy="0" r="0" fill="none" stroke="#fff" stroke-width="3" opacity="0"/>
+          <rect id="shineBar" x="-400" y="-260" width="90" height="520" fill="url(#shine)" transform="rotate(20)"/>
+        </g>
+        <!-- glyph, in original-image coordinates (icon centre = 359,427) -->
+        <g transform="translate(-359,-427)" filter="url(#lineShadow)">
+          <g fill="none" stroke="#fff" stroke-width="17" stroke-linecap="round" stroke-linejoin="round">
+            <!-- D: vertical + bottom curve + long diagonal into B top bowl -->
+            <path id="pD" d="M253.5 351 L253.5 482 Q253.5 503.5 276 503.5 L290 503.5 C316 503.5 329 492 338 468 L370 381 C377 363 389 354 402 350 C412 347 428 346 440 351 C458 359 466 376 464 395 C462 414 446 428 420 428 L404 428"/>
+            <!-- D top bowl crossing down into B lower bowl -->
+            <path id="pB" d="M253.5 351 L296 351 C320 351 334 360 343 380 L365 440 C373 488 392 503.5 410 503.5 C440 503.5 453 485 453 466 C453 444 436 428 410 428 L402 428"/>
+          </g>
+          <!-- clock -->
+          <g id="clock">
+            <path id="clockArc" d="M402 374 A27 27 0 0 0 402 412" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round"/>
+            <g id="hands" transform="translate(417,396)">
+              <line id="minHand" x1="0" y1="0" x2="0" y2="-26" stroke="#fff" stroke-width="5" stroke-linecap="round"/>
+              <line id="hrHand" x1="0" y1="0" x2="17" y2="0" stroke="#f5a623" stroke-width="5" stroke-linecap="round"/>
+              <circle r="4.6" fill="#fff"/>
+            </g>
+          </g>
+          <!-- check -->
+          <path id="check" d="M392 465 L409 479 L431 456" fill="none" stroke="#1fcdb8" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+          <!-- tie -->
+          <g id="tie" transform="translate(296,424)">
+            <path d="M-9 0 L9 0 L4 9 L-4 9 Z" fill="#fff"/>
+            <path d="M-4 13 L4 13 L9 44 L0 54 L-9 44 Z" fill="#fff"/>
+          </g>
+          <!-- eye -->
+          <g id="eye" transform="translate(296.5,397)">
+            <g id="eyeLid">
+              <circle r="13.5" fill="#fff"/>
+              <g id="pupil">
+                <circle r="7" fill="#6a42e8"/>
+                <circle cx="2.3" cy="-2.3" r="2.3" fill="#fff"/>
+              </g>
+            </g>
+          </g>
+        </g>
+      </g>
+    </g>
+
+  </g>
+</svg>
+
+<script>
+const params = new URLSearchParams(location.search);
+const W = +(params.get('w') || 1920), H = +(params.get('h') || 1080);
+const VERTICAL = H > W;
+if (params.has('transparent')) document.documentElement.style.background = document.body.style.background = 'transparent';
+const DURATION = 6.5;
+const $ = id => document.getElementById(id);
+if (params.has('light')) { $('tDuty').setAttribute('fill', '#fff'); ['tag1','tag2','tag3'].forEach(id => $(id).setAttribute('fill', '#fff')); }
+const svg = $('stage');
+svg.setAttribute('width', W); svg.setAttribute('height', H);
+svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
+
+const clamp = (v,a=0,b=1)=>Math.min(b,Math.max(a,v));
+const prog = (t,a,b)=>clamp((t-a)/(b-a));
+const easeOut = x=>1-Math.pow(1-x,3);
+const easeInOut = x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const backOut = x=>{const c1=1.9,c3=c1+1;return 1+c3*Math.pow(x-1,3)+c1*Math.pow(x-1,2);};
+const lerp=(a,b,x)=>a+(b-a)*x;
+
+// path lengths for draw-on
+const pD=$('pD'), pB=$('pB'), check=$('check'), arc=$('clockArc');
+const len = {}; [pD,pB,check,arc].forEach(p=>{len[p.id]=p.getTotalLength();p.style.strokeDasharray=len[p.id];});
+
+// layout ------------------------------------------------------------------
+const ICON = 306;
+let L = {};
+function layout(){
+  const tD=$('tDuty'), tB=$('tBay');
+  const wD=tD.getComputedTextLength();
+  tB.setAttribute('x', wD + 4);
+  const wordW = wD + 4 + tB.getComputedTextLength();
+  const tags=[$('tag1'),$('tag2'),$('tag3')];
+  let x=0; const tagX=[];
+  tags.forEach(t=>{tagX.push(x); x+=t.getComputedTextLength()+14;});
+  const tagW = x-14;
+  if(!VERTICAL){
+    const gap=48, textW=Math.max(wordW,tagW);
+    const total=ICON+gap+textW, sc=Math.min(1.05,(W*0.86)/total);
+    L.scale=sc;
+    L.ox=(W-total*sc)/2; L.oy=H/2;
+    L.iconFinal={x:L.ox+ICON/2*sc, y:L.oy};
+    L.iconStart={x:W/2, y:H/2};
+    L.textX=L.ox+(ICON+gap)*sc; L.wordY=L.oy+48*sc; L.tagY=L.oy+125*sc;
+    L.textAlign=0;
+  } else {
+    const sc=Math.min(1.1,(W*0.86)/Math.max(wordW,tagW));
+    L.scale=sc;
+    L.iconStart={x:W/2,y:H/2};
+    L.iconFinal={x:W/2,y:H/2-200*sc};
+    L.wordY=H/2+170*sc; L.tagY=H/2+250*sc;
+    L.textX=(W-wordW*sc)/2; L.tagX0=(W-tagW*sc)/2;
+  }
+  L.wordW=wordW; L.tagX=tagX; L.tagW=tagW;
+}
+
+function render(t){
+  const s=L.scale;
+  // --- icon entrance & move ---
+  const pop=prog(t,0,0.7);
+  const mv = easeInOut(prog(t,2.3,3.2));
+  const ix=lerp(L.iconStart.x,L.iconFinal.x,mv), iy=lerp(L.iconStart.y,L.iconFinal.y,mv);
+  const rot = lerp(-12,0,easeOut(pop));
+  const sc = (t<0.7? backOut(pop):1)*lerp(1.35,1,mv)*s;
+  $('iconWrap').setAttribute('transform',`translate(${ix},${iy}) rotate(${rot}) scale(${Math.max(0.0001,sc)})`);
+  $('iconWrap').setAttribute('opacity',clamp(pop*3));
+
+  // --- strokes draw on ---
+  const d1=easeInOut(prog(t,0.35,1.35)), d2=easeInOut(prog(t,0.5,1.5));
+  pD.style.strokeDashoffset=len.pD*(1-d1);
+  pB.style.strokeDashoffset=len.pB*(1-d2);
+  pD.style.opacity=d1>0?1:0; pB.style.opacity=d2>0?1:0;
+
+  // --- tie drops in ---
+  const tp=prog(t,1.25,1.65);
+  $('tie').setAttribute('transform',`translate(296,${lerp(404,424,backOut(tp))})`);
+  $('tie').setAttribute('opacity',clamp(tp*2));
+
+  // --- eye: opens, scans around, blinks ---
+  const eo=prog(t,1.35,1.6);
+  let lid = easeOut(eo);
+  const blink=(tc,dur=0.16)=>{const x=prog(t,tc-dur/2,tc+dur/2);return x>0&&x<1?Math.abs(1-2*x):1;};
+  lid*=Math.max(0.08,blink(2.2)*blink(4.55)*blink(6.05));
+  $('eyeLid').setAttribute('transform',`scale(${lerp(0.6,1,eo)},${Math.max(0.05,lid)})`);
+  $('eye').setAttribute('opacity',clamp(eo*3));
+  // pupil look path (keyframes: time, x, y)
+  const K=[[0,3,0],[1.7,3,0],[1.95,-5,0],[2.35,-5,0],[2.6,5,-2],[3.0,5,-2],[3.25,-4,3],[3.6,-4,3],[3.85,5,0],[4.3,5,0],[4.8,0,-4],[5.2,0,-4],[5.5,3,0],[9,3,0]];
+  let px=3,py=0;
+  for(let i=0;i<K.length-1;i++){const[a,ax,ay]=K[i],[b,bx,by]=K[i+1];if(t>=a&&t<=b){const x=easeInOut((t-a)/(b-a));px=lerp(ax,bx,x);py=lerp(ay,by,x);break;}}
+  $('pupil').setAttribute('transform',`translate(${px},${py})`);
+
+  // ripples (watching / tracking pulse) – eye is at (-62.5,-30) in icon space
+  [[$('ripple1'),1.65],[$('ripple2'),2.05],].forEach(([c,st])=>{
+    const x=prog(t,st,st+1.3);
+    c.setAttribute('cx',-62.5); c.setAttribute('cy',-30);
+    c.setAttribute('r',lerp(14,260,easeOut(x)));
+    c.setAttribute('opacity',x>0&&x<1?(1-x)*0.45:0);
+  });
+
+  // --- clock: arc draws, hands spin then settle ---
+  const ca=easeOut(prog(t,1.45,1.9));
+  arc.style.strokeDashoffset=len.clockArc*(1-ca);
+  $('clock').setAttribute('opacity',clamp(prog(t,1.4,1.6)));
+  const spin=easeInOut(prog(t,1.5,2.9));
+  $('minHand').setAttribute('transform',`rotate(${-720*(1-spin)})`);
+  $('hrHand').setAttribute('transform',`rotate(${-120*(1-spin)})`);
+  $('hands').setAttribute('transform',`translate(417,396) scale(${lerp(0.3,1,easeOut(prog(t,1.45,1.8)))})`);
+
+  // --- check mark ---
+  const ck=easeOut(prog(t,2.85,3.25));
+  check.style.strokeDashoffset=len.check*(1-ck);
+  check.setAttribute('opacity',ck>0?1:0);
+  const ckPop=prog(t,3.2,3.5);
+  const cps=1+Math.sin(ckPop*Math.PI)*0.25;
+  check.setAttribute('transform',`translate(411,467) scale(${cps}) translate(-411,-467)`);
+
+  // --- shine sweep ---
+  const sh=prog(t,4.6,5.4);
+  $('shineBar').setAttribute('x',lerp(-400,300,easeInOut(sh)));
+  $('shineBar').setAttribute('opacity',sh>0&&sh<1?1:0);
+
+  // --- wordmark ---
+  const wr=easeInOut(prog(t,2.7,3.6));
+  const words=$('words');
+  if(!VERTICAL){
+    words.setAttribute('transform',`translate(${L.textX+lerp(-60*s,0,wr)},${L.wordY}) scale(${s})`);
+    $('textClipRect').setAttribute('x',L.textX-4); $('textClipRect').setAttribute('width',(L.wordW+40)*s*wr);
+    $('textClipRect').setAttribute('y',L.wordY-230*s); $('textClipRect').setAttribute('height',300*s);
+  } else {
+    words.setAttribute('transform',`translate(${L.textX},${L.wordY+lerp(80*s,0,wr)}) scale(${s})`);
+    $('textClipRect').setAttribute('x',0); $('textClipRect').setAttribute('width',W);
+    $('textClipRect').setAttribute('y',L.wordY-200*s); $('textClipRect').setAttribute('height',260*s);
+  }
+  $('tBay').setAttribute('opacity',clamp(prog(t,3.0,3.5)));
+  $('tDuty').setAttribute('opacity',clamp(prog(t,2.7,3.0)));
+  // tagline words one after another
+  ['tag1','tag2','tag3'].forEach((id,i)=>{
+    const x=easeOut(prog(t,3.55+i*0.35,4.05+i*0.35));
+    const el=$(id);
+    const baseX = VERTICAL ? L.tagX0 : L.textX + 6*s;
+    el.setAttribute('transform',`translate(${baseX+L.tagX[i]*s},${L.tagY+lerp(24,0,x)}) scale(${s})`);
+    el.setAttribute('opacity',x);
+  });
+}
+
+window.DURATION=DURATION;
+window.renderAt=t=>render(t);
+document.fonts.ready.then(()=>{layout();render(0);window.ready=true;
+  if(!params.has('capture')){const st=performance.now();const loop=()=>{render(((performance.now()-st)/1000)%(DURATION+1));requestAnimationFrame(loop);};loop();}
+});
+</script>
+</body>
+</html>
