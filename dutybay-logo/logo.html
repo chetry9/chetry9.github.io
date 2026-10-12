@@ -106,6 +106,7 @@
 const params = new URLSearchParams(location.search);
 const W = +(params.get('w') || 1920), H = +(params.get('h') || 1080);
 const VERTICAL = H > W;
+const ICON_ONLY = params.has('icon');  // icon mark alone, centred, no wordmark
 if (params.has('transparent')) document.documentElement.style.background = document.body.style.background = 'transparent';
 const DURATION = 6.5;
 const $ = id => document.getElementById(id);
@@ -161,7 +162,7 @@ function render(t){
   const s=L.scale;
   // --- icon entrance & move ---
   const pop=prog(t,0,0.7);
-  const mv = easeInOut(prog(t,2.3,3.2));
+  const mv = ICON_ONLY ? 0 : easeInOut(prog(t,2.3,3.2));
   const ix=lerp(L.iconStart.x,L.iconFinal.x,mv), iy=lerp(L.iconStart.y,L.iconFinal.y,mv);
   const rot = lerp(-12,0,easeOut(pop));
   const sc = (t<0.7? backOut(pop):1)*lerp(1.35,1,mv)*s;
@@ -248,7 +249,13 @@ function render(t){
 
 window.DURATION=DURATION;
 window.renderAt=t=>render(t);
-document.fonts.ready.then(()=>{layout();render(0);window.ready=true;
+document.fonts.ready.then(()=>{layout();
+  if(ICON_ONLY){
+    $('wordWrap').style.display=$('tagWrap').style.display='none';
+    L.scale=Math.min(W,H)*0.68/(312*1.35);
+    L.iconStart=L.iconFinal={x:W/2,y:H/2};
+  }
+  render(0);window.ready=true;
   if(!params.has('capture')){const st=performance.now();const loop=()=>{render(((performance.now()-st)/1000)%(DURATION+1));requestAnimationFrame(loop);};loop();}
 });
 </script>

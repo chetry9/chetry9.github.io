@@ -2,6 +2,7 @@
 // Usage: node render.js <width> <height> <out.mp4|out.webm|out.mov> [fps] [stillTime]
 // .webm (VP9) and .mov (ProRes 4444) are rendered with a transparent background.
 // A file name containing "_light" uses white text, for placing on dark backgrounds.
+// A file name containing "_Icon" renders the icon mark alone, centred.
 const { chromium } = require('playwright');
 const { spawn } = require('child_process');
 const path = require('path');
@@ -12,7 +13,7 @@ const path = require('path');
   const alpha = /\.(webm|mov)$/i.test(out);
   const browser = await chromium.launch();
   const page = await browser.newPage({ viewport: { width: W, height: H } });
-  await page.goto('file://' + path.join(__dirname, 'logo.html') + `?w=${W}&h=${H}&capture=1${alpha ? '&transparent=1' : ''}${/_light/.test(out) ? '&light=1' : ''}`);
+  await page.goto('file://' + path.join(__dirname, 'logo.html') + `?w=${W}&h=${H}&capture=1${alpha ? '&transparent=1' : ''}${/_light/.test(out) ? '&light=1' : ''}${/_Icon/.test(out) ? '&icon=1' : ''}`);
   await page.waitForFunction(() => window.ready === true);
 
   if (still !== undefined) {
