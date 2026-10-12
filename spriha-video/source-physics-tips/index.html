@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="bn">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="fonts/fonts.css">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1080px;height:1920px;overflow:hidden;background:#0A2350}
+body{font-family:'Hind Siliguri',sans-serif;color:#fff;-webkit-font-smoothing:antialiased}
+#stage{position:absolute;inset:0;overflow:hidden}
+.layer{position:absolute;inset:0}
+.a{position:absolute;will-change:transform,opacity}
+.center{left:0;right:0;text-align:center}
+.h{font-family:'Anek Bangla',sans-serif;font-weight:800;line-height:1.15}
+.en{font-family:'Poppins',sans-serif}
+.y{color:#FFC93C}
+.shadow{text-shadow:0 10px 40px rgba(0,0,0,.4)}
+#bg{background:radial-gradient(110% 70% at 50% 30%,#4E8FDA 0%,#2A68B3 40%,#123A73 80%,#0A2350 100%)}
+#bgHook{background:radial-gradient(120% 80% at 50% 40%,#16305e 0%,#0b1838 50%,#050a18 100%)}
+#grid{opacity:.09}
+#flash{background:#fff;opacity:0}
+#vig{background:radial-gradient(ellipse at center,rgba(0,0,0,0) 55%,rgba(0,0,0,.5) 100%)}
+.chip{display:inline-block;padding:14px 34px;border-radius:999px;background:rgba(255,255,255,.14);border:2px solid rgba(255,255,255,.35);font-weight:700;font-size:44px}
+.chip.yel{background:#FFC93C;color:#1a1200;border-color:#FFC93C}
+.num{width:150px;height:150px;border-radius:40px;background:#FFC93C;color:#1a1200;display:flex;align-items:center;justify-content:center;font-family:'Poppins';font-weight:800;font-size:84px;box-shadow:0 18px 50px rgba(255,201,60,.4)}
+.paper{background:#FFFDF6;color:#0B2347;border-radius:40px;box-shadow:0 30px 90px rgba(0,0,0,.35);
+  background-image:repeating-linear-gradient(transparent 0 78px,#DCE6F5 78px 80px);background-position:0 40px}
+.paper:before{content:'';position:absolute;left:84px;top:0;bottom:0;width:3px;background:#F4A7B0}
+.formula{font-family:'Poppins';font-weight:800;color:#1F5FA8;font-size:150px;line-height:1}
+.formula span{display:inline-block}
+.mean{font-family:'Anek Bangla';font-weight:700;font-size:54px;white-space:nowrap;color:#0B2347}
+.note{display:inline-flex;align-items:center;gap:16px;padding:20px 38px;border-radius:999px;background:#0B2347;color:#fff;font-weight:700;font-size:44px;box-shadow:0 14px 40px rgba(0,0,0,.3)}
+.seg{flex:1;height:12px;border-radius:6px;background:rgba(255,255,255,.25);overflow:hidden}
+.seg i{display:block;height:100%;width:0;background:#FFC93C}
+.hl{background:linear-gradient(transparent 60%,rgba(255,201,60,.65) 60%);padding:0 6px}
+</style>
+</head>
+<body>
+<div id="stage">
+  <div class="layer" id="bg"></div>
+  <div class="layer" id="bgHook"></div>
+  <svg class="layer" id="grid" width="1080" height="1920"><defs>
+    <pattern id="gp" width="60" height="60" patternUnits="userSpaceOnUse"><path d="M60 0H0V60" fill="none" stroke="#fff" stroke-width="1.5"/></pattern></defs>
+    <rect id="gridr" x="-60" y="-60" width="1200" height="2040" fill="url(#gp)"/></svg>
+  <canvas class="layer" id="fx" width="1080" height="1920"></canvas>
+  <div class="layer" id="floaters"></div>
+
+  <!-- HOOK 0-3 -->
+  <div class="a center" data-in="-0.3" data-out="2.9" data-fx="up" style="top:440px"><div class="chip">📚 PHYSICS HACKS</div></div>
+  <div class="a center h shadow" data-in="-0.35" data-out="2.9" data-fx="slam" style="top:640px;font-size:124px"><span id="brain" style="display:inline-block;font-size:130px">🤯</span><br>ফিজিক্সের সূত্র<br><span class="y" style="font-size:136px">মনে থাকে না?</span></div>
+  <div class="a center" data-in="1.25" data-out="2.9" data-fx="pop" style="top:1110px">
+    <div style="display:inline-block;background:#fff;color:#0B2347;border-radius:36px;padding:26px 50px" class="h"><span style="font-size:76px">এই <span style="color:#1F5FA8">৫টা ট্রিক</span> মেনে চলো</span></div>
+  </div>
+  <div class="a center" data-in="1.8" data-out="2.9" data-fx="up" style="top:1290px"><div class="chip yel">📌 সেভ করে রাখো</div></div>
+
+  <!-- persistent header for tips -->
+  <div class="a" id="hdr" style="left:60px;right:60px;top:110px;opacity:0">
+    <div style="display:flex;align-items:center;gap:20px">
+      <div style="width:96px;height:96px;border-radius:24px;background:#fff;display:flex;align-items:center;justify-content:center"><img src="mark.png" style="height:78px"></div>
+      <div style="flex:1"><div class="en" style="font-weight:800;font-size:36px;line-height:1">SPRIHA</div><div class="en" style="font-weight:600;font-size:21px;letter-spacing:4px;opacity:.85">EDUCATION CARE</div></div>
+      <div class="chip" style="font-size:34px;padding:10px 26px">ফিজিক্স টিপস</div>
+    </div>
+    <div style="display:flex;gap:12px;margin-top:34px"><div class="seg"><i></i></div><div class="seg"><i></i></div><div class="seg"><i></i></div><div class="seg"><i></i></div><div class="seg"><i></i></div></div>
+  </div>
+
+  <div id="tips"></div>
+
+  <!-- SAVE CTA 19-21.8 -->
+  <div class="a center" data-in="19.05" data-out="21.75" data-fx="pop" style="top:470px">
+    <svg width="300" height="360" viewBox="0 0 100 120"><path d="M14 6h72v108L50 88 14 114z" fill="none" stroke="#fff" stroke-width="7" stroke-linejoin="round"/><clipPath id="bk"><path d="M14 6h72v108L50 88 14 114z"/></clipPath><rect id="bkfill" clip-path="url(#bk)" x="0" y="120" width="100" height="120" fill="#FFC93C"/></svg>
+  </div>
+  <div class="a center h shadow" data-in="19.3" data-out="21.75" data-fx="up" style="top:900px;font-size:120px">পোস্টটা <span class="y">সেভ করো</span></div>
+  <div class="a center" data-in="19.7" data-out="21.75" data-fx="up" style="top:1080px;font-weight:700;font-size:54px;opacity:.95">পরীক্ষার আগে এক নজরে রিভিশন হয়ে যাবে</div>
+  <div class="a center" data-in="20.3" data-out="21.75" data-fx="pop" style="top:1220px"><div class="chip yel" style="font-size:52px">👥 ফিজিক্স-ভীতু বন্ধুকে ট্যাগ করো</div></div>
+
+  <!-- END CARD 21.8-25 -->
+  <div class="a center" data-in="21.85" data-out="99" data-fx="zoom" style="top:250px">
+    <div style="display:inline-block;background:#fff;border-radius:44px;padding:28px 46px;box-shadow:0 20px 60px rgba(0,0,0,.3)"><img src="logo.png" style="height:360px;display:block"></div>
+  </div>
+  <div class="a center h shadow" data-in="22.15" data-out="99" data-fx="up" style="top:790px;font-size:84px">মুখস্থ নয়, <span class="y">কনসেপ্ট ক্লিয়ার</span></div>
+  <div class="a center" data-in="22.45" data-out="99" data-fx="up" style="top:920px"><div class="chip" style="font-size:48px;background:#13C27F;border-color:#13C27F">🎁 নতুন ব্যাচে সম্পূর্ণ ফ্রি ক্লাস</div></div>
+  <div class="a center" data-in="22.8" data-out="99" data-fx="pop" style="top:1070px">
+    <div style="display:inline-flex;align-items:center;gap:22px;padding:28px 54px;border-radius:999px;background:#FFC93C;color:#151000;font-family:'Poppins';font-weight:800;font-size:76px;box-shadow:0 20px 60px rgba(255,201,60,.45)">📞 01341-629475</div>
+  </div>
+  <div class="a center" data-in="23.1" data-out="99" data-fx="up" style="top:1260px;font-weight:600;font-size:42px">📍 সেক্টর-০৬, রোড-১০, হাউজ-৩৪, উত্তরা</div>
+  <div class="a center h y" data-in="23.4" data-out="99" data-fx="up" style="top:1350px;font-size:62px">স্থির লক্ষ্যে সুনিশ্চিত যাত্রা...</div>
+
+  <div class="layer" id="vig"></div>
+  <div class="layer" id="flash"></div>
+</div>
+
+<script>
+const W=1080,H=1920;
+const clamp=(x,a=0,b=1)=>Math.max(a,Math.min(b,x)),lerp=(a,b,t)=>a+(b-a)*t;
+const eOut=t=>1-Math.pow(1-t,3),eIn=t=>t*t*t,eInOut=t=>t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;
+const eBack=t=>{const c1=1.70158,c3=c1+1;return 1+c3*Math.pow(t-1,3)+c1*Math.pow(t-1,2)};
+const seg=(t,a,b)=>clamp((t-a)/(b-a));
+function rng(s){return()=>{s|=0;s=s+0x6D2B79F5|0;let t=Math.imul(s^s>>>15,1|s);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+const $=id=>document.getElementById(id);
+
+// ---------- tips ----------
+const T0=3.0,TD=3.2;
+const TIPS=[
+ {t:'সূত্রের <span class="hl">মানে</span> বোঝো',f:['F','=','ma'],m:'বল = ভর × ত্বরণ',n:'💡 অক্ষর না, অর্থ মনে রাখো'},
+ {t:'<span class="hl">একক</span> মিলিয়ে দেখো',f:['N','=','kg·m/s²'],fs:120,m:'দুই পাশের একক মিললেই সূত্র ঠিক',n:'✅ ভুল সূত্র সাথে সাথে ধরা পড়বে'},
+ {t:'মনে মনে <span class="hl">ছবি</span> বানাও',f:['v','=','u','+','at'],m:'শেষ বেগ = শুরুর বেগ + বাড়তি বেগ',n:'🚗 গাড়ির স্পিড বাড়ছে, কল্পনা করো'},
+ {t:'এক পাতার <span class="hl">ফর্মুলা শিট</span>',sheet:['E = mc²','P = W / t','V = IR','p = mv'],m:'',n:'⏱️ রোজ মাত্র ২ মিনিট চোখ বুলাও'},
+ {t:'অঙ্ক করে <span class="hl">পাকা</span> করো',big:'১ সূত্র = ৩টা অঙ্ক',m:'প্র্যাকটিসেই সূত্র স্থায়ী হয়',n:'🔁 সপ্তাহ শেষে আবার রিভিশন'},
+];
+const tipsEl=$('tips');
+TIPS.forEach((p,i)=>{
+  const a=T0+i*TD,b=a+TD-0.15;
+  let body='';
+  if(p.f) body=`<div class="formula" style="${p.fs?'font-size:'+p.fs+'px':''}">${p.f.map((c,k)=>`<span class="fc" data-k="${k}" style="margin:0 14px">${c}</span>`).join('')}</div>`;
+  if(p.sheet) body=`<div style="text-align:left;display:inline-block">${p.sheet.map((s,k)=>`<div class="fc en" data-k="${k}" style="font-weight:800;font-size:76px;color:#1F5FA8;line-height:80px;margin:0">${s}</div>`).join('')}</div>`;
+  if(p.big) body=`<div class="h fc" data-k="0" style="font-size:104px;color:#1F5FA8">${p.big}</div>`;
+  tipsEl.insertAdjacentHTML('beforeend',`
+  <div class="tipgrp" data-a="${a}" data-b="${b}">
+    <div class="a" data-in="${a}" data-out="${b}" data-fx="pop" data-exit="left" style="left:90px;top:380px"><div class="num">0${i+1}</div></div>
+    <div class="a h shadow" data-in="${a+.12}" data-out="${b}" data-fx="right" data-exit="left" style="left:270px;right:60px;top:385px;font-size:${i===3?76:80}px;line-height:1.1;height:150px;display:flex;align-items:center"><div>${p.t}</div></div>
+    <div class="a paper" data-in="${a+.3}" data-out="${b}" data-fx="zoom" data-exit="left" style="left:80px;right:80px;top:620px;height:${p.sheet?600:560}px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 30px 0 100px;text-align:center">
+      ${body}
+      ${p.m?`<div class="mean mline" style="margin-top:44px">${p.m}</div>`:''}
+    </div>
+    <div class="a center" data-in="${a+1.5}" data-out="${b}" data-fx="pop" data-exit="left" style="top:${p.sheet?1300:1260}px"><div class="note">${p.n}</div></div>
+  </div>`);
+});
+
+// formula floaters for hook
+const fl=$('floaters'),FL=['E=mc²','F=ma','V=IR','v=u+at','P=W/t','λ','Ω','Δx','g','½mv²'],floats=[];
+{const r=rng(5);FL.forEach(s=>{const d=document.createElement('div');d.className='a en';d.textContent=s;const o={el:d,x:r()*900,y:150+r()*1650,s:44+r()*50,ph:r()*6.28,sp:.4+r()*.5,rot:(r()-.5)*30};
+ d.style.cssText=`left:0;top:0;font-weight:800;font-size:${o.s}px;color:rgba(255,255,255,.16);white-space:nowrap`;fl.appendChild(d);floats.push(o)})}
+
+// particles + confetti
+const cv=$('fx'),cx=cv.getContext('2d');
+const parts=[];{const r=rng(3);for(let i=0;i<40;i++)parts.push({x:r()*W,y:r()*H,r:3+r()*8,sp:15+r()*40,ph:r()*6.28,a:.12+r()*.3})}
+const conf=[];{const r=rng(9);const c=['#FFC93C','#fff','#2EE59D','#FF6B81','#7FB2F0'];for(let i=0;i<90;i++)conf.push({a:-Math.PI/2+(r()-.5)*2.4,v:700+r()*900,w:12+r()*14,h:18+r()*22,c:c[i%5],rot:r()*6,vr:(r()-.5)*12})}
+function drawFX(t){
+  cx.clearRect(0,0,W,H);
+  parts.forEach(p=>{const y=(p.y-t*p.sp+H*10)%H,x=p.x+Math.sin(t*.8+p.ph)*30;cx.beginPath();cx.arc(x,y,p.r,0,7);cx.fillStyle=`rgba(255,255,255,${p.a})`;cx.fill()});
+  const tb=t-19.4;if(tb>0&&tb<2.4)conf.forEach(c=>{const x=540+Math.cos(c.a)*c.v*tb,y=640+Math.sin(c.a)*c.v*tb+700*tb*tb;cx.save();cx.translate(x,y);cx.rotate(c.rot+c.vr*tb);cx.globalAlpha=clamp(1-(tb-1.6)/.8);cx.fillStyle=c.c;cx.fillRect(-c.w/2,-c.h/2,c.w,c.h);cx.restore()});
+}
+
+const items=[...document.querySelectorAll('[data-in]')].map(el=>({el,tin:+el.dataset.in,tout:+el.dataset.out,fx:el.dataset.fx,exit:el.dataset.exit}));
+function applyItem(it,t){
+  const {el,tin,tout,fx,exit}=it;
+  if(t<tin-0.001||t>tout+0.4){el.style.opacity=0;el.style.visibility='hidden';return}
+  el.style.visibility='visible';
+  const dIn={slam:.32,pop:.45,up:.5,left:.55,right:.55,zoom:.55}[fx]||.5;
+  const pi=seg(t,tin,tin+dIn),po=seg(t,tout,tout+.35);
+  let op=1,tx=0,ty=0,sc=1,rot=0,blur=0;
+  switch(fx){
+    case 'slam':sc=lerp(2.3,1,eOut(pi));op=clamp(pi*3);blur=(1-pi)*14;break;
+    case 'pop':sc=lerp(.3,1,eBack(pi));op=clamp(pi*2.5);break;
+    case 'up':ty=lerp(80,0,eOut(pi));op=eOut(pi);break;
+    case 'left':tx=lerp(-1100,0,eOut(pi));break;
+    case 'right':tx=lerp(1100,0,eOut(pi));op=clamp(pi*2);break;
+    case 'zoom':sc=lerp(.7,1,eBack(pi));op=eOut(pi);blur=(1-pi)*8;break;
+  }
+  sc*=1+0.02*seg(t,tin,tout);
+  if(po>0){const e=eIn(po);if(exit==='left'){tx-=e*1200;rot-=e*4}else{op*=1-e;sc*=lerp(1,1.12,e);blur+=e*10;ty-=e*40}}
+  el.style.opacity=op;el.style.transform=`translate(${tx}px,${ty}px) scale(${sc}) rotate(${rot}deg)`;
+  el.style.filter=blur>.3?`blur(${blur.toFixed(1)}px)`:'none';
+}
+
+function render(t){
+  $('bgHook').style.opacity=1-seg(t,2.85,3.05);
+  $('gridr').setAttribute('transform',`translate(${(t*20)%60} ${(t*30)%60})`);
+  fl.style.opacity=1-seg(t,2.7,3.0);
+  floats.forEach(o=>{o.el.style.transform=`translate(${o.x+Math.sin(t*o.sp+o.ph)*25}px,${o.y+Math.cos(t*o.sp+o.ph)*25-t*25}px) rotate(${o.rot}deg)`});
+  $('brain').style.transform=`rotate(${Math.sin(t*14)*10}deg) scale(${1+.08*Math.sin(t*9)})`;
+  // shake
+  let sx=0,sy=0;[[0,.3],[1.25,.25],[19.05,.3]].forEach(([b,d])=>{const k=seg(t,b,b+d);if(t>=b&&k<1){const a=(1-k)*18;sx+=Math.sin(t*90)*a;sy+=Math.cos(t*77)*a}});
+  $('stage').style.transform=`translate(${sx}px,${sy}px)`;
+  let f=0;[[3.0,.3,.5],[19.05,.3,.5],[21.85,.3,.5]].forEach(([b,d,m])=>{const k=seg(t,b,b+d);if(t>=b&&k<1)f=Math.max(f,m*(1-k))});$('flash').style.opacity=f;
+
+  items.forEach(it=>applyItem(it,t));
+  // header + progress
+  const hv=seg(t,2.95,3.35)*(1-seg(t,18.85,19.1));
+  $('hdr').style.opacity=hv;$('hdr').style.transform=`translateY(${(1-eOut(seg(t,2.95,3.35)))*-60}px)`;
+  document.querySelectorAll('.seg i').forEach((e,i)=>{e.style.width=(seg(t,T0+i*TD,T0+(i+1)*TD)*100)+'%'});
+  // formula char stagger + meaning reveal
+  document.querySelectorAll('.tipgrp').forEach(g=>{const a=+g.dataset.a;
+    g.querySelectorAll('.fc').forEach(c=>{const k=seg(t,a+.5+(+c.dataset.k)*.12,a+.8+(+c.dataset.k)*.12);c.style.opacity=k;c.style.transform=`translateY(${(1-eBack(k))*50}px) scale(${lerp(.6,1,eBack(k))})`;c.style.display=c.classList.contains('en')||c.classList.contains('h')?'block':'inline-block'});
+    const m=g.querySelector('.mline');if(m){const k=seg(t,a+1.05,a+1.45);m.style.clipPath=`inset(0 ${100-eOut(k)*100}% 0 0)`}
+  });
+  // bookmark fill
+  $('bkfill').setAttribute('y',lerp(120,0,eInOut(seg(t,19.4,20.1))));
+  drawFX(t);
+}
+window.render=render;render(0);
+</script>
+</body>
+</html>
