@@ -4,7 +4,13 @@
 - **Audience**: adults aged 45–54, small-business owners, website owners and beginners
 - **Palette**: navy #0B1020, BestDigiTools orange #FD5814, white text, muted green #5FBF8A for positives, amber #F5A524 for price warnings
 - **Type**: Inter Display Bold for all text; Poppins for the BDT wordmark
-- **Motion**: smooth slide + scale transitions (~0.3s, no flashes), card reveals, a gently floating monitor, a slow parallax dot grid
+- **Motion (v2, high-end)**: built as real 3D in the browser, so cards, browsers and calendars have true perspective.
+  - **Camera**: a slow drift plus a gentle push-in on every scene.
+  - **Background**: a 3D perspective grid floor, rotating light rays and parallax bokeh particles.
+  - **Surfaces**: frosted-glass cards with spinning gradient borders, and shine sweeps across text and buttons.
+  - **Type**: kinetic letter-by-letter headlines that tilt in from depth.
+  - **Animated details**: icons that draw themselves (✓ marks, lock shackle), a 3D calendar flip, a swinging price tag that flips to "?", website sections flying in from depth, a pendulum drop for the domain bill, and a light burst behind the logo.
+  - **Transitions**: depth-blur, about 0.35s, with no flashes.
 - **Branding**: a subtle BDT watermark top-left from 0–49s; the full BDT logo with an orange glow on the end screen
 - **Captions**: large (54px), synced word by word, on a dark pill at y≈1620 (above the social UI controls). Price words (price, renewal, cost, domain) are tinted orange.
 - **Logos**: the SiteGround logo is the one you supplied, with its black text recoloured white for the navy background. WordPress is the official mark (simple-icons).
