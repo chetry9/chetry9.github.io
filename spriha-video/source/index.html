@@ -1,0 +1,667 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Spriha Ad</title>
+<style>
+@font-face{font-family:Baloo;src:url(fonts/baloo-da-2-bengali-800-normal.woff2);font-weight:800}
+@font-face{font-family:Hind;src:url(fonts/hind-siliguri-bengali-500-normal.woff2);font-weight:500}
+@font-face{font-family:Hind;src:url(fonts/hind-siliguri-bengali-600-normal.woff2);font-weight:600}
+@font-face{font-family:Hind;src:url(fonts/hind-siliguri-bengali-700-normal.woff2);font-weight:700}
+@font-face{font-family:Pop;src:url(fonts/poppins-latin-600-normal.woff2);font-weight:600}
+@font-face{font-family:Pop;src:url(fonts/poppins-latin-700-normal.woff2);font-weight:700}
+@font-face{font-family:Pop;src:url(fonts/poppins-latin-800-normal.woff2);font-weight:800}
+:root{--blue:#1F65AD;--blue2:#3B74B9;--navy:#0B2A52;--red:#E23B3B;--green:#1FA463;--yellow:#FFC72C;--ink:#10223D}
+html,body{margin:0;width:1080px;height:1920px;overflow:hidden;background:#000}
+#stage{position:relative;width:1080px;height:1920px;overflow:hidden;background:#fff;font-family:Hind,Pop,sans-serif;color:var(--ink)}
+.scene{position:absolute;inset:0;overflow:hidden;display:none}
+.layer{position:absolute;inset:0}
+.abs{position:absolute}
+.cx{left:0;right:0;text-align:center}
+svg{position:absolute;left:0;top:0;overflow:visible}
+svg .a{transform-box:fill-box;transform-origin:center}
+.big{font-family:Baloo,Pop;font-weight:800;line-height:1.18;letter-spacing:.5px}
+.w{display:inline-block;white-space:pre}
+.hlred{color:#fff;background:var(--red);padding:0 22px;border-radius:18px;box-shadow:0 10px 30px rgba(226,59,59,.35)}
+.hlblue{color:#fff;background:var(--blue);padding:0 22px;border-radius:18px}
+.pill{display:inline-flex;align-items:center;gap:16px;border-radius:999px;padding:14px 34px;font-weight:700;font-size:46px}
+.card{background:#fff;border-radius:36px;box-shadow:0 24px 60px rgba(11,42,82,.18)}
+.pop{font-family:Pop}
+</style></head>
+<body><div id="stage">
+
+<!-- ============ SCENE 1 : HOOK ============ -->
+<div class="scene" id="s1">
+ <div class="layer" id="s1cam">
+  <svg width="1080" height="1920" viewBox="0 0 1080 1920" id="s1svg"></svg>
+ </div>
+ <div class="abs cx big" id="s1t1" style="top:150px;font-size:100px;color:var(--ink)">পড়াশোনা তো করছে,</div>
+ <div class="abs cx big" id="s1t2" style="top:285px;font-size:90px">কিন্তু <span class="hlred">রেজাল্ট আসছে না?</span></div>
+ <div class="abs card" id="s1card" style="left:300px;top:1300px;width:480px;padding:0 0 26px;overflow:hidden">
+  <div style="background:var(--blue);color:#fff;font-weight:700;font-size:44px;text-align:center;padding:14px 0">রেজাল্ট কার্ড</div>
+  <div style="padding:16px 40px 0;font-size:44px;font-weight:600;line-height:1.55">
+   <div style="display:flex;justify-content:space-between">গণিত <b class="pop" style="color:var(--red)">C</b></div>
+   <div style="display:flex;justify-content:space-between">পদার্থবিজ্ঞান <b class="pop" style="color:var(--red)">D</b></div>
+   <div style="display:flex;justify-content:space-between">রসায়ন <b class="pop" style="color:var(--red)">C</b></div>
+  </div>
+  <div style="position:relative;text-align:center;margin-top:10px;font-family:Pop;font-weight:800;font-size:58px;color:var(--red)">GPA 2.75
+   <svg width="300" height="110" viewBox="0 0 300 110" style="left:90px;top:-12px"><path id="s1ring" d="M150,8 C260,6 292,40 285,62 C276,95 200,104 140,102 C60,100 8,84 12,55 C16,25 80,10 170,12" fill="none" stroke="#E23B3B" stroke-width="7" stroke-linecap="round" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/></svg>
+  </div>
+ </div>
+</div>
+
+<!-- ============ SCENE 2a : WHY ============ -->
+<div class="scene" id="s2a" style="background:var(--navy)">
+ <svg width="1080" height="1920" viewBox="0 0 1080 1920" id="s2asvg"></svg>
+ <div class="abs cx big" id="s2aq" style="top:470px;font-size:520px;color:var(--yellow);line-height:1">?</div>
+ <div class="abs cx big" id="s2at" style="top:1150px;font-size:112px;color:#fff">এর কারণ কী জানেন?</div>
+</div>
+
+<!-- ============ SCENE 2b : CROWD ============ -->
+<div class="scene" id="s2b" style="background:#DDE3EB">
+ <div class="layer" id="s2bcam"><svg width="1080" height="1920" viewBox="0 0 1080 1920" id="s2bsvg"></svg></div>
+ <div class="layer" id="s2bspot"></div>
+ <svg width="1080" height="1920" viewBox="0 0 1080 1920" id="s2bx"></svg>
+ <div class="abs pill" id="s2bchip" style="right:50px;top:110px;background:var(--yellow);color:var(--ink);font-size:52px">👥 <span>১০০+ স্টুডেন্ট</span></div>
+ <div class="abs cx" id="s2btxt" style="top:1520px">
+  <div class="card big" style="display:inline-block;padding:26px 50px;font-size:86px;line-height:1.25">বড় ব্যাচ =<br><span style="color:var(--red)">পার্সোনাল কেয়ারের অভাব!</span></div>
+ </div>
+</div>
+
+<!-- ============ SCENE 2c : ROTE ============ -->
+<div class="scene" id="s2c" style="background:#EEF1F6">
+ <svg width="1080" height="1920" viewBox="0 0 1080 1920" id="s2csvg"></svg>
+ <div class="abs cx big" id="s2ct1" style="top:190px;font-size:110px">শুধু <span class="hlblue">মুখস্থ</span>...</div>
+ <div class="abs cx big" id="s2ct2" style="top:1520px;font-size:100px">বেসিক <span class="hlred">ক্লিয়ার হচ্ছে না!</span></div>
+</div>
+
+<!-- ============ SCENE 3 : LOGO ============ -->
+<div class="scene" id="s3" style="background:radial-gradient(circle at 50% 42%,#fff 0,#F3F8FE 45%,#DCEAF8 100%)">
+ <svg width="1080" height="1920" viewBox="0 0 1080 1920" id="s3rays"></svg>
+ <div class="abs cx" id="s3chip" style="top:200px"><span class="pill" style="background:var(--blue);color:#fff;font-size:54px">✔ সমস্যার সমাধান</span></div>
+ <div class="abs" id="s3ring" style="left:240px;top:420px;width:600px;height:600px;border-radius:50%;border:10px solid #3B74B9"></div>
+ <div class="abs" id="s3emb" style="left:265px;top:400px;width:550px;height:635px">
+  <img src="emblem.png" style="width:100%;height:100%">
+  <div id="s3shine" style="position:absolute;inset:0;-webkit-mask:url(emblem.png) center/100% 100% no-repeat;background:linear-gradient(105deg,transparent 40%,rgba(255,255,255,.95) 50%,transparent 60%);background-size:300% 100%"></div>
+ </div>
+ <img class="abs" id="s3word" src="wordmark.png" style="left:345px;top:1085px;width:390px">
+ <div class="abs cx" id="s3tag" style="top:1365px;font-family:Pop;font-weight:700;font-size:54px;color:var(--navy);letter-spacing:10px">SPRIHA EDUCATION CARE</div>
+ <div class="abs" id="s3line" style="left:240px;top:1460px;width:600px;height:8px;border-radius:4px;background:linear-gradient(90deg,#1F65AD,#FFC72C)"></div>
+</div>
+
+<!-- ============ SCENE 4 : SOLUTION CLASSROOM ============ -->
+<div class="scene" id="s4" style="background:#F3F7FC">
+ <div class="layer" id="s4cam"><svg width="1080" height="1920" viewBox="0 0 1080 1920" id="s4svg"></svg></div>
+ <div class="abs pill" id="s4tag" style="left:735px;top:300px;background:var(--navy);color:#fff;font-size:40px;padding:12px 28px">🎓 <span class="pop">BUET</span> মেন্টর</div>
+ <div class="abs pill" id="s4count" style="left:50px;top:885px;background:var(--yellow);color:var(--ink);font-size:46px">👥 মাত্র ১৫-২০ জন</div>
+ <div class="abs pill" id="s4b1" style="left:150px;top:1015px;background:#fff;color:var(--green);font-size:38px;box-shadow:0 10px 30px rgba(0,0,0,.15)">বুঝেছি! 👍</div>
+ <div class="abs pill" id="s4b2" style="left:640px;top:1100px;background:#fff;color:var(--green);font-size:38px;box-shadow:0 10px 30px rgba(0,0,0,.15)">এবার ক্লিয়ার! 💡</div>
+ <div class="abs cx" id="s4txt" style="top:1530px">
+  <div class="card" style="display:inline-block;padding:22px 46px 30px;width:900px;box-sizing:border-box">
+   <div class="big" id="s4l1" style="font-size:64px;color:#7A8698"><span id="s4strike" style="position:relative;display:inline-block">মুখস্থ নয়<i id="s4strk" style="position:absolute;left:-6px;right:-6px;top:52%;height:9px;background:var(--red);border-radius:5px;transform-origin:left"></i></span>,</div>
+   <div class="big" id="s4l2" style="font-size:80px;line-height:1.2"><span style="color:var(--blue)">কনসেপ্ট ক্লিয়ার</span> + <span style="color:var(--green)">পার্সোনাল কেয়ার!</span></div>
+  </div>
+ </div>
+</div>
+
+<!-- ============ SCENE 5 : FEATURES ============ -->
+<div class="scene" id="s5" style="background:linear-gradient(170deg,#2A73BD 0%,#1F65AD 40%,#0B2A52 100%)">
+ <svg width="1080" height="1920" viewBox="0 0 1080 1920" id="s5bg"></svg>
+ <div class="abs cx big" id="s5h" style="top:250px;font-size:110px;color:#fff">কেন <span style="color:var(--yellow)">স্পৃহা</span>?</div>
+ <div id="s5cards"></div>
+ <div class="abs cx" id="s5foot" style="top:1560px"><span class="pill" style="background:var(--yellow);color:var(--navy);font-size:58px;padding:18px 54px">⭐ আপনার সন্তানের জন্য সেরা যত্ন</span></div>
+</div>
+
+<!-- ============ SCENE 5b : RELIEF ============ -->
+<div class="scene" id="s5b" style="background:radial-gradient(circle at 50% 60%,#FFFDF5 0,#FFF3D0 60%,#FFE39A 100%)">
+ <svg width="1080" height="1920" viewBox="0 0 1080 1920" id="s5bsvg"></svg>
+ <div class="abs cx big" id="s5bt1" style="top:170px;font-size:92px">সন্তানের ভবিষ্যৎ নিয়ে</div>
+ <div class="abs cx big" id="s5bt2" style="top:300px;font-size:116px;color:var(--green)">আর চিন্তা নয়!</div>
+ <div class="abs card" id="s5bcard" style="left:560px;top:820px;width:330px;padding:18px 0 22px;text-align:center;border:6px solid var(--yellow)">
+  <div style="font-size:40px;font-weight:700;color:var(--blue)">রেজাল্ট</div>
+  <div class="pop" style="font-size:96px;font-weight:800;color:var(--green);line-height:1.05">A+</div>
+  <div class="pop" style="font-size:40px;font-weight:700;color:var(--ink)">GPA 5.00 ★</div>
+ </div>
+</div>
+
+<!-- ============ SCENE 6 : ADMISSION ============ -->
+<div class="scene" id="s6" style="background:linear-gradient(170deg,#1F65AD,#0B2A52)">
+ <svg width="1080" height="1920" viewBox="0 0 1080 1920" id="s6svg"></svg>
+ <div class="abs cx big" id="s6t0" style="top:330px;font-size:84px;color:#fff">স্পৃহায় এখন</div>
+ <div class="abs cx" id="s6rib" style="top:520px">
+  <div class="big" style="display:inline-block;background:var(--yellow);color:var(--navy);font-size:170px;padding:10px 70px 0;border-radius:30px;box-shadow:0 30px 70px rgba(0,0,0,.35)">ভর্তি চলছে!</div>
+ </div>
+ <div class="abs cx" id="s6c1" style="top:930px"><span class="pill card" style="font-size:72px;padding:22px 56px;color:var(--navy)">✅ নতুন <span class="pop" style="font-weight:800;color:var(--blue)">SSC</span> ব্যাচ</span></div>
+ <div class="abs cx" id="s6c2" style="top:1120px"><span class="pill card" style="font-size:72px;padding:22px 56px;color:var(--navy)">✅ নতুন <span class="pop" style="font-weight:800;color:var(--blue)">HSC</span> ব্যাচ</span></div>
+ <div class="abs cx" id="s6c3" style="top:1380px"><span class="pill" style="background:var(--red);color:#fff;font-size:60px;padding:16px 50px">⏳ আসন সীমিত!</span></div>
+</div>
+
+<!-- ============ SCENE 7 : CTA ============ -->
+<div class="scene" id="s7" style="background:radial-gradient(circle at 50% 45%,#FFFFFF 0,#EEF5FD 55%,#D5E6F8 100%)">
+ <svg width="1080" height="1920" viewBox="0 0 1080 1920" id="s7svg"></svg>
+ <img class="abs" id="s7logo" src="logo.png" style="left:374px;top:110px;height:520px">
+ <div class="abs cx big" id="s7t1" style="top:150px;font-size:104px;color:var(--navy)">আজই <span style="color:var(--blue)">ফ্রি ক্লাসে</span> পাঠান!</div>
+ <div class="abs" id="s7badge" style="left:190px;top:470px;width:700px;height:700px">
+  <svg width="700" height="700" viewBox="-350 -350 700 700" id="s7star"></svg>
+  <div class="abs cx" style="top:205px;font-family:Pop;font-weight:800;font-size:132px;line-height:1;color:var(--navy)">FREE</div>
+  <div class="abs cx" style="top:335px;font-family:Pop;font-weight:800;font-size:96px;line-height:1;color:#fff;letter-spacing:4px">CLASS</div>
+  <div class="abs cx" style="top:488px;font-weight:700;font-size:50px;color:var(--navy)">সম্পূর্ণ ফ্রি</div>
+ </div>
+ <div class="abs cx" id="s7v1" style="top:1260px"><span class="pill card" style="font-size:62px;padding:20px 50px">১. আগে নিজে <b style="color:var(--blue)">যাচাই করুন</b></span></div>
+ <div class="abs cx" id="s7v2" style="top:1430px"><span class="pill card" style="font-size:62px;padding:20px 50px">২. তারপর <b style="color:var(--green)">সিদ্ধান্ত নিন</b> ✅</span></div>
+ <!-- phone block -->
+ <div class="abs cx big" id="s7seat" style="top:930px;font-size:66px;color:var(--navy)">সিট বুক করতে এখনই কল করুন</div>
+ <div class="abs" id="s7phone" style="left:70px;top:1035px;width:940px;height:230px;border-radius:44px;background:linear-gradient(135deg,#2A73BD,#0B2A52);box-shadow:0 30px 70px rgba(11,42,82,.35);display:flex;align-items:center">
+  <div id="s7ph" style="width:160px;height:160px;margin-left:36px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center">
+   <svg width="96" height="96" viewBox="0 0 24 24" style="position:static"><path fill="#1FA463" d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1z"/></svg>
+  </div>
+  <div style="flex:1;text-align:center;color:#fff;font-family:Pop;font-weight:800;font-size:92px;letter-spacing:1px;white-space:nowrap;margin-right:30px">01341-629475</div>
+ </div>
+ <div class="abs cx" id="s7btn" style="top:1320px">
+  <span class="pill" id="s7btnin" style="background:var(--green);color:#fff;font-size:70px;padding:24px 80px;box-shadow:0 20px 50px rgba(31,164,99,.45)">📞 এখনই কল করুন</span>
+ </div>
+ <svg width="1080" height="1920" viewBox="0 0 1080 1920" id="s7hand"></svg>
+ <div class="abs cx" id="s7addr" style="top:1560px">
+  <span class="pill card" style="font-size:66px;padding:22px 56px;color:var(--navy)"><span id="s7pin" style="display:inline-block">📍</span> উত্তরা শাখা, ঢাকা</span>
+ </div>
+ <div class="abs cx" id="s7foot" style="top:1760px;font-weight:600;font-size:44px;color:#4A5B75">অথবা সরাসরি চলে আসুন — আপনার সন্তানের জন্য</div>
+</div>
+
+<!-- persistent logo bug -->
+<div class="abs" id="bug" style="left:40px;top:40px;width:200px;height:250px;border-radius:30px;background:rgba(255,255,255,.92);box-shadow:0 10px 30px rgba(11,42,82,.15);display:none">
+ <img src="logo.png" style="position:absolute;left:47px;top:18px;height:214px">
+</div>
+<!-- transition overlays -->
+<div class="abs" id="wipe" style="inset:0;display:none"></div>
+<div class="abs" id="flash" style="inset:0;background:#fff;opacity:0;pointer-events:none"></div>
+</div>
+
+<script>
+// ---------- utils ----------
+const OFF=0.3;               // voice-over start offset (s)
+const c=x=>x+OFF;            // cue in VO-time -> video time
+const DUR=57.6;
+const $=id=>document.getElementById(id);
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lerp=(a,b,p)=>a+(b-a)*p;
+const E={
+ lin:t=>t,
+ out:t=>1-Math.pow(1-t,3),
+ out5:t=>1-Math.pow(1-t,5),
+ in:t=>t*t*t,
+ io:t=>t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2,
+ expo:t=>t>=1?1:1-Math.pow(2,-10*t),
+ back:t=>{const c1=1.70158,c3=c1+1;return 1+c3*Math.pow(t-1,3)+c1*Math.pow(t-1,2)},
+ back2:t=>{const c1=2.6,c3=c1+1;return 1+c3*Math.pow(t-1,3)+c1*Math.pow(t-1,2)},
+ el:t=>t<=0?0:t>=1?1:Math.pow(2,-10*t)*Math.sin((t*10-.75)*(2*Math.PI)/3)+1,
+};
+const P=(t,a,d,e=E.out)=>e(cl((t-a)/d));
+function st(el,o){
+ if(typeof el==='string')el=$(el);
+ let tr='';
+ if(o.x!==undefined||o.y!==undefined)tr+=`translate(${(o.x||0).toFixed(2)}px,${(o.y||0).toFixed(2)}px) `;
+ if(o.r)tr+=`rotate(${o.r.toFixed(2)}deg) `;
+ if(o.s!==undefined)tr+=`scale(${o.s.toFixed(4)}) `;
+ if(o.sx!==undefined||o.sy!==undefined)tr+=`scale(${(o.sx??1).toFixed(4)},${(o.sy??1).toFixed(4)}) `;
+ el.style.transform=tr;
+ if(o.o!==undefined)el.style.opacity=cl(o.o).toFixed(3);
+ if(o.blur!==undefined)el.style.filter=o.blur>0.05?`blur(${o.blur.toFixed(2)}px)`:'none';
+ if(o.clip!==undefined)el.style.clipPath=o.clip;
+ if(o.d!==undefined)el.style.display=o.d?'':'none';
+}
+const show=(id,t,a,b)=>{const v=t>=a&&t<b;$(id).style.display=v?'block':'none';return v};
+// kinetic text: split into word spans
+function prepKT(el){
+ const out=[];
+ [...el.childNodes].forEach(n=>{
+  if(n.nodeType===3){
+   n.textContent.split(/(\s+)/).forEach(w=>{ if(!w)return; if(/^\s+$/.test(w)){out.push(document.createTextNode(w));return;}
+    const s=document.createElement('span');s.className='w';s.textContent=w;out.push(s);});
+  } else { const s=document.createElement('span');s.className='w';s.appendChild(n.cloneNode(true));out.push(s);}
+ });
+ el.innerHTML='';out.forEach(n=>el.appendChild(n));
+}
+function kin(id,t,a,{st:stg=.08,d=.55,dy=70,ease=E.back}={}){
+ const ws=$(id).querySelectorAll(':scope > .w');
+ ws.forEach((w,i)=>{const p=P(t,a+i*stg,d,ease);const q=cl((t-a-i*stg)/(d*.6));
+  st(w,{y:(1-p)*dy,o:q,blur:(1-q)*10,s:lerp(.85,1,cl(p))});});
+}
+// seeded random
+let seed=7;const rnd=()=>{seed=(seed*16807)%2147483647;return (seed-1)/2147483646};
+
+// ---------- character builders ----------
+const SK='#B97A50',SK2='#A86D45',HR='#1d1717';
+function eyes(expr,k=1){
+ if(expr==='happy')return `<path d="M${-32*k},${-2*k} q${10*k},${-14*k} ${20*k},0 M${12*k},${-2*k} q${10*k},${-14*k} ${20*k},0" stroke="#2a1a14" stroke-width="${5*k}" fill="none" stroke-linecap="round"/>`;
+ return `<g class="a blink"><ellipse cx="${-22*k}" cy="0" rx="${6.5*k}" ry="${8*k}" fill="#2a1a14"/><ellipse cx="${22*k}" cy="0" rx="${6.5*k}" ry="${8*k}" fill="#2a1a14"/></g>`;
+}
+function brows(expr,k=1){
+ if(expr==='worried'||expr==='stress')return `<path d="M${-40*k},${-20*k} L${-12*k},${-30*k} M${12*k},${-30*k} L${40*k},${-20*k}" stroke="${HR}" stroke-width="${6*k}" stroke-linecap="round"/>`;
+ if(expr==='confused')return `<path d="M${-40*k},${-24*k} L${-12*k},${-22*k} M${12*k},${-36*k} Q${26*k},${-44*k} ${40*k},${-34*k}" stroke="${HR}" stroke-width="${6*k}" stroke-linecap="round" fill="none"/>`;
+ return `<path d="M${-40*k},${-26*k} Q${-26*k},${-34*k} ${-12*k},${-26*k} M${12*k},${-26*k} Q${26*k},${-34*k} ${40*k},${-26*k}" stroke="${HR}" stroke-width="${6*k}" stroke-linecap="round" fill="none"/>`;
+}
+function mouth(expr,k=1){
+ if(expr==='happy')return `<path d="M${-24*k},${26*k} Q0,${56*k} ${24*k},${26*k} Z" fill="#7a2b2b"/><path d="M${-18*k},${28*k} L${18*k},${28*k} L${15*k},${34*k} L${-15*k},${34*k}Z" fill="#fff"/>`;
+ if(expr==='stress')return `<path d="M${-20*k},${34*k} q${7*k},${-8*k} ${13*k},0 q${7*k},${8*k} ${13*k},0 q${7*k},${-8*k} ${14*k},0" stroke="#5a2a20" stroke-width="${5*k}" fill="none" stroke-linecap="round"/>`;
+ if(expr==='confused')return `<path d="M${-16*k},${36*k} L${18*k},${28*k}" stroke="#5a2a20" stroke-width="${5*k}" stroke-linecap="round"/>`;
+ return `<path d="M${-18*k},${36*k} Q0,${24*k} ${18*k},${36*k}" stroke="#5a2a20" stroke-width="${5*k}" fill="none" stroke-linecap="round"/>`;
+}
+// boy, origin = head centre, head r=60
+function boy(expr,{shirt='#F7F9FC',arm=''}={}){
+ return `<g>
+ <path d="M-118,270 L-108,125 Q-100,78 -42,72 L42,72 Q100,78 108,125 L118,270 Z" fill="${shirt}" stroke="#CBD5E1" stroke-width="3"/>
+ <path d="M-30,72 L0,110 L30,72" fill="none" stroke="#CBD5E1" stroke-width="6" stroke-linejoin="round"/>
+ <rect x="42" y="130" width="34" height="40" rx="6" fill="#1F65AD"/>
+ <rect x="-18" y="38" width="36" height="42" fill="${SK2}"/>
+ <ellipse cx="-60" cy="4" rx="10" ry="15" fill="${SK2}"/><ellipse cx="60" cy="4" rx="10" ry="15" fill="${SK2}"/>
+ <circle r="60" fill="${SK}"/>
+ <path d="M-63,-2 Q-70,-74 0,-76 Q66,-76 64,-6 Q52,-42 22,-46 Q-6,-30 -36,-42 Q-56,-32 -63,-2Z" fill="${HR}"/>
+ ${brows(expr,.9)}${eyes(expr,.9)}${mouth(expr,.9)}
+ ${arm}</g>`;
+}
+// mother, origin = feet centre; head centre at (0,-710)
+function mom(expr){
+ return `<g>
+ <circle cx="44" cy="-752" r="40" fill="${HR}"/>
+ <path d="M-118,-440 L118,-440 L170,0 L-170,0 Z" fill="#2F8F8A"/>
+ <path d="M-40,-300 L-70,-10 M0,-300 L-4,-10 M40,-300 L62,-10" stroke="#257873" stroke-width="7"/>
+ <rect x="-170" y="-30" width="340" height="30" fill="#D9A93B"/>
+ <path d="M-96,-606 Q0,-636 96,-606 L120,-430 L-120,-430 Z" fill="#A63446"/>
+ <path d="M-98,-608 L30,-622 L140,-420 L84,-260 L-30,-420 Z" fill="#33A19B"/>
+ <path d="M30,-622 L140,-420 L84,-260" fill="none" stroke="#D9A93B" stroke-width="12" stroke-linejoin="round"/>
+ <rect x="-22" y="-656" width="44" height="54" fill="${SK2}"/>
+ <path d="M-96,-596 Q-150,-500 -70,-462" stroke="#A63446" stroke-width="46" stroke-linecap="round" fill="none"/>
+ <path d="M-70,-462 L-20,-470" stroke="${SK}" stroke-width="34" stroke-linecap="round"/>
+ <path d="M96,-596 Q130,-520 70,-470" stroke="#33A19B" stroke-width="46" stroke-linecap="round" fill="none"/>
+ <path d="M70,-470 L24,-474" stroke="${SK}" stroke-width="34" stroke-linecap="round"/>
+ <g transform="translate(0,-520) rotate(-6)"><rect x="-62" y="-70" width="124" height="150" rx="8" fill="#fff" stroke="#9fb0c6" stroke-width="4"/><rect x="-62" y="-70" width="124" height="28" rx="6" fill="#1F65AD"/><path d="M-40,-20 h80 M-40,5 h80 M-40,30 h55" stroke="#c4cdd8" stroke-width="7"/><text x="10" y="64" font-family="Pop" font-weight="800" font-size="30" fill="#E23B3B">C</text></g>
+ <circle cx="-22" cy="-470" r="20" fill="${SK}"/><circle cx="22" cy="-474" r="20" fill="${SK}"/>
+ <ellipse cx="-70" cy="-704" rx="11" ry="16" fill="${SK2}"/><ellipse cx="70" cy="-704" rx="11" ry="16" fill="${SK2}"/>
+ <ellipse cx="0" cy="-708" rx="70" ry="78" fill="${SK}"/>
+ <path d="M-74,-700 Q-80,-792 0,-794 Q80,-792 74,-700 Q66,-760 4,-764 L0,-748 L-4,-764 Q-66,-760 -74,-700Z" fill="${HR}"/>
+ <path d="M30,-786 Q50,-770 60,-740" stroke="#8d8d8d" stroke-width="5" fill="none"/>
+ <g transform="translate(0,-708)">${brows(expr)}${eyes(expr)}${mouth(expr)}
+ <g fill="none" stroke="#3a3a3a" stroke-width="4"><circle cx="-23" cy="0" r="18"/><circle cx="23" cy="0" r="18"/><path d="M-5,0 h10"/></g></g>
+ </g>`;
+}
+function backKid(x,y,r,shirt,type){
+ let s=`<g><path d="M${x-r*1.75},${y+r*3} Q${x-r*1.7},${y+r*0.95} ${x},${y+r*0.95} Q${x+r*1.7},${y+r*0.95} ${x+r*1.75},${y+r*3} Z" fill="${shirt}"/>`;
+ if(type==='hijab'){
+  const hc=['#F2F2F2','#6B5B95','#2F8F8A','#C76B98'][Math.floor(rnd()*4)];
+  s+=`<path d="M${x-r*1.25},${y+r*1.7} Q${x-r*1.35},${y-r*1.15} ${x},${y-r*1.15} Q${x+r*1.35},${y-r*1.15} ${x+r*1.25},${y+r*1.7} Z" fill="${hc}"/>`;
+ } else {
+  s+=`<rect x="${x-r*.32}" y="${y+r*.5}" width="${r*.64}" height="${r*.6}" fill="${SK2}"/><ellipse cx="${x-r*.97}" cy="${y+r*.1}" rx="${r*.2}" ry="${r*.3}" fill="${SK2}"/><ellipse cx="${x+r*.97}" cy="${y+r*.1}" rx="${r*.2}" ry="${r*.3}" fill="${SK2}"/><circle cx="${x}" cy="${y}" r="${r}" fill="${HR}"/>`;
+  if(type==='braid')s+=`<path d="M${x},${y+r*.6} q${-r*.25},${r*.5} 0,${r} q${r*.25},${r*.5} 0,${r}" stroke="${HR}" stroke-width="${r*.42}" stroke-linecap="round" fill="none"/>`;
+ }
+ return s+'</g>';
+}
+
+// ---------- build static art ----------
+function build(){
+ // ===== S1 =====
+ let s=`
+ <defs><linearGradient id="g1wall" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E9EEF4"/><stop offset="1" stop-color="#D3DBE6"/></linearGradient>
+ <radialGradient id="g1lamp" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#FFE7A3" stop-opacity=".85"/><stop offset="1" stop-color="#FFE7A3" stop-opacity="0"/></radialGradient></defs>
+ <rect width="1080" height="1920" fill="url(#g1wall)"/>
+ <rect y="1560" width="1080" height="360" fill="#C3CCD8"/>
+ <g id="s1win"><rect x="70" y="640" width="250" height="300" rx="10" fill="#8FC3F0" id="s1sky"/>
+  <circle id="s1sun" cx="200" cy="740" r="42" fill="#FFD25A"/>
+  <path id="s1moon" d="M215,700 a50,50 0 1,0 40,70 a40,40 0 1,1 -40,-70z" fill="#F6F1D2"/>
+  <rect x="70" y="640" width="250" height="300" rx="10" fill="none" stroke="#fff" stroke-width="14"/><path d="M195,640 v300 M70,790 h250" stroke="#fff" stroke-width="10"/></g>
+ <g transform="translate(940,720)"><circle r="62" fill="#fff" stroke="#2c3e57" stroke-width="8"/>
+  <line id="s1hh" x1="0" y1="0" x2="0" y2="-30" stroke="#2c3e57" stroke-width="8" stroke-linecap="round"/>
+  <line id="s1mh" x1="0" y1="0" x2="0" y2="-46" stroke="#E23B3B" stroke-width="5" stroke-linecap="round"/><circle r="6" fill="#2c3e57"/></g>
+ <circle cx="900" cy="1000" r="260" fill="url(#g1lamp)" id="s1glow"/>
+ <!-- student -->
+ <g id="s1kid" transform="translate(860,1015)">${boy('stress',{arm:`<path id="s1arm" d="M80,100 Q120,10 40,-62" stroke="#F7F9FC" stroke-width="40" stroke-linecap="round" fill="none"/><circle cx="34" cy="-64" r="24" fill="${SK}"/>`})}
+  <path id="s1sweat" d="M-70,-30 q-10,18 0,26 q10,-8 0,-26z" fill="#7cc6ff"/></g>
+ <!-- desk -->
+ <rect x="500" y="1238" width="560" height="34" rx="8" fill="#8B5E3C"/>
+ <rect x="530" y="1272" width="26" height="300" fill="#6E4A2F"/><rect x="1004" y="1272" width="26" height="300" fill="#6E4A2F"/>
+ <path d="M1010,1238 L1010,1120 L1040,1070" stroke="#2c3e57" stroke-width="12" fill="none" stroke-linecap="round"/><path d="M1010,1040 L1085,1070 L1065,1110 Z" fill="#2c3e57"/>`;
+ // book stack
+ const bc=['#E25B45','#3B74B9','#F2B134','#2F8F8A','#8E6BBF','#E07A9E','#5AA469','#1F65AD','#D9534F','#F2B134','#3B74B9'];
+ let by=1238;
+ for(let i=0;i<11;i++){const h=34+((i*7)%3)*8, w=200-((i*37)%5)*12, x=545+((i*29)%4)*6-(w-200)/2;
+  by-=h; s+=`<g class="s1book" data-i="${i}"><rect x="${x}" y="${by}" width="${w}" height="${h-3}" rx="5" fill="${bc[i]}"/><rect x="${x+w-26}" y="${by+5}" width="10" height="${h-13}" fill="#fff" opacity=".55"/></g>`;}
+ s+=`<g id="s1mom" transform="translate(300,1640)">${mom('worried')}</g>
+ <g id="s1scrib" opacity="0"><path d="M690,820 c30,-40 60,30 90,-10 s50,30 80,-15" stroke="#2c3e57" stroke-width="6" fill="none" stroke-linecap="round"/>
+ <path d="M700,790 c25,-25 45,20 70,0 s45,20 70,-5 s30,15 50,0" stroke="#2c3e57" stroke-width="5" fill="none" stroke-linecap="round"/></g>`;
+ $('s1svg').innerHTML=s;
+
+ // ===== S2a =====
+ s='';
+ for(let i=0;i<24;i++){const a=i*15*Math.PI/180;s+=`<path d="M540,1000 L${540+1600*Math.cos(a)},${1000+1600*Math.sin(a)} L${540+1600*Math.cos(a+.13)},${1000+1600*Math.sin(a+.13)}Z" fill="#fff" opacity=".035"/>`;}
+ $('s2asvg').innerHTML=`<g id="s2arays" class="a">${s}</g>`;
+
+ // ===== S2b crowd =====
+ s=`<rect width="1080" height="1920" fill="#DDE3EB"/><rect y="0" width="1080" height="470" fill="#E8EDF3"/>
+ <rect x="380" y="235" width="320" height="170" rx="8" fill="#2F4F3E" stroke="#8B5E3C" stroke-width="10"/>
+ <path d="M410,280 h120 M410,310 h200 M410,340 h90" stroke="#dfe9e2" stroke-width="5" opacity=".8"/>
+ <g transform="translate(735,330) scale(.42)">${boy('normal',{shirt:'#3B74B9'})}</g>
+ <g id="s2bbub" opacity="0"><rect x="770" y="230" width="120" height="56" rx="28" fill="#fff"/><text x="830" y="270" text-anchor="middle" font-size="36" font-family="Pop" fill="#555">...</text></g>`;
+ seed=11;
+ const shirts=['#F7F9FC','#EEF3F9','#D7E6F7','#F7F9FC','#E9EEF5'];
+ let n=0;
+ for(let row=0;row<10;row++){
+  const r=13+row*3.7, y=500+row*(52+row*10.5), sp=r*2.75, cnt=Math.floor(1060/sp);
+  const x0=(1080-(cnt-1)*sp)/2;
+  for(let i=0;i<cnt;i++){
+   if(row===6&&i===Math.floor(cnt*0.62)){s+=`<g id="s2bconf" data-x="${x0+i*sp}" data-y="${y}" data-r="${r}"></g>`;n++;continue;}
+   const rr=rnd(); const ty=rr<.22?'hijab':rr<.32?'braid':'';
+   s+=backKid(x0+i*sp+(rnd()-.5)*8,y+(rnd()-.5)*8,r*(0.92+rnd()*.16),shirts[Math.floor(rnd()*shirts.length)],ty);n++;
+  }
+ }
+ $('s2bsvg').innerHTML=s;
+ const cf=$('s2bconf');const cx=+cf.dataset.x,cy=+cf.dataset.y,cr=+cf.dataset.r;
+ cf.outerHTML=`<g id="s2bkid" transform="translate(${cx},${cy}) scale(${cr/60*1.12})">${boy('confused')}</g>`;
+ window.CONF={x:cx,y:cy,r:cr};
+ // red X + q marks + dashed line
+ $('s2bx').innerHTML=`
+ <path id="s2bdash" d="M735,420 C760,700 ${cx+60},${cy-300} ${cx},${cy-cr*1.6}" stroke="#E23B3B" stroke-width="7" stroke-dasharray="18 16" fill="none" opacity="0"/>
+ <g id="s2bfar" opacity="0"><rect x="${(735+cx)/2+20}" y="${(420+cy)/2-60}" width="250" height="74" rx="37" fill="#E23B3B"/><text x="${(735+cx)/2+145}" y="${(420+cy)/2-10}" text-anchor="middle" font-family="Hind" font-weight="700" font-size="42" fill="#fff">অনেক দূরে!</text></g>
+ <g id="s2bq">${[0,1,2].map(i=>`<text class="a q" x="${cx-70+i*70}" y="${cy-cr*2}" text-anchor="middle" font-family="Pop" font-weight="800" font-size="${56+i*8}" fill="#E23B3B" stroke="#fff" stroke-width="5" paint-order="stroke">?</text>`).join('')}</g>
+ <g id="s2bX" class="a" opacity="0"><path d="M360,640 L720,1000 M720,640 L360,1000" stroke="#fff" stroke-width="96" stroke-linecap="round"/><path d="M360,640 L720,1000 M720,640 L360,1000" stroke="#E23B3B" stroke-width="66" stroke-linecap="round"/></g>`;
+
+ // ===== S2c head =====
+ $('s2csvg').innerHTML=`
+ <g transform="translate(270,560) scale(1.38)">
+  <path d="M120,480 L120,400 Q40,370 40,250 Q40,60 220,50 Q370,45 385,200 L392,215 Q405,240 420,265 Q428,278 410,282 L395,285 L398,320 Q402,345 380,350 L370,352 Q375,390 340,395 L280,400 L280,480 Z" fill="#C9D6E6"/>
+  <g transform="translate(110,95)">
+   <rect x="0" y="0" width="100" height="90" rx="14" fill="#3B74B9"/><rect x="108" y="0" width="100" height="90" rx="14" fill="#5B8FD0"/>
+   <rect x="0" y="98" width="100" height="90" rx="14" fill="#5B8FD0"/>
+   <rect id="s2chole" x="108" y="98" width="100" height="90" rx="14" fill="#EEF1F6" stroke="#E23B3B" stroke-width="6" stroke-dasharray="14 10"/>
+   <g id="s2cpiece" class="a"><rect x="108" y="98" width="100" height="90" rx="14" fill="#3B74B9"/><circle cx="108" cy="143" r="16" fill="#3B74B9"/></g>
+   <circle cx="100" cy="45" r="16" fill="#3B74B9"/><circle cx="50" cy="90" r="16" fill="#3B74B9"/><circle cx="158" cy="90" r="16" fill="#5B8FD0"/>
+  </g>
+ </g>
+ <g id="s2cflow" font-family="Pop" font-weight="700" fill="#1F65AD">
+  ${['a² + b² = c²','F = ma','H₂O','v = u + at','sin²θ+cos²θ=1','PV = nRT'].map((f,i)=>`<text class="fl" x="0" y="0" font-size="44">${f}</text>`).join('')}
+ </g>`;
+
+ // ===== S3 rays =====
+ s='';for(let i=0;i<20;i++){const a=i*18*Math.PI/180;s+=`<path d="M540,730 L${540+1500*Math.cos(a)},${730+1500*Math.sin(a)} L${540+1500*Math.cos(a+.16)},${730+1500*Math.sin(a+.16)}Z" fill="#CFE2F7" opacity=".45"/>`;}
+ let sp='';seed=3;for(let i=0;i<26;i++){sp+=`<circle class="sp" data-a="${rnd()*6.283}" data-d="${260+rnd()*360}" data-s="${.5+rnd()}" r="${4+rnd()*9}" fill="${rnd()<.5?'#3B74B9':'#FFC72C'}"/>`;}
+ $('s3rays').innerHTML=`<g id="s3r" class="a">${s}</g><g id="s3sp">${sp}</g>`;
+
+ // ===== S4 classroom =====
+ s=`<rect width="1080" height="1920" fill="#F3F7FC"/><rect y="1050" width="1080" height="870" fill="#E1E9F4"/>
+ <path d="M1080,0 L1080,520 L560,1500 L300,1500 L760,0Z" fill="#fff" opacity=".45"/>
+ <rect x="70" y="330" width="680" height="440" rx="14" fill="#fff" stroke="#9FB3CB" stroke-width="14"/>
+ <rect x="70" y="770" width="680" height="16" fill="#9FB3CB"/>
+ <path id="s4tri" d="M150,700 L430,700 L150,420 Z" fill="none" stroke="#1F65AD" stroke-width="9" stroke-linejoin="round" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/>
+ <path id="s4sq" d="M150,670 h30 v30" fill="none" stroke="#1F65AD" stroke-width="5"/>
+ <g font-family="Pop" font-weight="700" font-size="40" fill="#E23B3B" id="s4lbl"><text x="110" y="575">a</text><text x="280" y="745">b</text><text x="305" y="545">c</text></g>
+ <text id="s4eq" x="470" y="520" font-family="Pop" font-weight="800" font-size="50" fill="#0B2A52">a²+b²=c²</text>
+ <g id="s4bulb" class="a" transform="translate(600,640)"><circle r="70" fill="#FFE27A" opacity=".5" id="s4glow"/><path d="M-30,10 a38,38 0 1,1 60,0 q-12,12 -12,28 h-36 q0,-16 -12,-28z" fill="#FFC72C" stroke="#0B2A52" stroke-width="5"/><rect x="-17" y="42" width="34" height="14" rx="4" fill="#0B2A52"/></g>
+ <g id="s4mentor" transform="translate(900,1080) scale(.82)">
+  <path d="M-80,0 L-60,-330 L60,-330 L80,0 Z" fill="#2c3e57"/>
+  <path d="M-110,-330 L-100,-560 Q-96,-610 -40,-616 L40,-616 Q96,-610 100,-560 L110,-330 Z" fill="#7FB8EA"/>
+  <path d="M-30,-616 L0,-578 L30,-616" fill="none" stroke="#5A9AD6" stroke-width="7"/>
+  <g id="s4parm"><path d="M-96,-590 Q-170,-560 -240,-640" stroke="#7FB8EA" stroke-width="44" stroke-linecap="round" fill="none"/><circle cx="-246" cy="-648" r="24" fill="${SK}"/><rect x="-300" y="-668" width="50" height="14" rx="6" fill="#E23B3B" transform="rotate(-30 -270 -660)"/></g>
+  <path d="M96,-590 Q140,-480 90,-420" stroke="#7FB8EA" stroke-width="44" stroke-linecap="round" fill="none"/><circle cx="88" cy="-410" r="24" fill="${SK}"/>
+  <g transform="translate(0,-700)">
+   <rect x="-20" y="38" width="40" height="50" fill="${SK2}"/>
+   <ellipse cx="-62" cy="4" rx="11" ry="16" fill="${SK2}"/><ellipse cx="62" cy="4" rx="11" ry="16" fill="${SK2}"/>
+   <circle r="64" fill="${SK}"/>
+   <path d="M-66,-4 Q-72,-82 0,-84 Q72,-82 66,-8 Q60,-50 0,-52 Q-56,-50 -66,-4Z" fill="${HR}"/>
+   ${brows('normal',.95)}${eyes('happy',.95)}${mouth('happy',.95)}
+  </g></g>`;
+ seed=5;
+ const rows=[[1010,30,6],[1150,38,6],[1320,48,5]]; let kid=0;
+ rows.forEach(([y,r,cnt],ri)=>{const spc=1080/(cnt+.4);for(let i=0;i<cnt;i++){const x=spc*(i+.7);const rr=rnd();
+  const sh=['#F7F9FC','#D7E6F7','#F7F9FC','#E5EEF9'][Math.floor(rnd()*4)];
+  const hand=(ri===0&&i===2)||(ri===1&&i===4)||(ri===2&&i===1);
+  if(hand)s+=`<g class="hand" data-x="${x+r*1.2}" data-y="${y+r*1.4}"><path d="M${x+r*1.2},${y+r*1.4} L${x+r*1.6},${y-r*1.6}" stroke="${sh}" stroke-width="${r*.6}" stroke-linecap="round"/><circle cx="${x+r*1.6}" cy="${y-r*1.75}" r="${r*.35}" fill="${SK}"/></g>`;
+  s+=backKid(x,y,r,sh,rr<.25?'hijab':rr<.38?'braid':'');kid++;}});
+ $('s4svg').innerHTML=s;
+
+ // ===== S5 cards =====
+ const feats=[
+  ['বুয়েট ও মেডিকেলের মেন্টর','অভিজ্ঞ ও যত্নশীল শিক্ষক','🎓'],
+  ['ছোট ব্যাচে পার্সোনাল কেয়ার','প্রতিটি স্টুডেন্টের দিকে আলাদা নজর','👨‍👩‍👧'],
+  ['নিয়মিত মডেল টেস্ট','ও রিভিশন — দুর্বলতা ধরে উন্নতি','📝']];
+ $('s5cards').innerHTML=feats.map((f,i)=>`
+ <div class="abs card" id="s5c${i}" style="left:50px;top:${500+i*340}px;width:980px;height:290px;display:flex;align-items:center;box-sizing:border-box;padding:0 36px">
+  <div class="s5tick" style="flex:none;width:140px;height:140px;border-radius:50%;background:var(--green);display:flex;align-items:center;justify-content:center;box-shadow:0 12px 30px rgba(31,164,99,.4)">
+   <svg width="90" height="90" viewBox="0 0 90 90" style="position:static"><path class="tk" d="M18,47 L38,66 L74,25" stroke="#fff" stroke-width="13" fill="none" stroke-linecap="round" stroke-linejoin="round" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/></svg></div>
+  <div style="margin-left:34px;flex:1"><div class="big" style="font-size:70px;line-height:1.15;color:var(--navy)">${f[0]}</div><div style="font-size:44px;font-weight:600;color:#5A6B85;margin-top:6px">${f[1]}</div></div>
+ </div>`).join('');
+ s='';seed=9;for(let i=0;i<30;i++)s+=`<circle class="bk" data-x="${rnd()*1080}" data-y="${rnd()*1920}" data-v="${20+rnd()*40}" r="${6+rnd()*26}" fill="#fff" opacity="${.04+rnd()*.08}"/>`;
+ $('s5bg').innerHTML=s;
+
+ // ===== S5b relief =====
+ s=`<ellipse cx="540" cy="1640" rx="520" ry="70" fill="#F2D27A" opacity=".6"/>
+ <g id="s5bmom" transform="translate(330,1650)">${mom('happy').replace(/<g transform="translate\(0,-520\)[\s\S]*?<\/g>\n/,'')}</g>
+ <g id="s5bkid" transform="translate(720,1210) scale(1.15)">${boy('happy',{arm:`<path d="M-90,110 Q-150,40 -150,-60" stroke="#F7F9FC" stroke-width="40" stroke-linecap="round" fill="none"/><circle cx="-150" cy="-70" r="24" fill="${SK}"/><path id="s5barm" d="M90,110 Q140,40 120,-100" stroke="#F7F9FC" stroke-width="40" stroke-linecap="round" fill="none"/><circle cx="118" cy="-112" r="24" fill="${SK}"/>`})}
+  <path d="M-118,270 L118,270 L110,480 L-110,480Z" fill="#26364F"/></g>`;
+ seed=21;let cf2='';for(let i=0;i<60;i++)cf2+=`<rect class="cf" data-x="${rnd()*1080}" data-v="${300+rnd()*500}" data-d="${rnd()*1.2}" data-r="${rnd()*360}" data-w="${(rnd()-.5)*200}" width="${14+rnd()*14}" height="${8+rnd()*8}" fill="${['#1F65AD','#FFC72C','#1FA463','#E23B3B','#3B74B9'][i%5]}"/>`;
+ $('s5bsvg').innerHTML=s+`<g id="s5bcf">${cf2}</g>`;
+
+ // ===== S6 =====
+ s='';for(let i=0;i<24;i++){const a=i*15*Math.PI/180;s+=`<path d="M540,700 L${540+1700*Math.cos(a)},${700+1700*Math.sin(a)} L${540+1700*Math.cos(a+.13)},${700+1700*Math.sin(a+.13)}Z" fill="#fff" opacity=".05"/>`;}
+ seed=33;let cf3='';for(let i=0;i<70;i++)cf3+=`<rect class="cf" data-x="${rnd()*1080}" data-v="${350+rnd()*500}" data-d="${rnd()*1.5}" data-r="${rnd()*360}" data-w="${(rnd()-.5)*240}" width="${14+rnd()*16}" height="${8+rnd()*8}" fill="${['#FFC72C','#fff','#7FB8EA','#1FA463','#FF8A5B'][i%5]}"/>`;
+ $('s6svg').innerHTML=`<g id="s6r" class="a">${s}</g><g id="s6cf">${cf3}</g>`;
+
+ // ===== S7 =====
+ let star='';const N=24;for(let i=0;i<N*2;i++){const a=i*Math.PI/N, rr=i%2?300:340;star+=`${i?'L':'M'}${(rr*Math.cos(a)).toFixed(1)},${(rr*Math.sin(a)).toFixed(1)}`;}
+ $('s7star').innerHTML=`<path d="${star}Z" fill="#FFC72C" stroke="#F29F05" stroke-width="10" stroke-linejoin="round" id="s7sp"/><circle r="262" fill="none" stroke="#fff" stroke-width="8" stroke-dasharray="6 14"/><rect x="-310" y="-20" width="620" height="140" rx="20" fill="#1F65AD"/>`;
+ s='';for(let i=0;i<24;i++){const a=i*15*Math.PI/180;s+=`<path d="M540,820 L${540+1700*Math.cos(a)},${820+1700*Math.sin(a)} L${540+1700*Math.cos(a+.13)},${820+1700*Math.sin(a+.13)}Z" fill="#BFD8F2" opacity=".35"/>`;}
+ $('s7svg').innerHTML=`<g id="s7r" class="a">${s}</g><circle id="s7rip" cx="540" cy="1385" r="10" fill="none" stroke="#1FA463" stroke-width="8" opacity="0"/>`;
+ $('s7hand').innerHTML=`<g id="s7fing" opacity="0"><path d="M0,0 l-8,-64 q-2,-16 12,-17 q13,0 14,15 l4,38 q4,-12 16,-10 q12,3 11,16 q5,-10 16,-7 q11,4 9,17 q6,-7 15,-3 q9,5 6,20 l-10,48 q-6,26 -32,30 l-38,0 q-22,0 -32,-20 l-26,-50 q-6,-14 6,-20 q12,-5 22,8z" fill="#F2C9A7" stroke="#5a3a2a" stroke-width="5" stroke-linejoin="round"/></g>`;
+
+ document.querySelectorAll('#s1t1,#s1t2,#s2at,#s2ct1,#s2ct2,#s5h,#s5bt1,#s5bt2,#s6t0,#s7t1,#s7seat,#s7foot').forEach(prepKT);
+}
+
+// ---------- per-frame ----------
+function confetti(group,t,t0){
+ group.querySelectorAll('.cf').forEach(r=>{const tt=t-t0-+r.dataset.d;if(tt<0){r.setAttribute('opacity',0);return;}
+  const y=-40+tt*+r.dataset.v+tt*tt*120, x=+r.dataset.x+Math.sin(tt*3+ +r.dataset.r)*+r.dataset.w*.3;
+  r.setAttribute('opacity',1);r.setAttribute('transform',`translate(${x},${y}) rotate(${+r.dataset.r+tt*300})`);});
+}
+
+function seek(t){
+ // ===== S1 HOOK  (0 -> 6.35) =====
+ if(show('s1',t,0,c(6.35))){
+  const cam=lerp(1.18,1.04,P(t,0,2.2,E.io))+ (t>c(3)?P(t,c(3),3,E.io)*.03:0);
+  st('s1cam',{s:cam,x:lerp(-120,0,P(t,0,2.2,E.io)),y:lerp(-60,0,P(t,0,2.2,E.io))});
+  $('s1cam').style.transformOrigin='540px 1100px';
+  kin('s1t1',t,0.05,{st:.12});
+  kin('s1t2',t,c(3.05),{st:.14,dy:90});
+  // day->night & clock
+  const dn=P(t,0.2,3.0,E.io);
+  $('s1sky').setAttribute('fill',`rgb(${lerp(143,22,dn)|0},${lerp(195,36,dn)|0},${lerp(240,72,dn)|0})`);
+  $('s1sun').setAttribute('transform',`translate(0,${dn*220})`);$('s1moon').setAttribute('transform',`translate(0,${(1-dn)*220})`);
+  $('s1mh').setAttribute('transform',`rotate(${t*360*1.2})`);$('s1hh').setAttribute('transform',`rotate(${t*30})`);
+  $('s1glow').setAttribute('opacity',(0.25+dn*.75).toFixed(2));
+  document.querySelectorAll('.s1book').forEach(b=>{const i=+b.dataset.i;const p=P(t,0.1+i*.07,.45,E.back);b.setAttribute('transform',`translate(0,${(1-p)*-700})`);b.setAttribute('opacity',cl((t-0.1-i*.07)*6));});
+  $('s1arm').setAttribute('transform',`rotate(${Math.sin(t*5)*3} 80 100)`);
+  $('s1sweat').setAttribute('transform',`translate(0,${((t*1.3)%1)*40})`);$('s1sweat').setAttribute('opacity',(1-((t*1.3)%1)).toFixed(2));
+  $('s1scrib').setAttribute('opacity',cl((t-1)*2)*(.6+.4*Math.sin(t*9)));
+  st('s1mom',{});$('s1mom').setAttribute('transform',`translate(${lerp(-200,300,P(t,0.3,1.0,E.out))},1640)`);
+  // result card
+  const pc=P(t,c(3.4),.6,E.back2);
+  st('s1card',{s:lerp(.2,1,pc),r:lerp(-25,-5,pc),o:cl((t-c(3.4))*5),y:(1-pc)*200});
+  $('s1ring').style.strokeDashoffset=1-P(t,c(4.3),.7,E.io);
+  // exit: whip up
+  const ex=P(t,c(5.95),.4,E.in);
+  st('s1',{y:-ex*400,blur:ex*14});
+ }
+ // ===== S2a WHY (c(5.95) -> c(7.75)) =====
+ if(show('s2a',t,c(5.95),c(7.75))){
+  const w=P(t,c(5.95),.45,E.out5);
+  st('s2a',{clip:`polygon(0 ${100-w*130}%,100% ${130-w*130}%,100% 100%,0 100%)`});
+  $('s2a').style.clipPath=`polygon(0 ${lerp(100,-30,w)}%,100% ${lerp(130,0,w)}%,100% 100%,0 100%)`;
+  const q=P(t,c(6.0),.7,E.el);
+  st('s2aq',{s:lerp(0,1,q),r:lerp(-60,0,q)+Math.sin(t*4)*4});
+  $('s2arays').style.transform=`rotate(${t*12}deg)`;
+  kin('s2at',t,c(6.1),{st:.1});
+  const ex=P(t,c(7.4),.35,E.in);
+  $('s2a').style.opacity=1-ex; st('s2aq',{s:lerp(0,1,q)*(1+ex*6),r:Math.sin(t*4)*4});
+ }
+ // ===== S2b CROWD (c(7.4) -> c(12.75)) =====
+ if(show('s2b',t,c(7.4),c(12.75))){
+  $('s2b').style.opacity=cl((t-c(7.4))/.3);
+  const z=P(t,c(7.45),1.6,E.io);
+  $('s2bcam').style.transformOrigin='560px 330px';
+  const shake=t>c(10.45)&&t<c(10.8)?Math.sin(t*90)*14*(1-(t-c(10.45))/.35):0;
+  st('s2bcam',{s:lerp(2.4,1,z)+P(t,c(9),3.5,E.lin)*.05,x:shake});
+  st('s2bchip',{s:P(t,c(7.9),.5,E.back),o:cl((t-c(7.9))*5)});
+  $('s2bbub').setAttribute('opacity',cl((t-c(7.6))*4));
+  // spotlight on confused kid
+  const sp=P(t,c(8.9),.6);
+  const {x,y,r}=CONF;
+  $('s2bspot').style.background=`radial-gradient(circle at ${x}px ${y+r*.6}px, rgba(0,0,0,0) ${r*3}px, rgba(8,20,40,${.55*sp}) ${r*5}px)`;
+  $('s2bdash').setAttribute('opacity',sp);$('s2bdash').style.strokeDashoffset=-t*60;
+  $('s2bfar').setAttribute('opacity',P(t,c(9.3),.4));
+  document.querySelectorAll('#s2bq .q').forEach((q,i)=>{const p=P(t,c(8.9)+i*.18,.5,E.back);q.style.transform=`translateY(${Math.sin(t*4+i)*10}px) scale(${p})`;q.style.opacity=cl((t-c(8.9)-i*.18)*4);});
+  const xp=P(t,c(10.45),.35,E.back);
+  $('s2bX').setAttribute('opacity',cl((t-c(10.45))*8));$('s2bX').style.transform=`scale(${lerp(2.4,1,xp)}) rotate(${lerp(-20,0,xp)}deg)`;
+  const tp=P(t,c(8.6),.6,E.back);
+  st('s2btxt',{y:(1-tp)*300,o:cl((t-c(8.6))*4),s:t>c(10.45)?1+Math.max(0,.06*Math.sin((t-c(10.45))*10))*(t<c(10.8)?1:0):1});
+  const ex=P(t,c(12.5),.3,E.in);
+  $('s2b').style.transform=`translateX(${-ex*1080}px)`;
+ }
+ // ===== S2c ROTE (c(12.5) -> c(16.45)) =====
+ if(show('s2c',t,c(12.5),c(16.45))){
+  const en=P(t,c(12.5),.35,E.out);
+  $('s2c').style.transform=`translateX(${(1-en)*1080}px)`;
+  kin('s2ct1',t,c(12.6),{st:.12});
+  kin('s2ct2',t,c(14.1),{st:.14});
+  document.querySelectorAll('#s2cflow .fl').forEach((f,i)=>{const tt=t-c(12.7)-i*.32; if(tt<0||tt>1.6){f.setAttribute('opacity',0);return;}
+   if(tt>1.25){f.setAttribute('opacity',0);return;} const p=cl(tt/1.2); const x=lerp(-320,420,E.io(p)), y=lerp(640+i*110,800,E.io(p));
+   f.setAttribute('opacity',cl(tt*4)*cl((1.25-tt)/.35)); f.setAttribute('transform',`translate(${x},${y}) scale(${lerp(1,.3,cl((tt-.6)/.6))})`);});
+  const fall=t-c(14.35);
+  $('s2cpiece').style.transform=fall>0?`translate(${fall*240}px,${fall*fall*1400}px) rotate(${fall*260}deg)`:`translate(${Math.sin(t*30)*(t>c(13.9)?4:0)}px,0)`;
+  $('s2chole').setAttribute('opacity',fall>0?(.5+.5*Math.sin(t*10)):0);
+  st('flash',{o:0});
+ }
+ // ===== transition iris to logo =====
+ const ir=P(t,c(16.1),.45,E.io);
+ // ===== S3 LOGO (c(16.1) -> c(20.75)) =====
+ if(show('s3',t,c(16.1),c(20.75))){
+  $('s3').style.clipPath=`circle(${lerp(0,1250,ir)}px at 540px 960px)`;
+  $('s3r').style.transform=`rotate(${t*8}deg)`;
+  const e=P(t,c(16.55),.9,E.back2);
+  st('s3emb',{s:lerp(.2,1,e)*(1+Math.sin(t*2)*.008),r:lerp(-25,0,e),o:cl((t-c(16.5))*5),blur:(1-cl((t-c(16.5))/.4))*14});
+  const rg=cl((t-c(16.9))/.9);
+  st('s3ring',{s:lerp(.6,1.5,E.out(rg)),o:(rg>0&&rg<1)?(1-rg)*.8:0});
+  $('s3shine').style.backgroundPosition=`${lerp(130,-30,P(t,c(17.3),.9,E.io))}% 0`;
+  st('s3chip',{y:(1-P(t,c(16.4),.5,E.back))*-120,o:cl((t-c(16.4))*4)});
+  const wd=P(t,c(18.2),.6,E.out5);
+  st('s3word',{clip:`inset(${(1-wd)*100}% 0 0 0)`,y:(1-wd)*60});
+  const tg=P(t,c(18.7),.8,E.out);
+  st('s3tag',{o:tg,blur:(1-tg)*8});$('s3tag').style.letterSpacing=lerp(40,10,tg)+'px';
+  st('s3line',{sx:P(t,c(18.9),.7,E.io)});$('s3line').style.transformOrigin='center';
+  document.querySelectorAll('#s3sp .sp').forEach(sq=>{const a=+sq.dataset.a,d=+sq.dataset.d,tt=t-c(16.6);const p=E.out(cl(tt/1.4));
+   sq.setAttribute('cx',540+Math.cos(a+tt*.2*sq.dataset.s)*d*p);sq.setAttribute('cy',730+Math.sin(a+tt*.2*sq.dataset.s)*d*p);sq.setAttribute('opacity',tt<0?0:Math.min(1,tt*3)*(.7));});
+  // exit: logo -> bug, scene fades
+  const ex=P(t,c(20.2),.5,E.io);
+  if(ex>0){
+   st('s3emb',{x:lerp(0,-405,ex),y:lerp(0,-400,ex),s:lerp(1,.3,ex),o:1});
+   $('s3emb').style.transformOrigin='center';
+   st('s3word',{x:lerp(0,-405,ex),y:lerp(0,-930,ex),s:lerp(1,.3,ex),o:1-ex});
+   ['s3tag','s3line','s3chip','s3rays'].forEach(i=>$(i).style.opacity=1-ex);
+   $('s3').style.background=`radial-gradient(circle at 50% 42%,rgba(255,255,255,${1-ex}) 0,rgba(243,248,254,${1-ex}) 45%,rgba(220,234,248,${1-ex}) 100%)`;
+  } else $('s3').style.background='';
+ }
+ // ===== persistent bug =====
+ const bugOn=t>=c(20.6)&&t<c(34.3);
+ $('bug').style.display=bugOn?'block':'none';
+ if(bugOn)st('bug',{s:P(t,c(20.6),.4,E.back),o:1-P(t,c(34.0),.25)});
+ // ===== S4 SOLUTION (c(20.3) -> c(24.75)) =====
+ if(show('s4',t,c(20.3),c(24.75))){
+  $('s4').style.zIndex=0;
+  const en=P(t,c(20.3),.6,E.out);
+  st('s4',{o:en});
+  st('s4cam',{s:lerp(1.12,1,P(t,c(20.3),1.2,E.io))+P(t,c(21.5),3,E.lin)*.03});$('s4cam').style.transformOrigin='540px 900px';
+  $('s4tri').style.strokeDashoffset=1-P(t,c(20.8),1.2,E.io);
+  $('s4lbl').setAttribute('opacity',P(t,c(21.6),.4));$('s4sq').setAttribute('opacity',P(t,c(21.6),.4));
+  const eq=P(t,c(21.9),.5);$('s4eq').setAttribute('opacity',eq);$('s4eq').style.clipPath=`inset(0 ${(1-eq)*100}% 0 0)`;
+  const bl=P(t,c(22.35),.5,E.back);$('s4bulb').style.transform=`scale(${bl})`;$('s4glow').setAttribute('opacity',(.3+.3*Math.sin(t*8))*bl);
+  $('s4parm').setAttribute('transform',`rotate(${Math.sin(t*3)*5} -96 -590)`);
+  document.querySelectorAll('#s4svg .hand').forEach((h,i)=>{const p=P(t,c(21.2)+i*.25,.4,E.back);h.setAttribute('transform',`translate(0,${(1-p)*80})`);h.setAttribute('opacity',p>0?1:0);});
+  st('s4tag',{s:P(t,c(20.9),.5,E.back),o:cl((t-c(20.9))*5),y:Math.sin(t*2.5)*6});
+  st('s4count',{x:(1-P(t,c(21.2),.5,E.back))*-500});
+  st('s4b1',{s:P(t,c(22.7),.4,E.back),o:cl((t-c(22.7))*5),y:Math.sin(t*3)*5});
+  st('s4b2',{s:P(t,c(23.1),.4,E.back),o:cl((t-c(23.1))*5),y:Math.sin(t*3+1)*5});
+  const tx=P(t,c(20.5),.55,E.back);st('s4txt',{y:(1-tx)*400});
+  $('s4strk').style.transform=`scaleX(${P(t,c(21.2),.35)})`;
+  const l2=P(t,c(22.25),.5,E.back);st('s4l2',{s:lerp(.6,1,l2),o:cl((t-c(22.25))*4)});
+  const ex=P(t,c(24.35),.4,E.in);$('s4').style.transform=`translateY(${-ex*1920}px)`;
+ }
+ // ===== S5 FEATURES (c(24.35) -> c(34.4)) =====
+ if(show('s5',t,c(24.35),c(34.4))){
+  const en=P(t,c(24.35),.4,E.out);$('s5').style.transform=`translateY(${(1-en)*1920}px)`;
+  kin('s5h',t,c(24.55),{st:.12});
+  document.querySelectorAll('#s5bg .bk').forEach(b=>{b.setAttribute('cx',b.dataset.x);b.setAttribute('cy',(+b.dataset.y-t*b.dataset.v)%1920+ (+b.dataset.y-t*b.dataset.v<0?1920:0));});
+  [c(24.9),c(28.2),c(31.1)].forEach((a,i)=>{
+   const p=P(t,a,.6,E.back);st('s5c'+i,{x:(1-p)*(i%2?1100:-1100),o:cl((t-a)*4),r:(1-p)*(i%2?6:-6)});
+   const card=$('s5c'+i);card.querySelector('.tk').style.strokeDashoffset=1-P(t,a+.35,.4,E.io);
+   const tk=P(t,a+.3,.5,E.el);card.querySelector('.s5tick').style.transform=`scale(${tk})`;
+   const glow=t>a&&t<a+3.3?1:0;card.style.boxShadow=glow?'0 0 0 8px rgba(255,199,44,.9),0 24px 60px rgba(0,0,0,.3)':'0 24px 60px rgba(0,0,0,.25)';
+  });
+  st('s5foot',{s:P(t,c(31.9),.5,E.back),o:cl((t-c(31.9))*5)});
+  const ex=P(t,c(34.0),.4,E.in);
+  [0,1,2].forEach(i=>{if(ex>0)$('s5c'+i).style.transform=`translateX(${ex*(i%2?-1200:1200)}px)`});
+  $('s5').style.opacity=1-P(t,c(34.15),.25);
+ }
+ // ===== S5b RELIEF (c(34.0) -> c(37.0)) =====
+ if(show('s5b',t,c(34.0),c(37.0))){
+  const ir2=P(t,c(34.0),.5,E.io);$('s5b').style.clipPath=`circle(${lerp(0,1300,ir2)}px at 720px 1100px)`;
+  kin('s5bt1',t,c(34.1),{st:.1});kin('s5bt2',t,c(34.6),{st:.14,dy:100});
+  st('s5bmom',{});$('s5bmom').setAttribute('transform',`translate(330,1650) translate(0,${Math.sin(t*5)*-4})`);
+  $('s5bkid').setAttribute('transform',`translate(720,${1210-Math.abs(Math.sin(t*5))*16}) scale(1.15)`);
+  const cp=P(t,c(34.3),.6,E.back2);st('s5bcard',{s:cp,r:lerp(-30,6,cp)+Math.sin(t*4)*2,o:cl((t-c(34.3))*5),y:-Math.abs(Math.sin(t*5))*16});
+  confetti($('s5bcf'),t,c(34.4));
+  const ex=P(t,c(36.55),.4,E.in);$('s5b').style.transform=`scale(${1+ex*.3})`;$('s5b').style.opacity=1-ex;
+ }
+ // ===== S6 ADMISSION (c(36.55) -> c(41.35)) =====
+ if(show('s6',t,c(36.55),c(41.35))){
+  const en=P(t,c(36.55),.45,E.out5);
+  $('s6').style.clipPath=`polygon(0 0,${lerp(-40,140,en)}% 0,${lerp(-80,100,en)}% 100%,0 100%)`;
+  $('s6r').style.transform=`rotate(${t*10}deg)`;
+  kin('s6t0',t,c(36.8),{st:.1});
+  const rb=P(t,c(37.2),.7,E.el);st('s6rib',{s:lerp(0,1,rb),r:lerp(-12,-3,rb)+Math.sin(t*3)*1.2});
+  st('s6c1',{x:(1-P(t,c(38.6),.5,E.back))*-1100});
+  st('s6c2',{x:(1-P(t,c(39.3),.5,E.back))*1100});
+  const c3=P(t,c(39.9),.5,E.back);st('s6c3',{s:c3*(1+.05*Math.sin(t*9)),o:cl((t-c(39.9))*5)});
+  confetti($('s6cf'),t,c(37.3));
+  const ex=P(t,c(41.0),.35,E.in);st('s6',{s:1+ex*.6,o:1-ex,blur:ex*16});
+ }
+ // ===== S7 CTA (c(41.0) -> end) =====
+ if(show('s7',t,c(41.0),99)){
+  st('s7',{o:P(t,c(41.0),.35),s:lerp(.85,1,P(t,c(41.0),.5,E.out))});
+  $('s7r').style.transform=`rotate(${t*9}deg)`;
+  kin('s7t1',t,c(41.25),{st:.12});
+  // phase B: phone layout from c(47.9)
+  const ph=P(t,c(47.9),.7,E.io);
+  const bp=P(t,c(41.4),.8,E.el);
+  $('s7sp').setAttribute('transform',`rotate(${t*20})`);
+  // badge: big centre -> small top-right
+  st('s7badge',{s:lerp(bp,.38,ph)*(1+.025*Math.sin(t*6)),r:lerp(lerp(-30,-6,bp),12,ph),x:lerp(0,355,ph),y:lerp(0,-170,ph)});
+  st('s7t1',{o:1-ph,y:-ph*120});
+  const lg=P(t,c(48.0),.7,E.back);st('s7logo',{o:cl((t-c(48))*4),y:(1-lg)*-80,s:lerp(.5,1,lg)*(1+.01*Math.sin(t*2))});
+  st('s7v1',{x:(1-P(t,c(45.2),.5,E.back))*-1100,o:1-ph,y:ph*200});
+  st('s7v2',{x:(1-P(t,c(46.7),.5,E.back))*1100,o:1-ph,y:ph*200});
+  kin('s7seat',t,c(48.1),{st:.08});
+  const pp=P(t,c(48.3),.6,E.back);st('s7phone',{s:pp,o:cl((t-c(48.3))*5)});
+  const ring=t>c(48.6)?Math.sin(t*40)*10*(Math.sin(t*2.5)>0?1:0):0;$('s7ph').style.transform=`rotate(${ring}deg)`;
+  const bt=P(t,c(50.2),.5,E.back);st('s7btn',{s:bt*(t>c(50.9)?1+.04*Math.sin((t-c(50.9))*7):1),o:cl((t-c(50.2))*5)});
+  // finger tap
+  const f=t-c(50.5);
+  $('s7fing').setAttribute('opacity',f>0&&f<1.6?cl(f*5)*cl((1.6-f)*4):0);
+  const fx=lerp(900,600,E.out(cl(f/.5))), fy=lerp(1750,1400,E.out(cl(f/.5)))+(f>.55&&f<.75?14:0);
+  $('s7fing').setAttribute('transform',`translate(${fx},${fy}) rotate(-15)`);
+  const rp=cl((f-.6)/.6);$('s7rip').setAttribute('r',20+rp*260);$('s7rip').setAttribute('opacity',rp>0&&rp<1?1-rp:0);
+  st('s7btnin',{s:f>.55&&f<.8?.94:1});
+  const ad=P(t,c(51.4),.6,E.back);st('s7addr',{y:(1-ad)*300,o:cl((t-c(51.4))*4)});
+  const pinb=t>c(51.6)?Math.abs(Math.sin((t-c(51.6))*6))*-18*Math.max(0,1-(t-c(51.6))/2):0;$('s7pin').style.transform=`translateY(${pinb}px)`;
+  kin('s7foot',t,c(52.2),{st:.06,dy:30});
+ }
+ // global fade out at very end
+ st('flash',{o:0});
+}
+build();
+window.seek=seek;window.DUR=DUR;
+const q=new URLSearchParams(location.search);
+if(q.has('t'))document.fonts.ready.then(()=>seek(+q.get('t')));
+</script>
+</body></html>
