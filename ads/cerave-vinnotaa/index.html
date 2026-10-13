@@ -1,0 +1,361 @@
+<!doctype html>
+<html lang="bn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CeraVe × Vinnotaa Ad</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@500;600;700&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --blue: #4285F4; --red: #EA4335; --yellow: #FBBC05; --green: #34A853;
+    --cv-green: #2BA84A; --cv-navy: #0C2D5A; --ink: #10213F; --cream: #F7F4EE;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 100%; height: 100%; background: #111; overflow: hidden; }
+  body { display: grid; place-items: center; font-family: 'Hind Siliguri', 'Poppins', sans-serif; color: var(--ink); }
+  body.en { font-family: 'Poppins', sans-serif; }
+  body.bn .en, body.en .bn { display: none !important; }
+
+  #stage { width: 1080px; height: 1920px; position: relative; overflow: hidden; transform-origin: center center; flex: none; background: var(--cream); }
+  body.capture { display: block; background: var(--cream); }
+  body.capture #stage { transform: none !important; }
+
+  .scene { position: absolute; inset: 0; visibility: hidden; }
+  .abs { position: absolute; left: 0; right: 0; text-align: center; }
+  [data-in] { will-change: transform, opacity; }
+
+  /* Scene 1 – hook */
+  #s1 { background: radial-gradient(circle at 50% 40%, #1d3c6e 0%, #0b1a33 75%); color: #fff; }
+  #s1 .tag { top: 250px; font-size: 46px; font-weight: 600; color: var(--yellow); letter-spacing: 1px; }
+  #s1 .big { font-size: 128px; font-weight: 700; line-height: 1.15; }
+  #s1 .l1 { top: 520px; }
+  #s1 .l2 { top: 700px; }
+  #s1 .l3 { top: 900px; }
+  #s1 .l3 span.hl { background: var(--red); padding: 0 34px; border-radius: 22px; display: inline-block; }
+  body.en #s1 .big { font-size: 112px; }
+  #cracks { position: absolute; left: 140px; top: 1180px; width: 800px; height: 420px; }
+  #cracks path { fill: none; stroke: #e9c7a8; stroke-width: 7; stroke-linecap: round; stroke-linejoin: round; }
+  #s1 .sub { top: 1660px; font-size: 44px; color: #c9d6ee; padding: 0 80px; }
+
+  /* Scene 2 – problem */
+  #s2 { background: linear-gradient(180deg, #FFF6E6 0%, #FCE3D4 100%); }
+  #s2 .h { top: 260px; font-size: 84px; font-weight: 700; line-height: 1.25; padding: 0 70px; }
+  #s2 .h b { color: var(--red); }
+  #soap { position: absolute; left: 290px; top: 760px; width: 500px; height: 380px; }
+  #s2 .p { top: 1260px; font-size: 62px; font-weight: 600; line-height: 1.35; padding: 0 90px; }
+  #s2 .p b { color: var(--red); }
+  #s2 .note { top: 1620px; font-size: 46px; font-weight: 600; color: #8a5a3c; }
+
+  /* Scene 3 – product reveal */
+  #s3 { background: radial-gradient(circle at 50% 46%, #ffffff 0%, #EAF6EE 60%, #D3EEDC 100%); }
+  #s3 .kicker { top: 170px; font-size: 64px; font-weight: 700; color: var(--cv-green); }
+  #ring { position: absolute; left: 140px; top: 400px; width: 800px; height: 800px; border-radius: 50%; border: 10px dashed rgba(43,168,74,.35); }
+  .bottle-wrap { position: absolute; left: 215px; top: 360px; width: 650px; height: 729px; }
+  .bottle-wrap, .mini, .cta-bottle { mix-blend-mode: multiply; }
+  .bottle-wrap img { width: 100%; height: 100%; display: block; }
+  #s3 .name { top: 1170px; font-family: 'Poppins', sans-serif; font-size: 66px; font-weight: 800; color: var(--cv-navy); line-height: 1.15; }
+  #s3 .name small { display: block; font-size: 50px; font-weight: 600; color: var(--cv-green); }
+  #s3 .line { top: 1420px; font-size: 60px; font-weight: 700; line-height: 1.35; padding: 0 80px; }
+  #s3 .line b { color: var(--cv-green); }
+  .drop { position: absolute; width: 34px; height: 34px; border-radius: 50% 50% 50% 0; transform: rotate(-45deg); background: rgba(66,133,244,.55); }
+
+  /* Scene 4 – benefits */
+  #s4 { background: linear-gradient(180deg, #F1F7FF 0%, #E3EEFC 100%); }
+  #s4 .h { top: 170px; font-size: 76px; font-weight: 700; color: var(--cv-navy); }
+  .mini { position: absolute; left: 640px; top: 1180px; width: 420px; height: 471px; }
+  .mini img { width: 100%; height: 100%; }
+  .ben { position: absolute; left: 70px; width: 940px; display: flex; align-items: center; gap: 34px; background: #fff; border-radius: 34px; padding: 30px 36px; box-shadow: 0 14px 40px rgba(16,33,63,.10); }
+  .ben .ic { flex: none; width: 104px; height: 104px; border-radius: 50%; display: grid; place-items: center; color: #fff; font-size: 58px; font-weight: 800; font-family: 'Poppins', sans-serif; }
+  .ben .tx { font-size: 50px; font-weight: 700; line-height: 1.25; text-align: left; }
+  .ben .tx small { display: block; font-size: 38px; font-weight: 500; color: #4a5a78; }
+  #b1 { top: 360px; } #b2 { top: 590px; } #b3 { top: 820px; } #b4 { top: 1050px; width: 560px; }
+  #s4 .foot { top: 1730px; font-size: 46px; font-weight: 600; color: var(--cv-navy); }
+
+  /* Scene 5 – how to use */
+  #s5 { background: linear-gradient(180deg, #FFFBEA 0%, #FFF1C2 100%); }
+  #s5 .h { top: 200px; font-size: 84px; font-weight: 700; }
+  .step { position: absolute; width: 440px; height: 520px; background: #fff; border-radius: 40px; box-shadow: 0 14px 40px rgba(60,40,0,.10); text-align: center; padding-top: 50px; }
+  .step .n { width: 150px; height: 150px; border-radius: 50%; margin: 0 auto 36px; display: grid; place-items: center; color: #fff; font-family: 'Poppins', sans-serif; font-size: 84px; font-weight: 800; }
+  .step .t { font-size: 54px; font-weight: 700; line-height: 1.3; padding: 0 30px; }
+  #st1 { left: 70px; top: 420px; } #st2 { left: 570px; top: 420px; }
+  #st3 { left: 70px; top: 1000px; } #st4 { left: 570px; top: 1000px; }
+  #s5 .foot { top: 1640px; font-size: 62px; font-weight: 700; }
+  #s5 .foot span { background: var(--green); color: #fff; padding: 10px 40px; border-radius: 60px; }
+
+  /* Scene 6 – CTA */
+  #s6 { background: #fff; }
+  #s6 .logo { top: 150px; }
+  #s6 .logo img { width: 640px; }
+  #s6 .h { top: 440px; font-size: 104px; font-weight: 700; line-height: 1.15; }
+  #s6 .h b { color: var(--red); }
+  .cta-bottle { position: absolute; left: 330px; top: 700px; width: 420px; height: 471px; }
+  .cta-bottle img { width: 100%; height: 100%; }
+  #btn { top: 1210px; }
+  #btn .b { display: inline-block; background: var(--red); color: #fff; font-size: 70px; font-weight: 700; padding: 34px 80px; border-radius: 100px; box-shadow: 0 18px 40px rgba(234,67,53,.35); }
+  #s6 .contact { top: 1420px; font-size: 50px; font-weight: 700; color: var(--ink); }
+  #s6 .contact .ph { color: var(--blue); }
+  #s6 .perks { top: 1540px; display: flex; justify-content: center; gap: 22px; flex-wrap: wrap; padding: 0 50px; }
+  #s6 .perks span { font-size: 40px; font-weight: 600; padding: 12px 30px; border-radius: 50px; color: #fff; }
+
+  /* persistent chrome */
+  #wm { position: absolute; left: 40px; top: 40px; width: 230px; opacity: 0; }
+  #bar { position: absolute; left: 0; bottom: 0; height: 12px; width: 0; background: linear-gradient(90deg, var(--blue), var(--red), var(--yellow), var(--green)); }
+
+  #ui { position: fixed; right: 16px; bottom: 16px; display: flex; gap: 8px; font: 600 14px/1 'Poppins', sans-serif; z-index: 9; }
+  #ui a, #ui button { background: #fff; color: #111; border: 0; border-radius: 20px; padding: 10px 14px; cursor: pointer; text-decoration: none; }
+  body.capture #ui { display: none; }
+</style>
+</head>
+<body class="bn">
+<div id="stage">
+
+  <!-- 1. HOOK 0–4.6s -->
+  <section class="scene" id="s1" data-in="0" data-out="4.6" data-dur="0.01">
+    <div class="abs tag" data-in="0.15" data-anim="down" data-out="4.6">
+      <span class="bn">৪৫ বছরের পর এই সমস্যা খুব সাধারণ</span><span class="en">Very common after age 45</span>
+    </div>
+    <div class="abs big l1" data-in="0.35" data-anim="up" data-out="4.6"><span class="bn">মুখ ধোয়ার পর</span><span class="en">After washing,</span></div>
+    <div class="abs big l2" data-in="0.75" data-anim="up" data-out="4.6"><span class="bn">মুখ টানটান</span><span class="en">does your face</span></div>
+    <div class="abs big l3" data-in="1.15" data-anim="pop" data-out="4.6"><span class="hl"><span class="bn">আর শুষ্ক লাগে?</span><span class="en">feel dry &amp; tight?</span></span></div>
+    <svg id="cracks" viewBox="0 0 800 420" data-in="1.6" data-dur="0.2" data-out="4.6">
+      <path pathLength="1" d="M400 20 L370 110 L420 170 L360 260 L400 330 L380 410"/>
+      <path pathLength="1" d="M370 110 L250 140 L170 90 L60 130"/>
+      <path pathLength="1" d="M420 170 L540 150 L630 210 L760 180"/>
+      <path pathLength="1" d="M360 260 L240 300 L130 280"/>
+      <path pathLength="1" d="M400 330 L520 360 L640 330"/>
+    </svg>
+    <div class="abs sub" data-in="2.6" data-anim="up" data-out="4.6">
+      <span class="bn">তাহলে এই ভিডিওটা শেষ পর্যন্ত দেখুন</span><span class="en">Then watch this till the end</span>
+    </div>
+  </section>
+
+  <!-- 2. PROBLEM 4.6–9.4s -->
+  <section class="scene" id="s2" data-in="4.6" data-out="9.4" data-dur="0.35">
+    <div class="abs h" data-in="4.8" data-anim="up" data-out="9.4">
+      <span class="bn">বয়স বাড়লে ত্বক<br><b>নিজে থেকেই শুকিয়ে যায়</b></span>
+      <span class="en">As we age, skin<br><b>gets drier on its own</b></span>
+    </div>
+    <svg id="soap" viewBox="0 0 500 380" data-in="5.5" data-anim="pop" data-out="9.4">
+      <ellipse cx="250" cy="300" rx="200" ry="40" fill="rgba(0,0,0,.08)"/>
+      <rect x="70" y="110" width="360" height="180" rx="70" fill="#F5B7C8"/>
+      <rect x="95" y="128" width="310" height="70" rx="35" fill="#FAD3DE"/>
+      <circle cx="120" cy="80" r="26" fill="none" stroke="#9cc3f5" stroke-width="6"/>
+      <circle cx="175" cy="45" r="16" fill="none" stroke="#9cc3f5" stroke-width="5"/>
+      <circle cx="390" cy="70" r="20" fill="none" stroke="#9cc3f5" stroke-width="5"/>
+      <g id="xmark" stroke="#EA4335" stroke-width="30" stroke-linecap="round">
+        <line pathLength="1" x1="90" y1="40" x2="410" y2="340"/>
+        <line pathLength="1" x1="410" y1="40" x2="90" y2="340"/>
+      </g>
+    </svg>
+    <div class="abs p" data-in="6.6" data-anim="up" data-out="9.4">
+      <span class="bn">সাধারণ সাবান ত্বকের<br><b>প্রাকৃতিক তেল</b> কেড়ে নেয়</span>
+      <span class="en">Regular soap washes away<br>your skin's <b>natural oil</b></span>
+    </div>
+    <div class="abs note" data-in="7.6" data-anim="fade" data-out="9.4">
+      <span class="bn">ফলাফল: চুলকানি, খসখসে ভাব, রুক্ষ ত্বক</span><span class="en">Result: itching, rough and flaky skin</span>
+    </div>
+  </section>
+
+  <!-- 3. PRODUCT 9.4–15.2s -->
+  <section class="scene" id="s3" data-in="9.4" data-out="15.2" data-dur="0.35">
+    <div class="abs kicker" data-in="9.6" data-anim="down" data-out="15.2"><span class="bn">সহজ সমাধান</span><span class="en">The simple fix</span></div>
+    <div id="ring" data-in="9.8" data-anim="zoom" data-out="15.2"></div>
+    <div id="drops"></div>
+    <div class="bottle-wrap" data-in="9.9" data-anim="rise" data-dur="0.9" data-out="15.2"><img class="float" src="assets/cerave.png" alt="CeraVe Hydrating Facial Cleanser"></div>
+    <div class="abs name" data-in="10.9" data-anim="up" data-out="15.2">CeraVe<small>Hydrating Facial Cleanser</small></div>
+    <div class="abs line" data-in="11.8" data-anim="up" data-out="15.2">
+      <span class="bn">মুখ পরিষ্কার করে,<br><b>কিন্তু আর্দ্রতা ধরে রাখে</b></span>
+      <span class="en">Cleans your face,<br><b>but keeps the moisture in</b></span>
+    </div>
+  </section>
+
+  <!-- 4. BENEFITS 15.2–21.4s -->
+  <section class="scene" id="s4" data-in="15.2" data-out="21.4" data-dur="0.35">
+    <div class="abs h" data-in="15.3" data-anim="down" data-out="21.4"><span class="bn">কেন CeraVe?</span><span class="en">Why CeraVe?</span></div>
+    <div class="ben" id="b1" data-in="15.8" data-anim="left" data-out="21.4">
+      <div class="ic" style="background:var(--blue)">3</div>
+      <div class="tx"><span class="bn">৩টি জরুরি সেরামাইড<small>ত্বকের সুরক্ষা স্তর ঠিক রাখতে সাহায্য করে</small></span><span class="en">3 essential ceramides<small>Help restore the skin's protective layer</small></span></div>
+    </div>
+    <div class="ben" id="b2" data-in="16.8" data-anim="left" data-out="21.4">
+      <div class="ic" style="background:var(--green)">✓</div>
+      <div class="tx"><span class="bn">হায়ালুরোনিক অ্যাসিড<small>ত্বকে পানি ধরে রাখে</small></span><span class="en">Hyaluronic acid<small>Holds water in your skin</small></span></div>
+    </div>
+    <div class="ben" id="b3" data-in="17.8" data-anim="left" data-out="21.4">
+      <div class="ic" style="background:var(--red)">✓</div>
+      <div class="tx"><span class="bn">চর্মরোগ বিশেষজ্ঞদের সাথে তৈরি<small>সুগন্ধি ছাড়া, ত্বকে কোমল</small></span><span class="en">Made with skin doctors<small>No fragrance, gentle on skin</small></span></div>
+    </div>
+    <div class="ben" id="b4" data-in="18.8" data-anim="left" data-out="21.4">
+      <div class="ic" style="background:var(--yellow)">✓</div>
+      <div class="tx"><span class="bn">স্বাভাবিক ও<br>শুষ্ক ত্বকের জন্য</span><span class="en">For normal<br>to dry skin</span></div>
+    </div>
+    <div class="mini" data-in="16.2" data-anim="right" data-out="21.4"><img class="float" src="assets/cerave.png" alt=""></div>
+    <div class="abs foot" data-in="19.8" data-anim="fade" data-out="21.4"><span class="bn">ধোয়ার পর ত্বক টানটান লাগে না</span><span class="en">No tight feeling after washing</span></div>
+  </section>
+
+  <!-- 5. HOW TO USE 21.4–25.8s -->
+  <section class="scene" id="s5" data-in="21.4" data-out="25.8" data-dur="0.35">
+    <div class="abs h" data-in="21.5" data-anim="down" data-out="25.8"><span class="bn">ব্যবহার খুব সহজ</span><span class="en">Very easy to use</span></div>
+    <div class="step" id="st1" data-in="21.9" data-anim="pop" data-out="25.8"><div class="n" style="background:var(--blue)">1</div><div class="t"><span class="bn">মুখ পানিতে ভেজান</span><span class="en">Wet your face</span></div></div>
+    <div class="step" id="st2" data-in="22.4" data-anim="pop" data-out="25.8"><div class="n" style="background:var(--red)">2</div><div class="t"><span class="bn">এক পাম্প হাতে নিন</span><span class="en">Take one pump</span></div></div>
+    <div class="step" id="st3" data-in="22.9" data-anim="pop" data-out="25.8"><div class="n" style="background:var(--yellow)">3</div><div class="t"><span class="bn">আলতো করে ম্যাসাজ করুন</span><span class="en">Rub gently</span></div></div>
+    <div class="step" id="st4" data-in="23.4" data-anim="pop" data-out="25.8"><div class="n" style="background:var(--green)">4</div><div class="t"><span class="bn">পানি দিয়ে ধুয়ে ফেলুন</span><span class="en">Rinse with water</span></div></div>
+    <div class="abs foot" data-in="24.0" data-anim="up" data-out="25.8"><span><span class="bn">সকালে ও রাতে — দিনে ২ বার</span><span class="en">Morning &amp; night — 2 times a day</span></span></div>
+  </section>
+
+  <!-- 6. CTA 25.8–32s -->
+  <section class="scene" id="s6" data-in="25.8" data-out="99" data-dur="0.35">
+    <div class="abs logo" data-in="25.9" data-anim="pop" data-out="99"><img src="assets/vinnotaa-logo.png" alt="Vinnotaa"></div>
+    <div class="abs h" data-in="26.3" data-anim="up" data-out="99">
+      <span class="bn">আজই <b>অর্ডার</b> করুন</span><span class="en"><b>Order</b> today</span>
+    </div>
+    <div class="cta-bottle" data-in="26.6" data-anim="rise" data-out="99"><img class="float" src="assets/cerave.png" alt=""></div>
+    <div class="abs" id="btn" data-in="27.2" data-anim="pop" data-out="99"><span class="b pulse"><span class="bn">এখনই অর্ডার করুন →</span><span class="en">Order Now →</span></span></div>
+    <div class="abs contact" data-in="27.7" data-anim="up" data-out="99">
+      <span class="bn">ইনবক্স করুন বা কল করুন: </span><span class="en">Inbox us or call: </span><span class="ph" data-cfg="phone"></span>
+    </div>
+    <div class="abs perks" data-in="28.2" data-anim="up" data-out="99">
+      <span style="background:var(--blue)"><span class="bn">১০০% অরিজিনাল</span><span class="en">100% original</span></span>
+      <span style="background:var(--green)"><span class="bn">সারা দেশে হোম ডেলিভারি</span><span class="en">Home delivery all over BD</span></span>
+      <span style="background:#E37400"><span class="bn">ক্যাশ অন ডেলিভারি</span><span class="en">Cash on delivery</span></span>
+    </div>
+  </section>
+
+  <img id="wm" src="assets/vinnotaa-logo.png" alt="">
+  <div id="bar"></div>
+</div>
+
+<div id="ui">
+  <button id="replay">↻ Replay</button>
+  <a id="langLink" href="?lang=en">English</a>
+</div>
+
+<script>
+  // ---- Edit your details here ----
+  const CONFIG = { phone: '01XXX-XXXXXX' };
+  const DURATION = 30;
+
+  const params = new URLSearchParams(location.search);
+  const lang = params.get('lang') === 'en' ? 'en' : 'bn';
+  const capture = params.has('capture');
+  document.body.className = lang + (capture ? ' capture' : '');
+  document.documentElement.lang = lang;
+  const langLink = document.getElementById('langLink');
+  langLink.href = lang === 'en' ? '?' : '?lang=en';
+  langLink.textContent = lang === 'en' ? 'বাংলা' : 'English';
+  document.querySelectorAll('[data-cfg]').forEach(el => el.textContent = CONFIG[el.dataset.cfg]);
+
+  const clamp = v => Math.max(0, Math.min(1, v));
+  const easeOut = p => 1 - Math.pow(1 - p, 3);
+  const easeBack = p => { const c1 = 1.70158, c3 = c1 + 1; return 1 + c3 * Math.pow(p - 1, 3) + c1 * Math.pow(p - 1, 2); };
+
+  const animated = [...document.querySelectorAll('[data-in]')].map(el => ({
+    el, tIn: +el.dataset.in, tOut: +(el.dataset.out || 1e9),
+    dur: +(el.dataset.dur || 0.6), anim: el.dataset.anim || 'fade'
+  }));
+
+  // water drops for the product scene
+  const dropsBox = document.getElementById('drops');
+  const drops = Array.from({ length: 14 }, (_, i) => {
+    const d = document.createElement('div');
+    d.className = 'drop';
+    dropsBox.appendChild(d);
+    return { el: d, x: 120 + (i * 137) % 840, delay: (i * 0.37) % 2.6, speed: 260 + (i * 53) % 180, size: 0.6 + ((i * 7) % 5) / 6 };
+  });
+
+  const crackPaths = document.querySelectorAll('#cracks path');
+  const xLines = document.querySelectorAll('#xmark line');
+  const floats = document.querySelectorAll('.float');
+  const pulse = document.querySelector('.pulse');
+  const ring = document.getElementById('ring');
+  const wm = document.getElementById('wm');
+  const bar = document.getElementById('bar');
+
+  function renderAt(t) {
+    for (const a of animated) {
+      const visible = t >= a.tIn && t <= a.tOut;
+      a.el.style.visibility = visible ? 'visible' : 'hidden';
+      if (!visible) continue;
+      const p = clamp((t - a.tIn) / a.dur);
+      const q = a.tOut > 90 ? 0 : clamp((t - (a.tOut - 0.3)) / 0.3);
+      const e = easeOut(p);
+      let tr = '';
+      switch (a.anim) {
+        case 'up': tr = `translateY(${(1 - e) * 90}px)`; break;
+        case 'down': tr = `translateY(${-(1 - e) * 90}px)`; break;
+        case 'left': tr = `translateX(${-(1 - e) * 160}px)`; break;
+        case 'right': tr = `translateX(${(1 - e) * 220}px)`; break;
+        case 'rise': tr = `translateY(${(1 - e) * 500}px) scale(${0.7 + 0.3 * e})`; break;
+        case 'zoom': tr = `scale(${1.4 - 0.4 * e})`; break;
+        case 'pop': tr = `scale(${0.3 + 0.7 * easeBack(p)})`; break;
+      }
+      if (a.anim === 'zoom') tr += ` rotate(${t * 30}deg)`;
+      a.el.style.transform = tr;
+      a.el.style.opacity = Math.min(1, p * 1.6) * (1 - q);
+    }
+
+    // hook: crack lines draw in, headline shakes once
+    crackPaths.forEach((path, i) => {
+      path.style.strokeDasharray = 1;
+      path.style.strokeDashoffset = 1 - clamp((t - 1.6 - i * 0.18) / 0.6);
+    });
+    const shake = t > 1.45 && t < 1.85 ? Math.sin(t * 90) * 10 : 0;
+    document.querySelector('#s1 .l3').style.transform += ` translateX(${shake}px)`;
+
+    // problem: red cross over soap
+    xLines.forEach((line, i) => {
+      line.style.strokeDasharray = 1;
+      line.style.strokeDashoffset = 1 - clamp((t - 6.0 - i * 0.25) / 0.35);
+    });
+
+    // product: drops float up
+    const s3t = t - 9.6;
+    drops.forEach(d => {
+      const local = s3t - d.delay;
+      if (local < 0 || t > 15.2) { d.el.style.opacity = 0; return; }
+      const y = 1120 - ((local * d.speed) % 1000);
+      d.el.style.left = d.x + 'px';
+      d.el.style.top = y + 'px';
+      d.el.style.opacity = 0.8 * clamp(local / 0.4);
+      d.el.style.transform = `rotate(-45deg) scale(${d.size})`;
+    });
+
+    floats.forEach((f, i) => f.style.transform = `translateY(${Math.sin(t * 2.2 + i) * 14}px)`);
+    pulse.style.transform = `scale(${1 + 0.06 * Math.max(0, Math.sin((t - 27.5) * 6))})`;
+    ring.style.borderColor = `rgba(43,168,74,${0.25 + 0.15 * Math.sin(t * 3)})`;
+    wm.style.opacity = t > 4.8 && t < 25.6 ? 0.9 : 0;
+    bar.style.width = (clamp(t / DURATION) * 100) + '%';
+  }
+  window.renderAt = renderAt;
+  window.DURATION = DURATION;
+
+  // fit stage to window for preview
+  const stage = document.getElementById('stage');
+  function fit() {
+    if (capture) return;
+    const s = Math.min(innerWidth / 1080, innerHeight / 1920);
+    stage.style.transform = `scale(${s})`;
+    stage.style.margin = `${(1920 * s - 1920) / 2}px ${(1080 * s - 1080) / 2}px`;
+  }
+  addEventListener('resize', fit); fit();
+
+  if (capture) {
+    renderAt(0);
+  } else {
+    let start = null;
+    document.getElementById('replay').onclick = () => { start = null; };
+    document.fonts.ready.then(() => {
+      const loop = now => {
+        if (start === null) start = now;
+        const t = (now - start) / 1000;
+        renderAt(Math.min(t, DURATION));
+        if (t > DURATION + 1.5) start = null;
+        requestAnimationFrame(loop);
+      };
+      requestAnimationFrame(loop);
+    });
+  }
+</script>
+</body>
+</html>
