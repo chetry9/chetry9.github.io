@@ -252,6 +252,7 @@ window.renderAt=t=>render(t);
 document.fonts.ready.then(()=>{layout();
   if(ICON_ONLY){
     $('wordWrap').style.display=$('tagWrap').style.display='none';
+    $('icon').removeAttribute('filter');  // no drop shadow: clean edge on any background
     L.scale=Math.min(W,H)*0.68/(312*1.35);
     L.iconStart=L.iconFinal={x:W/2,y:H/2};
   }
