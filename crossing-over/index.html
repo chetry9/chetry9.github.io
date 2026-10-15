@@ -134,10 +134,9 @@
     backdrop-filter: blur(6px); z-index: 40; opacity: 0;
     animation: logoIn .6s cubic-bezier(.2,1.4,.4,1) 5.1s 1 both;
   }
-  .logo .mark { width: 74px; height: 74px; border-radius: 50%;
-    background: conic-gradient(var(--yellow), var(--pink), var(--cyan), var(--yellow));
-    display: grid; place-items: center; font-family: 'Poppins'; font-weight: 900; font-size: 40px; color: var(--ink); }
-  .logo .mark span { width: 60px; height: 60px; border-radius: 50%; background: #fff; display: grid; place-items: center; }
+  .logo .mark { width: 92px; height: 92px; border-radius: 50%; background: #fff;
+    box-shadow: 0 0 0 4px var(--yellow); display: grid; place-items: center; overflow: hidden; }
+  .logo .mark img { height: 78px; width: auto; }
   .logo .name { font-family: 'Poppins'; font-weight: 800; font-size: 30px; line-height: 1.05; }
   .logo .name small { display: block; font-size: 20px; font-weight: 700; color: var(--yellow); letter-spacing: 2px; }
   @keyframes logoIn { 0% { opacity: 0; transform: translateX(-120px) scale(.6); } 100% { opacity: 1; transform: none; } }
@@ -292,8 +291,11 @@
     from { box-shadow: 0 0 0 0 rgba(255,210,63,.0), 0 0 20px rgba(255,255,255,.4); transform: scale(1); }
     to   { box-shadow: 0 0 0 16px rgba(255,210,63,.55), 0 0 110px 30px rgba(255,210,63,.9); transform: scale(1.06); }
   }
-  .banner .sub { margin-top: 30px; font-size: 52px; font-weight: 700; }
-  .contact { left: 70px; right: 70px; top: 1290px; display: flex; flex-direction: column; gap: 22px; }
+  .banner .brand { display: inline-flex; align-items: center; gap: 22px; margin-top: 36px; padding: 16px 34px 16px 22px;
+    border-radius: 30px; background: #fff; color: #1f5fae; text-align: left; font-size: 50px; font-weight: 800; line-height: 1.05; }
+  .banner .brand img { height: 130px; width: auto; }
+  .banner .brand small { display: block; font-family: 'Poppins'; font-size: 26px; font-weight: 700; color: #3b73b9; letter-spacing: 1px; margin-top: 6px; }
+  .contact { left: 70px; right: 70px; top: 1330px; display: flex; flex-direction: column; gap: 22px; }
   .contact .item { display: flex; align-items: center; gap: 26px; padding: 26px 34px; border-radius: 34px;
     background: rgba(255,255,255,.1); border: 3px solid rgba(255,255,255,.2); font-size: 48px; font-weight: 700; line-height: 1.2; opacity: 0; }
   .contact .ic { flex: 0 0 90px; height: 90px; border-radius: 26px; display: grid; place-items: center; background: var(--yellow); }
@@ -392,7 +394,7 @@
 
   <!-- ===== LOGO ===== -->
   <div class="abs logo">
-    <div class="mark"><span>S</span></div>
+    <div class="mark"><img src="spriha-logo.png" alt="স্পৃহা লোগো"></div>
     <div class="name">Spriha<small>EDUCATION CARE</small></div>
   </div>
 
@@ -476,7 +478,7 @@
       <div class="hsc">HSC-28</div>
       <div class="bio">Biology</div>
       <div class="free">FREE CLASS</div>
-      <div class="sub">স্পৃহা এডুকেশন কেয়ার</div>
+      <div class="brand"><img src="spriha-logo.png" alt="স্পৃহা লোগো"><div>স্পৃহা এডুকেশন কেয়ার<small>Spriha Education Care</small></div></div>
     </div>
     <div class="abs contact">
       <div class="item i1">
