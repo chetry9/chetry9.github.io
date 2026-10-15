@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>ক্রসিং ওভার শর্টকাট | Spriha Education Care</title>
+<meta name="description" content="৩০ সেকেন্ডে মিয়োসিস-১ প্রোফেজ-১ এর ৫টি উপপর্যায় ও ক্রসিং ওভার মনে রাখার শর্টকাট।" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+Da+2:wght@600;700;800&family=Hind+Siliguri:wght@500;600;700&family=Poppins:wght@700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg1: #120b3d;
+    --bg2: #2a0f5c;
+    --yellow: #ffd23f;
+    --pink: #ff3d7f;
+    --cyan: #2de2e6;
+    --blue: #3a86ff;
+    --red: #ff3b3b;
+    --white: #ffffff;
+    --ink: #1b1440;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; }
+  body {
+    background: #07051a;
+    color: var(--white);
+    font-family: 'Hind Siliguri', system-ui, sans-serif;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 14px; padding: 12px 16px; overflow: hidden;
+  }
+  body.record { padding: 0; gap: 0; }
+  body.record .controls { display: none; }
+
+  /* ---------- Stage: fixed 1080x1920, scaled to fit ---------- */
+  .viewport { position: relative; flex: 0 0 auto; }
+  #stage {
+    position: absolute; left: 0; top: 0;
+    width: 1080px; height: 1920px; transform-origin: 0 0;
+    overflow: hidden;
+    background: radial-gradient(1200px 1200px at 50% 30%, var(--bg2), var(--bg1) 70%);
+    font-family: 'Baloo Da 2', 'Hind Siliguri', sans-serif;
+  }
+  .scene { position: absolute; inset: 0; opacity: 0; }
+  .abs { position: absolute; }
+  .center-x { left: 0; right: 0; text-align: center; }
+
+  /* moving background dots */
+  .bg-dots {
+    position: absolute; inset: -200px;
+    background-image: radial-gradient(rgba(255,255,255,.09) 3px, transparent 3px);
+    background-size: 70px 70px;
+    animation: drift 30s linear 0s 1 both;
+  }
+  @keyframes drift { from { transform: translate(0,0); } to { transform: translate(140px, 280px); } }
+
+  /* ================= SCENE 1: HOOK 0-5s ================= */
+  #s1 { animation: sceneOn 5s linear 0s 1 both; }
+  @keyframes sceneOn { 0%,98% { opacity: 1; } 100% { opacity: 0; } }
+  #s1 .flash { position: absolute; inset: 0; background: #fff; opacity: 0; animation: flash .5s ease-out 0s 1 both; }
+  @keyframes flash { 0% { opacity: .9; } 100% { opacity: 0; } }
+
+  .student { left: 190px; top: 760px; width: 700px; height: 900px;
+    animation: slideUp .7s cubic-bezier(.2,1.4,.4,1) .15s 1 both, shake .25s ease-in-out 1.6s 8; }
+  @keyframes slideUp { from { transform: translateY(700px); } to { transform: translateY(0); } }
+  @keyframes shake { 0%,100% { transform: rotate(0); } 25% { transform: rotate(-2deg); } 75% { transform: rotate(2deg); } }
+  .qm { font-family: 'Poppins', sans-serif; font-weight: 900; font-size: 130px; color: var(--yellow);
+    opacity: 0; text-shadow: 0 8px 0 rgba(0,0,0,.25); }
+  .qm1 { left: 170px; top: 720px; animation: popFloat 2.6s ease-out 1.2s 1 both; }
+  .qm2 { left: 800px; top: 680px; animation: popFloat 2.6s ease-out 1.5s 1 both; color: var(--cyan); }
+  .qm3 { left: 480px; top: 610px; animation: popFloat 2.6s ease-out 1.8s 1 both; color: var(--pink); font-size: 100px; }
+  @keyframes popFloat {
+    0% { opacity: 0; transform: scale(.2) translateY(0) rotate(-20deg); }
+    15% { opacity: 1; transform: scale(1.2) translateY(-10px) rotate(8deg); }
+    25% { transform: scale(1) translateY(-20px) rotate(0); }
+    100% { opacity: 1; transform: scale(1) translateY(-120px) rotate(10deg); }
+  }
+  .swirl { left: 450px; top: 660px; width: 180px; height: 180px; opacity: 0;
+    animation: fadeIn .3s ease-out 1.4s 1 both, spin 1s linear 1.4s 4; }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .hook-bubble {
+    left: 70px; right: 70px; top: 170px; padding: 46px 40px 40px;
+    background: var(--white); color: var(--ink); border-radius: 48px;
+    font-size: 92px; line-height: 1.18; font-weight: 800; text-align: center;
+    box-shadow: 0 22px 0 var(--pink), 0 40px 80px rgba(0,0,0,.45);
+    transform-origin: 50% 100%;
+    animation: bubblePop .55s cubic-bezier(.2,1.6,.4,1) .9s 1 both;
+  }
+  .hook-bubble::after {
+    content: ''; position: absolute; left: 50%; bottom: -60px; margin-left: -40px;
+    border: 40px solid transparent; border-top: 50px solid var(--white);
+  }
+  .hook-bubble .hl { color: var(--pink); }
+  .hook-bubble .emoji { font-family: 'Noto Color Emoji', 'Apple Color Emoji', 'Segoe UI Emoji', sans-serif; font-size: 100px; display: inline-block;
+    animation: wobble .4s ease-in-out 1.5s 6; }
+  @keyframes bubblePop { 0% { opacity: 0; transform: scale(.2) rotate(-6deg); } 100% { opacity: 1; transform: scale(1) rotate(0); } }
+  @keyframes wobble { 0%,100% { transform: rotate(0) scale(1); } 50% { transform: rotate(14deg) scale(1.15); } }
+
+  /* glitch transition 4.5s - 5.2s */
+  .glitch { position: absolute; inset: 0; pointer-events: none; opacity: 0; z-index: 50;
+    animation: glitchOn .75s steps(1) 4.45s 1 both; }
+  .glitch div { position: absolute; left: 0; right: 0; mix-blend-mode: screen; }
+  .glitch .g1 { top: 12%; height: 9%; background: rgba(45,226,230,.85); transform: translateX(-40px); }
+  .glitch .g2 { top: 38%; height: 5%; background: rgba(255,61,127,.85); transform: translateX(60px); }
+  .glitch .g3 { top: 57%; height: 13%; background: rgba(255,210,63,.7); transform: translateX(-80px); }
+  .glitch .g4 { top: 81%; height: 6%; background: rgba(255,255,255,.8); transform: translateX(30px); }
+  @keyframes glitchOn {
+    0% { opacity: 0; }
+    1% { opacity: 1; transform: translateX(0); }
+    15% { opacity: 0; }
+    25% { opacity: 1; transform: translateX(-30px) scaleY(1.2); }
+    40% { opacity: 1; transform: translateX(40px); filter: hue-rotate(90deg); }
+    55% { opacity: 0; }
+    65% { opacity: 1; transform: translateX(-20px) scaleY(.8); filter: hue-rotate(200deg); }
+    85% { opacity: 1; transform: translateX(10px); }
+    100% { opacity: 0; }
+  }
+  #stage { animation: stageGlitch .75s steps(1) 4.45s 1 both; }
+  @keyframes stageGlitch {
+    0% { filter: none; transform: var(--fit) translateX(0); }
+    25% { filter: saturate(3) contrast(1.4); transform: var(--fit) translateX(-14px); }
+    50% { filter: invert(1); transform: var(--fit) translateX(14px); }
+    75% { filter: saturate(3) hue-rotate(120deg); transform: var(--fit) translateX(-6px); }
+    100% { filter: none; transform: var(--fit) translateX(0); }
+  }
+
+  /* ================= LOGO (5s onwards) ================= */
+  .logo {
+    left: 40px; top: 40px; display: flex; align-items: center; gap: 16px;
+    padding: 14px 26px 14px 14px; border-radius: 999px;
+    background: rgba(255,255,255,.12); border: 2px solid rgba(255,255,255,.25);
+    backdrop-filter: blur(6px); z-index: 40; opacity: 0;
+    animation: logoIn .6s cubic-bezier(.2,1.4,.4,1) 5.1s 1 both;
+  }
+  .logo .mark { width: 92px; height: 92px; border-radius: 50%; background: #fff;
+    box-shadow: 0 0 0 4px var(--yellow); display: grid; place-items: center; overflow: hidden; }
+  .logo .mark img { height: 78px; width: auto; }
+  .logo .name { font-family: 'Poppins'; font-weight: 800; font-size: 30px; line-height: 1.05; }
+  .logo .name small { display: block; font-size: 20px; font-weight: 700; color: var(--yellow); letter-spacing: 2px; }
+  @keyframes logoIn { 0% { opacity: 0; transform: translateX(-120px) scale(.6); } 100% { opacity: 1; transform: none; } }
+
+  /* ================= SCENE 2: STAGES + TRICK 5-15s ================= */
+  #s2 { animation: s2on 10s linear 5s 1 both; }
+  @keyframes s2on { 0% { opacity: 1; } 97% { opacity: 1; } 100% { opacity: 0; } }
+  .s2-title { top: 190px; font-size: 64px; font-weight: 800; color: var(--yellow); opacity: 0;
+    animation: dropIn .5s cubic-bezier(.2,1.5,.4,1) 5.3s 1 both; }
+  .s2-title small { display: block; font-size: 40px; color: #cfc6ff; font-weight: 600; }
+  @keyframes dropIn { 0% { opacity: 0; transform: translateY(-80px); } 100% { opacity: 1; transform: none; } }
+
+  .stage-list { left: 90px; right: 90px; top: 400px; display: flex; flex-direction: column; gap: 22px;
+    animation: listShrink .6s ease-in-out 10.6s 1 both; transform-origin: 50% 0; }
+  @keyframes listShrink { to { transform: scale(.78) translateY(-30px); opacity: .55; } }
+  .stage-card {
+    display: flex; align-items: center; gap: 28px; padding: 22px 34px;
+    border-radius: 30px; background: rgba(255,255,255,.08); border: 3px solid rgba(255,255,255,.18);
+    opacity: 0;
+  }
+  .stage-card .num { flex: 0 0 86px; height: 86px; border-radius: 24px; display: grid; place-items: center;
+    font-family: 'Poppins'; font-weight: 900; font-size: 50px; color: var(--ink); }
+  .stage-card .bn { font-size: 66px; font-weight: 800; line-height: 1.1; }
+  .stage-card .en { font-family: 'Poppins'; font-size: 32px; font-weight: 700; color: #cfc6ff; }
+  .c1 .num { background: var(--cyan); } .c2 .num { background: var(--yellow); } .c3 .num { background: var(--red); color: #fff; }
+  .c4 .num { background: #8be36c; } .c5 .num { background: #c08bff; }
+  .stage-list .c1 { animation: cardIn .45s cubic-bezier(.2,1.5,.4,1) 5.8s 1 both; }
+  .stage-list .c2 { animation: cardIn .45s cubic-bezier(.2,1.5,.4,1) 6.7s 1 both; }
+  .stage-list .c3 { animation: cardIn .45s cubic-bezier(.2,1.5,.4,1) 7.6s 1 both; }
+  .stage-list .c4 { animation: cardIn .45s cubic-bezier(.2,1.5,.4,1) 8.5s 1 both; }
+  .stage-list .c5 { animation: cardIn .45s cubic-bezier(.2,1.5,.4,1) 9.4s 1 both; }
+  @keyframes cardIn { 0% { opacity: 0; transform: translateX(300px) scale(.8); } 100% { opacity: 1; transform: none; } }
+
+  .trick-card {
+    left: 60px; right: 60px; top: 1180px; padding: 40px 30px 46px; text-align: center;
+    border-radius: 44px; background: linear-gradient(135deg, var(--yellow), #ffb02e);
+    color: var(--ink); box-shadow: 0 20px 0 #c26a00, 0 40px 90px rgba(0,0,0,.5);
+    opacity: 0;
+    animation: trickIn .7s cubic-bezier(.2,1.6,.4,1) 11s 1 both, floaty 2s ease-in-out 11.7s 2;
+  }
+  .trick-card .tag { display: inline-block; font-size: 38px; font-weight: 800; padding: 6px 26px; border-radius: 999px;
+    background: var(--ink); color: var(--yellow); margin-bottom: 16px; }
+  .trick-card .en { font-family: 'Poppins'; font-weight: 900; font-size: 74px; line-height: 1.1; letter-spacing: -1px; }
+  .trick-card .bn { white-space: nowrap; font-size: 64px; font-weight: 800; line-height: 1.15; margin-top: 10px; color: #6a0d3a; }
+  @keyframes trickIn { 0% { opacity: 0; transform: translateY(400px) rotate(8deg) scale(.6); } 100% { opacity: 1; transform: none; } }
+  @keyframes floaty { 0%,100% { transform: translateY(0) rotate(0); } 50% { transform: translateY(-22px) rotate(-1deg); } }
+
+  /* ================= SCENE 3: MATCH + CROSSING OVER 15-24s ================= */
+  #s3 { animation: s3on 9s linear 15s 1 both; }
+  @keyframes s3on { 0% { opacity: 0; } 3% { opacity: 1; } 97% { opacity: 1; } 100% { opacity: 0; } }
+  .match { left: 50px; right: 50px; top: 180px; display: flex; flex-direction: column; gap: 14px;
+    animation: matchUp .6s ease-in-out 19.7s 1 both; transform-origin: 50% 0; }
+  @keyframes matchUp { to { transform: translateY(-40px) scale(.86); } }
+  .mrow { display: grid; grid-template-columns: 330px 80px 1fr; align-items: center;
+    padding: 12px 22px; border-radius: 26px; background: rgba(255,255,255,.07); opacity: 0;
+    transform-origin: 50% 50%; }
+  .mrow .w { font-family: 'Poppins'; font-weight: 900; font-size: 54px; color: var(--yellow); line-height: 1; }
+  .mrow .w small { display: block; font-family: 'Baloo Da 2'; font-size: 34px; font-weight: 700; color: #ffe9a8; margin-top: 4px; }
+  .mrow .arrow { font-family: 'Poppins'; font-size: 54px; font-weight: 900; color: var(--cyan); opacity: 0; }
+  .mrow .s { font-size: 50px; font-weight: 800; line-height: 1.05; opacity: 0; }
+  .mrow .s small { display: block; font-family: 'Poppins'; font-size: 28px; color: #cfc6ff; font-weight: 700; }
+  .m1 { animation: rowIn .35s ease-out 15.3s 1 both, dimRow .4s ease 19.2s 1 forwards; }
+  .m2 { animation: rowIn .35s ease-out 15.5s 1 both, dimRow .4s ease 19.2s 1 forwards; }
+  .m3 { animation: rowIn .35s ease-out 15.7s 1 both, pakay .6s cubic-bezier(.2,1.6,.4,1) 19.1s 1 forwards; }
+  .m4 { animation: rowIn .35s ease-out 15.9s 1 both, dimRow .4s ease 19.2s 1 forwards; }
+  .m5 { animation: rowIn .35s ease-out 16.1s 1 both, dimRow .4s ease 19.2s 1 forwards; }
+  .m1 .arrow, .m1 .s { animation: matchIn .4s ease-out 16.6s 1 both; }
+  .m2 .arrow, .m2 .s { animation: matchIn .4s ease-out 17.1s 1 both; }
+  .m3 .arrow, .m3 .s { animation: matchIn .4s ease-out 17.6s 1 both; }
+  .m4 .arrow, .m4 .s { animation: matchIn .4s ease-out 18.1s 1 both; }
+  .m5 .arrow, .m5 .s { animation: matchIn .4s ease-out 18.6s 1 both; }
+  @keyframes rowIn { 0% { opacity: 0; transform: translateX(-200px); } 100% { opacity: 1; transform: none; } }
+  @keyframes matchIn { 0% { opacity: 0; transform: translateX(80px); } 100% { opacity: 1; transform: none; } }
+  @keyframes dimRow { to { opacity: .28; transform: scale(.94); } }
+  @keyframes pakay {
+    0% { opacity: 1; transform: scale(1); background: rgba(255,255,255,.07); box-shadow: none; }
+    100% { opacity: 1; transform: scale(1.1); background: var(--red); box-shadow: 0 0 0 8px #fff, 0 0 70px 10px rgba(255,59,59,.8); }
+  }
+  .m3 .w, .m3 .w small, .m3 .s small { transition: none; }
+  .m3 .w { animation: whiten .3s linear 19.2s 1 forwards; }
+  @keyframes whiten { to { color: #fff; } }
+
+  .xo-panel { left: 60px; right: 60px; top: 960px; height: 880px; border-radius: 48px;
+    background: rgba(8,5,30,.65); border: 3px solid rgba(255,255,255,.18); opacity: 0;
+    animation: panelIn .5s cubic-bezier(.2,1.4,.4,1) 19.8s 1 both; }
+  @keyframes panelIn { 0% { opacity: 0; transform: translateY(200px) scale(.9); } 100% { opacity: 1; transform: none; } }
+  .xo-panel h3 { position: absolute; left: 0; right: 0; top: 26px; text-align: center; font-size: 54px; font-weight: 800; }
+  .xo-panel h3 span { color: var(--red); }
+  .xo-panel svg { position: absolute; left: 0; top: 0; width: 960px; height: 880px; overflow: visible; }
+  .xo-panel svg text { font-family: 'Baloo Da 2', sans-serif; }
+
+  /* chromosome motion */
+  .homo-blue { animation: pairBlue .7s ease-in-out 20.3s 1 both, sepBlue .6s ease-in-out 23s 1 forwards; }
+  .homo-red  { animation: pairRed .7s ease-in-out 20.3s 1 both, sepRed .6s ease-in-out 23s 1 forwards; }
+  @keyframes pairBlue { from { transform: translateX(-140px); } to { transform: translateX(0); } }
+  @keyframes pairRed  { from { transform: translateX(140px); } to { transform: translateX(0); } }
+  @keyframes sepBlue { from { transform: translateX(0); } to { transform: translateX(-60px); } }
+  @keyframes sepRed  { from { transform: translateX(0); } to { transform: translateX(60px); } }
+  .tip { transform-box: fill-box; transform-origin: 50% 100%; }
+  .tip-blue { animation: pairBlue .7s ease-in-out 20.3s 1 both, swapBlue 2s ease-in-out 21s 1 forwards; }
+  .tip-red  { animation: pairRed .7s ease-in-out 20.3s 1 both, swapRed 2s ease-in-out 21s 1 forwards; }
+  @keyframes swapBlue {
+    0%   { transform: translateX(0) skewX(0deg); }
+    35%  { transform: translateX(0) skewX(-18.4deg); }
+    65%  { transform: translateX(0) skewX(-18.4deg); }
+    100% { transform: translateX(60px) skewX(0deg); }
+  }
+  @keyframes swapRed {
+    0%   { transform: translateX(0) skewX(0deg); }
+    35%  { transform: translateX(0) skewX(18.4deg); }
+    65%  { transform: translateX(0) skewX(18.4deg); }
+    100% { transform: translateX(-60px) skewX(0deg); }
+  }
+  /* after the swap the tips move with their new homolog */
+  .tipwrap-blue { animation: sepRed .6s ease-in-out 23s 1 forwards; }
+  .tipwrap-red  { animation: sepBlue .6s ease-in-out 23s 1 forwards; }
+  .chiasma { opacity: 0; transform-box: fill-box; transform-origin: center;
+    animation: chiOn 1.4s ease-out 21.6s 1 both; }
+  @keyframes chiOn { 0% { opacity: 0; transform: scale(.2); } 20% { opacity: 1; transform: scale(1.25); } 30% { transform: scale(1); } 80% { opacity: 1; } 100% { opacity: 0; } }
+  .chi-label { opacity: 0; animation: labelIn .4s ease-out 21.8s 1 both, fadeOut .4s ease 23s 1 forwards; }
+  .done-label { opacity: 0; animation: labelIn .4s ease-out 23.3s 1 both; }
+  .pair-label { opacity: 0; animation: labelIn .3s ease-out 20.3s 1 both, fadeOut .3s ease 21.4s 1 forwards; }
+  @keyframes labelIn { 0% { opacity: 0; transform: translateY(20px); } 100% { opacity: 1; transform: none; } }
+  @keyframes fadeOut { to { opacity: 0; } }
+  .tip-glow rect { animation: glowPulse .5s ease-in-out 23.3s 2 alternate; }
+  @keyframes glowPulse { to { filter: drop-shadow(0 0 16px #fff) brightness(1.3); } }
+
+  /* ================= SCENE 4: CTA 24-30s ================= */
+  #s4 { animation: s4on 6s linear 24s 1 both; }
+  @keyframes s4on { 0% { opacity: 0; } 5% { opacity: 1; } 100% { opacity: 1; } }
+  .rays { left: 50%; top: 760px; width: 2400px; height: 2400px; margin: -1200px 0 0 -1200px;
+    background: repeating-conic-gradient(rgba(255,210,63,.13) 0 10deg, transparent 10deg 20deg);
+    border-radius: 50%; animation: spin 12s linear 24s 1 both; }
+  .ribbon { top: 230px; left: 50%; width: 760px; margin-left: -380px; text-align: center;
+    font-size: 58px; font-weight: 800; color: var(--ink); background: var(--yellow);
+    padding: 14px 0 6px; border-radius: 20px; transform: rotate(-3deg); opacity: 0;
+    animation: ribbonIn .5s cubic-bezier(.2,1.6,.4,1) 24.3s 1 both; }
+  @keyframes ribbonIn { 0% { opacity: 0; transform: rotate(-3deg) scale(2.2); } 100% { opacity: 1; transform: rotate(-3deg) scale(1); } }
+  .banner {
+    left: 70px; right: 70px; top: 420px; padding: 60px 40px 56px; border-radius: 56px; text-align: center;
+    background: linear-gradient(160deg, #ff3d7f, #7b2ff7 60%, #3a86ff);
+    box-shadow: 0 30px 100px rgba(123,47,247,.7), inset 0 0 0 6px rgba(255,255,255,.25);
+    opacity: 0; animation: bannerIn .7s cubic-bezier(.2,1.4,.4,1) 24.6s 1 both;
+  }
+  @keyframes bannerIn { 0% { opacity: 0; transform: translateY(300px) scale(.7); } 100% { opacity: 1; transform: none; } }
+  .banner .hsc { font-family: 'Poppins'; font-weight: 900; font-size: 128px; line-height: 1; letter-spacing: -2px; }
+  .banner .bio { font-family: 'Poppins'; font-weight: 800; font-size: 84px; line-height: 1.1; color: var(--yellow); }
+  .banner .free { display: inline-block; margin-top: 34px; padding: 18px 54px; border-radius: 999px;
+    font-family: 'Poppins'; font-weight: 900; font-size: 92px; color: var(--ink); background: #fff;
+    animation: glow 1s ease-in-out 25.3s 5 alternate; }
+  @keyframes glow {
+    from { box-shadow: 0 0 0 0 rgba(255,210,63,.0), 0 0 20px rgba(255,255,255,.4); transform: scale(1); }
+    to   { box-shadow: 0 0 0 16px rgba(255,210,63,.55), 0 0 110px 30px rgba(255,210,63,.9); transform: scale(1.06); }
+  }
+  .banner .brand { display: inline-flex; align-items: center; gap: 22px; margin-top: 36px; padding: 16px 34px 16px 22px;
+    border-radius: 30px; background: #fff; color: #1f5fae; text-align: left; font-size: 50px; font-weight: 800; line-height: 1.05; }
+  .banner .brand img { height: 130px; width: auto; }
+  .banner .brand small { display: block; font-family: 'Poppins'; font-size: 26px; font-weight: 700; color: #3b73b9; letter-spacing: 1px; margin-top: 6px; }
+  .contact { left: 70px; right: 70px; top: 1330px; display: flex; flex-direction: column; gap: 22px; }
+  .contact .item { display: flex; align-items: center; gap: 26px; padding: 26px 34px; border-radius: 34px;
+    background: rgba(255,255,255,.1); border: 3px solid rgba(255,255,255,.2); font-size: 48px; font-weight: 700; line-height: 1.2; opacity: 0; }
+  .contact .ic { flex: 0 0 90px; height: 90px; border-radius: 26px; display: grid; place-items: center; background: var(--yellow); }
+  .contact .ic svg { width: 54px; height: 54px; }
+  .contact .i1 { animation: cardIn .5s cubic-bezier(.2,1.5,.4,1) 25.4s 1 both; }
+  .contact .i2 { animation: cardIn .5s cubic-bezier(.2,1.5,.4,1) 25.8s 1 both; }
+  .cta-foot { top: 1740px; font-size: 46px; font-weight: 800; color: var(--yellow); opacity: 0;
+    animation: labelIn .4s ease-out 26.4s 1 both, floaty 1.4s ease-in-out 26.8s 2; }
+
+  /* ---------- progress bar on the stage ---------- */
+  .bar { position: absolute; left: 0; bottom: 0; height: 12px; width: 100%; background: linear-gradient(90deg, var(--cyan), var(--pink), var(--yellow));
+    transform-origin: 0 50%; animation: grow 30s linear 0s 1 both; z-index: 60; }
+  @keyframes grow { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+
+  /* start overlay */
+  #startOverlay { position: absolute; inset: 0; z-index: 100; display: grid; place-items: center;
+    background: rgba(7,5,26,.55); cursor: pointer; }
+  #startOverlay .play { width: 260px; height: 260px; border-radius: 50%; background: var(--yellow);
+    display: grid; place-items: center; box-shadow: 0 0 0 26px rgba(255,210,63,.25); }
+  #startOverlay .play::after { content: ''; margin-left: 30px; border-left: 110px solid var(--ink);
+    border-top: 66px solid transparent; border-bottom: 66px solid transparent; }
+  body.record #startOverlay { display: none; }
+
+  /* ---------- page controls (outside the reel) ---------- */
+  .controls { width: min(560px, 100%); display: flex; flex-direction: column; gap: 10px; font-family: 'Hind Siliguri', sans-serif; }
+  .row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .controls button, .controls label.btn {
+    background: #241a5c; color: #fff; border: 1px solid #3d3190; border-radius: 12px;
+    padding: 8px 14px; font: 600 15px 'Hind Siliguri', sans-serif; cursor: pointer;
+  }
+  .controls button:hover, .controls label.btn:hover { background: #31247a; }
+  .controls button.on { background: #ffd23f; color: #1b1440; border-color: #ffd23f; }
+  #scrub { flex: 1; accent-color: #ffd23f; min-width: 140px; }
+  #time { font: 600 14px ui-monospace, monospace; color: #cfc6ff; min-width: 92px; text-align: right; }
+  .hint { font-size: 13px; color: #9a92c9; }
+</style>
+</head>
+<body>
+
+<div class="viewport" id="viewport">
+<div id="stage">
+  <div class="bg-dots"></div>
+
+  <!-- ===== SCENE 1: HOOK ===== -->
+  <section class="scene" id="s1">
+    <div class="flash"></div>
+    <svg class="abs swirl" viewBox="0 0 100 100" aria-hidden="true">
+      <path d="M50 50 m0 -6 a6 6 0 1 1 -6 6 a12 12 0 1 1 12 12 a18 18 0 1 1 -18 -18 a24 24 0 1 1 24 24"
+            fill="none" stroke="#2de2e6" stroke-width="5" stroke-linecap="round"/>
+    </svg>
+    <div class="abs qm qm1">?</div>
+    <div class="abs qm qm2">?</div>
+    <div class="abs qm qm3">?</div>
+
+    <!-- confused student reading a book -->
+    <svg class="abs student" viewBox="0 0 700 900" aria-hidden="true">
+      <!-- body -->
+      <path d="M150 900 C150 650 230 560 350 560 C470 560 550 650 550 900 Z" fill="#3a86ff"/>
+      <path d="M300 560 L350 640 L400 560 Z" fill="#fff"/>
+      <!-- neck -->
+      <rect x="320" y="500" width="60" height="70" rx="20" fill="#e0a07a"/>
+      <!-- head -->
+      <circle cx="350" cy="380" r="150" fill="#f2b48c"/>
+      <!-- hair -->
+      <path d="M200 370 C190 230 290 190 360 200 C450 205 520 260 505 360 C470 300 420 290 380 280 C340 300 270 300 230 330 Z" fill="#2b1b12"/>
+      <!-- ears -->
+      <circle cx="202" cy="395" r="26" fill="#e7a47d"/><circle cx="498" cy="395" r="26" fill="#e7a47d"/>
+      <!-- swirly eyes -->
+      <g fill="none" stroke="#1b1440" stroke-width="7" stroke-linecap="round">
+        <path d="M290 385 m0 -4 a4 4 0 1 1 -4 4 a10 10 0 1 1 10 10 a17 17 0 1 1 -17 -17"/>
+        <path d="M410 385 m0 -4 a4 4 0 1 1 -4 4 a10 10 0 1 1 10 10 a17 17 0 1 1 -17 -17"/>
+      </g>
+      <!-- eyebrows (worried) -->
+      <path d="M255 335 L320 350" stroke="#2b1b12" stroke-width="10" stroke-linecap="round"/>
+      <path d="M445 335 L380 350" stroke="#2b1b12" stroke-width="10" stroke-linecap="round"/>
+      <!-- wavy mouth -->
+      <path d="M305 460 q15 -14 30 0 t30 0 t30 0" fill="none" stroke="#1b1440" stroke-width="8" stroke-linecap="round"/>
+      <!-- sweat drop -->
+      <path d="M500 300 C490 320 485 335 500 342 C515 335 510 320 500 300 Z" fill="#7fe3ff"/>
+      <!-- open book -->
+      <g transform="translate(350 760)">
+        <path d="M-230 -60 L0 -20 L0 120 L-230 80 Z" fill="#fff" stroke="#1b1440" stroke-width="6"/>
+        <path d="M230 -60 L0 -20 L0 120 L230 80 Z" fill="#fff" stroke="#1b1440" stroke-width="6"/>
+        <g stroke="#9aa3c7" stroke-width="6" stroke-linecap="round">
+          <path d="M-200 -30 L-30 0"/><path d="M-200 0 L-30 30"/><path d="M-200 30 L-30 60"/>
+          <path d="M200 -30 L30 0"/><path d="M200 0 L30 30"/><path d="M200 30 L30 60"/>
+        </g>
+        <text x="-118" y="-60" font-family="Poppins" font-weight="900" font-size="44" fill="#ff3d7f" transform="rotate(10 -118 -60)">X</text>
+        <!-- hands -->
+        <circle cx="-235" cy="20" r="34" fill="#f2b48c"/><circle cx="235" cy="20" r="34" fill="#f2b48c"/>
+      </g>
+    </svg>
+
+    <div class="abs hook-bubble">ক্রসিং ওভার কি <span class="hl">মাথার ওপর</span> দিয়ে যাচ্ছে? <span class="emoji">🤯</span></div>
+  </section>
+
+  <!-- ===== LOGO ===== -->
+  <div class="abs logo">
+    <div class="mark"><img src="spriha-logo.png" alt="স্পৃহা লোগো"></div>
+    <div class="name">Spriha<small>EDUCATION CARE</small></div>
+  </div>
+
+  <!-- ===== SCENE 2: 5 STAGES + TRICK ===== -->
+  <section class="scene" id="s2">
+    <div class="abs center-x s2-title">প্রোফেজ-১ এর ৫টি উপপর্যায়<small>Meiosis I · Prophase I</small></div>
+    <div class="abs stage-list">
+      <div class="stage-card c1"><div class="num">1</div><div><div class="bn">লেপ্টোটিন</div><div class="en">Leptotene</div></div></div>
+      <div class="stage-card c2"><div class="num">2</div><div><div class="bn">জাইগোটিন</div><div class="en">Zygotene</div></div></div>
+      <div class="stage-card c3"><div class="num">3</div><div><div class="bn">প্যাকাইটিন</div><div class="en">Pachytene</div></div></div>
+      <div class="stage-card c4"><div class="num">4</div><div><div class="bn">ডিপ্লোটিন</div><div class="en">Diplotene</div></div></div>
+      <div class="stage-card c5"><div class="num">5</div><div><div class="bn">ডায়াকাইনেসিস</div><div class="en">Diakinesis</div></div></div>
+    </div>
+    <div class="abs trick-card">
+      <div class="tag">মনে রাখার ট্রিক 😎</div>
+      <div class="en">Lezy Zeba Pakay Dim Din-din</div>
+      <div class="bn">লেজি জেবা পাকায় ডিম দিন-দিন</div>
+    </div>
+  </section>
+
+  <!-- ===== SCENE 3: MATCH + CROSSING OVER ===== -->
+  <section class="scene" id="s3">
+    <div class="abs match">
+      <div class="mrow m1"><div class="w">Lezy<small>লেজি</small></div><div class="arrow">→</div><div class="s">লেপ্টোটিন<small>Leptotene</small></div></div>
+      <div class="mrow m2"><div class="w">Zeba<small>জেবা</small></div><div class="arrow">→</div><div class="s">জাইগোটিন<small>Zygotene</small></div></div>
+      <div class="mrow m3"><div class="w">Pakay<small>পাকায়</small></div><div class="arrow">→</div><div class="s">প্যাকাইটিন<small>Pachytene</small></div></div>
+      <div class="mrow m4"><div class="w">Dim<small>ডিম</small></div><div class="arrow">→</div><div class="s">ডিপ্লোটিন<small>Diplotene</small></div></div>
+      <div class="mrow m5"><div class="w">Din-din<small>দিন-দিন</small></div><div class="arrow">→</div><div class="s">ডায়াকাইনেসিস<small>Diakinesis</small></div></div>
+    </div>
+
+    <div class="abs xo-panel">
+      <h3><span>প্যাকাইটিনে</span> ঘটে ক্রসিং ওভার!</h3>
+      <svg viewBox="0 0 960 880" aria-hidden="true">
+        <defs>
+          <linearGradient id="gB" x1="0" x2="1"><stop offset="0" stop-color="#5fa0ff"/><stop offset="1" stop-color="#2f6fe0"/></linearGradient>
+          <linearGradient id="gR" x1="0" x2="1"><stop offset="0" stop-color="#ff6b6b"/><stop offset="1" stop-color="#d92626"/></linearGradient>
+        </defs>
+        <!-- Pairing coordinates: blue chromatids x=380,430 ; red x=490,540 ; width 40 ; y 200..760 ; exchange point y=380 -->
+        <g class="homo-blue">
+          <rect x="380" y="200" width="40" height="560" rx="20" fill="url(#gB)"/>
+          <rect x="430" y="380" width="40" height="380" rx="20" fill="url(#gB)"/>
+          <rect x="430" y="380" width="40" height="40" fill="url(#gB)"/>
+          <ellipse cx="425" cy="540" rx="58" ry="16" fill="#0b2a66" opacity=".55"/>
+        </g>
+        <g class="homo-red">
+          <rect x="540" y="200" width="40" height="560" rx="20" fill="url(#gR)"/>
+          <rect x="490" y="380" width="40" height="380" rx="20" fill="url(#gR)"/>
+          <rect x="490" y="380" width="40" height="40" fill="url(#gR)"/>
+          <ellipse cx="535" cy="540" rx="58" ry="16" fill="#661010" opacity=".55"/>
+        </g>
+        <!-- exchanging tips of the inner (non-sister) chromatids -->
+        <g class="tipwrap-blue"><g class="tip tip-blue tip-glow"><rect x="430" y="200" width="40" height="190" rx="20" fill="url(#gB)"/><rect x="430" y="360" width="40" height="30" fill="url(#gB)"/></g></g>
+        <g class="tipwrap-red"><g class="tip tip-red tip-glow"><rect x="490" y="200" width="40" height="190" rx="20" fill="url(#gR)"/><rect x="490" y="360" width="40" height="30" fill="url(#gR)"/></g></g>
+
+        <!-- chiasma marker -->
+        <g class="chiasma">
+          <circle cx="480" cy="300" r="62" fill="none" stroke="#ffd23f" stroke-width="8" stroke-dasharray="14 10"/>
+        </g>
+        <g class="chi-label">
+          <path d="M560 300 L660 300" stroke="#ffd23f" stroke-width="6" stroke-linecap="round"/>
+          <text x="670" y="290" font-size="52" font-weight="800" fill="#ffd23f">কায়াজমা</text>
+          <text x="672" y="336" font-size="34" font-weight="700" fill="#fff" font-family="Poppins">Chiasma (X)</text>
+        </g>
+        <g class="pair-label">
+          <text x="480" y="830" text-anchor="middle" font-size="44" font-weight="700" fill="#cfc6ff">হোমোলোগাস ক্রোমোজোম জোড়া বাঁধছে</text>
+        </g>
+        <g class="done-label">
+          <text x="480" y="830" text-anchor="middle" font-size="48" font-weight="800" fill="#fff">অংশ বিনিময় সম্পন্ন! 🔁 = নতুন বৈচিত্র্য</text>
+        </g>
+        <text x="60" y="160" font-size="34" font-weight="700" fill="#8fb8ff" class="pair-label">পিতৃ (Paternal)</text>
+        <text x="900" y="160" font-size="34" font-weight="700" fill="#ff9a9a" text-anchor="end" class="pair-label">মাতৃ (Maternal)</text>
+      </svg>
+    </div>
+  </section>
+
+  <!-- ===== SCENE 4: CTA ===== -->
+  <section class="scene" id="s4">
+    <div class="abs rays"></div>
+    <div class="abs ribbon">🎉 নতুন ব্যাচ শুরু!</div>
+    <div class="abs banner">
+      <div class="hsc">HSC-28</div>
+      <div class="bio">Biology</div>
+      <div class="free">FREE CLASS</div>
+      <div class="brand"><img src="spriha-logo.png" alt="স্পৃহা লোগো"><div>স্পৃহা এডুকেশন কেয়ার<small>Spriha Education Care</small></div></div>
+    </div>
+    <div class="abs contact">
+      <div class="item i1">
+        <div class="ic"><svg viewBox="0 0 24 24"><path fill="#1b1440" d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg></div>
+        <div id="ctaAddress"></div>
+      </div>
+      <div class="item i2">
+        <div class="ic"><svg viewBox="0 0 24 24"><path fill="#1b1440" d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg></div>
+        <div id="ctaPhone"></div>
+      </div>
+    </div>
+    <div class="abs center-x cta-foot">আজই সিট বুক করো! 👆</div>
+  </section>
+
+  <div class="glitch"><div class="g1"></div><div class="g2"></div><div class="g3"></div><div class="g4"></div></div>
+  <div class="bar"></div>
+  <div id="startOverlay" aria-label="Play"><div class="play"></div></div>
+</div>
+</div>
+
+<div class="controls">
+  <div class="row">
+    <button id="playBtn">▶ চালাও</button>
+    <button id="restartBtn">⟲ আবার</button>
+    <input id="scrub" type="range" min="0" max="30" step="0.01" value="0" aria-label="সময়">
+    <span id="time">0.0 / 30.0</span>
+  </div>
+  <div class="row">
+    <button id="sfxBtn" class="on">সাউন্ড ইফেক্ট</button>
+    <button id="voBtn" class="on">ভয়েসওভার</button>
+    <label class="btn">অন্য ভয়েসওভার <input id="voFile" type="file" accept="audio/*" hidden></label>
+  </div>
+  <div class="hint" id="hint"></div>
+</div>
+
+<audio id="vo" src="voiceover.mp3" preload="auto"></audio>
+
+<script>
+/* ===================== EDIT HERE ===================== */
+const CONFIG = {
+  address: 'সেক্টর-০৬, রোড-১০, হাউজ-৩৪, উত্তরা, ঢাকা',
+  phone: '01341-629475',
+  // The voiceover is longer than 30s. Each pair maps a moment in the voiceover (seconds)
+  // to a moment in the reel's 30s timeline, so scenes start when the narration reaches them.
+  // [voiceover second, reel second]
+  voMarks: [[0, 0], [4.8, 5], [26.0, 15], [41.8, 24], [51.6, 30]],
+};
+/* ===================================================== */
+
+const REEL = 30;
+const stage = document.getElementById('stage');
+const viewport = document.getElementById('viewport');
+const vo = document.getElementById('vo');
+const scrub = document.getElementById('scrub');
+const timeEl = document.getElementById('time');
+const playBtn = document.getElementById('playBtn');
+const hint = document.getElementById('hint');
+const params = new URLSearchParams(location.search);
+if (params.has('record')) document.body.classList.add('record');
+
+document.getElementById('ctaAddress').textContent = CONFIG.address;
+document.getElementById('ctaPhone').textContent = CONFIG.phone;
+
+/* ---- fit the 1080x1920 stage into the window ---- */
+function fit() {
+  const rec = document.body.classList.contains('record');
+  const availH = window.innerHeight - (rec ? 0 : 150);
+  const availW = window.innerWidth - (rec ? 0 : 32);
+  const s = Math.min(availW / 1080, availH / 1920);
+  stage.style.setProperty('--fit', `scale(${s})`);
+  stage.style.transform = `scale(${s})`;
+  viewport.style.width = 1080 * s + 'px';
+  viewport.style.height = 1920 * s + 'px';
+}
+window.addEventListener('resize', fit); fit();
+
+/* ---- timeline: every CSS animation is paused and driven from one clock ---- */
+let anims = [];
+function collect() {
+  anims = document.getAnimations().filter(a => stage.contains(a.effect && a.effect.target));
+  anims.forEach(a => a.pause());
+}
+function render(t) {
+  const ms = t * 1000;
+  for (const a of anims) a.currentTime = ms;
+  scrub.value = t;
+  timeEl.textContent = `${t.toFixed(1)} / ${REEL.toFixed(1)}`;
+}
+
+/* voiceover time <-> reel time (piecewise linear) */
+function mapPts(x, pts, from, to) {
+  if (x <= pts[0][from]) return pts[0][to];
+  for (let i = 1; i < pts.length; i++) {
+    const a = pts[i - 1], b = pts[i];
+    if (x <= b[from]) return a[to] + (x - a[from]) * (b[to] - a[to]) / (b[from] - a[from]);
+  }
+  return pts[pts.length - 1][to];
+}
+let voReady = false, voOn = true;
+const voToReel = x => mapPts(x, CONFIG.voMarks, 0, 1);
+const reelToVo = x => mapPts(x, CONFIG.voMarks, 1, 0);
+function setVoMarksFor(duration) {
+  // a newly loaded file: map its whole length onto the reel proportionally
+  CONFIG.voMarks = [[0, 0], [duration, REEL]];
+}
+vo.addEventListener('loadedmetadata', () => { voReady = true; updateHint(); });
+vo.addEventListener('error', () => { voReady = false; updateHint(); });
+function useVo() { return voOn && voReady; }
+function updateHint() {
+  hint.textContent = useVo()
+    ? `ভয়েসওভার ${vo.duration.toFixed(1)}s, রিলের ৩০s টাইমলাইনের সাথে সিঙ্ক করা।`
+    : 'ভয়েসওভার ছাড়া ৩০ সেকেন্ডের রিল।';
+}
+
+/* ---- sound effects (Web Audio, no files needed) ---- */
+let ac = null, sfxOn = true;
+function audio() { if (!ac) ac = new (window.AudioContext || window.webkitAudioContext)(); return ac; }
+function noiseBuf(len) {
+  const c = audio(), b = c.createBuffer(1, c.sampleRate * len, c.sampleRate), d = b.getChannelData(0);
+  for (let i = 0; i < d.length; i++) d[i] = Math.random() * 2 - 1;
+  return b;
+}
+const SFX = {
+  whoosh(dur = .7, vol = .5) {
+    const c = audio(), n = c.createBufferSource(), f = c.createBiquadFilter(), g = c.createGain(), t = c.currentTime;
+    n.buffer = noiseBuf(dur); f.type = 'bandpass'; f.Q.value = 1.2;
+    f.frequency.setValueAtTime(300, t); f.frequency.exponentialRampToValueAtTime(4000, t + dur * .8);
+    g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(vol, t + dur * .5); g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+    n.connect(f).connect(g).connect(c.destination); n.start(t); n.stop(t + dur);
+  },
+  pop(freq = 600, vol = .25) {
+    const c = audio(), o = c.createOscillator(), g = c.createGain(), t = c.currentTime;
+    o.type = 'sine'; o.frequency.setValueAtTime(freq, t); o.frequency.exponentialRampToValueAtTime(freq * 2.2, t + .08);
+    g.gain.setValueAtTime(vol, t); g.gain.exponentialRampToValueAtTime(0.0001, t + .15);
+    o.connect(g).connect(c.destination); o.start(t); o.stop(t + .16);
+  },
+  glitch() {
+    const c = audio(), t0 = c.currentTime;
+    for (let i = 0; i < 9; i++) {
+      const o = c.createOscillator(), g = c.createGain(), t = t0 + i * .07;
+      o.type = 'square'; o.frequency.value = 80 + Math.random() * 900;
+      g.gain.setValueAtTime(.12, t); g.gain.setValueAtTime(0, t + .05);
+      o.connect(g).connect(c.destination); o.start(t); o.stop(t + .06);
+    }
+  },
+  ding() {
+    const c = audio(), t = c.currentTime;
+    [880, 1320].forEach((f, i) => {
+      const o = c.createOscillator(), g = c.createGain();
+      o.type = 'triangle'; o.frequency.value = f;
+      g.gain.setValueAtTime(.25, t + i * .06); g.gain.exponentialRampToValueAtTime(0.0001, t + i * .06 + .6);
+      o.connect(g).connect(c.destination); o.start(t + i * .06); o.stop(t + i * .06 + .65);
+    });
+  },
+  swap() {
+    const c = audio(), o = c.createOscillator(), g = c.createGain(), t = c.currentTime;
+    o.type = 'sawtooth'; o.frequency.setValueAtTime(200, t); o.frequency.exponentialRampToValueAtTime(700, t + .9); o.frequency.exponentialRampToValueAtTime(300, t + 1.8);
+    g.gain.setValueAtTime(.0001, t); g.gain.exponentialRampToValueAtTime(.08, t + .2); g.gain.exponentialRampToValueAtTime(.0001, t + 1.9);
+    o.connect(g).connect(c.destination); o.start(t); o.stop(t + 2);
+  },
+  sparkle() { [1047, 1319, 1568, 2093].forEach((f, i) => setTimeout(() => SFX.pop(f, .15), i * 90)); },
+};
+const CUES = [
+  [0.05, () => SFX.whoosh(.8, .6)], [0.95, () => SFX.pop(500)],
+  [1.2, () => SFX.pop(700, .15)], [1.5, () => SFX.pop(800, .15)], [1.8, () => SFX.pop(900, .15)],
+  [4.45, () => SFX.glitch()], [5.1, () => SFX.whoosh(.4, .3)],
+  [5.8, () => SFX.pop(520)], [6.7, () => SFX.pop(580)], [7.6, () => SFX.pop(640)], [8.5, () => SFX.pop(700)], [9.4, () => SFX.pop(760)],
+  [11.0, () => SFX.whoosh(.6, .45)], [11.5, () => SFX.ding()],
+  [15.0, () => SFX.whoosh(.5, .4)],
+  [16.6, () => SFX.pop(520)], [17.1, () => SFX.pop(580)], [17.6, () => SFX.pop(640)], [18.1, () => SFX.pop(700)], [18.6, () => SFX.pop(760)],
+  [19.1, () => SFX.ding()], [21.0, () => SFX.swap()], [23.3, () => SFX.sparkle()],
+  [24.0, () => SFX.whoosh(.7, .55)], [24.6, () => SFX.pop(400, .3)], [25.3, () => SFX.sparkle()],
+  [25.4, () => SFX.pop(600)], [25.8, () => SFX.pop(700)],
+];
+
+/* ---- transport ---- */
+let playing = false, t = 0, startPerf = 0, startT = 0;
+function now() {
+  if (!playing) return t;
+  if (useVo()) return voToReel(vo.currentTime);
+  return startT + (performance.now() - startPerf) / 1000;
+}
+function play() {
+  if (t >= REEL - 0.01) t = 0;
+  playing = true; playBtn.textContent = '⏸ থামাও';
+  document.getElementById('startOverlay').style.display = 'none';
+  if (sfxOn) audio().resume();
+  startT = t; startPerf = performance.now();
+  if (useVo()) { vo.currentTime = reelToVo(t); vo.play().catch(() => {}); }
+  requestAnimationFrame(tick);
+}
+function pause() { t = now(); playing = false; playBtn.textContent = '▶ চালাও'; vo.pause(); }
+function seek(x) {
+  t = Math.max(0, Math.min(REEL, x));
+  if (useVo()) vo.currentTime = reelToVo(t);
+  startT = t; startPerf = performance.now();
+  render(t);
+}
+function tick() {
+  if (!playing) return;
+  const prev = t;
+  t = Math.min(REEL, now());
+  if (sfxOn) for (const [ct, fn] of CUES) if (ct > prev && ct <= t) fn();
+  render(t);
+  if (t >= REEL) { playing = false; playBtn.textContent = '▶ চালাও'; vo.pause(); return; }
+  requestAnimationFrame(tick);
+}
+
+playBtn.onclick = () => (playing ? pause() : play());
+document.getElementById('restartBtn').onclick = () => { seek(0); play(); };
+document.getElementById('startOverlay').onclick = play;
+scrub.oninput = () => { const was = playing; if (was) pause(); seek(+scrub.value); };
+document.getElementById('sfxBtn').onclick = e => { sfxOn = !sfxOn; e.target.classList.toggle('on', sfxOn); };
+document.getElementById('voBtn').onclick = e => {
+  const was = playing; if (was) pause();
+  voOn = !voOn; e.target.classList.toggle('on', voOn); updateHint();
+  if (was) play();
+};
+document.getElementById('voFile').onchange = e => {
+  const f = e.target.files[0]; if (!f) return;
+  pause(); voReady = false; vo.src = URL.createObjectURL(f);
+  vo.addEventListener('loadedmetadata', () => { setVoMarksFor(vo.duration); updateHint(); seek(0); }, { once: true });
+};
+document.addEventListener('keydown', e => { if (e.code === 'Space') { e.preventDefault(); playing ? pause() : play(); } });
+
+// for frame-by-frame export: window.reel.seek(seconds)
+window.reel = { seek: x => { collect(); render(x); }, duration: REEL };
+
+document.fonts.ready.then(() => { collect(); render(0); updateHint(); });
+</script>
+</body>
+</html>
