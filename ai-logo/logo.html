@@ -13,16 +13,18 @@
 <script>
 // Vector rebuild of the orbit / AI-face logo, drawn in a 1254×1254 design space.
 // ?v=1 Orbit Reveal · ?v=2 AI Wake-Up · ?v=3 Seamless Loop
+// ?v=4 Comet Trail · ?v=5 Gyroscope 3D · ?v=6 AI Glitch Boot
 const params = new URLSearchParams(location.search);
 const W = +(params.get('w') || 1080), H = +(params.get('h') || 1080);
 const VARIANT = +(params.get('v') || 1);
-const DURATIONS = {1: 5.5, 2: 6, 3: 4};
+const DURATIONS = {1: 5.5, 2: 6, 3: 4, 4: 6, 5: 5.5, 6: 5.5};
 const DURATION = DURATIONS[VARIANT];
 if (params.has('transparent')) document.documentElement.style.background = document.body.style.background = 'transparent';
 
 const cv = document.getElementById('c');
 cv.width = W; cv.height = H;
-const ctx = cv.getContext('2d');
+const mainCtx = cv.getContext('2d');
+let ctx = mainCtx;  // swapped to an offscreen context while pixelating
 
 // ---------- helpers ----------
 const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
@@ -91,25 +93,30 @@ function drawTile(st) {
 }
 
 // ---------- orbit rings ----------
-function ellipsePt(R, th) {
-  const c = Math.cos(th), s = Math.sin(th), ro = rad(R.rot), cr = Math.cos(ro), sr = Math.sin(ro);
+// Returns d → world point at signed distance d along the ring-plane normal at θ.
+// R.bf squashes the ring plane (3D tilt: 1 = artwork, ~0 = edge-on).
+function ellipseMap(R, th) {
+  const c = Math.cos(th), s = Math.sin(th), ro = rad(R.rot), cr = Math.cos(ro), sr = Math.sin(ro), bf = R.bf ?? 1;
   const x = R.a * c, y = R.b * s;
   let nx = R.b * c, ny = R.a * s; const n = Math.hypot(nx, ny); nx /= n; ny /= n;
-  return {x: R.cx + x * cr - y * sr, y: R.cy + x * sr + y * cr, nx: nx * cr - ny * sr, ny: nx * sr + ny * cr};
+  return d => { const lx = x + nx * d, ly = (y + ny * d) * bf; return {x: R.cx + lx * cr - ly * sr, y: R.cy + lx * sr + ly * cr}; };
 }
 // Build crescent samples for one arc. Returns [{o:{x,y}, i:{x,y}, front:bool, tail:0..1}]
-function arcSamples(R, A, phase, grow) {
+// grow: arc grows out from its thickest point. reveal (optional): arc is drawn on
+// from its start up to that angle, like a pen following the orbit.
+function arcSamples(R, A, phase, grow, reveal) {
   if (grow <= 0) return [];
-  const n = A.o.length, s0 = A.t0, e0 = A.t0 + n - 1, p = A.p;
-  const s = p - (p - s0) * grow, e = p + (e0 - p) * grow, out = [];
+  const n = A.o.length, s0 = A.t0, e0 = A.t0 + n - 1;
+  let p = A.p;
+  if (reveal != null) { if (reveal <= s0) return []; grow = 1; p = s0; }
+  const s = p - (p - s0) * grow, e = reveal != null ? Math.min(e0, reveal) : p + (e0 - p) * grow, out = [];
   const at = (arr, f) => { const k = Math.floor(f), u = f - k; return arr[clamp(k, 0, n - 1)] * (1 - u) + arr[clamp(k + 1, 0, n - 1)] * u; };
   const N = Math.max(8, Math.round(n * 1.2));
   for (let k = 0; k <= N; k++) {
-    const th = lerp(s, e, k / N), src = p + (th - p) / grow, f = src - s0;
+    const th = lerp(s, e, k / N), src = reveal != null ? th : p + (th - p) / grow, f = src - s0;
     const o = at(A.o, f), i = at(A.i, f), c = (o + i) / 2, hw = (o - i) / 2 * lerp(.35, 1, grow);
     const tail = 1 - clamp(Math.min(src - s0, e0 - src) / 38);
-    const tt = rad(th + phase), P = ellipsePt(R, tt);
-    const pt = d => ({x: P.x + P.nx * d, y: P.y + P.ny * d});
+    const tt = rad(th + phase), pt = ellipseMap(R, tt);
     out.push({o: pt(c + hw), i: pt(c - hw), m: pt(c - hw * .25), front: Math.sin(tt) >= 0, tail, al: at(A.al, f)});
   }
   return out;
@@ -134,10 +141,10 @@ const mix = (c1, c2, x) => c1.map((v, k) => Math.round(v + (c2[k] - v) * x));
 function drawRings(st, front) {
   // crossing order matches the artwork: behind the sphere ring B sits under ring A
   (front ? [0, 1] : [1, 0]).forEach(ri => {
-    const R = RINGS[ri], ph = st.ringPhase[ri], gr = st.ringGrow[ri];
+    const R = ringAt(st, ri), ph = st.ringPhase[ri], gr = st.ringGrow[ri];
     if (st.ringA <= 0) return;
     R.arcs.forEach(A => {
-      const smp = arcSamples(R, A, ph, gr);
+      const smp = arcSamples(R, A, ph, gr, revealFor(st, ri, A));
       runs(smp, front).forEach(run => {
         ctx.save();
         ctx.globalAlpha = st.ringA;
@@ -166,20 +173,64 @@ function drawRings(st, front) {
   });
 }
 
+// ring with the current 3D tilt / spin applied
+const ringAt = (st, ri) => ({...RINGS[ri], bf: st.ringBF[ri], rot: RINGS[ri].rot + st.ringSpin[ri]});
+// comet draw-on: each ring's pen starts at COMET0 and travels one lap (unwrapped degrees)
+const COMET0 = [120, 118];
+function revealFor(st, ri, A) {
+  if (st.comet == null) return null;
+  const m = Math.ceil((COMET0[ri] - 1 - A.t0) / 360);
+  return st.comet[ri] - 360 * m;
+}
+function drawComets(st) {
+  if (st.comet == null || st.cometA <= 0) return;
+  ctx.save();
+  ctx.globalCompositeOperation = 'lighter';
+  [0, 1].forEach(ri => {
+    const R = ringAt(st, ri), th = st.comet[ri], ph = st.ringPhase[ri];
+    const P = k => ellipseMap(R, rad(th - k + ph))(-14);
+    // tapered glowing trail
+    const N = 40;
+    for (let k = N; k > 0; k--) {
+      const a = P(k * 2.2), b = P((k - 1) * 2.2), u = 1 - k / N;
+      ctx.strokeStyle = `rgba(${ri ? '120,235,255' : '255,170,255'},${.85 * u * st.cometA})`;
+      ctx.lineWidth = 2 + 16 * u; ctx.lineCap = 'round';
+      ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
+    }
+    const h = P(0);
+    const g = ctx.createRadialGradient(h.x, h.y, 0, h.x, h.y, 70);
+    g.addColorStop(0, `rgba(255,255,255,${st.cometA})`); g.addColorStop(.25, `rgba(190,240,255,${.7 * st.cometA})`); g.addColorStop(1, 'rgba(120,160,255,0)');
+    ctx.fillStyle = g; ctx.beginPath(); ctx.arc(h.x, h.y, 70, 0, TAU); ctx.fill();
+  });
+  ctx.restore();
+}
+
 // ---------- sphere ----------
+function spherePath(x, y, r, st) {
+  ctx.beginPath();
+  if (!st.wobble) { ctx.arc(x, y, r, 0, TAU); return; }
+  for (let k = 0; k <= 72; k++) {
+    const f = k / 72 * TAU, w = st.wobble, tt = st.wobT;
+    const rr = r * (1 + w * (.6 * Math.sin(3 * f + tt) + .4 * Math.sin(5 * f - 1.7 * tt)));
+    k ? ctx.lineTo(x + Math.cos(f) * rr, y + Math.sin(f) * rr) : ctx.moveTo(x + Math.cos(f) * rr, y + Math.sin(f) * rr);
+  }
+  ctx.closePath();
+}
 function drawSphere(st) {
   if (st.sphS <= 0) return;
   const {x, y, r} = SPHERE;
   ctx.save();
   ctx.translate(x, y + st.sphY); ctx.scale(st.sphS, st.sphS); ctx.translate(-x, -y);
+  // squash & stretch pivots on the bottom of the sphere
+  ctx.translate(x, y + r); ctx.scale(st.sphSX, st.sphSY); ctx.translate(-x, -(y + r));
   // outer aura
   ctx.save();
-  ctx.beginPath(); ctx.arc(x, y, r, 0, TAU);
+  spherePath(x, y, r, st);
   ctx.shadowColor = `rgba(110,170,255,${.75 * st.power})`; ctx.shadowBlur = 70 * st.k;
   ctx.fillStyle = '#3416ea'; ctx.fill();
   ctx.restore();
   ctx.save();
-  ctx.beginPath(); ctx.arc(x, y, r, 0, TAU); ctx.clip();
+  spherePath(x, y, r, st); ctx.clip();
   // body
   let g = ctx.createRadialGradient(x, y + 30, 0, x, y + 10, r * 1.05);
   g.addColorStop(0, '#2c10e6'); g.addColorStop(.6, '#3518ec'); g.addColorStop(1, '#4a34f6');
@@ -224,13 +275,25 @@ function drawSphere(st) {
     g.addColorStop(0, 'rgba(255,255,255,.95)'); g.addColorStop(1, 'rgba(160,220,255,.2)');
     ctx.fillStyle = g; ctx.fillRect(x - r, y - r, 2 * r, 2 * r);
   }
+  // horizontal scan line that switches the eyes on
+  const scanY = lerp(y - r, y + r, st.eyeScan);
+  if (st.eyeScan > 0 && st.eyeScan < 1) {
+    ctx.globalAlpha = Math.sin(st.eyeScan * Math.PI);
+    const sg = ctx.createLinearGradient(0, scanY - 30, 0, scanY + 4);
+    sg.addColorStop(0, 'rgba(90,240,255,0)'); sg.addColorStop(1, 'rgba(160,250,255,.55)');
+    ctx.fillStyle = sg; ctx.fillRect(x - r, scanY - 30, 2 * r, 34);
+    ctx.fillStyle = '#e6fdff'; ctx.shadowColor = 'rgba(90,240,255,1)'; ctx.shadowBlur = 18 * st.k;
+    ctx.fillRect(x - r, scanY - 1.5, 2 * r, 3); ctx.shadowBlur = 0;
+  }
   ctx.restore();
   // eyes
   if (st.eyeA > 0) {
-    EYES.forEach(e => {
-      const ex = e.x + st.lookX, ey = e.y + st.lookY;
-      const h = 86 * Math.max(.06, st.eyeOpen), w = 40;
+    EYES.forEach((e, ei) => {
+      const ex = lerp(630, e.x, st.eyeSplit) + st.lookX, ey = e.y + st.lookY;
+      const open = st.eyeOpen * (ei === 0 ? 1 - .94 * st.winkL : 1);
+      const h = 86 * Math.max(.06, open), w = 40;
       ctx.save();
+      if (st.eyeScan < 1) { ctx.beginPath(); ctx.rect(ex - 60, 0, 120, scanY); ctx.clip(); }
       ctx.globalAlpha = st.eyeA;
       ctx.shadowColor = 'rgba(200,235,255,.9)'; ctx.shadowBlur = (16 + 26 * st.eyeGlow) * st.k;
       roundRect(ex - w / 2, ey - h / 2, w, h, Math.min(20, h / 2));
@@ -251,8 +314,39 @@ function starPath(R, k) {
 }
 function drawSpark(st) {
   if (st.sparkS <= 0) return;
+  const px = SPARK.x + st.sparkDX, py = SPARK.y + st.sparkDY;
+  // shooting-star trail while it is travelling
+  const sp = Math.hypot(st.sparkDX, st.sparkDY);
+  if (sp > 2) {
+    const ux = st.sparkDX / sp, uy = st.sparkDY / sp, L = Math.min(520, sp * 1.6 + 80);
+    ctx.save(); ctx.globalCompositeOperation = 'lighter';
+    const g = ctx.createLinearGradient(px, py, px + ux * L, py + uy * L);
+    g.addColorStop(0, 'rgba(170,255,235,.9)'); g.addColorStop(1, 'rgba(170,255,235,0)');
+    ctx.strokeStyle = g; ctx.lineCap = 'round';
+    ctx.lineWidth = 26; ctx.beginPath(); ctx.moveTo(px, py); ctx.lineTo(px + ux * L, py + uy * L); ctx.stroke();
+    ctx.lineWidth = 8; ctx.strokeStyle = 'rgba(255,255,255,.8)'; ctx.beginPath(); ctx.moveTo(px, py); ctx.lineTo(px + ux * L * .5, py + uy * L * .5); ctx.stroke();
+    ctx.restore();
+  }
+  // anamorphic lens flare
+  if (st.flare > 0) {
+    ctx.save(); ctx.globalCompositeOperation = 'lighter';
+    ctx.translate(px, py);
+    ctx.save(); ctx.scale(7, .22);
+    let g = ctx.createRadialGradient(0, 0, 0, 0, 0, 90);
+    g.addColorStop(0, `rgba(230,255,250,${.95 * st.flare})`); g.addColorStop(.4, `rgba(120,240,255,${.35 * st.flare})`); g.addColorStop(1, 'rgba(120,240,255,0)');
+    ctx.fillStyle = g; ctx.beginPath(); ctx.arc(0, 0, 90, 0, TAU); ctx.fill(); ctx.restore();
+    g = ctx.createRadialGradient(0, 0, 0, 0, 0, 160);
+    g.addColorStop(0, `rgba(255,255,255,${.8 * st.flare})`); g.addColorStop(1, 'rgba(160,255,230,0)');
+    ctx.fillStyle = g; ctx.beginPath(); ctx.arc(0, 0, 160, 0, TAU); ctx.fill();
+    // ghost rings toward the tile centre
+    [[.45, 34, '120,255,220'], [.8, 18, '200,160,255'], [1.15, 50, '120,200,255']].forEach(([f, rr, c]) => {
+      ctx.fillStyle = `rgba(${c},${.22 * st.flare})`;
+      ctx.beginPath(); ctx.arc((627 - px) * f, (624 - py) * f, rr, 0, TAU); ctx.fill();
+    });
+    ctx.restore();
+  }
   ctx.save();
-  ctx.translate(SPARK.x, SPARK.y); ctx.rotate(rad(st.sparkRot)); ctx.scale(st.sparkS, st.sparkS);
+  ctx.translate(px, py); ctx.rotate(rad(st.sparkRot)); ctx.scale(st.sparkS, st.sparkS);
   // flash burst behind
   if (st.sparkFlash > 0) {
     const g = ctx.createRadialGradient(0, 0, 0, 0, 0, 220);
@@ -299,6 +393,58 @@ function drawParticles(st) {
     ctx.restore();
   });
 }
+// neural-network backdrop (variant 6)
+const NODES = (() => {
+  const out = [];
+  for (let gy = 0; gy < 8; gy++) for (let gx = 0; gx < 8; gx++) {
+    const x = 150 + gx * 136 + (rnd() - .5) * 80, y = 150 + gy * 136 + (rnd() - .5) * 80;
+    out.push({x, y, ph: rnd() * TAU});
+  }
+  return out;
+})();
+const EDGES = (() => {
+  const e = [];
+  NODES.forEach((a, i) => {
+    NODES.map((b, j) => [j, Math.hypot(a.x - b.x, a.y - b.y)]).filter(([j]) => j > i)
+      .sort((p, q) => p[1] - q[1]).slice(0, 2).forEach(([j]) => e.push([i, j, rnd()]));
+  });
+  return e;
+})();
+function drawNet(st, t) {
+  if (!(st.net > 0)) return;
+  const c = easeInOut(st.converge);
+  const pos = n => ({x: lerp(n.x, SPHERE.x, c), y: lerp(n.y, SPHERE.y, c)});
+  ctx.save();
+  ctx.globalCompositeOperation = 'lighter';
+  EDGES.forEach(([i, j, o], k) => {
+    const on = clamp(st.net * EDGES.length * 1.4 / EDGES.length - o * .6);
+    if (on <= 0) return;
+    const a = pos(NODES[i]), b = pos(NODES[j]);
+    ctx.strokeStyle = `rgba(140,220,255,${.35 * on * (1 - c * .5)})`; ctx.lineWidth = 2;
+    ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
+    // data pulse travelling along the edge
+    const u = (t * (.8 + o) + o * 3) % 1, px = lerp(a.x, b.x, u), py = lerp(a.y, b.y, u);
+    ctx.fillStyle = `rgba(200,250,255,${.9 * on})`; ctx.beginPath(); ctx.arc(px, py, 4, 0, TAU); ctx.fill();
+  });
+  NODES.forEach(n => {
+    const p = pos(n), tw = .55 + .45 * Math.sin(t * 5 + n.ph);
+    const g = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, 22);
+    g.addColorStop(0, `rgba(230,250,255,${tw * st.net})`); g.addColorStop(1, 'rgba(120,200,255,0)');
+    ctx.fillStyle = g; ctx.beginPath(); ctx.arc(p.x, p.y, 22, 0, TAU); ctx.fill();
+  });
+  ctx.restore();
+}
+function drawIrisEdge(st) {
+  if (!(st.iris > 0 && st.iris < 1)) return;
+  ctx.save();
+  ctx.globalCompositeOperation = 'lighter';
+  ctx.strokeStyle = `rgba(200,240,255,${.9 * (1 - st.iris)})`; ctx.lineWidth = 10;
+  ctx.shadowColor = 'rgba(120,220,255,1)'; ctx.shadowBlur = 30 * st.k;
+  ctx.beginPath(); ctx.arc(SPHERE.x, SPHERE.y, irisR(st), 0, TAU); ctx.stroke();
+  ctx.restore();
+}
+const irisR = st => lerp(0, 1000, st.iris);
+
 function drawPulse(st) {
   if (!(st.pulse > 0 && st.pulse < 1)) return;
   ctx.save();
@@ -313,7 +459,9 @@ function drawPulse(st) {
 function baseState() {
   return {tileA: 1, tileS: 1, shine: 0, ringA: 1, ringPhase: [0, 0], ringGrow: [1, 1],
     sphS: 1, sphY: 0, power: 1, rimRot: 0, flash: 0, eyeA: 1, eyeOpen: 1, eyeGlow: 0, lookX: 0, lookY: 0,
-    sparkS: 1, sparkRot: 0, sparkFlash: 0, sparkGlow: 0, glints: [], particles: 0, pulse: 0, groupS: 1};
+    sparkS: 1, sparkRot: 0, sparkFlash: 0, sparkGlow: 0, glints: [], particles: 0, pulse: 0, groupS: 1,
+    groupSX: 1, ringBF: [1, 1], ringSpin: [0, 0], comet: null, cometA: 0, iris: 1, wobble: 0, wobT: 0, sphSX: 1, sphSY: 1,
+    eyeScan: 1, eyeSplit: 1, winkL: 0, sparkDX: 0, sparkDY: 0, flare: 0, net: 0, converge: 0, pixel: 1, glitch: 0};
 }
 // eye look keyframes: [t, x, y]
 function look(t, K) {
@@ -399,16 +547,99 @@ const TIMELINES = {
     st.shine = prog(t, 1.6, 2.6);
     return st;
   },
+  // 4 — Comet Trail: iris opens, comets draw the orbits, liquid sphere, shooting-star sparkle, scan-on eyes, wink
+  4(t) {
+    const st = baseState();
+    st.iris = easeInOut(prog(t, 0, 1.0));
+    const sp = prog(t, .25, 1.15);
+    st.sphS = sp > 0 ? backOut(sp, 1.6) : 0;
+    st.wobble = .14 * Math.max(0, 1 - prog(t, .25, 2.1)) * (sp > 0 ? 1 : 0); st.wobT = t * 9;
+    st.rimRot = lerp(-260, 0, easeOut(prog(t, .3, 2.6)));
+    const c0 = easeInOut(prog(t, .7, 2.05)), c1 = easeInOut(prog(t, .85, 2.25));
+    st.comet = [lerp(COMET0[0], COMET0[0] + 366, c0), lerp(COMET0[1], COMET0[1] + 366, c1)];
+    st.cometA = clamp(prog(t, .7, .85)) * (1 - prog(t, 2.1, 2.45));
+    st.ringA = 1;
+    st.pulse = prog(t, 2.2, 3.1);
+    const kp = easeOut(prog(t, 2.2, 2.7));
+    st.sparkS = t >= 2.2 ? lerp(.5, 1, kp) : 0; st.sparkDX = 430 * (1 - kp); st.sparkDY = -400 * (1 - kp);
+    st.sparkRot = lerp(-220, 0, kp);
+    st.flare = bump(t, 2.72, .3);
+    st.eyeA = t > 2.9 ? 1 : 0; st.eyeScan = prog(t, 2.9, 3.35); st.eyeGlow = bump(t, 3.35, .25);
+    st.winkL = bump(t, 3.95, .2);
+    st.eyeOpen = blinks(t, [5.0]);
+    [st.lookX, st.lookY] = look(t, [[0, 0, 0], [4.3, 0, 0], [4.55, -9, -4], [4.8, -9, -4], [5.15, 0, 0]]);
+    st.shine = prog(t, 4.2, 5.0);
+    idle(st, t, 2.4);
+    return st;
+  },
+  // 5 — Gyroscope 3D: tile flips in, rings unfold in 3D, sphere drops & squashes, eyes pop
+  5(t) {
+    const st = baseState();
+    const fp = prog(t, 0, .7);
+    st.groupSX = Math.max(.001, backOut(fp, 1.3)); st.tileA = clamp(fp * 4);
+    st.groupS = lerp(1.07, 1, easeOut(prog(t, 0, 5.5)));
+    // drop, land at 0.85, spring settle
+    const d = prog(t, .25, .85);
+    st.sphS = t >= .25 ? 1 : 0;
+    st.sphY = t < .85 ? lerp(-760, 0, d * d) : 0;
+    const L = t - .85;
+    if (t < .85) { st.sphSX = lerp(1, .9, d); st.sphSY = lerp(1, 1.12, d); }
+    else { const sq = Math.exp(-L * 6) * Math.cos(L * 22); st.sphSX = 1 + .24 * sq; st.sphSY = 1 - .22 * sq; }
+    st.pulse = prog(t, .85, 1.7);
+    st.rimRot = lerp(-180, 0, easeOut(prog(t, .8, 2.6)));
+    const r0 = easeOut(prog(t, .75, 2.3)), r1 = easeOut(prog(t, .9, 2.45));
+    st.ringBF = [lerp(.03, 1, r0), lerp(.03, 1, r1)];
+    st.ringSpin = [lerp(-95, 0, r0), lerp(95, 0, r1)];
+    st.ringPhase = [lerp(-260, 0, r0), lerp(260, 0, r1)];
+    st.ringA = clamp(prog(t, .75, .95));
+    const kp = prog(t, 2.05, 2.65);
+    st.sparkS = kp > 0 ? backOut(kp, 2.6) : 0; st.sparkRot = lerp(-540, 0, easeOut(kp));
+    st.flare = bump(t, 2.5, .28) * .8;
+    const eo = prog(t, 2.45, 2.75);
+    st.eyeA = eo > 0 ? 1 : 0;
+    st.eyeOpen = (eo < 1 ? backOut(eo, 3) : 1) * blinks(t, [3.35, 4.85, 5.08]);
+    st.eyeGlow = bump(t, 2.65, .25);
+    [st.lookX, st.lookY] = look(t, [[0, 0, 0], [3.6, 0, 0], [3.85, 10, -8], [4.35, 10, -8], [4.6, 0, 0]]);
+    st.shine = prog(t, 3.9, 4.7);
+    idle(st, t, 2.6);
+    return st;
+  },
+  // 6 — AI Glitch Boot: neural net collapses into the core, logo resolves from pixels with glitches, cursor splits into eyes
+  6(t) {
+    const st = baseState();
+    st.tileA = easeOut(prog(t, 0, .35));
+    st.net = clamp(prog(t, .1, 1.1)); st.converge = prog(t, 1.15, 1.55);
+    if (t >= 1.6) st.net = 0;
+    const on = t >= 1.5;
+    st.sphS = on ? 1 : 0; st.ringA = on ? 1 : 0; st.sparkS = on ? 1 : 0;
+    st.flash = bump(t, 1.55, .18);
+    st.pulse = prog(t, 1.5, 2.4);
+    const steps = [64, 40, 28, 18, 12, 8, 5, 3, 2, 1];
+    st.pixel = on ? steps[Math.min(steps.length - 1, Math.floor(prog(t, 1.5, 2.55) * steps.length))] : 1;
+    st.glitch = Math.max(bump(t, 1.62, .1), bump(t, 1.95, .08) * .8, bump(t, 2.35, .07) * .7, bump(t, 3.9, .06) * .5);
+    st.rimRot = lerp(-200, 0, easeOut(prog(t, 1.5, 3.2)));
+    // typing cursor, then it splits into two eyes
+    st.eyeA = t >= 2.65 ? ((t < 3.3 && Math.floor((t - 2.65) / .2) % 2 === 1) ? 0 : 1) : 0;
+    st.eyeSplit = easeOut(prog(t, 3.3, 3.6));
+    st.eyeOpen = (t < 3.3 ? .22 : lerp(.22, 1, backOut(prog(t, 3.3, 3.6), 2.2))) * blinks(t, [4.4]);
+    st.eyeGlow = bump(t, 3.55, .25);
+    [st.lookX, st.lookY] = look(t, [[0, 0, 0], [4.6, 0, 0], [4.8, 9, 0], [5.05, 9, 0], [5.25, 0, 0]]);
+    st.sparkFlash = bump(t, 2.6, .25) * .7;
+    st.shine = prog(t, 4.1, 4.9);
+    idle(st, t, 2.6);
+    return st;
+  },
 };
 
 // ---------- render ----------
-function render(t) {
-  const st = TIMELINES[VARIANT](t);
-  ctx.setTransform(1, 0, 0, 1, 0, 0);
-  ctx.clearRect(0, 0, W, H);
-  const s = Math.min(W, H) / 1254 * +(params.get('fit') || .94);
+let offA = null, offB = null;
+const canvas2 = (w, h) => { const c = document.createElement('canvas'); c.width = w; c.height = h; return c; };
+function drawScene(st, t, s, w, h) {
   st.k = s;
-  ctx.setTransform(s, 0, 0, s, W / 2 - 627 * s, H / 2 - 624 * s);
+  ctx.setTransform(s, 0, 0, s, w / 2 - 627 * s, h / 2 - 624 * s);
+  ctx.translate(627, 624); ctx.scale(st.groupS * st.groupSX, st.groupS); ctx.translate(-627, -624);
+  ctx.save();
+  if (st.iris < 1) { ctx.beginPath(); ctx.arc(SPHERE.x, SPHERE.y, irisR(st), 0, TAU); ctx.clip(); }
   drawTile(st);
   ctx.save();
   // keep artwork inside the tile so nothing (glow, rings) spills onto the transparent area
@@ -416,14 +647,53 @@ function render(t) {
   ctx.translate(cx, cy); ctx.scale(st.tileS, st.tileS); ctx.translate(-cx, -cy);
   roundRect(BOX.x, BOX.y, BOX.w, BOX.h, BOX.r); ctx.clip();
   ctx.translate(cx, cy); ctx.scale(1 / st.tileS, 1 / st.tileS); ctx.translate(-cx, -cy);
+  drawNet(st, t);
   drawParticles(st);
   drawRings(st, false);
   drawSphere(st);
   drawPulse(st);
   drawRings(st, true);
+  drawComets(st);
   drawSpark(st);
   drawGlints(st);
+  drawIrisEdge(st);
   ctx.restore();
+  ctx.restore();
+}
+function render(t) {
+  const st = TIMELINES[VARIANT](t);
+  const s = Math.min(W, H) / 1254 * +(params.get('fit') || .94);
+  mainCtx.setTransform(1, 0, 0, 1, 0, 0);
+  mainCtx.clearRect(0, 0, W, H);
+  if (st.pixel > 1) {
+    // resolve-from-pixels: draw small, then scale up without smoothing
+    const pw = Math.ceil(W / st.pixel), ph = Math.ceil(H / st.pixel);
+    if (!offA || offA.width !== pw || offA.height !== ph) offA = canvas2(pw, ph);
+    ctx = offA.getContext('2d'); ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.clearRect(0, 0, pw, ph);
+    drawScene(st, t, s / st.pixel, pw, ph);
+    ctx = mainCtx;
+    mainCtx.imageSmoothingEnabled = false;
+    mainCtx.drawImage(offA, 0, 0, pw * st.pixel, ph * st.pixel);
+    mainCtx.imageSmoothingEnabled = true;
+  } else {
+    drawScene(st, t, s, W, H);
+  }
+  if (st.glitch > .02) {
+    // slice displacement + RGB split
+    if (!offB) offB = canvas2(W, H);
+    const b = offB.getContext('2d');
+    b.setTransform(1, 0, 0, 1, 0, 0); b.clearRect(0, 0, W, H); b.drawImage(cv, 0, 0);
+    mainCtx.setTransform(1, 0, 0, 1, 0, 0); mainCtx.clearRect(0, 0, W, H);
+    let gs = 1 + Math.floor(t * 24) * 97; const gr = () => (gs = (gs * 16807) % 2147483647) / 2147483647;
+    const d = 14 * st.glitch * W / 1080;
+    mainCtx.filter = `drop-shadow(${-d}px 0 0 rgba(0,255,255,.75)) drop-shadow(${d}px 0 0 rgba(255,0,170,.75))`;
+    for (let y = 0; y < H;) {
+      const hh = Math.max(4, Math.round(gr() * H * .09)), dx = gr() < .45 ? (gr() - .5) * W * .12 * st.glitch : 0;
+      mainCtx.drawImage(offB, 0, y, W, hh, dx, y, W, hh);
+      y += hh;
+    }
+    mainCtx.filter = 'none';
+  }
 }
 
 window.DURATION = DURATION;
