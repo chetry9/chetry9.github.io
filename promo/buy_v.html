@@ -1,0 +1,247 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Before You Pay</title><style>@font-face{font-family:'IT';font-weight:600;src:url(node_modules/@fontsource/inter-tight/files/inter-tight-latin-600-normal.woff2)}
+@font-face{font-family:'IT';font-weight:700;src:url(node_modules/@fontsource/inter-tight/files/inter-tight-latin-700-normal.woff2)}
+@font-face{font-family:'IT';font-weight:800;src:url(node_modules/@fontsource/inter-tight/files/inter-tight-latin-800-normal.woff2)}
+@font-face{font-family:'IN';font-weight:400;src:url(node_modules/@fontsource/inter/files/inter-latin-400-normal.woff2)}
+@font-face{font-family:'IN';font-weight:500;src:url(node_modules/@fontsource/inter/files/inter-latin-500-normal.woff2)}
+@font-face{font-family:'IN';font-weight:600;src:url(node_modules/@fontsource/inter/files/inter-latin-600-normal.woff2)}
+@font-face{font-family:'PP';font-weight:600;src:url(node_modules/@fontsource/poppins/files/poppins-latin-600-normal.woff2)}
+@font-face{font-family:'PP';font-weight:700;src:url(node_modules/@fontsource/poppins/files/poppins-latin-700-normal.woff2)}
+/* ---- Apple-style liquid glass social bar ---- */
+#social{position:absolute;inset:0;z-index:80;pointer-events:none}
+.lglass{position:absolute;display:flex;align-items:center;gap:14px;border-radius:24px;isolation:isolate;
+ background:linear-gradient(140deg,rgba(255,255,255,.26),rgba(255,255,255,.07) 45%,rgba(255,255,255,.10)),rgba(18,18,24,.5);
+ backdrop-filter:blur(20px) saturate(200%) brightness(1.08);-webkit-backdrop-filter:blur(20px) saturate(200%) brightness(1.08);
+ box-shadow:inset 0 1.5px 0 rgba(255,255,255,.65),inset 0 -1px 0 rgba(255,255,255,.18),inset 1px 0 0 rgba(255,255,255,.2),inset 0 0 22px rgba(255,255,255,.10),0 14px 34px rgba(0,0,0,.35),0 2px 6px rgba(0,0,0,.2)}
+.lglass::before{content:'';position:absolute;inset:0;border-radius:inherit;padding:1.2px;z-index:-1;
+ background:linear-gradient(135deg,rgba(255,255,255,.95),rgba(255,255,255,.08) 35%,rgba(255,255,255,.04) 65%,rgba(255,255,255,.7));
+ -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude}
+.lglass::after{content:'';position:absolute;left:8%;right:30%;top:3px;height:42%;border-radius:20px 20px 40px 40px;z-index:-1;
+ background:linear-gradient(180deg,rgba(255,255,255,.35),rgba(255,255,255,0));filter:blur(1px);opacity:.5}
+.pill{bottom:30px;height:68px;width:442px;padding:0 16px;justify-content:center}
+.chip{width:46px;height:46px;border-radius:13px;display:flex;align-items:center;justify-content:center;flex:none;box-shadow:0 4px 10px rgba(0,0,0,.25),inset 0 1px 0 rgba(255,255,255,.35)}
+.chip i{display:block;width:24px;height:24px;background:#fff;-webkit-mask-size:contain;-webkit-mask-repeat:no-repeat;-webkit-mask-position:center}
+.pill span{font-family:'IT';font-weight:700;font-size:26px;letter-spacing:-.01em;color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.35);white-space:nowrap}
+.pill span b{color:#FF6A26;font-weight:700}
+#follow::after{opacity:.35}
+#follow{left:50%;top:50%;height:120px;padding:0 26px 0 22px;border-radius:40px;gap:20px;transform:translate(-50%,-50%);opacity:0}
+#follow .chip{width:64px;height:64px;border-radius:19px}#follow .chip i{width:34px;height:34px}
+#follow .fl{font-family:'IT';font-weight:800;font-size:46px;letter-spacing:-.02em;color:#fff;margin:0 10px 0 14px;white-space:nowrap;text-shadow:0 2px 6px rgba(0,0,0,.3)}
+#follow .fb{white-space:nowrap;height:80px;padding:0 38px;border-radius:26px;background:linear-gradient(180deg,#ff7a33,#ff4d0d);display:flex;align-items:center;gap:12px;font-family:'IT';font-weight:800;font-size:36px;color:#fff;box-shadow:0 10px 26px rgba(255,90,20,.55),inset 0 1.5px 0 rgba(255,255,255,.5)}
+
+:root{--nv:#081024;--or:#FD5814;--bl:#2F8BFF;--bl2:#5CC8FF}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1080px;height:1920px;overflow:hidden;background:var(--nv);font-family:'IN',sans-serif;color:#fff}
+#stage{position:absolute;inset:0;overflow:hidden;background:var(--nv)}
+.bg{position:absolute;inset:-100px;background:radial-gradient(800px 700px at 20% 18%,rgba(47,139,255,.22),transparent 60%),radial-gradient(800px 800px at 85% 85%,rgba(255,106,31,.16),transparent 60%),#081024}
+.grid{position:absolute;inset:0;background-image:linear-gradient(rgba(92,200,255,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(92,200,255,.06) 1px,transparent 1px);background-size:60px 60px;mask-image:radial-gradient(closest-side,#000 40%,transparent)}
+.scene{position:absolute;inset:0;opacity:0;visibility:hidden}
+.w{display:inline-block}
+.T{font-family:'IT';font-weight:800;letter-spacing:-.035em;line-height:.95;text-align:center;color:#fff}
+.or{color:var(--or)}.bl{color:var(--bl2)}
+.cnr{position:absolute;left:44px;top:50px;z-index:80;display:flex;align-items:center;gap:12px}
+.cnr img{height:46px}.cnr span{font-family:'PP';font-weight:700;font-size:30px;letter-spacing:-.5px}.cnr b{color:var(--or);font-weight:700}
+.win{position:absolute;border-radius:26px;background:#101a33;border:1px solid rgba(120,160,255,.25);box-shadow:0 30px 70px rgba(0,0,0,.5);overflow:hidden}
+.wbar{height:54px;display:flex;align-items:center;gap:12px;padding:0 20px;background:rgba(255,255,255,.04);border-bottom:1px solid rgba(255,255,255,.06);font-family:'IT';font-weight:700;font-size:24px}
+.wbar img{height:30px;width:30px;object-fit:contain}
+.wbody{padding:20px}
+.ln{height:14px;border-radius:7px;background:rgba(255,255,255,.12);margin:12px 0}
+.bubble{position:absolute;left:80px;right:80px;top:250px;border-radius:30px;padding:30px 34px;background:linear-gradient(160deg,#16244a,#0f1834);border:1px solid rgba(92,200,255,.35);font-size:34px;line-height:1.4}
+.cursor{position:absolute;width:56px;height:56px;z-index:40}
+.paste{position:absolute;padding:8px 16px;border-radius:12px;background:var(--or);font-family:'IT';font-weight:800;font-size:26px;z-index:41}
+.node{position:absolute;border-radius:40px;display:flex;align-items:center;justify-content:center;background:#fff;box-shadow:0 30px 80px rgba(0,0,0,.5)}
+.hub{position:absolute;left:340px;top:760px;width:400px;height:400px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-direction:column;background:radial-gradient(circle at 40% 35%,#1f3c8a,#0d1a3d 70%);border:3px solid var(--bl2);box-shadow:0 0 120px rgba(47,139,255,.6),inset 0 0 80px rgba(92,200,255,.3)}
+.ring{position:absolute;left:540px;top:960px;width:400px;height:400px;margin:-200px 0 0 -200px;border-radius:50%;border:3px solid rgba(92,200,255,.7)}
+.panel{position:absolute;left:70px;width:940px;border-radius:32px;background:linear-gradient(160deg,#121f42,#0b142d);border:1px solid rgba(120,160,255,.3);box-shadow:0 40px 100px rgba(0,0,0,.5);padding:28px 32px}
+.req{display:inline-block;padding:18px 26px;border-radius:22px;background:rgba(255,255,255,.08);font-size:32px;margin-bottom:22px}
+.ccard{display:flex;align-items:center;gap:24px;padding:24px;border-radius:24px;background:#fff;color:#1b1f2e}
+.av{width:90px;height:90px;border-radius:50%;background:linear-gradient(135deg,#FF7A59,#ff9e7d);display:flex;align-items:center;justify-content:center;font-family:'IT';font-weight:800;font-size:38px;color:#fff;flex:none}
+.trow{display:flex;align-items:center;gap:22px;padding:24px;border-radius:24px;background:#fff;color:#1b1f2e;font-size:34px;font-weight:600}
+.cb{width:54px;height:54px;border-radius:50%;border:4px solid #c7cbd6;display:flex;align-items:center;justify-content:center;flex:none}
+.cb svg{width:30px;height:30px;stroke:#fff;stroke-width:3.5;fill:none;opacity:0}
+.auth{display:inline-flex;align-items:center;gap:12px;padding:12px 22px;border-radius:30px;background:rgba(74,222,128,.14);border:1px solid rgba(74,222,128,.6);font-family:'IT';font-weight:700;font-size:28px;color:#86efac}
+.kin{position:absolute;left:0;right:0;text-align:center}
+.strike{position:relative;display:inline-block}
+.strike::after{content:'';position:absolute;left:-10px;right:-10px;top:52%;height:14px;border-radius:7px;background:var(--or);transform:scaleX(var(--s,0));transform-origin:left}
+.cap{position:absolute;left:60px;right:60px;bottom:250px;text-align:center;z-index:85;font-family:'IT';font-weight:800;font-size:54px;line-height:1.15;letter-spacing:-.01em;text-shadow:0 4px 16px rgba(0,0,0,.85),0 0 2px #000}
+.cap span{display:inline-block;margin:0 .14em;color:#fff;transition:none}
+.cap span.on{color:var(--or)}
+.flash{position:absolute;inset:0;background:#fff;opacity:0;z-index:90;pointer-events:none}
+.grain{position:absolute;inset:0;z-index:95;pointer-events:none;opacity:.05;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/></filter><rect width='200' height='200' filter='url(%23n)'/></svg>")}
+#follow{top:1350px!important}
+
+.sub{position:absolute;width:300px;height:390px;border-radius:30px;padding:30px 26px;background:linear-gradient(160deg,#16213f,#0d152c);border:1px solid rgba(120,160,255,.3);box-shadow:0 30px 80px rgba(0,0,0,.55);display:flex;flex-direction:column}
+.sub .ic{width:70px;height:70px;border-radius:20px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#2F8BFF,#5CC8FF)}
+.sub .ic svg{width:40px;height:40px;stroke:#fff;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.sub .nm{font-family:'IT';font-weight:700;font-size:30px;margin-top:22px;color:rgba(255,255,255,.85)}
+.sub .pr{font-family:'IT';font-weight:800;font-size:76px;letter-spacing:-.03em;margin-top:auto}
+.sub .pr small{font-size:30px;color:rgba(255,255,255,.6);font-weight:700}
+.sub .btn{margin-top:18px;padding:14px;border-radius:16px;text-align:center;background:#2F8BFF;font-family:'IT';font-weight:800;font-size:26px}
+.hd{position:absolute;left:0;right:0;top:220px;text-align:center}
+.chip{position:absolute;display:flex;align-items:center;justify-content:center;gap:14px;height:130px;padding:0 28px;border-radius:28px;font-family:'IT';font-weight:800;font-size:36px;background:#13203f;border:2px solid rgba(120,160,255,.35)}
+.arr{position:absolute;height:8px;border-radius:4px;background:rgba(255,255,255,.35);transform-origin:left center}
+.mark{position:absolute;width:120px;height:120px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'IT';font-weight:800;font-size:70px;color:#fff}
+.mark.x{background:#ef4444;box-shadow:0 0 50px rgba(239,68,68,.6)}.mark.ok{background:#22c55e;box-shadow:0 0 50px rgba(34,197,94,.6)}
+.lbl{position:absolute;font-family:'IT';font-weight:800;font-size:34px;letter-spacing:.2em}
+.big{font-family:'IT';font-weight:800;letter-spacing:-.04em;line-height:.9}
+.app{position:absolute;width:190px;height:190px;margin:-95px 0 0 -95px;border-radius:44px;background:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 24px 60px rgba(0,0,0,.5)}
+.app img{max-width:110px;max-height:100px}
+.app .mk{position:absolute;right:-22px;top:-22px;width:70px;height:70px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'IT';font-weight:800;font-size:40px;color:#fff;opacity:0}
+.feat{display:inline-block;margin:8px;padding:12px 20px;border-radius:16px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);font-family:'IT';font-weight:700;font-size:28px;color:rgba(255,255,255,.8)}
+</style></head><body><div id="stage"><div class="bg"></div><div class="grid"></div>
+<div class="cnr" id="cnr"><img src="assets/logos/bdt_icon_clean.png"><span>Best<b>Digi</b>Tools</span></div>
+
+<section class="scene" id="S0" style="opacity:1;visibility:visible">
+  <div class="hd T" style="top:210px;font-size:96px;line-height:1.02" id="h0"><span class="w">DON'T</span> <span class="w">BUY</span> <span class="w">ANOTHER</span><br><span class="w or">AI</span> <span class="w or">TOOL</span> <span class="w or">YET.</span></div>
+  <div class="sub" id="c0" style="left:60px;top:620px"><div class="ic"><svg viewBox="0 0 24 24"><path d="M4 20h4L19 9l-4-4L4 16z"/><path d="M13 7l4 4"/></svg></div><div class="nm">AI Writer Pro</div><div class="pr">$20<small>/mo</small></div><div class="btn">Subscribe</div></div>
+  <div class="sub" id="c1" style="left:390px;top:580px"><div class="ic"><svg viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></div><div class="nm">AI Sales Suite</div><div class="pr">$29<small>/mo</small></div><div class="btn">Subscribe</div></div>
+  <div class="sub" id="c2" style="left:720px;top:620px"><div class="ic"><svg viewBox="0 0 24 24"><rect x="5" y="8" width="14" height="11" rx="3"/><path d="M12 4v4M9 13h.01M15 13h.01"/></svg></div><div class="nm">AI Agent Max</div><div class="pr">$49<small>/mo</small></div><div class="btn">Subscribe</div></div>
+  <div class="hd big or" style="top:1090px;font-size:300px;text-shadow:0 0 60px rgba(253,88,20,.6)" id="wait">WAIT.</div>
+</section>
+
+<section class="scene" id="S1">
+  <div class="hd T" style="font-size:100px" id="h1"><span class="w or">1.</span> <span class="w">REAL</span> <span class="w">PROBLEM?</span></div>
+  <div class="lbl" style="left:70px;top:470px;color:#f87171" id="b1l">✕ BAD</div>
+  <div class="chip" id="b1a" style="left:70px;top:530px;width:290px">AI Tool</div>
+  <div class="arr" id="b1r" style="left:375px;top:591px;width:90px"></div>
+  <div class="chip" id="b1b" style="left:480px;top:530px;width:350px;font-size:32px;white-space:nowrap">✨ Cool Features</div>
+  <div class="mark x" id="b1x" style="left:860px;top:535px">✕</div>
+  <div class="lbl" style="left:70px;top:820px;color:#4ade80" id="g1l">✓ GOOD</div>
+  <div class="chip" id="g1a" style="left:70px;top:880px;width:260px;border-color:rgba(253,88,20,.6)">Problem</div>
+  <div class="arr" id="g1r" style="left:340px;top:941px;width:50px;background:#5CC8FF"></div>
+  <div class="chip" id="g1b" style="left:400px;top:880px;width:240px;border-color:rgba(92,200,255,.6)">AI Tool</div>
+  <div class="arr" id="g1s" style="left:650px;top:941px;width:50px;background:#5CC8FF"></div>
+  <div class="chip" id="g1c" style="left:710px;top:880px;width:240px;border-color:rgba(34,197,94,.7)">Result</div>
+  <div class="mark ok" id="g1k" style="left:480px;top:1060px">✓</div>
+</section>
+
+<section class="scene" id="S2">
+  <div class="hd T" style="font-size:100px" id="h2"><span class="w or">2.</span> <span class="w">REAL</span> <span class="w">ROI?</span></div>
+  <div class="sub" id="r0" style="left:70px;top:520px;width:430px;height:430px;align-items:center;justify-content:center"><div class="nm" style="margin:0">Subscription</div><div class="big" style="font-size:150px;margin-top:10px">$29</div><div class="nm" style="margin:0">per month</div></div>
+  <div class="hd T" style="top:690px;font-size:70px;left:500px;right:500px;width:80px" id="vs">vs</div>
+  <div class="sub" id="r1" style="left:580px;top:520px;width:430px;height:430px;align-items:center;justify-content:center;border-color:rgba(92,200,255,.6)"><div class="nm" style="margin:0">Time saved</div><div class="big bl" style="font-size:150px;margin-top:10px"><span id="hrs">0</span></div><div class="nm" style="margin:0">HOURS / month</div></div>
+  <div class="hd T" style="top:1060px;font-size:130px" id="wi"><span class="w">Worth</span> <span class="w or">it?</span></div>
+</section>
+
+<section class="scene" id="S3">
+  <div class="hd T" style="font-size:96px;line-height:1.02" id="h3"><span class="w or">3.</span> <span class="w">DOES</span> <span class="w">IT</span><br><span class="w">CONNECT?</span></div>
+  <svg width="1080" height="1920" style="position:absolute;left:0;top:0" id="cl">
+    <path id="q0" d="M540 960 L250 720" stroke="#5CC8FF" stroke-width="8" stroke-linecap="round" fill="none"/>
+    <path id="q1" d="M540 960 L830 720" stroke="#5CC8FF" stroke-width="8" stroke-linecap="round" fill="none"/>
+    <path id="q2" d="M540 960 L250 1200" stroke="#ef4444" stroke-width="8" stroke-linecap="round" fill="none" stroke-dasharray="18 18"/>
+    <path id="q3" d="M540 960 L830 1200" stroke="#ef4444" stroke-width="8" stroke-linecap="round" fill="none" stroke-dasharray="18 18"/></svg>
+  <div class="app" id="a0" style="left:250px;top:720px"><img src="assets/logos/lib/google-gmail.svg"><div class="mk" style="background:#22c55e">✓</div></div>
+  <div class="app" id="a1" style="left:830px;top:720px"><img src="assets/logos/lib/slack-icon.svg"><div class="mk" style="background:#22c55e">✓</div></div>
+  <div class="app" id="a2" style="left:250px;top:1200px"><img src="assets/logos/lib/hubspot.svg" style="max-width:150px"><div class="mk" style="background:#ef4444">✕</div></div>
+  <div class="app" id="a3" style="left:830px;top:1200px"><img src="assets/logos/lib/notion-icon.svg"><div class="mk" style="background:#ef4444">✕</div></div>
+  <div class="app" id="at" style="left:540px;top:960px;width:230px;height:230px;margin:-115px 0 0 -115px;border-radius:56px;background:linear-gradient(135deg,#2F8BFF,#5CC8FF);box-shadow:0 0 90px rgba(47,139,255,.6)"><svg viewBox="0 0 24 24" width="110" height="110" fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.2 5.8L20 11l-5.8 2.2L12 19l-2.2-5.8L4 11l5.8-2.2z"/></svg></div>
+  <div class="hd T" style="top:1390px;font-size:44px;color:rgba(255,255,255,.75)" id="at2">Your AI tool</div>
+</section>
+
+<section class="scene" id="S4">
+  <div id="feats" style="position:absolute;left:60px;right:60px;top:300px;text-align:center"></div>
+  <div class="hd T" style="top:700px;font-size:104px;line-height:1.05" id="p1"><span class="w">MORE</span> <span class="w">FEATURES</span><br><span class="w or" style="font-size:150px">≠</span><br><span class="w">BETTER</span> <span class="w">TOOL</span></div>
+  <div class="hd T" style="top:780px;font-size:110px;line-height:1.05" id="p2"><span class="w bl">BETTER</span> <span class="w bl">FIT</span><br><span class="w or" style="font-size:150px">=</span><br><span class="w">BETTER</span> <span class="w">BUY</span></div>
+</section>
+
+<section class="scene" id="S5">
+  <div class="hd T" style="top:300px;font-size:116px;line-height:1.02" id="cta"><span class="w">COMPARE</span><br><span class="w">BEFORE</span> <span class="w">YOU</span> <span class="w or">BUY.</span></div>
+  <div style="position:absolute;left:0;right:0;top:720px;display:flex;flex-direction:column;align-items:center" id="lgo"><img src="assets/logos/bdt_icon_clean.png" style="height:170px"><div style="font-family:'PP';font-weight:700;font-size:84px;letter-spacing:-3px;margin-top:16px">Best<span class="or">Digi</span>Tools</div></div>
+  <div class="lglass" id="follow" style="top:1180px!important"><div class="fl">FOLLOW @best<span style="color:#FD5814">digi</span>tools</div><div class="fb" id="fbtn" style="background:linear-gradient(180deg,#ff7a3a,#FD5814)"><span id="fbt">+ Follow</span></div></div>
+  <div id="fripple" style="position:absolute;left:0;top:0;width:120px;height:120px;margin:-60px 0 0 -60px;border-radius:50%;border:4px solid rgba(255,255,255,.9);opacity:0;z-index:85"></div>
+  <svg class="cursor" id="fcur" viewBox="0 0 24 24" style="opacity:0;z-index:86"><path d="M4 2l16 10-7 1.5L9.5 21z" fill="#111" stroke="#fff" stroke-width="1.5" stroke-linejoin="round"/></svg>
+  <div class="hd" style="top:1420px;font-family:'IT';font-weight:600;font-size:30px;letter-spacing:.14em;white-space:nowrap;color:rgba(255,255,255,.8)" id="tgl">DISCOVER <span class="or">•</span> COMPARE <span class="or">•</span> CHOOSE BEST.</div>
+</section>
+<div class="cap" id="cap"></div>
+<div class="flash" id="flash"></div><div class="grain"></div>
+</div>
+<script src="node_modules/gsap/dist/gsap.min.js"></script>
+<script>
+document.getElementById('feats').innerHTML=['AI Chat','Image Gen','Voice Clone','Video AI','Auto Agents','Web3 Mode','AR Avatars','50+ Templates','Plugins','Dark Mode','Analytics+','Workflow Lab'].map((f,i)=>`<span class="feat" id="ft${i}">${f}</span>`).join('');
+const VO=[[.05,3.17,"Before you pay for another AI tool, check these three things."],[3.4,2.48,"First — does it solve a problem you actually have?"],[8.3,3.75,"Second — will it save enough time or money to justify the subscription?"],[13.3,2.55,"Third — does it work with the tools you already use?"],[18.2,2.32,"More features don't always mean a better tool."],[22.2,2.73,"Compare before you buy. Follow BestDigiTools."]];
+const CAP=document.getElementById('cap');
+function caption(t){let line=null;for(const v of VO){if(t>=v[0]-.05&&t<=v[0]+v[1]+.25)line=v;}
+  if(!line){CAP.innerHTML='';return;}const ws=line[2].split(' ');const tot=ws.reduce((a,w)=>a+w.length+2,0);let acc=0,html='';
+  const p=(t-line[0])/line[1];ws.forEach(w=>{acc+=w.length+2;html+=`<span class="${acc/tot<=p+.02?'on':''}">${w}</span>`});CAP.innerHTML=html;}
+gsap.defaults({ease:'power3.out'});
+const tl=gsap.timeline({paused:true});const CUES=[];const cue=(t,y)=>CUES.push([+t.toFixed(3),y]);
+const show=(id,t)=>tl.set('#'+id,{opacity:1,visibility:'visible'},t);const hide=(id,t)=>tl.set('#'+id,{opacity:0,visibility:'hidden'},t);
+const flash=(t,o=.5)=>{tl.fromTo('#flash',{opacity:0},{opacity:o,duration:.05,ease:'none',immediateRender:false},t).to('#flash',{opacity:0,duration:.25},t+.05)};
+const shake=(sel,t,a=16)=>{for(let i=0;i<6;i++)tl.to(sel,{x:(i%2?-1:1)*a*(1-i/6),duration:.035,ease:'none'},t+i*.035);tl.to(sel,{x:0,duration:.04},t+.21)};
+const slam=(sel,t,st=.06)=>tl.fromTo(sel,{opacity:0,scale:1.7,filter:'blur(14px)'},{opacity:1,scale:1,filter:'blur(0px)',duration:.22,ease:'expo.out',stagger:st},t);
+const swipeOut=(id,t)=>{tl.to('#'+id+' > *',{x:-260,opacity:0,filter:'blur(10px)',duration:.25,ease:'power2.in'},t);hide(id,t+.27);cue(t,'whoosh');};
+const swipeIn=(sel,t)=>tl.fromTo(sel,{x:260,opacity:0},{x:0,opacity:1,duration:.35,ease:'expo.out'},t);
+tl.fromTo('#cnr',{opacity:1},{opacity:1,duration:.01},0);
+
+/* S0 hook 0-3.3 : problem visible from frame 1 */
+show('S0',0); cue(0,'boom'); cue(.05,'vo:0');
+tl.fromTo('#h0',{scale:1.08},{scale:1,duration:.5,ease:'expo.out'},0);
+[['#c0',-140,-8,0],['#c1',0,0,.08],['#c2',140,8,.16]].forEach(([id,x,r,t],i)=>{tl.fromTo(id,{opacity:1,x:x,y:i==1?160:40,rotate:r*2,scale:.9},{opacity:1,x:0,y:0,rotate:r,scale:1,duration:.45,ease:'back.out(1.6)'},t);cue(t,'card'+i);});
+tl.to('#c0,#c1,#c2',{y:'-=14',duration:1.5,ease:'none'},.6);
+slam('#wait',2.05,0); cue(2.05,'slam'); flash(2.05,.4); shake('#c0,#c1,#c2,#h0',2.08,18);
+tl.to('#c0,#c1,#c2',{filter:'grayscale(1) brightness(.5)',scale:.94,duration:.25},2.1);
+tl.to('#wait',{scale:1.06,duration:1,ease:'none'},2.3);
+swipeOut('S0',3.05);
+
+/* S1 check 1 : 3.3-8.2 */
+show('S1',3.3); cue(3.4,'vo:1'); cue(3.3,'num');
+slam('#h1 .w',3.35,.08);
+tl.fromTo('#b1l',{opacity:0},{opacity:1,duration:.2},3.9); swipeIn('#b1a',3.95);
+tl.fromTo('#b1r',{scaleX:0},{scaleX:1,duration:.25},4.25); swipeIn('#b1b',4.4); cue(4.4,'tick0');
+tl.fromTo('#b1x',{opacity:0,scale:2.5,rotate:-30},{opacity:1,scale:1,rotate:0,duration:.3,ease:'back.out(2)'},4.9); cue(4.9,'nope'); shake('#b1a,#b1b,#b1r',4.95,10);
+tl.to('#b1a,#b1b,#b1r',{opacity:.35,duration:.3},5.2);
+tl.fromTo('#g1l',{opacity:0},{opacity:1,duration:.2},5.6); swipeIn('#g1a',5.65); cue(5.65,'tick1');
+tl.fromTo('#g1r',{scaleX:0},{scaleX:1,duration:.2},5.95); swipeIn('#g1b',6.05); cue(6.05,'tick2');
+tl.fromTo('#g1s',{scaleX:0},{scaleX:1,duration:.2},6.35); swipeIn('#g1c',6.45); cue(6.45,'tick3');
+tl.fromTo('#g1k',{opacity:0,scale:2.5},{opacity:1,scale:1,duration:.35,ease:'back.out(2.5)'},6.9); cue(6.9,'yes'); flash(6.9,.15);
+swipeOut('S1',7.95);
+
+/* S2 check 2 : 8.2-13.2 */
+show('S2',8.2); cue(8.3,'vo:2'); cue(8.2,'num');
+slam('#h2 .w',8.25,.08);
+tl.fromTo('#r0',{opacity:0,x:-300,scale:.8},{opacity:1,x:0,scale:1,duration:.45,ease:'expo.out'},8.75); cue(8.75,'card0');
+tl.fromTo('#vs',{opacity:0,scale:2},{opacity:1,scale:1,duration:.3},9.3);
+tl.fromTo('#r1',{opacity:0,x:300,scale:.8},{opacity:1,x:0,scale:1,duration:.45,ease:'expo.out'},9.6); cue(9.6,'card1');
+const hr={v:0}; tl.to(hr,{v:5,duration:1,ease:'power2.out',onUpdate:()=>{hrs.textContent=Math.round(hr.v)}},10.0); cue(10.0,'count');
+tl.to('#r1',{boxShadow:'0 0 80px rgba(92,200,255,.5)',duration:.4},10.9);
+slam('#wi .w',11.6,.12); cue(11.6,'hit');
+tl.to('#wi',{scale:1.06,duration:.5,yoyo:true,repeat:1,ease:'sine.inOut'},12.0);
+swipeOut('S2',12.95);
+
+/* S3 check 3 : 13.2-18.1 */
+show('S3',13.2); cue(13.3,'vo:3'); cue(13.2,'num');
+slam('#h3 .w',13.25,.08);
+tl.fromTo('#at',{opacity:0,scale:.3},{opacity:1,scale:1,duration:.45,ease:'back.out(1.8)'},13.7); cue(13.7,'pop'); tl.fromTo('#at2',{opacity:0},{opacity:1,duration:.3},13.9);
+['q0','q1','q2','q3'].forEach(id=>{const el=document.getElementById(id);const L=el.getTotalLength();if(id=='q0'||id=='q1'){el.style.strokeDasharray=L;el.style.strokeDashoffset=L;}else el.style.opacity=0;});
+[0,1,2,3].forEach(i=>{tl.fromTo('#a'+i,{opacity:0,scale:.4},{opacity:1,scale:1,duration:.35,ease:'back.out(2)'},14.1+i*.15);cue(14.1+i*.15,'app'+i);});
+tl.to('#q0',{strokeDashoffset:0,duration:.35},14.9); tl.to('#q1',{strokeDashoffset:0,duration:.35},15.1); cue(14.9,'zap'); cue(15.1,'zap');
+tl.to('#a0 .mk',{opacity:1,duration:.2},15.25); tl.to('#a1 .mk',{opacity:1,duration:.2},15.45); cue(15.25,'yes'); cue(15.45,'yes');
+tl.to('#q2,#q3',{opacity:1,duration:.15},15.9); tl.fromTo('#q2,#q3',{strokeDashoffset:0},{strokeDashoffset:-72,duration:.6,ease:'none'},15.9);
+tl.to('#a2 .mk',{opacity:1,duration:.15},16.3); tl.to('#a3 .mk',{opacity:1,duration:.15},16.5); cue(16.3,'nope'); cue(16.5,'nope');
+tl.to('#a2,#a3',{filter:'grayscale(1)',opacity:.55,duration:.3},16.6); shake('#a2,#a3',16.35,10);
+swipeOut('S3',17.85);
+
+/* S4 payoff : 18.1-22.1 */
+show('S4',18.1); cue(18.2,'vo:4');
+tl.fromTo('#feats .feat',{opacity:0,scale:.5,y:30},{opacity:1,scale:1,y:0,duration:.2,stagger:.04,ease:'back.out(2)'},18.15); cue(18.15,'tabs');
+slam('#p1 .w',18.5,.1); cue(18.5,'hit');
+tl.to('#feats',{opacity:.25,filter:'blur(4px)',duration:.3},19.3);
+tl.to('#p1',{opacity:0,y:-80,filter:'blur(14px)',duration:.25,ease:'power2.in'},20.35); tl.to('#feats',{opacity:0,duration:.25},20.35); cue(20.35,'whoosh');
+slam('#p2 .w',20.55,.1); cue(20.55,'slam2'); flash(20.55,.25);
+swipeOut('S4',21.85);
+
+/* S5 CTA : 22.1-25.6 */
+show('S5',22.1); cue(22.2,'vo:5'); cue(22.1,'outro');
+slam('#cta .w',22.12,.09); cue(22.15,'hit2');
+tl.fromTo('#lgo',{opacity:0,scale:.7},{opacity:1,scale:1,duration:.45,ease:'expo.out'},22.6); cue(22.6,'impact');
+tl.fromTo('#follow',{opacity:0,y:60,scale:.8},{opacity:1,y:0,scale:1,duration:.45,ease:'back.out(1.8)'},23.0); cue(23.0,'pop');
+tl.fromTo('#tgl',{opacity:0,letterSpacing:'.3em'},{opacity:1,letterSpacing:'.14em',duration:.6},23.2);
+tl.fromTo('#fcur',{opacity:0,x:950,y:1500},{opacity:1,x:800,y:1225,duration:.5,ease:'power2.inOut'},23.6);
+tl.to('#fbtn',{scale:.92,duration:.08,yoyo:true,repeat:1},24.15); cue(24.15,'fclick');
+tl.fromTo('#fripple',{x:830,y:1240,scale:.3,opacity:1},{scale:2.2,opacity:0,duration:.6,immediateRender:false},24.15);
+tl.set('#fbt',{textContent:'✓ Following'},24.22); tl.to('#fbtn',{background:'linear-gradient(180deg,#2bd46b,#16a34a)',duration:.2},24.22);
+tl.to('#fcur',{opacity:0,duration:.25},24.6);
+const END=25.6; tl.set({}, {}, END);
+tl.eventCallback('onUpdate',()=>caption(tl.time()));
+window.DURATION=END; window.CUES=CUES.sort((a,b)=>a[0]-b[0]); window.seek=s=>{tl.seek(s,false);caption(s)};
+window.ready=document.fonts.ready.then(()=>Promise.all([...document.images].map(i=>i.complete?1:new Promise(r=>{i.onload=i.onerror=r}))));
+</script></body></html>
