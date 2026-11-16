@@ -1,6 +1,7 @@
 # Creative brief: Your Website Is Your First Conversation (UpscoreTech)
 
-- **File**: `upscoretech-your-website-is-your-first-conversation.mp4`, exactly 20.0s (600 frames), 1080×1920, 30 fps, H.264 + AAC 48 kHz
+- **File**: `upscoretech-your-website-is-your-first-conversation.mp4`, 21.0s (630 frames), 1080×1920, 30 fps, H.264 + AAC 48 kHz
+- **Cover (0–1s)**: the supplied 1024×1536 thumbnail, fitted to 9:16 over a blurred, slightly darkened copy of itself (nothing cropped), held for 1 second with silence. The 20s animated video follows from 1.0s, so all timings below are +1s in the final file.
 - **Audience**: American small business owners, contractors, salon owners, local service businesses, founders
 - **Palette**: deep navy #07152D, near-black #050B16, electric blue #1685F8 as the only accent, white text. The characters keep natural skin tones; their clothing uses the brand blues and neutrals.
 - **Type**: Inter Display ExtraBold headlines and SemiBold/Medium support text, with masked word-by-word reveals.
